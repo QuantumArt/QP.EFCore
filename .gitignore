@@ -3,3 +3,7 @@
 ################################################################################
 
 /.vs
+/QP8.EFCore/obj
+/CodeGeneration/obj
+/CodeGeneration/bin/Debug/netcoreapp2.1
+/QP8.EFCore/bin/Debug/netcoreapp2.1
