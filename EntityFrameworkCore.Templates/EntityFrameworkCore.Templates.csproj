@@ -1,0 +1,72 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="QPDataContextGenerator.tt" />
+    <None Remove="QPDataContextInclude\BaseM2MClasses.ttinclude" />
+    <None Remove="QPDataContextInclude\Classes.ttinclude" />
+    <None Remove="QPDataContextInclude\ClassesM2M.ttinclude" />
+    <None Remove="QPDataContextInclude\ClassExtensions.ttinclude" />
+    <None Remove="QPDataContextInclude\ConnectionScope.ttinclude" />
+    <None Remove="QPDataContextInclude\MappingConfigurator.ttinclude" />
+    <None Remove="QPDataContextInclude\MappingConfiguratorOnModelCreating.ttinclude" />
+    <None Remove="QPDataContextInclude\Model.ttinclude" />
+    <None Remove="QPDataContextInclude\ModelExtensions.ttinclude" />
+    <None Remove="QPDataContextInclude\StaticSchemaProvider.ttinclude" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="QPDataContextGenerator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <LastGenOutput>QPDataContextGenerator.log</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QPDataContextInclude\BaseM2MClasses.ttinclude" />
+    <EmbeddedResource Include="QPDataContextInclude\ClassesM2M.ttinclude" />
+    <EmbeddedResource Include="QPDataContextInclude\Classes.ttinclude" />
+    <EmbeddedResource Include="QPDataContextInclude\ClassExtensions.ttinclude" />
+    <EmbeddedResource Include="QPDataContextInclude\ConnectionScope.ttinclude" />
+    <EmbeddedResource Include="QPDataContextInclude\MappingConfigurator.ttinclude" />
+    <EmbeddedResource Include="QPDataContextInclude\MappingConfiguratorOnModelCreating.ttinclude" />
+    <EmbeddedResource Include="QPDataContextInclude\Model.ttinclude" />
+    <EmbeddedResource Include="QPDataContextInclude\ModelExtensions.ttinclude" />
+    <EmbeddedResource Include="QPDataContextInclude\StaticSchemaProvider.ttinclude" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.2" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QP8.EFCore\QP8.EFCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="*.cs">
+      <DependentUpon>QPDataContextGenerator.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="QPDataContextGenerator.log">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>QPDataContextGenerator.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+</Project>

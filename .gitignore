@@ -7,3 +7,5 @@
 /CodeGeneration/obj
 /CodeGeneration/bin/Debug/netcoreapp2.1
 /QP8.EFCore/bin/Debug/netcoreapp2.1
+/EntityFrameworkCore.Templates/bin/Debug/netcoreapp2.1/EntityFrameworkCore.Templates.deps.json
+/EntityFrameworkCore.Templates/obj

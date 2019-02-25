@@ -2,11 +2,15 @@
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
+
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".txt" #>
 
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ assembly name="EnvDTE" #>
+<#@ assembly name="System.Runtime" #>
+<#@ assembly name="System.Xml.XDocument" #>
+
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.Text.RegularExpressions" #>
 
@@ -155,7 +159,7 @@ class Manager {
             if (templateProjectItem.ProjectItems == null)
                 return;
             base.Process(split);
-            projectSyncAction.EndInvoke(projectSyncAction.BeginInvoke(generatedFileNames, null, null));
+             projectSyncAction(generatedFileNames);
         }
 
         protected override void CreateFile(String fileName, String content) {

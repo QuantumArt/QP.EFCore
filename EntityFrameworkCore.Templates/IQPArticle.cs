@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections;
 
-namespace Quantumart.QP8.EFCore.Models
+namespace EntityFrameworkCore.Templates
 {
     public interface IQPArticle
     {

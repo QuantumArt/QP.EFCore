@@ -37,5 +37,6 @@ namespace Quantumart.QP8.CoreCodeGeneration.Services
                 return name;
             }
         }
+
     }
 }

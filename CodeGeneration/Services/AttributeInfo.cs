@@ -111,5 +111,79 @@ namespace Quantumart.QP8.CoreCodeGeneration.Services
         public bool ShouldMap { get; set; }
 
         public string ExplicitMapping { get; set; }
+
+        public string M2MClassName
+        {
+            get
+            {
+               
+                return IsSource == true ? string.Format("{0}2{1}For{2}",  Content.MappedName, RelatedContent.MappedName, MappedName)
+                    : string.Format("{0}2{1}For{2}", RelatedContent.MappedName, Content.MappedName, RelatedAttribute.MappedName);
+            }
+
+        }
+
+        public string M2MPluralClassName
+        {
+            get
+            {
+                return IsSource == true ? string.Format("{0}2{1}For{2}", Content.MappedName, RelatedContent.PluralMappedName, MappedName)
+                   : string.Format("{0}2{1}For{2}", RelatedContent.MappedName, Content.PluralMappedName, RelatedAttribute.MappedName);
+            }
+
+        }
+
+        public string M2MReverseClassName
+        {
+            get
+            {
+
+                return IsSource == true ? string.Format("{0}2{1}For{2}", Content.MappedName, RelatedContent.MappedName, RelatedAttribute.MappedName)
+                    : string.Format("{0}2{1}For{2}", RelatedContent.MappedName, Content.MappedName, MappedName);
+            }
+
+        }
+
+        public string M2MPluralReverseClassName
+        {
+            get
+            {
+                return IsSource == true ? string.Format("{0}2{1}For{2}", Content.MappedName, RelatedContent.PluralMappedName, RelatedAttribute.MappedName)
+                   : string.Format("{0}2{1}For{2}", RelatedContent.MappedName, Content.PluralMappedName, MappedName);
+            }
+
+        }
+
+        public string M2MRelatedPropertyName
+        {
+            get
+            {
+                return RelatedContent.MappedName + "LinkedItem";
+            }
+        }
+
+        public string M2MPropertyName
+        {
+            get
+            {
+                return Content.MappedName +"Item";
+            }
+        }
+
+        public string M2MReverseRelatedPropertyName
+        {
+            get
+            {
+                return Content.MappedName + "LinkedItem";
+            }
+        }
+
+        public string M2MReversePropertyName
+        {
+            get
+            {
+                return RelatedContent.MappedName + "Item";
+            }
+        }
     }
 }
