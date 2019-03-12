@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<Project>
+  <ItemGroup>
+    <T4ParameterValues Include="EFCoreIncludeFolder">
+      <Value>$(EFCoreIncludeFolder)</Value>
+    </T4ParameterValues>
+  </ItemGroup>
+  <ItemGroup>
+    <TemplateIncludeFiles Include="$(EFCoreIncludeFolder)\include\QPDataContextInclude\*.*"/>
+  </ItemGroup>
+  <ItemGroup>
+    <TemplateFiles Include="$(EFCoreIncludeFolder)\include\*.tt"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ModelFiles Include="$(EFCoreIncludeFolder)\include\Models\*.cs"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ServiceFiles Include="$(EFCoreIncludeFolder)\include\Services\*.cs"/>
+  </ItemGroup>
+  <ItemGroup>
+    <DataFiles Include="$(EFCoreIncludeFolder)\content\*.xml"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="*.cs">
+      <DependentUpon>QPDataContextGenerator.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <Target Name="CopyTemplateTarget" BeforeTargets="BeforeBuild">
+    <Copy DestinationFolder="$(MSBuildProjectDirectory)\" SourceFiles="@(TemplateFiles)" ></Copy>
+  </Target>
+  <Target Name="CopyIncludeTemplateTarget" BeforeTargets="BeforeBuild">
+    <Copy DestinationFolder="$(MSBuildProjectDirectory)\QPDataContextInclude\" SourceFiles="@(TemplateIncludeFiles)" ></Copy>
+  </Target>
+  <Target Name="CopyModelsTarget" BeforeTargets="BeforeBuild">
+    <Copy DestinationFolder="$(MSBuildProjectDirectory)\Models\" SourceFiles="@(ModelFiles)" ></Copy>
+  </Target>
+  <Target Name="CopyServicesTarget" BeforeTargets="BeforeBuild">
+    <Copy DestinationFolder="$(MSBuildProjectDirectory)\Services\" SourceFiles="@(ServiceFiles)" ></Copy>
+  </Target>
+  <Target Name="CopyDataTarget" BeforeTargets="BeforeBuild">
+    <Copy DestinationFolder="$(MSBuildProjectDirectory)\" SourceFiles="@(DataFiles)"
+          Condition="!Exists('$(MSBuildProjectDirectory)\ModelMappingResult.xml')"></Copy>
+  </Target>
+</Project>

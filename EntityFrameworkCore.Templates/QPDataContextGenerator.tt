@@ -28,17 +28,17 @@
 <#@ import namespace="System.IO" #>
 <#@ import namespace="Quantumart.QP8.CoreCodeGeneration.Services" #>
 
-<#@ include file="..\CodeGeneration\Templates\Manager.ttinclude" #>
-<#@ include file="..\EntityFrameworkCore.Templates\QPDataContextInclude\Model.ttinclude" #>
-<#@ include file="..\EntityFrameworkCore.Templates\QPDataContextInclude\MappingConfiguratorOnModelCreating.ttinclude" #>
-<#@ include file="..\EntityFrameworkCore.Templates\QPDataContextInclude\MappingConfigurator.ttinclude" #>
-<#@ include file="..\EntityFrameworkCore.Templates\QPDataContextInclude\StaticSchemaProvider.ttinclude" #>
-<#@ include file="..\EntityFrameworkCore.Templates\QPDataContextInclude\ModelExtensions.ttinclude" #>
-<#@ include file="..\EntityFrameworkCore.Templates\QPDataContextInclude\ConnectionScope.ttinclude" #>
-<#@ include file="..\EntityFrameworkCore.Templates\QPDataContextInclude\Classes.ttinclude" #>
-<#@ include file="..\EntityFrameworkCore.Templates\QPDataContextInclude\ClassExtensions.ttinclude" #>
-<#@ include file="..\EntityFrameworkCore.Templates\QPDataContextInclude\BaseM2MClasses.ttinclude" #>
-<#@ include file="..\EntityFrameworkCore.Templates\QPDataContextInclude\ClassesM2M.ttinclude" #>
+<#@ include file="QPDataContextInclude\Manager.ttinclude" #>
+<#@ include file="QPDataContextInclude\Model.ttinclude" #>
+<#@ include file="QPDataContextInclude\MappingConfiguratorOnModelCreating.ttinclude" #>
+<#@ include file="QPDataContextInclude\MappingConfigurator.ttinclude" #>
+<#@ include file="QPDataContextInclude\StaticSchemaProvider.ttinclude" #>
+<#@ include file="QPDataContextInclude\ModelExtensions.ttinclude" #>
+<#@ include file="QPDataContextInclude\ConnectionScope.ttinclude" #>
+<#@ include file="QPDataContextInclude\Classes.ttinclude" #>
+<#@ include file="QPDataContextInclude\ClassExtensions.ttinclude" #>
+<#@ include file="QPDataContextInclude\BaseM2MClasses.ttinclude" #>
+<#@ include file="QPDataContextInclude\ClassesM2M.ttinclude" #>
 
 <#
 	using (var context = new GenerationContext(this, Host, GenerationEnvironment, "QPDataContextGenerator.tt.settings.xml"))
@@ -51,25 +51,25 @@
 		context.AddTemplateFile(className + "ConnectionScope.cs", AddConnectionScope, settings.GenerateModel);
 
 		context.AddTemplateFile("MappingConfigurator.cs", AddMappingConfigurator, settings.GenerateMappings);
-		context.AddCodeFile(@"..\QP8.EFCore\Services\MappingResolver.cs", settings.GenerateMappings);
-		context.AddCodeFile(@"..\QP8.EFCore\Services\FileSchemaProvider.cs", settings.GenerateMappings);
-		context.AddCodeFile(@"..\QP8.EFCore\Services\DatabaseSchemaProvider.cs", settings.GenerateMappings);
+		//context.AddCodeFile(@"Services\MappingResolver.cs", settings.GenerateMappings);
+		//context.AddCodeFile(@"Services\FileSchemaProvider.cs", settings.GenerateMappings);
+		//context.AddCodeFile(@"Services\DatabaseSchemaProvider.cs", settings.GenerateMappings);
 		context.AddTemplateFile("StaticSchemaProvider.cs", AddStaticSchemaProvider, settings.GenerateMappings);
 
-		context.AddCodeFile(@"..\QP8.EFCore\Models\IQPArticle.cs", settings.GenerateInterface);
-		context.AddCodeFile(@"..\QP8.EFCore\Models\IQPLink.cs", settings.GenerateInterface);
-		context.AddCodeFile(@"..\QP8.EFCore\Models\IQPLibraryService.cs", settings.GenerateInterface);
-		context.AddCodeFile(@"..\QP8.EFCore\Models\IQPFormService.cs", settings.GenerateInterface);
+		//context.AddCodeFile(@"Models\IQPArticle.cs", settings.GenerateInterface);
+		//context.AddCodeFile(@"Models\IQPLink.cs", settings.GenerateInterface);
+		//context.AddCodeFile(@"Models\IQPLibraryService.cs", settings.GenerateInterface);
+		//context.AddCodeFile(@"Models\IQPFormService.cs", settings.GenerateInterface);
 
-		context.AddCodeFile(@"..\QP8.EFCore\Services\IQPSchema.cs", settings.GenerateMappingInterface);
-		context.AddCodeFile(@"..\QP8.EFCore\Services\IMappingConfigurator.cs", settings.GenerateMappingInterface);
-		context.AddCodeFile(@"..\QP8.EFCore\Services\ISchemaProvider.cs", settings.GenerateMappingInterface);
-		context.AddCodeFile(@"..\QP8.EFCore\Services\MappingConfiguratorBase.cs", settings.GenerateMappingInterface);
+		//context.AddCodeFile(@"Services\IQPSchema.cs", settings.GenerateMappingInterface);
+		//context.AddCodeFile(@"Services\IMappingConfigurator.cs", settings.GenerateMappingInterface);
+		//context.AddCodeFile(@"Services\ISchemaProvider.cs", settings.GenerateMappingInterface);
+		//context.AddCodeFile(@"Services\MappingConfiguratorBase.cs", settings.GenerateMappingInterface);
 
-		context.AddCodeFile(@"..\QP8.EFCore\Models\StatusType.cs", settings.GenerateClasses);
-		context.AddCodeFile(@"..\QP8.EFCore\Models\User.cs", settings.GenerateClasses);
-		context.AddCodeFile(@"..\QP8.EFCore\Models\UserGroup.cs", settings.GenerateClasses);
-		context.AddCodeFile(@"..\QP8.EFCore\Models\UserGroupBind.cs", settings.GenerateClasses);
+		//context.AddCodeFile(@"Models\StatusType.cs", settings.GenerateClasses);
+		//context.AddCodeFile(@"Models\User.cs", settings.GenerateClasses);
+		//context.AddCodeFile(@"Models\UserGroup.cs", settings.GenerateClasses);
+		//context.AddCodeFile(@"Models\UserGroupBind.cs", settings.GenerateClasses);
 		context.AddTemplate(AddClasses, settings.GenerateClasses);
 		context.AddTemplateFile(className + ".Contents.Extensions.cs", AddClassExtensions, settings.GenerateClasses && settings.GenerateExtensions);
 		context.AddTemplate(AddM2MClasses, settings.GenerateClasses);

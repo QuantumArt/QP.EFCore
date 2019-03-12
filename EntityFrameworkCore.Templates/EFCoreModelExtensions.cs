@@ -14,6 +14,8 @@ using System.Collections.Generic;
 using Quantumart.QPublishing.Info;
 using System.Collections;
 using System.Globalization;
+using Quantumart.QP8.EFCore.Models;
+using Quantumart.QP8.EFCore.Services;
 /* place your custom usings here */
 
 namespace EntityFrameworkCore.Templates

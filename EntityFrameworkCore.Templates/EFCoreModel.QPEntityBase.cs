@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using Quantumart.QP8.EFCore.Models;
 
 namespace EntityFrameworkCore.Templates
 {

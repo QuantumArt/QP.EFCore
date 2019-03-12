@@ -1,0 +1,5 @@
+<#@ template debug="false" hostspecific="true" language="C#" #>
+<#+ void AddPublicationScript(NugetContext context){#>
+dotnet pack /p:NuspecFile=<#=context.NuspecName#>.nuspec
+rem dotnet nuget push <#=context.PackageName#>.<#=context.Version#>.nupkg -Source <#=context.PackageSource#>
+<#+}#>

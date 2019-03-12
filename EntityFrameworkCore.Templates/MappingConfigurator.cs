@@ -5,6 +5,8 @@ using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using Quantumart.QP8.CoreCodeGeneration.Services;
+using Quantumart.QP8.EFCore.Models;
+using Quantumart.QP8.EFCore.Services;
 /* place your custom usings here */
 
 namespace EntityFrameworkCore.Templates

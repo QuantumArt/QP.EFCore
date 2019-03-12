@@ -9,3 +9,5 @@
 /QP8.EFCore/bin/Debug/netcoreapp2.1
 /EntityFrameworkCore.Templates/bin/Debug/netcoreapp2.1/EntityFrameworkCore.Templates.deps.json
 /EntityFrameworkCore.Templates/obj
+/EntityFrameworkCore.CodeGeneration/obj
+/EntityFrameworkCore.Data/obj

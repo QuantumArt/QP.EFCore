@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>QP8.EntityFrameworkCore</id>
+    <version>0.1.0</version>
+    <title>QP8.EntityFrameworkCore</title>
+    <authors>Quantum Art</authors>
+    <owners>Quantum Art</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Entity Framework Core 2 class generator</description>
+    <releaseNotes>Add creation data context for EntityFrameworkCore</releaseNotes>
+    <copyright>Copyright © 2007-2019 Quantum Art</copyright>
+    <tags>QP8 EntityFrameworkCore</tags>
+    <dependencies>
+      <dependency id="Microsoft.AspNetCore.Http" version="2.2.2" />
+      <dependency id="Microsoft.EntityFrameworkCore" version="2.2.2" />
+      <dependency id="Microsoft.EntityFrameworkCore.Relational" version="2.2.2" />
+      <dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="2.2.2" />
+      <dependency id="System.Configuration.ConfigurationManager" version="4.5.0" />
+      <dependency id="System.Data.DataSetExtensions" version="4.5.0" />
+      <dependency id="Quantumart.AspNetCore" version="3.3.0" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Configuration" targetFramework="netcore"  />
+      <frameworkAssembly assemblyName="System.Xml.Linq" targetFramework="netcore"  />
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <file src="..\EntityFrameworkCore.Templates\QPDataContextInclude\Manager.ttinclude" target="include\QPDataContextInclude\Manager.ttinclude" />
+          <file src="..\EntityFrameworkCore.Templates\QPDataContextInclude\Model.ttinclude" target="include\QPDataContextInclude\Model.ttinclude" />
+          <file src="..\EntityFrameworkCore.Templates\QPDataContextInclude\MappingConfiguratorOnModelCreating.ttinclude" target="include\QPDataContextInclude\MappingConfiguratorOnModelCreating.ttinclude" />
+          <file src="..\EntityFrameworkCore.Templates\QPDataContextInclude\MappingConfigurator.ttinclude" target="include\QPDataContextInclude\MappingConfigurator.ttinclude" />
+          <file src="..\EntityFrameworkCore.Templates\QPDataContextInclude\StaticSchemaProvider.ttinclude" target="include\QPDataContextInclude\StaticSchemaProvider.ttinclude" />
+          <file src="..\EntityFrameworkCore.Templates\QPDataContextInclude\ModelExtensions.ttinclude" target="include\QPDataContextInclude\ModelExtensions.ttinclude" />
+          <file src="..\EntityFrameworkCore.Templates\QPDataContextInclude\ConnectionScope.ttinclude" target="include\QPDataContextInclude\ConnectionScope.ttinclude" />
+          <file src="..\EntityFrameworkCore.Templates\QPDataContextInclude\Classes.ttinclude" target="include\QPDataContextInclude\Classes.ttinclude" />
+          <file src="..\EntityFrameworkCore.Templates\QPDataContextInclude\ClassExtensions.ttinclude" target="include\QPDataContextInclude\ClassExtensions.ttinclude" />
+          <file src="..\EntityFrameworkCore.Templates\QPDataContextInclude\BaseM2MClasses.ttinclude" target="include\QPDataContextInclude\BaseM2MClasses.ttinclude" />
+          <file src="..\EntityFrameworkCore.Templates\QPDataContextInclude\ClassesM2M.ttinclude" target="include\QPDataContextInclude\ClassesM2M.ttinclude" />
+          <file src="..\EntityFrameworkCore.Templates\Services\MappingResolver.cs" target="include\Services\MappingResolver.cs" />
+          <file src="..\EntityFrameworkCore.Templates\Services\FileSchemaProvider.cs" target="include\Services\FileSchemaProvider.cs" />
+          <file src="..\EntityFrameworkCore.Templates\Services\DatabaseSchemaProvider.cs" target="include\Services\DatabaseSchemaProvider.cs" />
+          <file src="..\EntityFrameworkCore.Templates\Models\IQPArticle.cs" target="include\Models\IQPArticle.cs" />
+          <file src="..\EntityFrameworkCore.Templates\Models\IQPLink.cs" target="include\Models\IQPLink.cs" />
+          <file src="..\EntityFrameworkCore.Templates\Models\IQPLibraryService.cs" target="include\Models\IQPLibraryService.cs" />
+          <file src="..\EntityFrameworkCore.Templates\Models\IQPFormService.cs" target="include\Models\IQPFormService.cs" />
+          <file src="..\EntityFrameworkCore.Templates\Services\IQPSchema.cs" target="include\Services\IQPSchema.cs" />
+          <file src="..\EntityFrameworkCore.Templates\Services\IMappingConfigurator.cs" target="include\Services\IMappingConfigurator.cs" />
+          <file src="..\EntityFrameworkCore.Templates\Services\ISchemaProvider.cs" target="include\Services\ISchemaProvider.cs" />
+          <file src="..\EntityFrameworkCore.Templates\Services\MappingConfiguratorBase.cs" target="include\Services\MappingConfiguratorBase.cs" />
+          <file src="..\EntityFrameworkCore.Templates\Models\StatusType.cs" target="include\Models\StatusType.cs" />
+          <file src="..\EntityFrameworkCore.Templates\Models\User.cs" target="include\Models\User.cs" />
+          <file src="..\EntityFrameworkCore.Templates\Models\UserGroup.cs" target="include\Models\UserGroup.cs" />
+          <file src="..\EntityFrameworkCore.Templates\Models\UserGroupBind.cs" target="include\Models\UserGroupBind.cs" />
+          <file src="QPDataContextGenerator.tt" target="include"  buildAction="EmbeddedResource" />
+      <file src="QPDataContextGenerator.tt.settings.xml" target="content" />
+    <file src="ModelMappingResult.xml" target="content" />
+    <file src="bin\debug\netcoreapp2.1\Quantumart.QP8.CoreCodeGeneration.dll" target="lib\netcoreapp2.1"/>
+    <file src="QP8.EntityFrameworkCore.props" target="build\QP8.EntityFrameworkCore.props" />
+    <file src="QP8.EntityFrameworkCore.targets" target="build\QP8.EntityFrameworkCore.targets" />
+  </files>
+</package>

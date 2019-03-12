@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;	
 using Microsoft.AspNetCore.Http;
+using Quantumart.QP8.EFCore.Models;
+using Quantumart.QP8.EFCore.Services;
 /* place your custom usings here */
 
 namespace EntityFrameworkCore.Templates
