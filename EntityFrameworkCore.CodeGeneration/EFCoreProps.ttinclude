@@ -3,7 +3,7 @@
 <#= "<?xml version=\"1.0\"?>" #>
 <Project>
   <PropertyGroup>
-    <EFCoreIncludeFolder>$(NuGetPackageRoot)<#=context.PackageName + "\\" + context.Version#></EFCoreIncludeFolder>
+    <NugetPackageFolder>$(NuGetPackageRoot)<#=context.PackageName + "\\" + context.Version#></NugetPackageFolder>
   </PropertyGroup>
 </Project>
 <#+}#>

@@ -18,7 +18,7 @@ namespace Quantumart.QP8.CoreCodeGeneration.Services
         public static string ToPascal(string input)
         {
             if (input == null)
-            {
+            {                
                 return null;
             }
 

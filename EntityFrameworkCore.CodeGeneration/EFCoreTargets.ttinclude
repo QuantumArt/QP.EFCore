@@ -3,29 +3,24 @@
 <#= "<?xml version=\"1.0\"?>" #>
 <Project>
   <ItemGroup>
-    <T4ParameterValues Include="EFCoreIncludeFolder">
-      <Value>$(EFCoreIncludeFolder)</Value>
+    <T4ParameterValues Include="NugetPackageFolder">
+      <Value>$(NugetPackageFolder)</Value>
     </T4ParameterValues>
   </ItemGroup>
   <ItemGroup>
-    <TemplateIncludeFiles Include="$(EFCoreIncludeFolder)\include\QPDataContextInclude\*.*"/>
+    <TemplateIncludeFiles Include="$(NugetPackageFolder)\include\QPDataContextInclude\*.*"/>
   </ItemGroup>
   <ItemGroup>
-    <TemplateFiles Include="$(EFCoreIncludeFolder)\include\*.tt"/>
+    <TemplateFiles Include="$(NugetPackageFolder)\include\*.tt"/>
   </ItemGroup>
   <ItemGroup>
-    <ModelFiles Include="$(EFCoreIncludeFolder)\include\Models\*.cs"/>
+    <ModelFiles Include="$(NugetPackageFolder)\include\Models\*.cs"/>
   </ItemGroup>
   <ItemGroup>
-    <ServiceFiles Include="$(EFCoreIncludeFolder)\include\Services\*.cs"/>
+    <ServiceFiles Include="$(NugetPackageFolder)\include\Services\*.cs"/>
   </ItemGroup>
   <ItemGroup>
-    <DataFiles Include="$(EFCoreIncludeFolder)\content\*.xml"/>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="*.cs">
-      <DependentUpon>QPDataContextGenerator.tt</DependentUpon>
-    </Compile>
+    <DataFiles Include="$(NugetPackageFolder)\content\*.xml"/>
   </ItemGroup>
   <Target Name="CopyTemplateTarget" BeforeTargets="BeforeBuild">
     <Copy DestinationFolder="$(MSBuildProjectDirectory)\" SourceFiles="@(TemplateFiles)" ></Copy>
@@ -43,5 +38,67 @@
     <Copy DestinationFolder="$(MSBuildProjectDirectory)\" SourceFiles="@(DataFiles)"
           Condition="!Exists('$(MSBuildProjectDirectory)\ModelMappingResult.xml')"></Copy>
   </Target>
+
+  <UsingTask TaskName="UpdateProjectFileTask"
+                TaskFactory="RoslynCodeTaskFactory"
+                AssemblyFile="$(MSBuildBinPath)\Microsoft.Build.Tasks.Core.dll">
+    <ParameterGroup>
+      <ProjectPath ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System" />
+      <Code Type="Fragment" Language="C#">
+        <![CDATA[
+            if (System.IO.File.Exists(ProjectPath))
+            {
+              var content = System.IO.File.ReadAllText(ProjectPath);
+              if (!content.Contains($"<Compile Update=\"*.cs\">"))
+              {
+                var newtext =
+@"  <ItemGroup>
+    <None Remove=""QPDataContextInclude\BaseM2MClasses.ttinclude"" />
+    <None Remove=""QPDataContextInclude\Classes.ttinclude"" />
+    <None Remove=""QPDataContextInclude\ClassesM2M.ttinclude"" />
+    <None Remove=""QPDataContextInclude\ClassExtensions.ttinclude"" />
+    <None Remove=""QPDataContextInclude\ConnectionScope.ttinclude"" />
+    <None Remove=""QPDataContextInclude\Manager.ttinclude"" />
+    <None Remove=""QPDataContextInclude\MappingConfigurator.ttinclude"" />
+    <None Remove=""QPDataContextInclude\MappingConfiguratorOnModelCreating.ttinclude"" />
+    <None Remove=""QPDataContextInclude\Model.ttinclude"" />
+    <None Remove=""QPDataContextInclude\ModelExtensions.ttinclude"" />
+    <None Remove=""QPDataContextInclude\StaticSchemaProvider.ttinclude"" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include=""QPDataContextInclude\BaseM2MClasses.ttinclude"" />
+    <EmbeddedResource Include=""QPDataContextInclude\ClassesM2M.ttinclude"" />
+    <EmbeddedResource Include=""QPDataContextInclude\Classes.ttinclude"" />
+    <EmbeddedResource Include=""QPDataContextInclude\ClassExtensions.ttinclude"" />
+    <EmbeddedResource Include=""QPDataContextInclude\ConnectionScope.ttinclude"" />
+    <EmbeddedResource Include=""QPDataContextInclude\Manager.ttinclude"" />
+    <EmbeddedResource Include=""QPDataContextInclude\MappingConfigurator.ttinclude"" />
+    <EmbeddedResource Include=""QPDataContextInclude\MappingConfiguratorOnModelCreating.ttinclude"" />
+    <EmbeddedResource Include=""QPDataContextInclude\Model.ttinclude"" />
+    <EmbeddedResource Include=""QPDataContextInclude\ModelExtensions.ttinclude"" />
+    <EmbeddedResource Include=""QPDataContextInclude\StaticSchemaProvider.ttinclude"" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update=""*.cs"">
+      <DependentUpon>QPDataContextGenerator.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>";
+                 content = content.Replace($"</Project>", newtext.Replace($"\n", Environment.NewLine));
+                 System.IO.File.WriteAllText(ProjectPath, content, UTF8Encoding.Default); 
+              }
+            }
+            ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+  <Target Name="UpdateProjectFile" BeforeTargets="CopyTemplateTarget;CopyIncludeTemplateTarget;CopyModelsTarget;CopyServicesTarget;CopyDataTarget">
+    <UpdateProjectFileTask ProjectPath="$(MSBuildProjectFile)" />
+  </Target>
+
 </Project>
 <#+}#>

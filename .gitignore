@@ -11,3 +11,6 @@
 /EntityFrameworkCore.Templates/obj
 /EntityFrameworkCore.CodeGeneration/obj
 /EntityFrameworkCore.Data/obj
+/EntityFrameworkCore.CodeGeneration/bin/Debug
+/EntityFrameworkCore.Data/bin/Debug/netcoreapp2.1
+/EntityFrameworkCore.Templates/bin/Debug/netcoreapp2.1
