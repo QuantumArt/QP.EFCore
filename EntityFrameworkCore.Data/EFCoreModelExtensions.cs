@@ -16,6 +16,7 @@ using System.Collections;
 using System.Globalization;
 using Quantumart.QP8.EFCore.Models;
 using Quantumart.QP8.EFCore.Services;
+using Microsoft.Extensions.Configuration;
 
 
 namespace EntityFrameworkCore.Data
@@ -34,6 +35,14 @@ namespace EntityFrameworkCore.Data
 		: base(options)
         {
             MappingResolver = new MappingResolver(schema);
+            OnContextCreated();
+        }
+		
+		public EFCoreModel(DbContextOptions<EFCoreModel> options, IMappingConfigurator mappingConfigurator) 
+		: base(options)
+        {
+			MappingResolver = new MappingResolver(mappingConfigurator.GetSchema());
+            MappingConfigurator = mappingConfigurator;
             OnContextCreated();
         }
 
@@ -60,6 +69,8 @@ namespace EntityFrameworkCore.Data
         public static bool RemoveUploadUrlSchema = false;
 
         protected IMappingResolver MappingResolver { get; private set; }
+		
+		private IMappingConfigurator MappingConfigurator;
 
         public bool ShouldRemoveSchema { get { return _shouldRemoveSchema; } set { _shouldRemoveSchema = value; } }
         public Int32 SiteId { get; private set; }
@@ -109,10 +120,13 @@ namespace EntityFrameworkCore.Data
 			{
 				if (_defaultConnectionString == null)
 				{
-					var obj = System.Configuration.ConfigurationManager.ConnectionStrings[_defaultConnectionStringName];
-					if (obj == null)
+					var configuration = new ConfigurationBuilder()
+						.AddJsonFile("appsettings.json")
+						.Build();
+					var connectionString = configuration.GetConnectionString(_defaultConnectionStringName);
+					if (string.IsNullOrWhiteSpace(connectionString))
 						throw new ApplicationException(string.Format("Connection string '{0}' is not specified", _defaultConnectionStringName));
-					_defaultConnectionString = obj.ConnectionString;
+					_defaultConnectionString = connectionString;
 				}
 				return _defaultConnectionString;
 			}
@@ -136,13 +150,19 @@ namespace EntityFrameworkCore.Data
 
 		public static EFCoreModel Create(IMappingConfigurator configurator, SqlConnection connection)
         {
-			var mapping = configurator.GetMappingInfo(connection);
+			var mapping = configurator.GetMappingInfo();
             var optionsBuilder = new DbContextOptionsBuilder<EFCoreModel>();
             optionsBuilder.UseSqlServer<EFCoreModel>(connection);
-            optionsBuilder.UseModel(mapping.DbCompiledModel);
-
-            var ctx = new EFCoreModel(optionsBuilder.Options, mapping.Schema);
-            ctx.SiteName = mapping.Schema.Schema.SiteName;
+			EFCoreModel ctx;
+			if(mapping != null)
+			{
+				optionsBuilder.UseModel(mapping.DbCompiledModel);
+				ctx = new EFCoreModel(optionsBuilder.Options, mapping.Schema);
+				ctx.SiteName = mapping.Schema.Schema.SiteName;
+			} else {
+				ctx = new EFCoreModel(optionsBuilder.Options, configurator);
+			}
+            
             ctx.ConnectionString = connection.ConnectionString;
             return ctx;
         }

@@ -438,6 +438,7 @@ namespace EntityFrameworkCore.Data
 
  
             #endregion
+			AddMappingInfo(modelBuilder.Model);
         }
     }
 }

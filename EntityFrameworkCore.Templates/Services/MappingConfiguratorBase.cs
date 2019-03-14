@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Quantumart.QP8.CoreCodeGeneration.Services;
 
 namespace Quantumart.QP8.EFCore.Services
 {
@@ -29,21 +29,28 @@ namespace Quantumart.QP8.EFCore.Services
             _schemaProvider = schemaProvider;
         }
 
-        public virtual MappingInfo GetMappingInfo(DbConnection connection)
+        public virtual MappingInfo GetMappingInfo()
         {
-            return _cache.GetOrAdd(GetCacheKey(), a =>
+            Lazy<MappingInfo> m;
+            if (_cache.TryGetValue(GetCacheKey(), out m)) 
             {
-                var _schema = _schemaProvider.GetSchema();
-                _mappingResolver = new MappingResolver(_schema);
+                return m.Value;
+            }
+            return null;
+            
+        }
+		
+		public ModelReader GetSchema()
+		{
+			return _schemaProvider.GetSchema();
+		}
 
-                //TODO не понятно откуда брать convetionset и как использовать connection ????
-                var builder = new ModelBuilder(new ConventionSet());
-                OnModelCreating(builder);
-
-                return new Lazy<MappingInfo>(
-                    () => new MappingInfo(builder.Model, _schema),
-                    LazyThreadSafetyMode.ExecutionAndPublication);
-            }).Value;
+        protected void AddMappingInfo(IModel model)
+        {
+            var _schema = _schemaProvider.GetSchema();
+            _cache.TryAdd(GetCacheKey(), new Lazy<MappingInfo>(
+                    () => new MappingInfo(model, _schema),
+                    LazyThreadSafetyMode.ExecutionAndPublication));
         }
 
         public virtual void OnModelCreating(ModelBuilder modelBuilder)

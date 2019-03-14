@@ -7,8 +7,9 @@ namespace Quantumart.QP8.EFCore.Services
 {
     public interface IMappingConfigurator
     {
-        MappingInfo GetMappingInfo(DbConnection connection);
+        MappingInfo GetMappingInfo();
         void OnModelCreating(ModelBuilder modelBuilder);
+		ModelReader GetSchema();
     }
 
     public class MappingInfo

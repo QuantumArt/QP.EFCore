@@ -16,7 +16,7 @@
       <dependency id="Microsoft.EntityFrameworkCore" version="2.2.2" />
       <dependency id="Microsoft.EntityFrameworkCore.Relational" version="2.2.2" />
       <dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="2.2.2" />
-      <dependency id="System.Configuration.ConfigurationManager" version="4.5.0" />
+      <dependency id="Microsoft.Extensions.Configuration.Json" version="2.2.0" />
       <dependency id="System.Data.DataSetExtensions" version="4.5.0" />
       <dependency id="Quantumart.AspNetCore" version="3.3.0" />     
     </dependencies>

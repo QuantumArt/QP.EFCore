@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Quantumart.QP8.EFCore.Models;
 using Quantumart.QP8.EFCore.Services;
+using Microsoft.Extensions.Configuration;
 /* place your custom usings here */
 
 namespace EntityFrameworkCore.Templates
@@ -61,6 +62,15 @@ namespace EntityFrameworkCore.Templates
 
             OnContextCreated();
         }
+		
+		public EFCoreModel(IConfiguration configuration)
+            : base(DefaultConnectionOptions(configuration))
+        {
+            MappingResolver = GetDefaultMappingResolver();
+
+            OnContextCreated();
+        }
+		
 		public EFCoreModel(DbContextOptions<EFCoreModel> options)
             : base(options)
         {
@@ -93,16 +103,37 @@ namespace EntityFrameworkCore.Templates
 		public virtual DbSet<Setting2SettingForBackwardForRelatedSettings> Setting2SettingsForBackwardForRelatedSettings { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var schemaProvider = new StaticSchemaProvider();
-            var mapping = new MappingConfigurator(DefaultContentAccess, schemaProvider);
-            mapping.OnModelCreating(modelBuilder);
+		    if(MappingConfigurator == null)
+			{
+				var schemaProvider = new StaticSchemaProvider();
+				var mapping = new MappingConfigurator(DefaultContentAccess, schemaProvider);
+				mapping.OnModelCreating(modelBuilder);
+			} else {
+				var schema = MappingConfigurator.GetSchema();
+				SiteName = schema.Schema.SiteName;
+				MappingConfigurator.OnModelCreating(modelBuilder);
+			}
         }
 
 		private static DbContextOptions<EFCoreModel> DefaultConnectionOptions()
         {
+			var configuration = new ConfigurationBuilder()
+						.AddJsonFile("appsettings.json")
+						.Build();
+			var connectionString = configuration.GetConnectionString("qp_database");
             var optionsBuilder = new DbContextOptionsBuilder<EFCoreModel>();
-            optionsBuilder.UseSqlServer<EFCoreModel>("name=qp_database");
+            optionsBuilder.UseSqlServer<EFCoreModel>(connectionString);
             return optionsBuilder.Options;
         }
+		
+		private static DbContextOptions<EFCoreModel> DefaultConnectionOptions(IConfiguration configuration)
+        {
+		    var connectionString = configuration.GetConnectionString("qp_database");
+            var optionsBuilder = new DbContextOptionsBuilder<EFCoreModel>();
+            optionsBuilder.UseSqlServer<EFCoreModel>(connectionString);
+            return optionsBuilder.Options;
+        }
+		
+		
 	}
 }

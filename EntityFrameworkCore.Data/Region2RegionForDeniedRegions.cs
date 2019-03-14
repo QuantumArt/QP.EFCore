@@ -8,8 +8,8 @@ namespace EntityFrameworkCore.Data
 {
     public partial class Region2RegionForDeniedRegions: IQPLink
     {
-		public Region RegionItem;		
-		public Region RegionLinkedItem;
+		public Region RegionItem { get; set; }		
+		public Region RegionLinkedItem { get; set; }
 
 		public int RegionItem_ID { get; set; }	
 		public int RegionLinkedItem_ID { get; set; }
@@ -25,8 +25,8 @@ namespace EntityFrameworkCore.Data
 
 	public partial class Region2RegionForBackwardForDeniedRegions: IQPLink
     {
-		public Region RegionItem;		
-		public Region RegionLinkedItem;
+		public Region RegionItem { get; set; }		
+		public Region RegionLinkedItem { get; set; }
 
 		public int RegionItem_ID { get; set; }	
 		public int RegionLinkedItem_ID { get; set; }

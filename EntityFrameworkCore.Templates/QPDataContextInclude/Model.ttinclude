@@ -11,6 +11,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Quantumart.QP8.EFCore.Models;
 using Quantumart.QP8.EFCore.Services;
+using Microsoft.Extensions.Configuration;
 <#= settings.Usings#>
 
 namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("NamespaceHint")#>
@@ -69,6 +70,17 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
 
             OnContextCreated();
         }
+		
+		public <#=model.Schema.ClassName#>(IConfiguration configuration)
+            : base(DefaultConnectionOptions(configuration))
+        {
+<#+ if (settings.GenerateExtensions) { #>
+            MappingResolver = GetDefaultMappingResolver();
+<#+ } #>
+
+            OnContextCreated();
+        }
+		
 		public <#=model.Schema.ClassName#>(DbContextOptions<<#=model.Schema.ClassName#>> options)
             : base(options)
         {
@@ -105,17 +117,38 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
 <#+}#>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var schemaProvider = new StaticSchemaProvider();
-            var mapping = new MappingConfigurator(DefaultContentAccess, schemaProvider);
-            mapping.OnModelCreating(modelBuilder);
+		    if(MappingConfigurator == null)
+			{
+				var schemaProvider = new StaticSchemaProvider();
+				var mapping = new MappingConfigurator(DefaultContentAccess, schemaProvider);
+				mapping.OnModelCreating(modelBuilder);
+			} else {
+				var schema = MappingConfigurator.GetSchema();
+				SiteName = schema.Schema.SiteName;
+				MappingConfigurator.OnModelCreating(modelBuilder);
+			}
         }
 
 		private static DbContextOptions<<#=model.Schema.ClassName#>> DefaultConnectionOptions()
         {
+			var configuration = new ConfigurationBuilder()
+						.AddJsonFile("appsettings.json")
+						.Build();
+			var connectionString = configuration.GetConnectionString("<#=model.Schema.ConnectionStringName#>");
             var optionsBuilder = new DbContextOptionsBuilder<<#=model.Schema.ClassName#>>();
-            optionsBuilder.UseSqlServer<<#=model.Schema.ClassName#>>("name=<#=model.Schema.ConnectionStringName#>");
+            optionsBuilder.UseSqlServer<<#=model.Schema.ClassName#>>(connectionString);
             return optionsBuilder.Options;
         }
+		
+		private static DbContextOptions<<#=model.Schema.ClassName#>> DefaultConnectionOptions(IConfiguration configuration)
+        {
+		    var connectionString = configuration.GetConnectionString("<#=model.Schema.ConnectionStringName#>");
+            var optionsBuilder = new DbContextOptionsBuilder<<#=model.Schema.ClassName#>>();
+            optionsBuilder.UseSqlServer<<#=model.Schema.ClassName#>>(connectionString);
+            return optionsBuilder.Options;
+        }
+		
+		
 	}
 }
 <#+}#>

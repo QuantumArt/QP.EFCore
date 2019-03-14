@@ -37,8 +37,8 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
 {
     public partial class <#=attribute.M2MClassName#>: IQPLink
     {
-		public <#=content.MappedName#> <#=attribute.M2MPropertyName#>;		
-		public <#=attribute.RelatedContent.MappedName#> <#=attribute.M2MRelatedPropertyName#>;
+		public <#=content.MappedName#> <#=attribute.M2MPropertyName#> { get; set; }		
+		public <#=attribute.RelatedContent.MappedName#> <#=attribute.M2MRelatedPropertyName#> { get; set; }
 
 		public int <#=attribute.M2MPropertyName#>_ID { get; set; }	
 		public int <#=attribute.M2MRelatedPropertyName#>_ID { get; set; }
@@ -57,8 +57,8 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
 #>
 	public partial class <#=attribute.M2MReverseClassName#>: IQPLink
     {
-		public <#=content.MappedName#> <#=attribute.M2MReversePropertyName#>;		
-		public <#=attribute.RelatedContent.MappedName#> <#=attribute.M2MReverseRelatedPropertyName#>;
+		public <#=content.MappedName#> <#=attribute.M2MReversePropertyName#> { get; set; }		
+		public <#=attribute.RelatedContent.MappedName#> <#=attribute.M2MReverseRelatedPropertyName#> { get; set; }
 
 		public int <#=attribute.M2MReversePropertyName#>_ID { get; set; }	
 		public int <#=attribute.M2MReverseRelatedPropertyName#>_ID { get; set; }

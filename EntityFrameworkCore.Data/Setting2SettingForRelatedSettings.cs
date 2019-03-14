@@ -8,8 +8,8 @@ namespace EntityFrameworkCore.Data
 {
     public partial class Setting2SettingForRelatedSettings: IQPLink
     {
-		public Setting SettingItem;		
-		public Setting SettingLinkedItem;
+		public Setting SettingItem { get; set; }		
+		public Setting SettingLinkedItem { get; set; }
 
 		public int SettingItem_ID { get; set; }	
 		public int SettingLinkedItem_ID { get; set; }
@@ -25,8 +25,8 @@ namespace EntityFrameworkCore.Data
 
 	public partial class Setting2SettingForBackwardForRelatedSettings: IQPLink
     {
-		public Setting SettingItem;		
-		public Setting SettingLinkedItem;
+		public Setting SettingItem { get; set; }		
+		public Setting SettingLinkedItem { get; set; }
 
 		public int SettingItem_ID { get; set; }	
 		public int SettingLinkedItem_ID { get; set; }

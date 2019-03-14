@@ -26,6 +26,7 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
         public override void OnModelCreating(ModelBuilder modelBuilder)
         {
         <#+ MappingConfiguratorOnModelCreating(context, GetDynamicFieldMapping, GetDynamicTableMapping, GetDynamicLinkTableMapping, GetDynamicReversedLinkTablMapping); #>
+			AddMappingInfo(modelBuilder.Model);
         }
     }
 }

@@ -8,8 +8,8 @@ namespace EntityFrameworkCore.Data
 {
     public partial class Product2RegionForRegions: IQPLink
     {
-		public Product ProductItem;		
-		public Region RegionLinkedItem;
+		public Product ProductItem { get; set; }		
+		public Region RegionLinkedItem { get; set; }
 
 		public int ProductItem_ID { get; set; }	
 		public int RegionLinkedItem_ID { get; set; }
@@ -25,8 +25,8 @@ namespace EntityFrameworkCore.Data
 
 	public partial class Product2RegionForBackwardForRegions: IQPLink
     {
-		public Product RegionItem;		
-		public Region ProductLinkedItem;
+		public Product RegionItem { get; set; }		
+		public Region ProductLinkedItem { get; set; }
 
 		public int RegionItem_ID { get; set; }	
 		public int ProductLinkedItem_ID { get; set; }
