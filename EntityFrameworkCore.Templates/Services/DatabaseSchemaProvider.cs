@@ -8,7 +8,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.AspNetCore.Http;
 using Quantumart.QP8.CoreCodeGeneration.Services;
 
-namespace Quantumart.QP8.EFCore.Services
+namespace Quantumart.QP8.EntityFrameworkCore
 {
     public class DatabaseSchemaProvider : ISchemaProvider
     {

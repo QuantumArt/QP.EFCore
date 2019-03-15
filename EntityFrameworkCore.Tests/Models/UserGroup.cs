@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Quantumart.QP8.EFCore.Models
+namespace Quantumart.QP8.EntityFrameworkCore
 {
     public partial class UserGroup
     {

@@ -6,7 +6,7 @@ var settings = context.Settings;
 using System.Collections.Generic;
 using System.Linq;
 using Quantumart.QP8.CoreCodeGeneration.Services;
-using Quantumart.QP8.EFCore.Services;
+using Quantumart.QP8.EntityFrameworkCore;
 <#= settings.Usings#>
 
 namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("NamespaceHint")#>

@@ -1,4 +1,4 @@
-﻿using Quantumart.QP8.EFCore.Services;
+﻿using Quantumart.QP8.EntityFrameworkCore;
 using NUnit.Framework;
 
 namespace EntityFrameworkCore.Tests.Infrastructure

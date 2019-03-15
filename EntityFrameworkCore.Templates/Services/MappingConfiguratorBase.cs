@@ -1,4 +1,4 @@
-﻿using Quantumart.QP8.EFCore.Models;
+﻿using Quantumart.QP8.EntityFrameworkCore;
 using System;
 using System.Collections.Concurrent;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +8,7 @@ using System.Threading;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Quantumart.QP8.CoreCodeGeneration.Services;
 
-namespace Quantumart.QP8.EFCore.Services
+namespace Quantumart.QP8.EntityFrameworkCore
 {
     public abstract class MappingConfiguratorBase : IMappingConfigurator
     {

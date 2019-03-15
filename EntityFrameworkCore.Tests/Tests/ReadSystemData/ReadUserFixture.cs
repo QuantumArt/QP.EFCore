@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Quantumart.QP8.EFCore.Services;
+using Quantumart.QP8.EntityFrameworkCore;
 using NUnit.Framework;
 using EntityFrameworkCore.Tests.Infrastructure;
 using Microsoft.EntityFrameworkCore;

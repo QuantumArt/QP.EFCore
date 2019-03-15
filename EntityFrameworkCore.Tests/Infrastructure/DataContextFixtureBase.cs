@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using NUnit.Framework;
-using Quantumart.QP8.EFCore.Services;
+using Quantumart.QP8.EntityFrameworkCore;
 
 namespace EntityFrameworkCore.Tests.Infrastructure
 {

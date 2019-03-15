@@ -20,7 +20,10 @@
     <ServiceFiles Include="$(NugetPackageFolder)\include\Services\*.cs"/>
   </ItemGroup>
   <ItemGroup>
-    <DataFiles Include="$(NugetPackageFolder)\content\*.xml"/>
+    <DataFile Include="$(NugetPackageFolder)\content\ModelMappingResult.xml"/>
+  </ItemGroup>
+  <ItemGroup>
+    <SettingsFile Include="$(NugetPackageFolder)\content\QPDataContextGenerator.tt.settings.xml"/>
   </ItemGroup>
   <Target Name="CopyTemplateTarget" BeforeTargets="BeforeBuild">
     <Copy DestinationFolder="$(MSBuildProjectDirectory)\" SourceFiles="@(TemplateFiles)" ></Copy>
@@ -35,8 +38,12 @@
     <Copy DestinationFolder="$(MSBuildProjectDirectory)\Services\" SourceFiles="@(ServiceFiles)" ></Copy>
   </Target>
   <Target Name="CopyDataTarget" BeforeTargets="BeforeBuild">
-    <Copy DestinationFolder="$(MSBuildProjectDirectory)\" SourceFiles="@(DataFiles)"
+    <Copy DestinationFolder="$(MSBuildProjectDirectory)\" SourceFiles="@(DataFile)"
           Condition="!Exists('$(MSBuildProjectDirectory)\ModelMappingResult.xml')"></Copy>
+  </Target>
+  <Target Name="CopySettingsTarget" BeforeTargets="BeforeBuild">
+    <Copy DestinationFolder="$(MSBuildProjectDirectory)\" SourceFiles="@(SettingsFile)"
+          Condition="!Exists('$(MSBuildProjectDirectory)\QPDataContextGenerator.tt.settings.xml')"></Copy>
   </Target>
 
   <UsingTask TaskName="UpdateProjectFileTask"

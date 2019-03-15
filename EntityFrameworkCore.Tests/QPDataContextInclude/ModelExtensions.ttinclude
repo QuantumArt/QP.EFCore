@@ -20,8 +20,7 @@ using System.Collections.Generic;
 using Quantumart.QPublishing.Info;
 using System.Collections;
 using System.Globalization;
-using Quantumart.QP8.EFCore.Models;
-using Quantumart.QP8.EFCore.Services;
+using Quantumart.QP8.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 <#= settings.Usings#>
 
@@ -47,7 +46,9 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
 		public <#= model.Schema.ClassName#>(DbContextOptions<<#=model.Schema.ClassName#>> options, IMappingConfigurator mappingConfigurator) 
 		: base(options)
         {
-			MappingResolver = new MappingResolver(mappingConfigurator.GetSchema());
+			var schema = mappingConfigurator.GetSchema();
+            MappingResolver = new MappingResolver(schema);
+            SiteName = schema.Schema.SiteName;
             MappingConfigurator = mappingConfigurator;
             OnContextCreated();
         }

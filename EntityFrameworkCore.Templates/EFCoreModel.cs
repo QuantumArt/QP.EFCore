@@ -3,8 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;	
 using Microsoft.AspNetCore.Http;
-using Quantumart.QP8.EFCore.Models;
-using Quantumart.QP8.EFCore.Services;
+using Quantumart.QP8.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 /* place your custom usings here */
 
@@ -109,8 +108,6 @@ namespace EntityFrameworkCore.Templates
 				var mapping = new MappingConfigurator(DefaultContentAccess, schemaProvider);
 				mapping.OnModelCreating(modelBuilder);
 			} else {
-				var schema = MappingConfigurator.GetSchema();
-				SiteName = schema.Schema.SiteName;
 				MappingConfigurator.OnModelCreating(modelBuilder);
 			}
         }

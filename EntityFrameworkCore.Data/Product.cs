@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using Quantumart.QP8.EFCore.Models;
+using Quantumart.QP8.EntityFrameworkCore;
 namespace EntityFrameworkCore.Data
 {
     public partial class Product: IQPArticle

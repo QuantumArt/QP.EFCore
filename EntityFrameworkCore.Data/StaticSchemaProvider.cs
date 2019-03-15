@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Quantumart.QP8.CoreCodeGeneration.Services;
-using Quantumart.QP8.EFCore.Services;
+using Quantumart.QP8.EntityFrameworkCore;
 
 
 namespace EntityFrameworkCore.Data

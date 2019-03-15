@@ -14,8 +14,7 @@ using System.Collections.Generic;
 using Quantumart.QPublishing.Info;
 using System.Collections;
 using System.Globalization;
-using Quantumart.QP8.EFCore.Models;
-using Quantumart.QP8.EFCore.Services;
+using Quantumart.QP8.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 /* place your custom usings here */
 
@@ -41,7 +40,9 @@ namespace EntityFrameworkCore.Templates
 		public EFCoreModel(DbContextOptions<EFCoreModel> options, IMappingConfigurator mappingConfigurator) 
 		: base(options)
         {
-			MappingResolver = new MappingResolver(mappingConfigurator.GetSchema());
+			var schema = mappingConfigurator.GetSchema();
+            MappingResolver = new MappingResolver(schema);
+            SiteName = schema.Schema.SiteName;
             MappingConfigurator = mappingConfigurator;
             OnContextCreated();
         }

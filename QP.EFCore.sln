@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EntityFrameworkCore", "Enti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkCore.Templates", "EntityFrameworkCore.Templates\EntityFrameworkCore.Templates.csproj", "{5D22607A-61A5-436E-82A7-026E9FA519E5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkCore.CodeGeneration", "EntityFrameworkCore.CodeGeneration\EntityFrameworkCore.CodeGeneration.csproj", "{F0DBFA55-C599-4AEE-BC0E-59C75496BDFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkCore.PackageBuilder", "EntityFrameworkCore.CodeGeneration\EntityFrameworkCore.PackageBuilder.csproj", "{F0DBFA55-C599-4AEE-BC0E-59C75496BDFF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkCore.Data", "EntityFrameworkCore.Data\EntityFrameworkCore.Data.csproj", "{BF5519F3-F5DA-4027-8A74-24236B2A9F97}"
 EndProject

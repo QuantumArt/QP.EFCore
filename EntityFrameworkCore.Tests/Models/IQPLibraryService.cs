@@ -1,4 +1,4 @@
-﻿namespace Quantumart.QP8.EFCore.Models
+﻿namespace Quantumart.QP8.EntityFrameworkCore
 {
     public interface IQPLibraryService
     {

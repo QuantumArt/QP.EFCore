@@ -233,7 +233,6 @@ class DefaultNamespaceProcessor : IContentProcessor
 
 class FlatternTemplateProcessor : IContentProcessor
 {
-	private const string ReplaceTemplate = @"$1{0}$3$4";
 	private static Regex IncludeRegex = new Regex(@"(#@\s*include\s+file="")(.*)(\\[^\\]*)(""\s*#)", RegexOptions.Compiled);
 	private static Regex CodeFileRegex = new Regex(@"(AddCodeFile\(@?"")(.*)(\\[^\\""]*)("")", RegexOptions.Compiled);
 	private const string ReplacePath = @"$(SolutionDir)\CodeGeneration\bin\Debug\netcoreapp2.1\Quantumart.QP8.CoreCodeGeneration.dll";
@@ -250,7 +249,6 @@ class FlatternTemplateProcessor : IContentProcessor
 	{
 		foreach(var re in new[] {IncludeRegex, CodeFileRegex})
 		{
-			//content = re.Replace(content, _template);
 			content = content.Replace(ReplacePath, _newPath);
         }
 		return content;
