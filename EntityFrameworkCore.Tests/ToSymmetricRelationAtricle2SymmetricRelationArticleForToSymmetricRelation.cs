@@ -11,25 +11,35 @@ namespace EntityFrameworkCore.Tests
 		public ToSymmetricRelationAtricle ToSymmetricRelationAtricleItem { get; set; }		
 		public SymmetricRelationArticle SymmetricRelationArticleLinkedItem { get; set; }
 
-		public int ToSymmetricRelationAtricleItem_ID { get; set; }	
-		public int SymmetricRelationArticleLinkedItem_ID { get; set; }
+		public int ToSymmetricRelationAtricleItemId { get; set; }	
+		public int SymmetricRelationArticleLinkedItemId { get; set; }
 
 		public int LinkId
 		{
 			get { return 101; }
 		}
 
-		public int Id { get { return ToSymmetricRelationAtricleItem_ID; } }
-        public int LinkedItemId { get { return SymmetricRelationArticleLinkedItem_ID; } }
+		public int Id 
+		{ 
+			get { return ToSymmetricRelationAtricleItemId; } 
+			set { ToSymmetricRelationAtricleItemId = value; } 
+		}
+        public int LinkedItemId 
+		{ 
+			get { return SymmetricRelationArticleLinkedItemId; }
+			set { SymmetricRelationArticleLinkedItemId = value; }
+		}
+		public IQPArticle Item { get { return ToSymmetricRelationAtricleItem; } }		
+		public IQPArticle LinkedItem { get { return SymmetricRelationArticleLinkedItem; } }
 	}
 
-	public partial class ToSymmetricRelationAtricle2SymmetricRelationArticleForBackwardForToSymmetricRelation: IQPLink
+	public partial class SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation: IQPLink
     {
-		public ToSymmetricRelationAtricle SymmetricRelationArticleItem { get; set; }		
-		public SymmetricRelationArticle ToSymmetricRelationAtricleLinkedItem { get; set; }
+		public ToSymmetricRelationAtricle ToSymmetricRelationAtricleLinkedItem { get; set; }		
+		public SymmetricRelationArticle SymmetricRelationArticleItem { get; set; }
 
-		public int SymmetricRelationArticleItem_ID { get; set; }	
-		public int ToSymmetricRelationAtricleLinkedItem_ID { get; set; }
+		public int ToSymmetricRelationAtricleLinkedItemId { get; set; }	
+		public int SymmetricRelationArticleItemId { get; set; }
 
 		public int LinkId
 		{
@@ -37,8 +47,18 @@ namespace EntityFrameworkCore.Tests
 		}
 
                     
-		public int Id { get { return SymmetricRelationArticleItem_ID; } }
-        public int LinkedItemId { get { return ToSymmetricRelationAtricleLinkedItem_ID; } }
+		public int Id 
+		{ 
+			get { return ToSymmetricRelationAtricleLinkedItemId; }
+			set { ToSymmetricRelationAtricleLinkedItemId = value; }
+		}
+        public int LinkedItemId 
+		{ 
+			get { return SymmetricRelationArticleItemId; } 
+			set { SymmetricRelationArticleItemId = value; }
+		}
+		public IQPArticle Item { get { return ToSymmetricRelationAtricleLinkedItem; } }		
+		public IQPArticle LinkedItem { get { return SymmetricRelationArticleItem; } }
 
 	}
 

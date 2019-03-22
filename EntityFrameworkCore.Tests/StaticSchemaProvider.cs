@@ -231,11 +231,11 @@ namespace EntityFrameworkCore.Tests
                 },
                 new AttributeInfo
                 {
-                    Id = 38259,
+                    Id = 41538,
                     ContentId = 694,
                     Name = "SymmetricRelation",
                     MappedName = "SymmetricRelation",
-                    LinkId = 100,
+                    LinkId = 101,
                     Type = "M2M"
                 },
                 new AttributeInfo
@@ -366,7 +366,7 @@ namespace EntityFrameworkCore.Tests
                 },
                 new AttributeInfo
                 {
-                    Id = 40115,
+                    Id = 41539,
                     ContentId = 999,
                     Name = "BackReference",
                     MappedName = "BackReference",
@@ -375,7 +375,7 @@ namespace EntityFrameworkCore.Tests
                 },
                 new AttributeInfo
                 {
-                    Id = 40116,
+                    Id = 41540,
                     ContentId = 1300,
                     Name = "BackOtMReferenceMapping",
                     MappedName = "BackOtMReferenceMapping",
@@ -384,25 +384,7 @@ namespace EntityFrameworkCore.Tests
                 },
                 new AttributeInfo
                 {
-                    Id = 40117,
-                    ContentId = 695,
-                    Name = "BackwardForSymmetricRelation",
-                    MappedName = "BackwardForSymmetricRelation",
-                    LinkId = 100,
-                    Type = "M2M"
-                },
-                new AttributeInfo
-                {
-                    Id = 40118,
-                    ContentId = 694,
-                    Name = "BackwardForToSymmetricRelation",
-                    MappedName = "BackwardForToSymmetricRelation",
-                    LinkId = 101,
-                    Type = "M2M"
-                },
-                new AttributeInfo
-                {
-                    Id = 40119,
+                    Id = 41541,
                     ContentId = 994,
                     Name = "BackwardForReference",
                     MappedName = "BackwardForReference",

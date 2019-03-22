@@ -32,10 +32,16 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
 <#+	if(content.Attributes.Any(x => x.GenerateLibraryUrl || x.GenerateUploadPath || x.IsNullable)) { #>
         #region Genarated properties
 <#+	   	foreach(var attribute in content.Attributes.Where(x => x.GenerateLibraryUrl)) { #>
-        public string <#=attribute.MappedName#>Url { get; set; }
+        public string <#=attribute.MappedName#>Url 
+		{ 
+			get { return <#=model.Schema.ClassName#>.Current.GetUrl(this.<#=attribute.MappedName#>, "<#=content.MappedName#>", "<#= attribute.MappedName#>"); }
+		}
 <#+		} 
   		foreach(var attribute in content.Attributes.Where(x => x.GenerateUploadPath)) { #>
-        public string <#=attribute.MappedName#>UploadPath { get; set; }
+        public string <#=attribute.MappedName#>UploadPath 
+		{ 
+			get { return <#=model.Schema.ClassName#>.Current.GetUploadPath(this.<#=attribute.MappedName#>, "<#=content.MappedName#>", "<#= attribute.MappedName#>"); }
+		}
 <#+		} 
   		foreach(var attribute in content.Attributes.Where(x => x.IsNullable)) { #>
         public <#= attribute.ExactType#> <#=attribute.MappedName#>Exact { get { return this.<#=attribute.MappedName#> == null ? default(<#= attribute.ExactType#>) : this.<#=attribute.MappedName#>.Value; } }

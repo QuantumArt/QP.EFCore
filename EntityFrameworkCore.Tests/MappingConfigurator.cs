@@ -25,8 +25,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<AfiellFieldsItem>()
                 .ToTable(GetTableName("AfiellFieldsItem"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<AfiellFieldsItem>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<AfiellFieldsItem>()
                 .Property(x => x.LastModifiedBy)
@@ -93,8 +95,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<Schema>()
                 .ToTable(GetTableName("Schema"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<Schema>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<Schema>()
                 .Property(x => x.LastModifiedBy)
@@ -120,8 +124,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<StringItem>()
                 .ToTable(GetTableName("StringItem"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<StringItem>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<StringItem>()
                 .Property(x => x.LastModifiedBy)
@@ -147,8 +153,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<StringItemForUpdate>()
                 .ToTable(GetTableName("StringItemForUpdate"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<StringItemForUpdate>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<StringItemForUpdate>()
                 .Property(x => x.LastModifiedBy)
@@ -174,8 +182,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<StringItemForUnsert>()
                 .ToTable(GetTableName("StringItemForUnsert"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<StringItemForUnsert>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<StringItemForUnsert>()
                 .Property(x => x.LastModifiedBy)
@@ -201,8 +211,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<ItemForUpdate>()
                 .ToTable(GetTableName("ItemForUpdate"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<ItemForUpdate>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<ItemForUpdate>()
                 .Property(x => x.LastModifiedBy)
@@ -228,8 +240,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<ItemForInsert>()
                 .ToTable(GetTableName("ItemForInsert"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<ItemForInsert>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<ItemForInsert>()
                 .Property(x => x.LastModifiedBy)
@@ -255,8 +269,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<PublishedNotPublishedItem>()
                 .ToTable(GetTableName("PublishedNotPublishedItem"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<PublishedNotPublishedItem>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<PublishedNotPublishedItem>()
                 .Property(x => x.LastModifiedBy)
@@ -285,8 +301,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<ReplacingPlaceholdersItem>()
                 .ToTable(GetTableName("ReplacingPlaceholdersItem"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<ReplacingPlaceholdersItem>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<ReplacingPlaceholdersItem>()
                 .Property(x => x.LastModifiedBy)
@@ -312,8 +330,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<FileFieldsItem>()
                 .ToTable(GetTableName("FileFieldsItem"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<FileFieldsItem>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<FileFieldsItem>()
                 .Property(x => x.LastModifiedBy)
@@ -338,8 +358,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<SymmetricRelationArticle>()
                 .ToTable(GetTableName("SymmetricRelationArticle"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<SymmetricRelationArticle>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<SymmetricRelationArticle>()
                 .Property(x => x.LastModifiedBy)
@@ -355,41 +377,6 @@ namespace EntityFrameworkCore.Tests
 				.IsRequired()
                 .HasForeignKey(x => x.StatusTypeId); 
 
-
-             modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>()
-                .ToTable(GetLinkTableName("SymmetricRelationArticle", "SymmetricRelation"));
-
-            modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>().Property(e => e.SymmetricRelationArticleItem_ID).HasColumnName("id");
-            modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>().Property(e => e.ToSymmetricRelationAtricleLinkedItem_ID).HasColumnName("linked_id");
-            modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>().HasKey(ug => new { ug.SymmetricRelationArticleItem_ID, ug.ToSymmetricRelationAtricleLinkedItem_ID });
-
-            modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>()
-                .HasOne(bc => bc.SymmetricRelationArticleItem)
-                .WithMany(b => b.SymmetricRelation)
-                .HasForeignKey(bc => bc.SymmetricRelationArticleItem_ID);
-
-            modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>()
-                .HasOne(bc => bc.ToSymmetricRelationAtricleLinkedItem)
-                .WithMany();
-
-
-			 modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForBackwardForSymmetricRelation>()
-                .ToTable(GetReversedLinkTableName("SymmetricRelationArticle", "SymmetricRelation"));
-      
-
-			modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForBackwardForSymmetricRelation>().Property(e => e.ToSymmetricRelationAtricleItem_ID).HasColumnName("linked_id");
-			modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForBackwardForSymmetricRelation>().Property(e => e.SymmetricRelationArticleLinkedItem_ID).HasColumnName("id");
-			modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForBackwardForSymmetricRelation>().HasKey(ug => new { ug.ToSymmetricRelationAtricleItem_ID, ug.SymmetricRelationArticleLinkedItem_ID });
-            
-			 modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForBackwardForSymmetricRelation>()
-                .HasOne(bc => bc.SymmetricRelationArticleLinkedItem)
-                .WithMany(b => b.BackwardForSymmetricRelation)
-                .HasForeignKey(bc => bc.SymmetricRelationArticleLinkedItem_ID);
-
-            modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForBackwardForSymmetricRelation>()
-                .HasOne(bc => bc.ToSymmetricRelationAtricleItem)
-                .WithMany();
-
  
             #endregion
 
@@ -397,8 +384,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<ToSymmetricRelationAtricle>()
                 .ToTable(GetTableName("ToSymmetricRelationAtricle"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<ToSymmetricRelationAtricle>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<ToSymmetricRelationAtricle>()
                 .Property(x => x.LastModifiedBy)
@@ -418,37 +407,46 @@ namespace EntityFrameworkCore.Tests
              modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>()
                 .ToTable(GetLinkTableName("ToSymmetricRelationAtricle", "ToSymmetricRelation"));
 
-            modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>().Property(e => e.ToSymmetricRelationAtricleItem_ID).HasColumnName("id");
-            modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>().Property(e => e.SymmetricRelationArticleLinkedItem_ID).HasColumnName("linked_id");
-            modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>().HasKey(ug => new { ug.ToSymmetricRelationAtricleItem_ID, ug.SymmetricRelationArticleLinkedItem_ID });
+            modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>().Property(e => e.ToSymmetricRelationAtricleItemId).HasColumnName("id");
+            modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>().Property(e => e.SymmetricRelationArticleLinkedItemId).HasColumnName("linked_id");
+            modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>().HasKey(ug => new { ug.ToSymmetricRelationAtricleItemId, ug.SymmetricRelationArticleLinkedItemId });
 
             modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>()
                 .HasOne(bc => bc.ToSymmetricRelationAtricleItem)
                 .WithMany(b => b.ToSymmetricRelation)
-                .HasForeignKey(bc => bc.ToSymmetricRelationAtricleItem_ID);
+                .HasForeignKey(bc => bc.ToSymmetricRelationAtricleItemId);
 
             modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>()
                 .HasOne(bc => bc.SymmetricRelationArticleLinkedItem)
                 .WithMany();
+			modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>().Ignore(x=>x.Id);
+			modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>().Ignore(x=>x.LinkId);
+			modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>().Ignore(x=>x.LinkedItemId);
+			modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>().Ignore(x=>x.Item);
+			modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>().Ignore(x=>x.LinkedItem);
 
-
-			 modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForBackwardForToSymmetricRelation>()
+			 modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>()
                 .ToTable(GetReversedLinkTableName("ToSymmetricRelationAtricle", "ToSymmetricRelation"));
       
 
-			modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForBackwardForToSymmetricRelation>().Property(e => e.SymmetricRelationArticleItem_ID).HasColumnName("linked_id");
-			modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForBackwardForToSymmetricRelation>().Property(e => e.ToSymmetricRelationAtricleLinkedItem_ID).HasColumnName("id");
-			modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForBackwardForToSymmetricRelation>().HasKey(ug => new { ug.SymmetricRelationArticleItem_ID, ug.ToSymmetricRelationAtricleLinkedItem_ID });
+			modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>().Property(e => e.ToSymmetricRelationAtricleLinkedItemId).HasColumnName("linked_id");
+			modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>().Property(e => e.SymmetricRelationArticleItemId).HasColumnName("id");
+			modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>().HasKey(ug => new { ug.ToSymmetricRelationAtricleLinkedItemId, ug.SymmetricRelationArticleItemId });
             
-			 modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForBackwardForToSymmetricRelation>()
-                .HasOne(bc => bc.ToSymmetricRelationAtricleLinkedItem)
-                .WithMany(b => b.BackwardForToSymmetricRelation)
-                .HasForeignKey(bc => bc.ToSymmetricRelationAtricleLinkedItem_ID);
-
-            modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForBackwardForToSymmetricRelation>()
+			 modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>()
                 .HasOne(bc => bc.SymmetricRelationArticleItem)
+                .WithMany(b => b.SymmetricRelation)
+                .HasForeignKey(bc => bc.SymmetricRelationArticleItemId);
+
+            modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>()
+                .HasOne(bc => bc.ToSymmetricRelationAtricleLinkedItem)
                 .WithMany();
 
+			modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>().Ignore(x=>x.Id);
+			modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>().Ignore(x=>x.LinkId);
+			modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>().Ignore(x=>x.LinkedItemId);
+			modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>().Ignore(x=>x.Item);
+			modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>().Ignore(x=>x.LinkedItem);
  
             #endregion
 
@@ -456,8 +454,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<MtMItemForUpdate>()
                 .ToTable(GetTableName("MtMItemForUpdate"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<MtMItemForUpdate>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<MtMItemForUpdate>()
                 .Property(x => x.LastModifiedBy)
@@ -480,37 +480,46 @@ namespace EntityFrameworkCore.Tests
              modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>()
                 .ToTable(GetLinkTableName("MtMItemForUpdate", "Reference"));
 
-            modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>().Property(e => e.MtMItemForUpdateItem_ID).HasColumnName("id");
-            modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>().Property(e => e.MtMDictionaryForUpdateLinkedItem_ID).HasColumnName("linked_id");
-            modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>().HasKey(ug => new { ug.MtMItemForUpdateItem_ID, ug.MtMDictionaryForUpdateLinkedItem_ID });
+            modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>().Property(e => e.MtMItemForUpdateItemId).HasColumnName("id");
+            modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>().Property(e => e.MtMDictionaryForUpdateLinkedItemId).HasColumnName("linked_id");
+            modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>().HasKey(ug => new { ug.MtMItemForUpdateItemId, ug.MtMDictionaryForUpdateLinkedItemId });
 
             modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>()
                 .HasOne(bc => bc.MtMItemForUpdateItem)
                 .WithMany(b => b.Reference)
-                .HasForeignKey(bc => bc.MtMItemForUpdateItem_ID);
+                .HasForeignKey(bc => bc.MtMItemForUpdateItemId);
 
             modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>()
                 .HasOne(bc => bc.MtMDictionaryForUpdateLinkedItem)
                 .WithMany();
+			modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>().Ignore(x=>x.Id);
+			modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>().Ignore(x=>x.LinkId);
+			modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>().Ignore(x=>x.LinkedItemId);
+			modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>().Ignore(x=>x.Item);
+			modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>().Ignore(x=>x.LinkedItem);
 
-
-			 modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForBackwardForReference>()
+			 modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>()
                 .ToTable(GetReversedLinkTableName("MtMItemForUpdate", "Reference"));
       
 
-			modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForBackwardForReference>().Property(e => e.MtMDictionaryForUpdateItem_ID).HasColumnName("linked_id");
-			modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForBackwardForReference>().Property(e => e.MtMItemForUpdateLinkedItem_ID).HasColumnName("id");
-			modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForBackwardForReference>().HasKey(ug => new { ug.MtMDictionaryForUpdateItem_ID, ug.MtMItemForUpdateLinkedItem_ID });
+			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>().Property(e => e.MtMItemForUpdateLinkedItemId).HasColumnName("linked_id");
+			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>().Property(e => e.MtMDictionaryForUpdateItemId).HasColumnName("id");
+			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>().HasKey(ug => new { ug.MtMItemForUpdateLinkedItemId, ug.MtMDictionaryForUpdateItemId });
             
-			 modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForBackwardForReference>()
-                .HasOne(bc => bc.MtMItemForUpdateLinkedItem)
-                .WithMany(b => b.BackwardForReference)
-                .HasForeignKey(bc => bc.MtMItemForUpdateLinkedItem_ID);
-
-            modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForBackwardForReference>()
+			 modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>()
                 .HasOne(bc => bc.MtMDictionaryForUpdateItem)
+                .WithMany(b => b.BackwardForReference)
+                .HasForeignKey(bc => bc.MtMDictionaryForUpdateItemId);
+
+            modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>()
+                .HasOne(bc => bc.MtMItemForUpdateLinkedItem)
                 .WithMany();
 
+			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>().Ignore(x=>x.Id);
+			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>().Ignore(x=>x.LinkId);
+			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>().Ignore(x=>x.LinkedItemId);
+			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>().Ignore(x=>x.Item);
+			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>().Ignore(x=>x.LinkedItem);
  
             #endregion
 
@@ -518,8 +527,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<MtMDictionaryForUpdate>()
                 .ToTable(GetTableName("MtMDictionaryForUpdate"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<MtMDictionaryForUpdate>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<MtMDictionaryForUpdate>()
                 .Property(x => x.LastModifiedBy)
@@ -545,8 +556,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<OtMItemForUpdate>()
                 .ToTable(GetTableName("OtMItemForUpdate"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<OtMItemForUpdate>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<OtMItemForUpdate>()
                 .Property(x => x.LastModifiedBy)
@@ -580,8 +593,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<OtMDictionaryForUpdate>()
                 .ToTable(GetTableName("OtMDictionaryForUpdate"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<OtMDictionaryForUpdate>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<OtMDictionaryForUpdate>()
                 .Property(x => x.LastModifiedBy)
@@ -607,8 +622,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<DateItemForUpdate>()
                 .ToTable(GetTableName("DateItemForUpdate"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<DateItemForUpdate>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<DateItemForUpdate>()
                 .Property(x => x.LastModifiedBy)
@@ -631,8 +648,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<TimeItemForUpdate>()
                 .ToTable(GetTableName("TimeItemForUpdate"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<TimeItemForUpdate>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<TimeItemForUpdate>()
                 .Property(x => x.LastModifiedBy)
@@ -655,8 +674,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<DateTimeItemForUpdate>()
                 .ToTable(GetTableName("DateTimeItemForUpdate"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<DateTimeItemForUpdate>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<DateTimeItemForUpdate>()
                 .Property(x => x.LastModifiedBy)
@@ -679,8 +700,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<FileItemForUpdate>()
                 .ToTable(GetTableName("FileItemForUpdate"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<FileItemForUpdate>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<FileItemForUpdate>()
                 .Property(x => x.LastModifiedBy)
@@ -705,8 +728,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<ImageItemForUpdate>()
                 .ToTable(GetTableName("ImageItemForUpdate"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<ImageItemForUpdate>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<ImageItemForUpdate>()
                 .Property(x => x.LastModifiedBy)
@@ -731,8 +756,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<OtMItemForMapping>()
                 .ToTable(GetTableName("OtMItemForMapping"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<OtMItemForMapping>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<OtMItemForMapping>()
                 .Property(x => x.LastModifiedBy)
@@ -763,8 +790,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<OtMRelatedItemWithMapping>()
                 .ToTable(GetTableName("OtMRelatedItemWithMapping"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<OtMRelatedItemWithMapping>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<OtMRelatedItemWithMapping>()
                 .Property(x => x.LastModifiedBy)
@@ -787,8 +816,10 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<OtMItemToContentWithoutMapping>()
                 .ToTable(GetTableName("OtMItemToContentWithoutMapping"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<OtMItemToContentWithoutMapping>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<OtMItemToContentWithoutMapping>()
                 .Property(x => x.LastModifiedBy)

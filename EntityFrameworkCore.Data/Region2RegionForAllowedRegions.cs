@@ -11,33 +11,53 @@ namespace EntityFrameworkCore.Data
 		public Region RegionItem { get; set; }		
 		public Region RegionLinkedItem { get; set; }
 
-		public int RegionItem_ID { get; set; }	
-		public int RegionLinkedItem_ID { get; set; }
+		public int RegionItemId { get; set; }	
+		public int RegionLinkedItemId { get; set; }
 
 		public int LinkId
 		{
 			get { return 71; }
 		}
 
-		public int Id { get { return RegionItem_ID; } }
-        public int LinkedItemId { get { return RegionLinkedItem_ID; } }
+		public int Id 
+		{ 
+			get { return RegionItemId; } 
+			set { RegionItemId = value; } 
+		}
+        public int LinkedItemId 
+		{ 
+			get { return RegionLinkedItemId; }
+			set { RegionLinkedItemId = value; }
+		}
+		public IQPArticle Item { get { return RegionItem; } }		
+		public IQPArticle LinkedItem { get { return RegionLinkedItem; } }
 	}
 
 	public partial class Region2RegionForBackwardForAllowedRegions: IQPLink
     {
-		public Region RegionItem { get; set; }		
-		public Region RegionLinkedItem { get; set; }
+		public Region RegionLinkedItem { get; set; }		
+		public Region RegionItem { get; set; }
 
-		public int RegionItem_ID { get; set; }	
-		public int RegionLinkedItem_ID { get; set; }
+		public int RegionLinkedItemId { get; set; }	
+		public int RegionItemId { get; set; }
 
 		public int LinkId
 		{
 			get { return 71; }
 		}
 
-	   public int Id { get { return RegionLinkedItem_ID; } }
-       public int LinkedItemId { get { return RegionItem_ID; } }
+		public int Id 
+		{ 
+			get { return RegionItemId; } 
+			set { RegionItemId = value; } 
+		}
+		public int LinkedItemId 
+		{ 
+			get { return RegionLinkedItemId; } 
+			set { RegionLinkedItemId = value; } 
+		}
+		public IQPArticle Item { get { return RegionItem; } }		
+		public IQPArticle LinkedItem { get { return RegionLinkedItem; } }
 
 	}
 

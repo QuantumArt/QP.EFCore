@@ -10,7 +10,7 @@ namespace EntityFrameworkCore.Tests
     {
         public MtMDictionaryForUpdate()
         {
-			BackwardForReference = new HashSet<MtMItemForUpdate2MtMDictionaryForUpdateForBackwardForReference>();
+			BackwardForReference = new HashSet<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>();
         }
 
         public virtual Int32 Id { get; set; }
@@ -31,7 +31,7 @@ namespace EntityFrameworkCore.Tests
 		/// <summary>
 		/// Auto-generated backing property for 39284/Reference
 		/// </summary>
-		public  ICollection<MtMItemForUpdate2MtMDictionaryForUpdateForBackwardForReference> BackwardForReference { get; set; }
+		public  ICollection<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference> BackwardForReference { get; set; }
 	}
 }
 	

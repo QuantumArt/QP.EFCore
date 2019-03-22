@@ -11,7 +11,6 @@ namespace EntityFrameworkCore.Tests
         public ToSymmetricRelationAtricle()
         {
 		    ToSymmetricRelation = new HashSet<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>();
-			BackwardForSymmetricRelation = new HashSet<SymmetricRelationArticle2ToSymmetricRelationAtricleForBackwardForSymmetricRelation>();
         }
 
         public virtual Int32 Id { get; set; }
@@ -27,10 +26,6 @@ namespace EntityFrameworkCore.Tests
 		/// 
 		/// </summary>
 		public  ICollection<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation> ToSymmetricRelation { get; set; }
-		/// <summary>
-		/// Auto-generated backing property for 38259/SymmetricRelation
-		/// </summary>
-		public  ICollection<SymmetricRelationArticle2ToSymmetricRelationAtricleForBackwardForSymmetricRelation> BackwardForSymmetricRelation { get; set; }
 	}
 }
 	

@@ -11,25 +11,35 @@ namespace EntityFrameworkCore.Data
 		public Product ProductItem { get; set; }		
 		public Region RegionLinkedItem { get; set; }
 
-		public int ProductItem_ID { get; set; }	
-		public int RegionLinkedItem_ID { get; set; }
+		public int ProductItemId { get; set; }	
+		public int RegionLinkedItemId { get; set; }
 
 		public int LinkId
 		{
 			get { return 21; }
 		}
 
-		public int Id { get { return ProductItem_ID; } }
-        public int LinkedItemId { get { return RegionLinkedItem_ID; } }
+		public int Id 
+		{ 
+			get { return ProductItemId; } 
+			set { ProductItemId = value; } 
+		}
+        public int LinkedItemId 
+		{ 
+			get { return RegionLinkedItemId; }
+			set { RegionLinkedItemId = value; }
+		}
+		public IQPArticle Item { get { return ProductItem; } }		
+		public IQPArticle LinkedItem { get { return RegionLinkedItem; } }
 	}
 
-	public partial class Product2RegionForBackwardForRegions: IQPLink
+	public partial class Region2ProductForBackwardForRegions: IQPLink
     {
-		public Product RegionItem { get; set; }		
-		public Region ProductLinkedItem { get; set; }
+		public Product ProductLinkedItem { get; set; }		
+		public Region RegionItem { get; set; }
 
-		public int RegionItem_ID { get; set; }	
-		public int ProductLinkedItem_ID { get; set; }
+		public int ProductLinkedItemId { get; set; }	
+		public int RegionItemId { get; set; }
 
 		public int LinkId
 		{
@@ -37,8 +47,18 @@ namespace EntityFrameworkCore.Data
 		}
 
                     
-		public int Id { get { return RegionItem_ID; } }
-        public int LinkedItemId { get { return ProductLinkedItem_ID; } }
+		public int Id 
+		{ 
+			get { return ProductLinkedItemId; }
+			set { ProductLinkedItemId = value; }
+		}
+        public int LinkedItemId 
+		{ 
+			get { return RegionItemId; } 
+			set { RegionItemId = value; }
+		}
+		public IQPArticle Item { get { return ProductLinkedItem; } }		
+		public IQPArticle LinkedItem { get { return RegionItem; } }
 
 	}
 

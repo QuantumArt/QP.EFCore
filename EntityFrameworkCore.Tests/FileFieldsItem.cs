@@ -22,10 +22,6 @@ namespace EntityFrameworkCore.Tests
         public virtual StatusType StatusType { get; set; }
 
         public virtual String FileItem { get; set; }
-		#region Generated Content properties
-        // public string FileItemUrl { get; set; }
-        // public string FileItemUploadPath { get; set; }
-		#endregion
 	}
 }
 	

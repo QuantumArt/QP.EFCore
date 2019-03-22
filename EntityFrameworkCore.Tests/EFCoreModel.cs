@@ -106,25 +106,17 @@ namespace EntityFrameworkCore.Tests
         public virtual DbSet<OtMItemForMapping> OtMItemsForMapping { get; set; }
         public virtual DbSet<OtMRelatedItemWithMapping> OtMRelatedItemsWithMapping { get; set; }
         public virtual DbSet<OtMItemToContentWithoutMapping> OtMItemsToContentWithoutMapping { get; set; }
-		public virtual DbSet<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation> SymmetricRelationArticle2ToSymmetricRelationAtriclesForSymmetricRelation { get; set; }
-
-		public virtual DbSet<SymmetricRelationArticle2ToSymmetricRelationAtricleForBackwardForSymmetricRelation> SymmetricRelationArticle2ToSymmetricRelationAtriclesForBackwardForSymmetricRelation { get; set; }
 		public virtual DbSet<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation> ToSymmetricRelationAtricle2SymmetricRelationArticlesForToSymmetricRelation { get; set; }
 
-		public virtual DbSet<ToSymmetricRelationAtricle2SymmetricRelationArticleForBackwardForToSymmetricRelation> ToSymmetricRelationAtricle2SymmetricRelationArticlesForBackwardForToSymmetricRelation { get; set; }
+		public virtual DbSet<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation> SymmetricRelationArticle2ToSymmetricRelationAtriclesForSymmetricRelation { get; set; }
 		public virtual DbSet<MtMItemForUpdate2MtMDictionaryForUpdateForReference> MtMItemForUpdate2MtMDictionaryForUpdateForReference { get; set; }
 
-		public virtual DbSet<MtMItemForUpdate2MtMDictionaryForUpdateForBackwardForReference> MtMItemForUpdate2MtMDictionaryForUpdateForBackwardForReference { get; set; }
+		public virtual DbSet<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference> MtMDictionaryForUpdate2MtMItemsForUpdateForBackwardForReference { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-		    if(MappingConfigurator == null)
-			{
-				var schemaProvider = new StaticSchemaProvider();
-				var mapping = new MappingConfigurator(DefaultContentAccess, schemaProvider);
-				mapping.OnModelCreating(modelBuilder);
-			} else {
-				MappingConfigurator.OnModelCreating(modelBuilder);
-			}
+			var schemaProvider = new StaticSchemaProvider();
+			var mapping = new MappingConfigurator(DefaultContentAccess, schemaProvider);
+			mapping.OnModelCreating(modelBuilder);
         }
 
 		private static DbContextOptions<EFCoreModel> DefaultConnectionOptions()

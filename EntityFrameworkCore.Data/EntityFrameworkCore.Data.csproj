@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="QP8.EntityFrameworkCore" Version="0.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="QPDataContextGenerator.log">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -49,6 +45,9 @@
     <EmbeddedResource Include="QPDataContextInclude\Model.ttinclude" />
     <EmbeddedResource Include="QPDataContextInclude\ModelExtensions.ttinclude" />
     <EmbeddedResource Include="QPDataContextInclude\StaticSchemaProvider.ttinclude" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="QP8.EntityFrameworkCore" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="*.cs">

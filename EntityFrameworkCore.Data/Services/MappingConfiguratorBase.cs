@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Quantumart.QP8.CoreCodeGeneration.Services;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace Quantumart.QP8.EntityFrameworkCore
 {
@@ -31,16 +32,22 @@ namespace Quantumart.QP8.EntityFrameworkCore
 
         public virtual MappingInfo GetMappingInfo()
         {
-            Lazy<MappingInfo> m;
-            if (_cache.TryGetValue(GetCacheKey(), out m)) 
+            return _cache.GetOrAdd(GetCacheKey(), a =>
             {
-                return m.Value;
-            }
-            return null;
-            
+                var _schema = _schemaProvider.GetSchema();
+                _mappingResolver = new MappingResolver(_schema);
+                var conventionSet = SqlServerConventionSetBuilder.Build();
+                var builder = new ModelBuilder(conventionSet);
+                OnModelCreating(builder);
+                builder.FinalizeModel();
+
+                return new Lazy<MappingInfo>(
+                    () => new MappingInfo(builder.Model, _schema),
+                    LazyThreadSafetyMode.ExecutionAndPublication);
+            }).Value;
         }
-		
-		public ModelReader GetSchema()
+
+        public ModelReader GetSchema()
 		{
 			return _schemaProvider.GetSchema();
 		}

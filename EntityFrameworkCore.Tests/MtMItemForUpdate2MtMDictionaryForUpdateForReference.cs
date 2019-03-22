@@ -11,25 +11,35 @@ namespace EntityFrameworkCore.Tests
 		public MtMItemForUpdate MtMItemForUpdateItem { get; set; }		
 		public MtMDictionaryForUpdate MtMDictionaryForUpdateLinkedItem { get; set; }
 
-		public int MtMItemForUpdateItem_ID { get; set; }	
-		public int MtMDictionaryForUpdateLinkedItem_ID { get; set; }
+		public int MtMItemForUpdateItemId { get; set; }	
+		public int MtMDictionaryForUpdateLinkedItemId { get; set; }
 
 		public int LinkId
 		{
 			get { return 149; }
 		}
 
-		public int Id { get { return MtMItemForUpdateItem_ID; } }
-        public int LinkedItemId { get { return MtMDictionaryForUpdateLinkedItem_ID; } }
+		public int Id 
+		{ 
+			get { return MtMItemForUpdateItemId; } 
+			set { MtMItemForUpdateItemId = value; } 
+		}
+        public int LinkedItemId 
+		{ 
+			get { return MtMDictionaryForUpdateLinkedItemId; }
+			set { MtMDictionaryForUpdateLinkedItemId = value; }
+		}
+		public IQPArticle Item { get { return MtMItemForUpdateItem; } }		
+		public IQPArticle LinkedItem { get { return MtMDictionaryForUpdateLinkedItem; } }
 	}
 
-	public partial class MtMItemForUpdate2MtMDictionaryForUpdateForBackwardForReference: IQPLink
+	public partial class MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference: IQPLink
     {
-		public MtMItemForUpdate MtMDictionaryForUpdateItem { get; set; }		
-		public MtMDictionaryForUpdate MtMItemForUpdateLinkedItem { get; set; }
+		public MtMItemForUpdate MtMItemForUpdateLinkedItem { get; set; }		
+		public MtMDictionaryForUpdate MtMDictionaryForUpdateItem { get; set; }
 
-		public int MtMDictionaryForUpdateItem_ID { get; set; }	
-		public int MtMItemForUpdateLinkedItem_ID { get; set; }
+		public int MtMItemForUpdateLinkedItemId { get; set; }	
+		public int MtMDictionaryForUpdateItemId { get; set; }
 
 		public int LinkId
 		{
@@ -37,8 +47,18 @@ namespace EntityFrameworkCore.Tests
 		}
 
                     
-		public int Id { get { return MtMDictionaryForUpdateItem_ID; } }
-        public int LinkedItemId { get { return MtMItemForUpdateLinkedItem_ID; } }
+		public int Id 
+		{ 
+			get { return MtMItemForUpdateLinkedItemId; }
+			set { MtMItemForUpdateLinkedItemId = value; }
+		}
+        public int LinkedItemId 
+		{ 
+			get { return MtMDictionaryForUpdateItemId; } 
+			set { MtMDictionaryForUpdateItemId = value; }
+		}
+		public IQPArticle Item { get { return MtMItemForUpdateLinkedItem; } }		
+		public IQPArticle LinkedItem { get { return MtMDictionaryForUpdateItem; } }
 
 	}
 

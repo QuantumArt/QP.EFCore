@@ -29,11 +29,26 @@ namespace EntityFrameworkCore.Tests
 
         #endregion
         #region Genarated properties
-        public string FileUrl { get; set; }
-        public string ImageUrl { get; set; }
-        public string DynamicImageUrl { get; set; }
-        public string FileUploadPath { get; set; }
-        public string ImageUploadPath { get; set; }
+        public string FileUrl 
+		{ 
+			get { return EFCoreModel.Current.GetUrl(this.File, "AfiellFieldsItem", "File"); }
+		}
+        public string ImageUrl 
+		{ 
+			get { return EFCoreModel.Current.GetUrl(this.Image, "AfiellFieldsItem", "Image"); }
+		}
+        public string DynamicImageUrl 
+		{ 
+			get { return EFCoreModel.Current.GetUrl(this.DynamicImage, "AfiellFieldsItem", "DynamicImage"); }
+		}
+        public string FileUploadPath 
+		{ 
+			get { return EFCoreModel.Current.GetUploadPath(this.File, "AfiellFieldsItem", "File"); }
+		}
+        public string ImageUploadPath 
+		{ 
+			get { return EFCoreModel.Current.GetUploadPath(this.Image, "AfiellFieldsItem", "Image"); }
+		}
         public Int32 IntegerExact { get { return this.Integer == null ? default(Int32) : this.Integer.Value; } }
         public Decimal DecimalExact { get { return this.Decimal == null ? default(Decimal) : this.Decimal.Value; } }
         public Boolean BooleanExact { get { return this.Boolean == null ? default(Boolean) : this.Boolean.Value; } }
@@ -346,8 +361,14 @@ namespace EntityFrameworkCore.Tests
 
         #endregion
         #region Genarated properties
-        public string FileItemUrl { get; set; }
-        public string FileItemUploadPath { get; set; }
+        public string FileItemUrl 
+		{ 
+			get { return EFCoreModel.Current.GetUrl(this.FileItem, "FileFieldsItem", "FileItem"); }
+		}
+        public string FileItemUploadPath 
+		{ 
+			get { return EFCoreModel.Current.GetUploadPath(this.FileItem, "FileFieldsItem", "FileItem"); }
+		}
         #endregion
 
 		
@@ -689,8 +710,14 @@ namespace EntityFrameworkCore.Tests
 
         #endregion
         #region Genarated properties
-        public string FileValueFieldUrl { get; set; }
-        public string FileValueFieldUploadPath { get; set; }
+        public string FileValueFieldUrl 
+		{ 
+			get { return EFCoreModel.Current.GetUrl(this.FileValueField, "FileItemForUpdate", "FileValueField"); }
+		}
+        public string FileValueFieldUploadPath 
+		{ 
+			get { return EFCoreModel.Current.GetUploadPath(this.FileValueField, "FileItemForUpdate", "FileValueField"); }
+		}
         #endregion
 
 		
@@ -727,8 +754,14 @@ namespace EntityFrameworkCore.Tests
 
         #endregion
         #region Genarated properties
-        public string ImageValueFieldUrl { get; set; }
-        public string ImageValueFieldUploadPath { get; set; }
+        public string ImageValueFieldUrl 
+		{ 
+			get { return EFCoreModel.Current.GetUrl(this.ImageValueField, "ImageItemForUpdate", "ImageValueField"); }
+		}
+        public string ImageValueFieldUploadPath 
+		{ 
+			get { return EFCoreModel.Current.GetUploadPath(this.ImageValueField, "ImageItemForUpdate", "ImageValueField"); }
+		}
         #endregion
 
 		
@@ -860,6 +893,7 @@ namespace EntityFrameworkCore.Tests
         }
     }
 }
+	
 	
 	
 	

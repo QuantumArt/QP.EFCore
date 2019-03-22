@@ -40,16 +40,26 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
 		public <#=content.MappedName#> <#=attribute.M2MPropertyName#> { get; set; }		
 		public <#=attribute.RelatedContent.MappedName#> <#=attribute.M2MRelatedPropertyName#> { get; set; }
 
-		public int <#=attribute.M2MPropertyName#>_ID { get; set; }	
-		public int <#=attribute.M2MRelatedPropertyName#>_ID { get; set; }
+		public int <#=attribute.M2MPropertyName#>Id { get; set; }	
+		public int <#=attribute.M2MRelatedPropertyName#>Id { get; set; }
 
 		public int LinkId
 		{
 			get { return <#=attribute.LinkId#>; }
 		}
 
-		public int Id { get { return <#=attribute.M2MPropertyName#>_ID; } }
-        public int LinkedItemId { get { return <#=attribute.M2MRelatedPropertyName#>_ID; } }
+		public int Id 
+		{ 
+			get { return <#=attribute.M2MPropertyName#>Id; } 
+			set { <#=attribute.M2MPropertyName#>Id = value; } 
+		}
+        public int LinkedItemId 
+		{ 
+			get { return <#=attribute.M2MRelatedPropertyName#>Id; }
+			set { <#=attribute.M2MRelatedPropertyName#>Id = value; }
+		}
+		public IQPArticle Item { get { return <#=attribute.M2MPropertyName#>; } }		
+		public IQPArticle LinkedItem { get { return <#=attribute.M2MRelatedPropertyName#>; } }
 	}
 
 <#+	 if(settings.UseReversedAssociations && attribute.RelatedContent.SplitArticles)
@@ -60,8 +70,8 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
 		public <#=content.MappedName#> <#=attribute.M2MReversePropertyName#> { get; set; }		
 		public <#=attribute.RelatedContent.MappedName#> <#=attribute.M2MReverseRelatedPropertyName#> { get; set; }
 
-		public int <#=attribute.M2MReversePropertyName#>_ID { get; set; }	
-		public int <#=attribute.M2MReverseRelatedPropertyName#>_ID { get; set; }
+		public int <#=attribute.M2MReversePropertyName#>Id { get; set; }	
+		public int <#=attribute.M2MReverseRelatedPropertyName#>Id { get; set; }
 
 		public int LinkId
 		{
@@ -70,11 +80,31 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
 
 <#+  if(attribute.ContentId != attribute.RelatedContentId) { #>
                     
-		public int Id { get { return <#=attribute.M2MReversePropertyName#>_ID; } }
-        public int LinkedItemId { get { return <#=attribute.M2MReverseRelatedPropertyName#>_ID; } }
+		public int Id 
+		{ 
+			get { return <#=attribute.M2MReversePropertyName#>Id; }
+			set { <#=attribute.M2MReversePropertyName#>Id = value; }
+		}
+        public int LinkedItemId 
+		{ 
+			get { return <#=attribute.M2MReverseRelatedPropertyName#>Id; } 
+			set { <#=attribute.M2MReverseRelatedPropertyName#>Id = value; }
+		}
+		public IQPArticle Item { get { return <#=attribute.M2MReversePropertyName#>; } }		
+		public IQPArticle LinkedItem { get { return <#=attribute.M2MReverseRelatedPropertyName#>; } }
 <#+ } else { #>
-	   public int Id { get { return <#=attribute.M2MReverseRelatedPropertyName#>_ID; } }
-       public int LinkedItemId { get { return <#=attribute.M2MReversePropertyName#>_ID; } }
+		public int Id 
+		{ 
+			get { return <#=attribute.M2MReverseRelatedPropertyName#>Id; } 
+			set { <#=attribute.M2MReverseRelatedPropertyName#>Id = value; } 
+		}
+		public int LinkedItemId 
+		{ 
+			get { return <#=attribute.M2MReversePropertyName#>Id; } 
+			set { <#=attribute.M2MReversePropertyName#>Id = value; } 
+		}
+		public IQPArticle Item { get { return <#=attribute.M2MReverseRelatedPropertyName#>; } }		
+		public IQPArticle LinkedItem { get { return <#=attribute.M2MReversePropertyName#>; } }
 <#+ } #>
 
 	}

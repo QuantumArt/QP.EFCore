@@ -13,7 +13,7 @@ namespace EntityFrameworkCore.Templates
 		    Children = new HashSet<Region>();
 		    AllowedRegions = new HashSet<Region2RegionForAllowedRegions>();
 		    DeniedRegions = new HashSet<Region2RegionForDeniedRegions>();
-			BackwardForRegions = new HashSet<Product2RegionForBackwardForRegions>();
+			BackwardForRegions = new HashSet<Region2ProductForBackwardForRegions>();
 			BackwardForAllowedRegions = new HashSet<Region2RegionForBackwardForAllowedRegions>();
 			BackwardForDeniedRegions = new HashSet<Region2RegionForBackwardForDeniedRegions>();
         }
@@ -63,7 +63,7 @@ namespace EntityFrameworkCore.Templates
 		/// <summary>
 		/// Auto-generated backing property for 1228/Regions
 		/// </summary>
-		public  ICollection<Product2RegionForBackwardForRegions> BackwardForRegions { get; set; }
+		public  ICollection<Region2ProductForBackwardForRegions> BackwardForRegions { get; set; }
 		/// <summary>
 		/// Auto-generated backing property for 1659/AllowedRegions
 		/// </summary>
@@ -72,9 +72,6 @@ namespace EntityFrameworkCore.Templates
 		/// Auto-generated backing property for 1660/DeniedRegions
 		/// </summary>
 		public  ICollection<Region2RegionForBackwardForDeniedRegions> BackwardForDeniedRegions { get; set; }
-		#region Generated Content properties
-        // public Int32 OldSiteIdExact { get { return this.OldSiteId == null ? default(Int32) : this.OldSiteId.Value; } }
-		#endregion
 	}
 }
 	

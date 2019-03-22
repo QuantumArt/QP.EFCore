@@ -81,8 +81,14 @@ namespace EntityFrameworkCore.Data
 
         #endregion
         #region Genarated properties
-        public string PDFUrl { get; set; }
-        public string PDFUploadPath { get; set; }
+        public string PDFUrl 
+		{ 
+			get { return EFCoreModel.Current.GetUrl(this.PDF, "Product", "PDF"); }
+		}
+        public string PDFUploadPath 
+		{ 
+			get { return EFCoreModel.Current.GetUploadPath(this.PDF, "Product", "PDF"); }
+		}
         public Int32 TypeExact { get { return this.Type == null ? default(Int32) : this.Type.Value; } }
         public Int32 SortOrderExact { get { return this.SortOrder == null ? default(Int32) : this.SortOrder.Value; } }
         public Int32 MarketingSign_IDExact { get { return this.MarketingSign_ID == null ? default(Int32) : this.MarketingSign_ID.Value; } }

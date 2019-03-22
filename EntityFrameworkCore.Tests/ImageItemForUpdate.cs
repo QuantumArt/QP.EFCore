@@ -22,10 +22,6 @@ namespace EntityFrameworkCore.Tests
         public virtual StatusType StatusType { get; set; }
 
         public virtual String ImageValueField { get; set; }
-		#region Generated Content properties
-        // public string ImageValueFieldUrl { get; set; }
-        // public string ImageValueFieldUploadPath { get; set; }
-		#endregion
 	}
 }
 	

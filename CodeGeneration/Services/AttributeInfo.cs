@@ -138,8 +138,8 @@ namespace Quantumart.QP8.CoreCodeGeneration.Services
             get
             {
 
-                return IsSource == true ? string.Format("{0}2{1}For{2}", Content.MappedName, RelatedContent.MappedName, RelatedAttribute.MappedName)
-                    : string.Format("{0}2{1}For{2}", RelatedContent.MappedName, Content.MappedName, MappedName);
+                return IsSource == true ? string.Format("{0}2{1}For{2}", RelatedContent.MappedName, Content.MappedName, RelatedAttribute.MappedName)
+                    : string.Format("{0}2{1}For{2}", Content.MappedName, RelatedContent.MappedName, MappedName);
             }
 
         }
@@ -148,8 +148,8 @@ namespace Quantumart.QP8.CoreCodeGeneration.Services
         {
             get
             {
-                return IsSource == true ? string.Format("{0}2{1}For{2}", Content.MappedName, RelatedContent.PluralMappedName, RelatedAttribute.MappedName)
-                   : string.Format("{0}2{1}For{2}", RelatedContent.MappedName, Content.PluralMappedName, MappedName);
+                return IsSource == true ? string.Format("{0}2{1}For{2}", RelatedContent.MappedName, Content.PluralMappedName, RelatedAttribute.MappedName)
+                   : string.Format("{0}2{1}For{2}", Content.MappedName, RelatedContent.PluralMappedName, MappedName);
             }
 
         }
@@ -174,7 +174,7 @@ namespace Quantumart.QP8.CoreCodeGeneration.Services
         {
             get
             {
-                return Content.MappedName + "LinkedItem";
+                return RelatedContent.MappedName + "Item"; 
             }
         }
 
@@ -182,7 +182,7 @@ namespace Quantumart.QP8.CoreCodeGeneration.Services
         {
             get
             {
-                return RelatedContent.MappedName + "Item";
+                return Content.MappedName + "LinkedItem";
             }
         }
     }

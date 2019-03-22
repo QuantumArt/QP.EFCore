@@ -116,14 +116,9 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
 <#+}#>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-		    if(MappingConfigurator == null)
-			{
-				var schemaProvider = new StaticSchemaProvider();
-				var mapping = new MappingConfigurator(DefaultContentAccess, schemaProvider);
-				mapping.OnModelCreating(modelBuilder);
-			} else {
-				MappingConfigurator.OnModelCreating(modelBuilder);
-			}
+			var schemaProvider = new StaticSchemaProvider();
+			var mapping = new MappingConfigurator(DefaultContentAccess, schemaProvider);
+			mapping.OnModelCreating(modelBuilder);
         }
 
 		private static DbContextOptions<<#=model.Schema.ClassName#>> DefaultConnectionOptions()

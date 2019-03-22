@@ -25,8 +25,10 @@ namespace EntityFrameworkCore.Data
             modelBuilder.Entity<MarketingProduct>()
                 .ToTable(GetTableName("MarketingProduct"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<MarketingProduct>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<MarketingProduct>()
                 .Property(x => x.LastModifiedBy)
@@ -85,8 +87,10 @@ namespace EntityFrameworkCore.Data
             modelBuilder.Entity<Product>()
                 .ToTable(GetTableName("Product"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<Product>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<Product>()
                 .Property(x => x.LastModifiedBy)
@@ -129,37 +133,46 @@ namespace EntityFrameworkCore.Data
              modelBuilder.Entity<Product2RegionForRegions>()
                 .ToTable(GetLinkTableName("Product", "Regions"));
 
-            modelBuilder.Entity<Product2RegionForRegions>().Property(e => e.ProductItem_ID).HasColumnName("id");
-            modelBuilder.Entity<Product2RegionForRegions>().Property(e => e.RegionLinkedItem_ID).HasColumnName("linked_id");
-            modelBuilder.Entity<Product2RegionForRegions>().HasKey(ug => new { ug.ProductItem_ID, ug.RegionLinkedItem_ID });
+            modelBuilder.Entity<Product2RegionForRegions>().Property(e => e.ProductItemId).HasColumnName("id");
+            modelBuilder.Entity<Product2RegionForRegions>().Property(e => e.RegionLinkedItemId).HasColumnName("linked_id");
+            modelBuilder.Entity<Product2RegionForRegions>().HasKey(ug => new { ug.ProductItemId, ug.RegionLinkedItemId });
 
             modelBuilder.Entity<Product2RegionForRegions>()
                 .HasOne(bc => bc.ProductItem)
                 .WithMany(b => b.Regions)
-                .HasForeignKey(bc => bc.ProductItem_ID);
+                .HasForeignKey(bc => bc.ProductItemId);
 
             modelBuilder.Entity<Product2RegionForRegions>()
                 .HasOne(bc => bc.RegionLinkedItem)
                 .WithMany();
+			modelBuilder.Entity<Product2RegionForRegions>().Ignore(x=>x.Id);
+			modelBuilder.Entity<Product2RegionForRegions>().Ignore(x=>x.LinkId);
+			modelBuilder.Entity<Product2RegionForRegions>().Ignore(x=>x.LinkedItemId);
+			modelBuilder.Entity<Product2RegionForRegions>().Ignore(x=>x.Item);
+			modelBuilder.Entity<Product2RegionForRegions>().Ignore(x=>x.LinkedItem);
 
-
-			 modelBuilder.Entity<Product2RegionForBackwardForRegions>()
+			 modelBuilder.Entity<Region2ProductForBackwardForRegions>()
                 .ToTable(GetReversedLinkTableName("Product", "Regions"));
       
 
-			modelBuilder.Entity<Product2RegionForBackwardForRegions>().Property(e => e.RegionItem_ID).HasColumnName("linked_id");
-			modelBuilder.Entity<Product2RegionForBackwardForRegions>().Property(e => e.ProductLinkedItem_ID).HasColumnName("id");
-			modelBuilder.Entity<Product2RegionForBackwardForRegions>().HasKey(ug => new { ug.RegionItem_ID, ug.ProductLinkedItem_ID });
+			modelBuilder.Entity<Region2ProductForBackwardForRegions>().Property(e => e.ProductLinkedItemId).HasColumnName("linked_id");
+			modelBuilder.Entity<Region2ProductForBackwardForRegions>().Property(e => e.RegionItemId).HasColumnName("id");
+			modelBuilder.Entity<Region2ProductForBackwardForRegions>().HasKey(ug => new { ug.ProductLinkedItemId, ug.RegionItemId });
             
-			 modelBuilder.Entity<Product2RegionForBackwardForRegions>()
-                .HasOne(bc => bc.ProductLinkedItem)
-                .WithMany(b => b.BackwardForRegions)
-                .HasForeignKey(bc => bc.ProductLinkedItem_ID);
-
-            modelBuilder.Entity<Product2RegionForBackwardForRegions>()
+			 modelBuilder.Entity<Region2ProductForBackwardForRegions>()
                 .HasOne(bc => bc.RegionItem)
+                .WithMany(b => b.BackwardForRegions)
+                .HasForeignKey(bc => bc.RegionItemId);
+
+            modelBuilder.Entity<Region2ProductForBackwardForRegions>()
+                .HasOne(bc => bc.ProductLinkedItem)
                 .WithMany();
 
+			modelBuilder.Entity<Region2ProductForBackwardForRegions>().Ignore(x=>x.Id);
+			modelBuilder.Entity<Region2ProductForBackwardForRegions>().Ignore(x=>x.LinkId);
+			modelBuilder.Entity<Region2ProductForBackwardForRegions>().Ignore(x=>x.LinkedItemId);
+			modelBuilder.Entity<Region2ProductForBackwardForRegions>().Ignore(x=>x.Item);
+			modelBuilder.Entity<Region2ProductForBackwardForRegions>().Ignore(x=>x.LinkedItem);
             modelBuilder.Entity<Product>().Ignore(p => p.PDFUrl);
             modelBuilder.Entity<Product>().Ignore(p => p.PDFUploadPath);
  
@@ -169,8 +182,10 @@ namespace EntityFrameworkCore.Data
             modelBuilder.Entity<ProductParameter>()
                 .ToTable(GetTableName("ProductParameter"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<ProductParameter>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<ProductParameter>()
                 .Property(x => x.LastModifiedBy)
@@ -234,8 +249,10 @@ namespace EntityFrameworkCore.Data
             modelBuilder.Entity<Region>()
                 .ToTable(GetTableName("Region"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<Region>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<Region>()
                 .Property(x => x.LastModifiedBy)
@@ -269,74 +286,92 @@ namespace EntityFrameworkCore.Data
              modelBuilder.Entity<Region2RegionForAllowedRegions>()
                 .ToTable(GetLinkTableName("Region", "AllowedRegions"));
 
-            modelBuilder.Entity<Region2RegionForAllowedRegions>().Property(e => e.RegionItem_ID).HasColumnName("id");
-            modelBuilder.Entity<Region2RegionForAllowedRegions>().Property(e => e.RegionLinkedItem_ID).HasColumnName("linked_id");
-            modelBuilder.Entity<Region2RegionForAllowedRegions>().HasKey(ug => new { ug.RegionItem_ID, ug.RegionLinkedItem_ID });
+            modelBuilder.Entity<Region2RegionForAllowedRegions>().Property(e => e.RegionItemId).HasColumnName("id");
+            modelBuilder.Entity<Region2RegionForAllowedRegions>().Property(e => e.RegionLinkedItemId).HasColumnName("linked_id");
+            modelBuilder.Entity<Region2RegionForAllowedRegions>().HasKey(ug => new { ug.RegionItemId, ug.RegionLinkedItemId });
 
             modelBuilder.Entity<Region2RegionForAllowedRegions>()
                 .HasOne(bc => bc.RegionItem)
                 .WithMany(b => b.AllowedRegions)
-                .HasForeignKey(bc => bc.RegionItem_ID);
+                .HasForeignKey(bc => bc.RegionItemId);
 
             modelBuilder.Entity<Region2RegionForAllowedRegions>()
                 .HasOne(bc => bc.RegionLinkedItem)
                 .WithMany();
-
+			modelBuilder.Entity<Region2RegionForAllowedRegions>().Ignore(x=>x.Id);
+			modelBuilder.Entity<Region2RegionForAllowedRegions>().Ignore(x=>x.LinkId);
+			modelBuilder.Entity<Region2RegionForAllowedRegions>().Ignore(x=>x.LinkedItemId);
+			modelBuilder.Entity<Region2RegionForAllowedRegions>().Ignore(x=>x.Item);
+			modelBuilder.Entity<Region2RegionForAllowedRegions>().Ignore(x=>x.LinkedItem);
 
 			 modelBuilder.Entity<Region2RegionForBackwardForAllowedRegions>()
                 .ToTable(GetReversedLinkTableName("Region", "AllowedRegions"));
       
 
-			modelBuilder.Entity<Region2RegionForBackwardForAllowedRegions>().Property(e => e.RegionItem_ID).HasColumnName("id");
-			modelBuilder.Entity<Region2RegionForBackwardForAllowedRegions>().Property(e => e.RegionLinkedItem_ID).HasColumnName("linked_id");
+			modelBuilder.Entity<Region2RegionForBackwardForAllowedRegions>().Property(e => e.RegionLinkedItemId).HasColumnName("id");
+			modelBuilder.Entity<Region2RegionForBackwardForAllowedRegions>().Property(e => e.RegionItemId).HasColumnName("linked_id");
            
-			modelBuilder.Entity<Region2RegionForBackwardForAllowedRegions>().HasKey(ug => new { ug.RegionItem_ID, ug.RegionLinkedItem_ID });
+			modelBuilder.Entity<Region2RegionForBackwardForAllowedRegions>().HasKey(ug => new { ug.RegionLinkedItemId, ug.RegionItemId });
             
 			 modelBuilder.Entity<Region2RegionForBackwardForAllowedRegions>()
-                .HasOne(bc => bc.RegionLinkedItem)
+                .HasOne(bc => bc.RegionItem)
                 .WithMany(b => b.BackwardForAllowedRegions)
-                .HasForeignKey(bc => bc.RegionLinkedItem_ID);
+                .HasForeignKey(bc => bc.RegionItemId);
 
             modelBuilder.Entity<Region2RegionForBackwardForAllowedRegions>()
-                .HasOne(bc => bc.RegionItem)
+                .HasOne(bc => bc.RegionLinkedItem)
                 .WithMany();
 
+			modelBuilder.Entity<Region2RegionForBackwardForAllowedRegions>().Ignore(x=>x.Id);
+			modelBuilder.Entity<Region2RegionForBackwardForAllowedRegions>().Ignore(x=>x.LinkId);
+			modelBuilder.Entity<Region2RegionForBackwardForAllowedRegions>().Ignore(x=>x.LinkedItemId);
+			modelBuilder.Entity<Region2RegionForBackwardForAllowedRegions>().Ignore(x=>x.Item);
+			modelBuilder.Entity<Region2RegionForBackwardForAllowedRegions>().Ignore(x=>x.LinkedItem);
 
              modelBuilder.Entity<Region2RegionForDeniedRegions>()
                 .ToTable(GetLinkTableName("Region", "DeniedRegions"));
 
-            modelBuilder.Entity<Region2RegionForDeniedRegions>().Property(e => e.RegionItem_ID).HasColumnName("id");
-            modelBuilder.Entity<Region2RegionForDeniedRegions>().Property(e => e.RegionLinkedItem_ID).HasColumnName("linked_id");
-            modelBuilder.Entity<Region2RegionForDeniedRegions>().HasKey(ug => new { ug.RegionItem_ID, ug.RegionLinkedItem_ID });
+            modelBuilder.Entity<Region2RegionForDeniedRegions>().Property(e => e.RegionItemId).HasColumnName("id");
+            modelBuilder.Entity<Region2RegionForDeniedRegions>().Property(e => e.RegionLinkedItemId).HasColumnName("linked_id");
+            modelBuilder.Entity<Region2RegionForDeniedRegions>().HasKey(ug => new { ug.RegionItemId, ug.RegionLinkedItemId });
 
             modelBuilder.Entity<Region2RegionForDeniedRegions>()
                 .HasOne(bc => bc.RegionItem)
                 .WithMany(b => b.DeniedRegions)
-                .HasForeignKey(bc => bc.RegionItem_ID);
+                .HasForeignKey(bc => bc.RegionItemId);
 
             modelBuilder.Entity<Region2RegionForDeniedRegions>()
                 .HasOne(bc => bc.RegionLinkedItem)
                 .WithMany();
-
+			modelBuilder.Entity<Region2RegionForDeniedRegions>().Ignore(x=>x.Id);
+			modelBuilder.Entity<Region2RegionForDeniedRegions>().Ignore(x=>x.LinkId);
+			modelBuilder.Entity<Region2RegionForDeniedRegions>().Ignore(x=>x.LinkedItemId);
+			modelBuilder.Entity<Region2RegionForDeniedRegions>().Ignore(x=>x.Item);
+			modelBuilder.Entity<Region2RegionForDeniedRegions>().Ignore(x=>x.LinkedItem);
 
 			 modelBuilder.Entity<Region2RegionForBackwardForDeniedRegions>()
                 .ToTable(GetReversedLinkTableName("Region", "DeniedRegions"));
       
 
-			modelBuilder.Entity<Region2RegionForBackwardForDeniedRegions>().Property(e => e.RegionItem_ID).HasColumnName("id");
-			modelBuilder.Entity<Region2RegionForBackwardForDeniedRegions>().Property(e => e.RegionLinkedItem_ID).HasColumnName("linked_id");
+			modelBuilder.Entity<Region2RegionForBackwardForDeniedRegions>().Property(e => e.RegionLinkedItemId).HasColumnName("id");
+			modelBuilder.Entity<Region2RegionForBackwardForDeniedRegions>().Property(e => e.RegionItemId).HasColumnName("linked_id");
            
-			modelBuilder.Entity<Region2RegionForBackwardForDeniedRegions>().HasKey(ug => new { ug.RegionItem_ID, ug.RegionLinkedItem_ID });
+			modelBuilder.Entity<Region2RegionForBackwardForDeniedRegions>().HasKey(ug => new { ug.RegionLinkedItemId, ug.RegionItemId });
             
 			 modelBuilder.Entity<Region2RegionForBackwardForDeniedRegions>()
-                .HasOne(bc => bc.RegionLinkedItem)
+                .HasOne(bc => bc.RegionItem)
                 .WithMany(b => b.BackwardForDeniedRegions)
-                .HasForeignKey(bc => bc.RegionLinkedItem_ID);
+                .HasForeignKey(bc => bc.RegionItemId);
 
             modelBuilder.Entity<Region2RegionForBackwardForDeniedRegions>()
-                .HasOne(bc => bc.RegionItem)
+                .HasOne(bc => bc.RegionLinkedItem)
                 .WithMany();
 
+			modelBuilder.Entity<Region2RegionForBackwardForDeniedRegions>().Ignore(x=>x.Id);
+			modelBuilder.Entity<Region2RegionForBackwardForDeniedRegions>().Ignore(x=>x.LinkId);
+			modelBuilder.Entity<Region2RegionForBackwardForDeniedRegions>().Ignore(x=>x.LinkedItemId);
+			modelBuilder.Entity<Region2RegionForBackwardForDeniedRegions>().Ignore(x=>x.Item);
+			modelBuilder.Entity<Region2RegionForBackwardForDeniedRegions>().Ignore(x=>x.LinkedItem);
  
             #endregion
 
@@ -344,8 +379,10 @@ namespace EntityFrameworkCore.Data
             modelBuilder.Entity<MobileTariff>()
                 .ToTable(GetTableName("MobileTariff"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<MobileTariff>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<MobileTariff>()
                 .Property(x => x.LastModifiedBy)
@@ -376,8 +413,10 @@ namespace EntityFrameworkCore.Data
             modelBuilder.Entity<Setting>()
                 .ToTable(GetTableName("Setting"))
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd()
                 .HasColumnName("CONTENT_ITEM_ID");
+
+			 modelBuilder.Entity<Setting>()
+                .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<Setting>()
                 .Property(x => x.LastModifiedBy)
@@ -403,38 +442,47 @@ namespace EntityFrameworkCore.Data
              modelBuilder.Entity<Setting2SettingForRelatedSettings>()
                 .ToTable(GetLinkTableName("Setting", "RelatedSettings"));
 
-            modelBuilder.Entity<Setting2SettingForRelatedSettings>().Property(e => e.SettingItem_ID).HasColumnName("id");
-            modelBuilder.Entity<Setting2SettingForRelatedSettings>().Property(e => e.SettingLinkedItem_ID).HasColumnName("linked_id");
-            modelBuilder.Entity<Setting2SettingForRelatedSettings>().HasKey(ug => new { ug.SettingItem_ID, ug.SettingLinkedItem_ID });
+            modelBuilder.Entity<Setting2SettingForRelatedSettings>().Property(e => e.SettingItemId).HasColumnName("id");
+            modelBuilder.Entity<Setting2SettingForRelatedSettings>().Property(e => e.SettingLinkedItemId).HasColumnName("linked_id");
+            modelBuilder.Entity<Setting2SettingForRelatedSettings>().HasKey(ug => new { ug.SettingItemId, ug.SettingLinkedItemId });
 
             modelBuilder.Entity<Setting2SettingForRelatedSettings>()
                 .HasOne(bc => bc.SettingItem)
                 .WithMany(b => b.RelatedSettings)
-                .HasForeignKey(bc => bc.SettingItem_ID);
+                .HasForeignKey(bc => bc.SettingItemId);
 
             modelBuilder.Entity<Setting2SettingForRelatedSettings>()
                 .HasOne(bc => bc.SettingLinkedItem)
                 .WithMany();
-
+			modelBuilder.Entity<Setting2SettingForRelatedSettings>().Ignore(x=>x.Id);
+			modelBuilder.Entity<Setting2SettingForRelatedSettings>().Ignore(x=>x.LinkId);
+			modelBuilder.Entity<Setting2SettingForRelatedSettings>().Ignore(x=>x.LinkedItemId);
+			modelBuilder.Entity<Setting2SettingForRelatedSettings>().Ignore(x=>x.Item);
+			modelBuilder.Entity<Setting2SettingForRelatedSettings>().Ignore(x=>x.LinkedItem);
 
 			 modelBuilder.Entity<Setting2SettingForBackwardForRelatedSettings>()
                 .ToTable(GetReversedLinkTableName("Setting", "RelatedSettings"));
       
 
-			modelBuilder.Entity<Setting2SettingForBackwardForRelatedSettings>().Property(e => e.SettingItem_ID).HasColumnName("id");
-			modelBuilder.Entity<Setting2SettingForBackwardForRelatedSettings>().Property(e => e.SettingLinkedItem_ID).HasColumnName("linked_id");
+			modelBuilder.Entity<Setting2SettingForBackwardForRelatedSettings>().Property(e => e.SettingLinkedItemId).HasColumnName("id");
+			modelBuilder.Entity<Setting2SettingForBackwardForRelatedSettings>().Property(e => e.SettingItemId).HasColumnName("linked_id");
            
-			modelBuilder.Entity<Setting2SettingForBackwardForRelatedSettings>().HasKey(ug => new { ug.SettingItem_ID, ug.SettingLinkedItem_ID });
+			modelBuilder.Entity<Setting2SettingForBackwardForRelatedSettings>().HasKey(ug => new { ug.SettingLinkedItemId, ug.SettingItemId });
             
 			 modelBuilder.Entity<Setting2SettingForBackwardForRelatedSettings>()
-                .HasOne(bc => bc.SettingLinkedItem)
+                .HasOne(bc => bc.SettingItem)
                 .WithMany(b => b.BackwardForRelatedSettings)
-                .HasForeignKey(bc => bc.SettingLinkedItem_ID);
+                .HasForeignKey(bc => bc.SettingItemId);
 
             modelBuilder.Entity<Setting2SettingForBackwardForRelatedSettings>()
-                .HasOne(bc => bc.SettingItem)
+                .HasOne(bc => bc.SettingLinkedItem)
                 .WithMany();
 
+			modelBuilder.Entity<Setting2SettingForBackwardForRelatedSettings>().Ignore(x=>x.Id);
+			modelBuilder.Entity<Setting2SettingForBackwardForRelatedSettings>().Ignore(x=>x.LinkId);
+			modelBuilder.Entity<Setting2SettingForBackwardForRelatedSettings>().Ignore(x=>x.LinkedItemId);
+			modelBuilder.Entity<Setting2SettingForBackwardForRelatedSettings>().Ignore(x=>x.Item);
+			modelBuilder.Entity<Setting2SettingForBackwardForRelatedSettings>().Ignore(x=>x.LinkedItem);
  
             #endregion
 			AddMappingInfo(modelBuilder.Model);

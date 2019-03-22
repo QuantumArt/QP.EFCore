@@ -16,6 +16,7 @@ using System.Collections;
 using System.Globalization;
 using Quantumart.QP8.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Transactions;
 
 
 namespace EntityFrameworkCore.Tests
@@ -34,16 +35,6 @@ namespace EntityFrameworkCore.Tests
 		: base(options)
         {
             MappingResolver = new MappingResolver(schema);
-            OnContextCreated();
-        }
-		
-		public EFCoreModel(DbContextOptions<EFCoreModel> options, IMappingConfigurator mappingConfigurator) 
-		: base(options)
-        {
-			var schema = mappingConfigurator.GetSchema();
-            MappingResolver = new MappingResolver(schema);
-            SiteName = schema.Schema.SiteName;
-            MappingConfigurator = mappingConfigurator;
             OnContextCreated();
         }
 
@@ -70,8 +61,6 @@ namespace EntityFrameworkCore.Tests
         public static bool RemoveUploadUrlSchema = false;
 
         protected IMappingResolver MappingResolver { get; private set; }
-		
-		private IMappingConfigurator MappingConfigurator;
 
         public bool ShouldRemoveSchema { get { return _shouldRemoveSchema; } set { _shouldRemoveSchema = value; } }
         public Int32 SiteId { get; private set; }
@@ -151,19 +140,12 @@ namespace EntityFrameworkCore.Tests
 
 		public static EFCoreModel Create(IMappingConfigurator configurator, SqlConnection connection)
         {
-			var mapping = configurator.GetMappingInfo();
+		    var mapping = configurator.GetMappingInfo();
             var optionsBuilder = new DbContextOptionsBuilder<EFCoreModel>();
             optionsBuilder.UseSqlServer<EFCoreModel>(connection);
-			EFCoreModel ctx;
-			if(mapping != null)
-			{
-				optionsBuilder.UseModel(mapping.DbCompiledModel);
-				ctx = new EFCoreModel(optionsBuilder.Options, mapping.Schema);
-				ctx.SiteName = mapping.Schema.Schema.SiteName;
-			} else {
-				ctx = new EFCoreModel(optionsBuilder.Options, configurator);
-			}
-            
+			optionsBuilder.UseModel(mapping.DbCompiledModel);
+            EFCoreModel ctx = new EFCoreModel(optionsBuilder.Options, mapping.Schema);
+            ctx.SiteName = mapping.Schema.Schema.SiteName;
             ctx.ConnectionString = connection.ConnectionString;
             return ctx;
         }
@@ -220,7 +202,7 @@ namespace EntityFrameworkCore.Tests
             return Create(configurator, connection);
         }
 
-		  public static EFCoreModel CreateWithDatabaseMapping(ContentAccess contentAccess)
+		 public static EFCoreModel CreateWithDatabaseMapping(ContentAccess contentAccess)
         {
             return CreateWithDatabaseMapping(contentAccess, DefaultSiteName);
         }
@@ -318,32 +300,44 @@ namespace EntityFrameworkCore.Tests
             {
                 connection.Open();
             }
+			if(Cnn.ExternalTransaction != null)
+			{
+				UpdateObjectStateEntries(modified, (content, item) => item.Properties.Where(x=>x.IsModified).Select(x=>x.Metadata.Name).ToArray(), true);
+				UpdateObjectStateEntries(added, (content, item) => GetProperties(content), false);
 
-            using (var transaction = Database.BeginTransaction())
-            {
-                Cnn.ExternalTransaction = transaction.GetDbTransaction();
+				foreach (var deletedItem in deleted)
+				{
+					var article = (IQPArticle)deletedItem.Entity;
+					Cnn.DeleteContentItem(article.Id);
+				}
+			} else {
 
-                UpdateObjectStateEntries(modified, (content, item) => item.Properties.Where(x=>x.IsModified).Select(x=>x.Metadata.Name).ToArray(), true);
-                UpdateObjectStateEntries(added, (content, item) => GetProperties(content), false);
+				using (var transaction = Database.BeginTransaction())
+				{
+					Cnn.ExternalTransaction = transaction.GetDbTransaction();
 
-                foreach (var deletedItem in deleted)
-                {
-                    var article = (IQPArticle)deletedItem.Entity;
-                    Cnn.DeleteContentItem(article.Id);
-                }
+					UpdateObjectStateEntries(modified, (content, item) => item.Properties.Where(x=>x.IsModified).Select(x=>x.Metadata.Name).ToArray(), true);
+					UpdateObjectStateEntries(added, (content, item) => GetProperties(content), false);
 
-                transaction.Commit();
-                Cnn.ExternalTransaction = null;
-            }
+					foreach (var deletedItem in deleted)
+					{
+						var article = (IQPArticle)deletedItem.Entity;
+						Cnn.DeleteContentItem(article.Id);
+					}
 
-            connection.Close();
+					transaction.Commit();
+					Cnn.ExternalTransaction = null;
+				}
+			}
 
+            //connection.Close();
+			ChangeTracker.AcceptAllChanges();
             return 0;
         }
 
       private void UpdateObjectStateEntries(IEnumerable<EntityEntry> entries, Func<ContentInfo, EntityEntry, string[]> getProperties, bool passNullValues)
         {
-            foreach (var group in entries.Where(e => !e.Entity.GetType().IsAssignableFrom(typeof(IQPLink))).GroupBy(m => m.Entity.GetType().Name))
+            foreach (var group in entries.Where(e => !typeof(IQPLink).IsAssignableFrom(e.Entity.GetType())).GroupBy(m => m.Entity.GetType().Name))
             {
                 var contentName = group.Key;
                 var content = MappingResolver.GetContent(contentName);
@@ -356,7 +350,11 @@ namespace EntityFrameworkCore.Tests
                           var article = (IQPArticle)item.Entity;
                           var properties = getProperties(content, item);
                           var fieldValues = GetFieldValues(contentName, article, properties, passNullValues);
-
+						  if(fieldValues.ContainsKey("CONTENT_ITEM_ID") && Int32.Parse(fieldValues["CONTENT_ITEM_ID"]) < 0)
+                          {
+                              fieldValues["CONTENT_ITEM_ID"] = "0";
+							  item.Property("Id").IsTemporary = false;
+                          }
                           return new
                           {
                               article,
@@ -374,19 +372,32 @@ namespace EntityFrameworkCore.Tests
                 }
             }
 
+           foreach(var e in entries.Where(x=>typeof(IQPLink).IsAssignableFrom(x.Entity.GetType())))
+            {
+               if(((IQPLink)e.Entity).Id <= 0)
+                {
+                    ((IQPLink)e.Entity).Id = ((IQPLink)e.Entity).Item.Id;
+                    var p = e.Properties.Where(n => n.Metadata.Name != "ItemId" && !n.Metadata.Name.EndsWith("LinkedItemId") &&
+                                            n.Metadata.Name.EndsWith("ItemId")).FirstOrDefault();
+                    e.Property(p.Metadata.Name).IsTemporary = false;
+
+                }
+                if (((IQPLink)e.Entity).LinkedItemId <= 0)
+                {
+                    ((IQPLink)e.Entity).LinkedItemId = ((IQPLink)e.Entity).LinkedItem.Id;
+                    var p = e.Properties.Where(n => n.Metadata.Name != "LinkedItemId" && n.Metadata.Name.EndsWith("LinkedItemId")).FirstOrDefault();
+                    e.Property(p.Metadata.Name).IsTemporary = false;
+                }
+            }
+
             var relations = (from e in entries
-                    where e.Entity.GetType().IsAssignableFrom(typeof(IQPLink))
-                    let  keyParts = e.Metadata.FindPrimaryKey().Properties.Select(p=> e.Property(p.Name).CurrentValue).ToArray()
-                    let entityKey = keyParts[0]
-                    let relatedEntityKey = keyParts[1]
-                    let entry = e.Context.ChangeTracker.Entries().Where(x=>x.CurrentValues["Id"] == entityKey).FirstOrDefault()
-                    let relatedEntry = e.Context.ChangeTracker.Entries().Where(x => x.CurrentValues["Id"] == relatedEntityKey).FirstOrDefault()
-                    let id = ((IQPArticle)entry.Entity).Id
-                    let relatedId = ((IQPArticle)relatedEntry.Entity).Id
-                    let attribute = MappingResolver.GetAttribute(e.Metadata.Name)
+                    where typeof(IQPLink).IsAssignableFrom(e.Entity.GetType())
+                    let Id = ((IQPLink)e.Entity).Id 
+                    let relatedId = ((IQPLink)e.Entity).LinkedItemId 
+                    let attribute = MappingResolver.GetAttribute(e.Metadata.Name.Substring(e.Metadata.Name.LastIndexOf(".") + 1))
                     let item = new
                     {
-                        Id = id,
+                        Id = Id,
                         RelatedId = relatedId,
                         ContentId = attribute.ContentId,
                         Field = attribute.MappedName

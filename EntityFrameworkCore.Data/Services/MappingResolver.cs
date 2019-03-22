@@ -32,9 +32,11 @@ namespace Quantumart.QP8.EntityFrameworkCore
 
         public AttributeInfo GetAttribute(string key)
         {
-            var attributes = from c in _schema.Contents
+
+            var attributes = from c in _schema.Contents.Where(x=>!string.IsNullOrWhiteSpace(x.MappedName))
                              from a in c.Attributes
-                             where key == c.MappedName + "_" + a.MappedName
+                             where a.IsM2M && key.StartsWith(c.MappedName)
+                             && key.EndsWith(a.MappedName)
                              select a;
 
             return attributes.Single();

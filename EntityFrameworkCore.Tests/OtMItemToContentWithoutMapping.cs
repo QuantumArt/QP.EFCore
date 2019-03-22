@@ -22,8 +22,5 @@ namespace EntityFrameworkCore.Tests
         public virtual StatusType StatusType { get; set; }
 
         public virtual Int32? OtMReferenceMapping_ID { get; set; }
-		#region Generated Content properties
-        // public Int32 OtMReferenceMapping_IDExact { get { return this.OtMReferenceMapping_ID == null ? default(Int32) : this.OtMReferenceMapping_ID.Value; } }
-		#endregion
 	}
 }

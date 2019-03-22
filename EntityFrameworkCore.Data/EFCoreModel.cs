@@ -90,7 +90,7 @@ namespace EntityFrameworkCore.Data
         public virtual DbSet<Setting> Settings { get; set; }
 		public virtual DbSet<Product2RegionForRegions> Product2RegionsForRegions { get; set; }
 
-		public virtual DbSet<Product2RegionForBackwardForRegions> Product2RegionsForBackwardForRegions { get; set; }
+		public virtual DbSet<Region2ProductForBackwardForRegions> Region2ProductsForBackwardForRegions { get; set; }
 		public virtual DbSet<Region2RegionForAllowedRegions> Region2RegionsForAllowedRegions { get; set; }
 
 		public virtual DbSet<Region2RegionForBackwardForAllowedRegions> Region2RegionsForBackwardForAllowedRegions { get; set; }
@@ -102,14 +102,9 @@ namespace EntityFrameworkCore.Data
 		public virtual DbSet<Setting2SettingForBackwardForRelatedSettings> Setting2SettingsForBackwardForRelatedSettings { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-		    if(MappingConfigurator == null)
-			{
-				var schemaProvider = new StaticSchemaProvider();
-				var mapping = new MappingConfigurator(DefaultContentAccess, schemaProvider);
-				mapping.OnModelCreating(modelBuilder);
-			} else {
-				MappingConfigurator.OnModelCreating(modelBuilder);
-			}
+			var schemaProvider = new StaticSchemaProvider();
+			var mapping = new MappingConfigurator(DefaultContentAccess, schemaProvider);
+			mapping.OnModelCreating(modelBuilder);
         }
 
 		private static DbContextOptions<EFCoreModel> DefaultConnectionOptions()
