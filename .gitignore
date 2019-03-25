@@ -16,3 +16,5 @@
 /EntityFrameworkCore.Templates/bin/Debug/netcoreapp2.1
 /EntityFrameworkCore.Tests/bin/Debug/netcoreapp2.1
 /EntityFrameworkCore.Tests/obj
+/EntityFrameworkCore.Data/bin/Debug/netstandard2.0
+/EntityFrameworkCore.Tests/bin/Debug/netstandard2.0

@@ -23,8 +23,8 @@
       <dependency id="<#=context.QaName#>" version="<#=context.QaVersion#>" />     
     </dependencies>
     <frameworkAssemblies>
-      <frameworkAssembly assemblyName="System.Configuration" targetFramework="netcore"  />
-      <frameworkAssembly assemblyName="System.Xml.Linq" targetFramework="netcore"  />
+      <frameworkAssembly assemblyName="System.Configuration" targetFramework="netstandard2.0"  />
+      <frameworkAssembly assemblyName="System.Xml.Linq" targetFramework="netstandard2.0"  />
     </frameworkAssemblies>
   </metadata>
   <files>
