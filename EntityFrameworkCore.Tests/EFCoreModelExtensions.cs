@@ -337,6 +337,7 @@ namespace EntityFrameworkCore.Tests
 
       private void UpdateObjectStateEntries(IEnumerable<EntityEntry> entries, Func<ContentInfo, EntityEntry, string[]> getProperties, bool passNullValues)
         {
+		    var links = entries.Where(x=>typeof(IQPLink).IsAssignableFrom(x.Entity.GetType())).ToList();
             foreach (var group in entries.Where(e => !typeof(IQPLink).IsAssignableFrom(e.Entity.GetType())).GroupBy(m => m.Entity.GetType().Name))
             {
                 var contentName = group.Key;
@@ -355,6 +356,7 @@ namespace EntityFrameworkCore.Tests
                               fieldValues["CONTENT_ITEM_ID"] = "0";
 							  item.Property("Id").IsTemporary = false;
                           }
+						  AddLinksToUpdate(article, fieldValues, links);
                           return new
                           {
                               article,
@@ -390,7 +392,7 @@ namespace EntityFrameworkCore.Tests
                 }
             }
 
-            var relations = (from e in entries
+            var relations = (from e in links
                     where typeof(IQPLink).IsAssignableFrom(e.Entity.GetType())
                     let Id = ((IQPLink)e.Entity).Id 
                     let relatedId = ((IQPLink)e.Entity).LinkedItemId 
@@ -428,6 +430,63 @@ namespace EntityFrameworkCore.Tests
             article.Id = int.Parse(fieldValues[SystemColumnNames.Id], CultureInfo.InvariantCulture);
             article.Modified = DateTime.Parse(fieldValues[SystemColumnNames.Modified], CultureInfo.InvariantCulture);
             article.Created = DateTime.Parse(fieldValues[SystemColumnNames.Created], CultureInfo.InvariantCulture);
+        }
+
+		private void AddLinksToUpdate(IQPArticle article, Dictionary<string, string> fieldValues, List<EntityEntry> links)
+        {
+			var forwardLinks = links.Where(e=>((IQPLink)e.Entity).Id == article.Id && ((IQPLink)e.Entity).LinkedItemId > 0).ToList();
+			if (forwardLinks.Count > 0)
+			{
+				var relations = (from e in forwardLinks
+					let relatedId = ((IQPLink)e.Entity).LinkedItemId 
+                    let attribute = MappingResolver.GetAttribute(e.Metadata.Name.Substring(e.Metadata.Name.LastIndexOf(".") + 1))
+                   select new
+                    {
+                        RelatedId = relatedId,
+                        Field = attribute.MappedName
+                    })
+                    .ToArray();
+				var values = relations
+                    .GroupBy(r => r.Field).ToDictionary(x => x.Key, x => string.Join(",", x.Select(y => y.RelatedId)));
+                MergeValues(fieldValues, values);
+                links.RemoveAll(x=>forwardLinks.Contains(x));
+			}
+			var backwardLinks = links.Where(e=>((IQPLink)e.Entity).LinkedItemId == article.Id && ((IQPLink)e.Entity).Id > 0).ToList();
+			if (backwardLinks.Count > 0)
+			{
+				var relations = (from e in forwardLinks
+					let relatedId = ((IQPLink)e.Entity).Id 
+                    let attribute = MappingResolver.GetAttribute(e.Metadata.Name.Substring(e.Metadata.Name.LastIndexOf(".") + 1))
+                   select new
+                    {
+                        RelatedId = relatedId,
+                        Field = attribute.RelatedAttribute.MappedName
+                    })
+                    .ToArray();
+				var values = relations
+                    .GroupBy(r => r.Field).ToDictionary(x => x.Key, x => string.Join(",", x.Select(y => y.RelatedId)));
+                MergeValues(fieldValues, values);
+                links.RemoveAll(x => backwardLinks.Contains(x));
+            }
+		}
+        private void MergeValues(Dictionary<string, string> fieldValues, Dictionary<string, string> linkValues)
+        {
+            foreach (var key in linkValues.Keys)
+            {
+                if (fieldValues.ContainsKey(key))
+                {
+                    if(string.IsNullOrWhiteSpace(fieldValues[key]))
+                    {
+                        fieldValues[key] = linkValues[key];
+                    } else {
+                        fieldValues[key] = fieldValues[key] + "," + linkValues[key];
+                    }
+                }
+                else
+                {
+                    fieldValues.Add(key, linkValues[key]);
+                }
+            }
         }
 
         private string[] GetProperties(ContentInfo content)
