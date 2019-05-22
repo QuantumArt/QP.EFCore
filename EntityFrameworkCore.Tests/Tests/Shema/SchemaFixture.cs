@@ -1,6 +1,5 @@
 ﻿using EntityFrameworkCore.Tests.Infrastructure;
 using NUnit.Framework;
-using Quantumart.QP8.EntityFrameworkCore;
 
 namespace EntityFrameworkCore.Tests.Shema
 {

@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using Quantumart.QP8.EntityFrameworkCore;
+
 namespace EntityFrameworkCore.Data
 {
     public partial class ProductParameter: IQPArticle
@@ -24,8 +24,8 @@ namespace EntityFrameworkCore.Data
 		private String _Title;
 		public virtual String Title 
 		{ 
-			get { return _Title; }
-			set { _Title = EFCoreModel.Current.ReplacePlaceholders(value);}
+			get { return EFCoreModel.Current.ReplacePlaceholders(_Title); }
+			set { _Title = value;}
 		}
         public virtual Int32? Group_ID { get; set; }
         public virtual Int32? BaseParameter_ID { get; set; }
@@ -36,27 +36,27 @@ namespace EntityFrameworkCore.Data
 		private String _Value;
 		public virtual String Value 
 		{ 
-			get { return _Value; }
-			set { _Value = EFCoreModel.Current.ReplacePlaceholders(value);}
+			get { return EFCoreModel.Current.ReplacePlaceholders(_Value); }
+			set { _Value = value;}
 		}
         public virtual Int32? Unit_ID { get; set; }
 		private String _Legal;
 		public virtual String Legal 
 		{ 
-			get { return _Legal; }
-			set { _Legal = EFCoreModel.Current.ReplacePlaceholders(value);}
+			get { return EFCoreModel.Current.ReplacePlaceholders(_Legal); }
+			set { _Legal = value;}
 		}
 		private String _ShortTitle;
 		public virtual String ShortTitle 
 		{ 
-			get { return _ShortTitle; }
-			set { _ShortTitle = EFCoreModel.Current.ReplacePlaceholders(value);}
+			get { return EFCoreModel.Current.ReplacePlaceholders(_ShortTitle); }
+			set { _ShortTitle = value;}
 		}
 		private String _ShortValue;
 		public virtual String ShortValue 
 		{ 
-			get { return _ShortValue; }
-			set { _ShortValue = EFCoreModel.Current.ReplacePlaceholders(value);}
+			get { return EFCoreModel.Current.ReplacePlaceholders(_ShortValue); }
+			set { _ShortValue = value;}
 		}
         public virtual Int32? MatrixParameter_ID { get; set; }
         public virtual Int32? OldSiteId { get; set; }

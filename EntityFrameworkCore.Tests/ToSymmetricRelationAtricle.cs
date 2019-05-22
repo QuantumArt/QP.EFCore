@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using Quantumart.QP8.EntityFrameworkCore;
+
 namespace EntityFrameworkCore.Tests
 {
     public partial class ToSymmetricRelationAtricle: IQPArticle

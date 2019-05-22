@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using NUnit.Framework;
 using EntityFrameworkCore.Tests.Infrastructure;
-using Quantumart.QP8.EntityFrameworkCore;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Data.SqlClient;

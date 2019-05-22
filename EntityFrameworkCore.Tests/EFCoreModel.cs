@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;	
 using Microsoft.AspNetCore.Http;
-using Quantumart.QP8.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+
 
 
 namespace EntityFrameworkCore.Tests

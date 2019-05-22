@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>QP8.EntityFrameworkCore</id>
-    <version>1.0.5</version>
+    <version>1.1.1</version>
     <title>QP8.EntityFrameworkCore</title>
     <authors>Quantum Art</authors>
     <owners>Quantum Art</owners>
@@ -37,21 +37,21 @@
           <file src="..\EntityFrameworkCore.Templates\QPDataContextInclude\ClassExtensions.ttinclude" target="include\QPDataContextInclude\ClassExtensions.ttinclude" />
           <file src="..\EntityFrameworkCore.Templates\QPDataContextInclude\BaseM2MClasses.ttinclude" target="include\QPDataContextInclude\BaseM2MClasses.ttinclude" />
           <file src="..\EntityFrameworkCore.Templates\QPDataContextInclude\ClassesM2M.ttinclude" target="include\QPDataContextInclude\ClassesM2M.ttinclude" />
-          <file src="..\EntityFrameworkCore.Templates\Services\MappingResolver.cs" target="include\Services\MappingResolver.cs" />
-          <file src="..\EntityFrameworkCore.Templates\Services\FileSchemaProvider.cs" target="include\Services\FileSchemaProvider.cs" />
-          <file src="..\EntityFrameworkCore.Templates\Services\DatabaseSchemaProvider.cs" target="include\Services\DatabaseSchemaProvider.cs" />
-          <file src="..\EntityFrameworkCore.Templates\Models\IQPArticle.cs" target="include\Models\IQPArticle.cs" />
-          <file src="..\EntityFrameworkCore.Templates\Models\IQPLink.cs" target="include\Models\IQPLink.cs" />
-          <file src="..\EntityFrameworkCore.Templates\Models\IQPLibraryService.cs" target="include\Models\IQPLibraryService.cs" />
-          <file src="..\EntityFrameworkCore.Templates\Models\IQPFormService.cs" target="include\Models\IQPFormService.cs" />
-          <file src="..\EntityFrameworkCore.Templates\Services\IQPSchema.cs" target="include\Services\IQPSchema.cs" />
-          <file src="..\EntityFrameworkCore.Templates\Services\IMappingConfigurator.cs" target="include\Services\IMappingConfigurator.cs" />
-          <file src="..\EntityFrameworkCore.Templates\Services\ISchemaProvider.cs" target="include\Services\ISchemaProvider.cs" />
-          <file src="..\EntityFrameworkCore.Templates\Services\MappingConfiguratorBase.cs" target="include\Services\MappingConfiguratorBase.cs" />
-          <file src="..\EntityFrameworkCore.Templates\Models\StatusType.cs" target="include\Models\StatusType.cs" />
-          <file src="..\EntityFrameworkCore.Templates\Models\User.cs" target="include\Models\User.cs" />
-          <file src="..\EntityFrameworkCore.Templates\Models\UserGroup.cs" target="include\Models\UserGroup.cs" />
-          <file src="..\EntityFrameworkCore.Templates\Models\UserGroupBind.cs" target="include\Models\UserGroupBind.cs" />
+          <file src="..\EntityFrameworkCore.Templates\MappingResolver.cs" target="include\MappingResolver.cs" />
+          <file src="..\EntityFrameworkCore.Templates\FileSchemaProvider.cs" target="include\FileSchemaProvider.cs" />
+          <file src="..\EntityFrameworkCore.Templates\DatabaseSchemaProvider.cs" target="include\DatabaseSchemaProvider.cs" />
+          <file src="..\EntityFrameworkCore.Templates\IQPArticle.cs" target="include\IQPArticle.cs" />
+          <file src="..\EntityFrameworkCore.Templates\IQPLink.cs" target="include\IQPLink.cs" />
+          <file src="..\EntityFrameworkCore.Templates\IQPLibraryService.cs" target="include\IQPLibraryService.cs" />
+          <file src="..\EntityFrameworkCore.Templates\IQPFormService.cs" target="include\IQPFormService.cs" />
+          <file src="..\EntityFrameworkCore.Templates\IQPSchema.cs" target="include\IQPSchema.cs" />
+          <file src="..\EntityFrameworkCore.Templates\IMappingConfigurator.cs" target="include\IMappingConfigurator.cs" />
+          <file src="..\EntityFrameworkCore.Templates\ISchemaProvider.cs" target="include\ISchemaProvider.cs" />
+          <file src="..\EntityFrameworkCore.Templates\MappingConfiguratorBase.cs" target="include\MappingConfiguratorBase.cs" />
+          <file src="..\EntityFrameworkCore.Templates\StatusType.cs" target="include\StatusType.cs" />
+          <file src="..\EntityFrameworkCore.Templates\User.cs" target="include\User.cs" />
+          <file src="..\EntityFrameworkCore.Templates\UserGroup.cs" target="include\UserGroup.cs" />
+          <file src="..\EntityFrameworkCore.Templates\UserGroupBind.cs" target="include\UserGroupBind.cs" />
           <file src="QPDataContextGenerator.tt" target="include"  buildAction="EmbeddedResource" />
       <file src="QPDataContextGenerator.tt.settings.xml" target="content" />
     <file src="ModelMappingResult.xml" target="content" />

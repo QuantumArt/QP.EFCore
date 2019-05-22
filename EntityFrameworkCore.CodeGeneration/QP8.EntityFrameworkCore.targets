@@ -12,10 +12,7 @@
     <TemplateFiles Include="$(NugetPackageFolder)\include\*.tt"/>
   </ItemGroup>
   <ItemGroup>
-    <ModelFiles Include="$(NugetPackageFolder)\include\Models\*.cs"/>
-  </ItemGroup>
-  <ItemGroup>
-    <ServiceFiles Include="$(NugetPackageFolder)\include\Services\*.cs"/>
+    <ModelFiles Include="$(NugetPackageFolder)\include\*.cs"/>
   </ItemGroup>
   <ItemGroup>
     <DataFile Include="$(NugetPackageFolder)\content\ModelMappingResult.xml"/>
@@ -30,10 +27,8 @@
     <Copy DestinationFolder="$(MSBuildProjectDirectory)\QPDataContextInclude\" SourceFiles="@(TemplateIncludeFiles)" ></Copy>
   </Target>
   <Target Name="CopyModelsTarget" BeforeTargets="BeforeBuild">
-    <Copy DestinationFolder="$(MSBuildProjectDirectory)\Models\" SourceFiles="@(ModelFiles)" ></Copy>
-  </Target>
-  <Target Name="CopyServicesTarget" BeforeTargets="BeforeBuild">
-    <Copy DestinationFolder="$(MSBuildProjectDirectory)\Services\" SourceFiles="@(ServiceFiles)" ></Copy>
+    <Copy DestinationFolder="$(MSBuildProjectDirectory)\" SourceFiles="@(ModelFiles)" 
+           Condition="!Exists('$(MSBuildProjectDirectory)\IQPArticle.cs')"></Copy>
   </Target>
   <Target Name="CopyDataTarget" BeforeTargets="BeforeBuild">
     <Copy DestinationFolder="$(MSBuildProjectDirectory)\" SourceFiles="@(DataFile)"
@@ -101,7 +96,7 @@
     </Task>
   </UsingTask>
 
-  <Target Name="UpdateProjectFile" BeforeTargets="CopyTemplateTarget;CopyIncludeTemplateTarget;CopyModelsTarget;CopyServicesTarget;CopyDataTarget">
+  <Target Name="UpdateProjectFile" BeforeTargets="CopyTemplateTarget;CopyIncludeTemplateTarget;CopyModelsTarget;CopyDataTarget">
         <UpdateProjectFileTask ProjectPath="$(MSBuildProjectFile)" Condition=" '$(Configuration)' == 'Debug' " />      
   </Target>
 

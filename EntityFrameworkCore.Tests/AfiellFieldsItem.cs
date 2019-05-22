@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using Quantumart.QP8.EntityFrameworkCore;
+
 namespace EntityFrameworkCore.Tests
 {
     public partial class AfiellFieldsItem: IQPArticle
@@ -24,8 +24,8 @@ namespace EntityFrameworkCore.Tests
 		private String _String;
 		public virtual String String 
 		{ 
-			get { return _String; }
-			set { _String = EFCoreModel.Current.ReplacePlaceholders(value);}
+			get { return EFCoreModel.Current.ReplacePlaceholders(_String); }
+			set { _String = value;}
 		}
         public virtual Int32? Integer { get; set; }
         public virtual Decimal? Decimal { get; set; }
@@ -38,21 +38,21 @@ namespace EntityFrameworkCore.Tests
 		private String _TextBox;
 		public virtual String TextBox 
 		{ 
-			get { return _TextBox; }
-			set { _TextBox = EFCoreModel.Current.ReplacePlaceholders(value);}
+			get { return EFCoreModel.Current.ReplacePlaceholders(_TextBox); }
+			set { _TextBox = value;}
 		}
 		private String _VisualEdit;
 		public virtual String VisualEdit 
 		{ 
-			get { return _VisualEdit; }
-			set { _VisualEdit = EFCoreModel.Current.ReplacePlaceholders(value);}
+			get { return EFCoreModel.Current.ReplacePlaceholders(_VisualEdit); }
+			set { _VisualEdit = value;}
 		}
         public virtual String DynamicImage { get; set; }
 		private String _Enum;
 		public virtual String Enum 
 		{ 
-			get { return _Enum; }
-			set { _Enum = EFCoreModel.Current.ReplacePlaceholders(value);}
+			get { return EFCoreModel.Current.ReplacePlaceholders(_Enum); }
+			set { _Enum = value;}
 		}
 	}
 }

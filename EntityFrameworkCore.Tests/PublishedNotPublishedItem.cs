@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using Quantumart.QP8.EntityFrameworkCore;
+
 namespace EntityFrameworkCore.Tests
 {
     public partial class PublishedNotPublishedItem: IQPArticle
@@ -24,14 +24,14 @@ namespace EntityFrameworkCore.Tests
 		private String _Title;
 		public virtual String Title 
 		{ 
-			get { return _Title; }
-			set { _Title = EFCoreModel.Current.ReplacePlaceholders(value);}
+			get { return EFCoreModel.Current.ReplacePlaceholders(_Title); }
+			set { _Title = value;}
 		}
 		private String _Alias;
 		public virtual String Alias 
 		{ 
-			get { return _Alias; }
-			set { _Alias = EFCoreModel.Current.ReplacePlaceholders(value);}
+			get { return EFCoreModel.Current.ReplacePlaceholders(_Alias); }
+			set { _Alias = value;}
 		}
 	}
 }

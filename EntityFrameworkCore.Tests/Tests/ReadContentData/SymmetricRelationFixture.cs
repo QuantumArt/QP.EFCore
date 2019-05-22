@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using EntityFrameworkCore.Tests.Infrastructure;
-using Quantumart.QP8.EntityFrameworkCore;
 using NUnit.Framework;
 
 namespace EntityFrameworkCore.Tests.ReadContentData

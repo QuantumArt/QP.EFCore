@@ -14,7 +14,6 @@ using System.Collections.Generic;
 using Quantumart.QPublishing.Info;
 using System.Collections;
 using System.Globalization;
-using Quantumart.QP8.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Transactions;
 

@@ -14,7 +14,7 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using Quantumart.QP8.EntityFrameworkCore;
+
 <#+
 	}
 	 #>
@@ -28,7 +28,7 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using Quantumart.QP8.EntityFrameworkCore;
+
 <#+
 	}
 #>
@@ -66,8 +66,8 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
 		private <#= attribute.NetType#> _<#=attribute.MappedName#>;
 		public virtual <#= attribute.NetType#> <#=attribute.MappedName#> 
 		{ 
-			get { return _<#=attribute.MappedName#>; }
-			set { _<#=attribute.MappedName#> = <#=model.Schema.ClassName#>.Current.ReplacePlaceholders(value);}
+			get { return <#=model.Schema.ClassName#>.Current.ReplacePlaceholders(_<#=attribute.MappedName#>); }
+			set { _<#=attribute.MappedName#> = value;}
 		}
 <#+			} else { #>
         public virtual <#= attribute.NetType#> <#=attribute.MappedName#> { get; set; }

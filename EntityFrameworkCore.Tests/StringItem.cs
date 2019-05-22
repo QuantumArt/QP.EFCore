@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using Quantumart.QP8.EntityFrameworkCore;
+
 namespace EntityFrameworkCore.Tests
 {
     public partial class StringItem: IQPArticle
@@ -24,8 +24,8 @@ namespace EntityFrameworkCore.Tests
 		private String _StringValue;
 		public virtual String StringValue 
 		{ 
-			get { return _StringValue; }
-			set { _StringValue = EFCoreModel.Current.ReplacePlaceholders(value);}
+			get { return EFCoreModel.Current.ReplacePlaceholders(_StringValue); }
+			set { _StringValue = value;}
 		}
 	}
 }

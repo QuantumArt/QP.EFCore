@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using Quantumart.QP8.EntityFrameworkCore;
+
 namespace EntityFrameworkCore.Templates
 {
     public partial class Setting: IQPArticle
@@ -26,14 +26,14 @@ namespace EntityFrameworkCore.Templates
 		private String _Title;
 		public virtual String Title 
 		{ 
-			get { return _Title; }
-			set { _Title = EFCoreModel.Current.ReplacePlaceholders(value);}
+			get { return EFCoreModel.Current.ReplacePlaceholders(_Title); }
+			set { _Title = value;}
 		}
 		private String _ValueMapped;
 		public virtual String ValueMapped 
 		{ 
-			get { return _ValueMapped; }
-			set { _ValueMapped = EFCoreModel.Current.ReplacePlaceholders(value);}
+			get { return EFCoreModel.Current.ReplacePlaceholders(_ValueMapped); }
+			set { _ValueMapped = value;}
 		}
         public virtual Decimal? DecimalValue { get; set; }
 		/// <summary>

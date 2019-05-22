@@ -1,6 +1,5 @@
 using EntityFrameworkCore.Tests.Infrastructure;
 using NUnit.Framework;
-using Quantumart.QP8.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
