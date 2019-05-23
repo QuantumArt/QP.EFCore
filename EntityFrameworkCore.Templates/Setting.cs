@@ -23,17 +23,17 @@ namespace EntityFrameworkCore.Templates
         public virtual Int32 LastModifiedBy { get; set; }
         public virtual StatusType StatusType { get; set; }
 
-		private String _Title;
+		private String _internalTitle;
 		public virtual String Title 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_Title); }
-			set { _Title = value;}
+			get { return _internalTitle; }
+			set { _internalTitle = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
-		private String _ValueMapped;
+		private String _internalValueMapped;
 		public virtual String ValueMapped 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_ValueMapped); }
-			set { _ValueMapped = value;}
+			get { return _internalValueMapped; }
+			set { _internalValueMapped = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
         public virtual Decimal? DecimalValue { get; set; }
 		/// <summary>

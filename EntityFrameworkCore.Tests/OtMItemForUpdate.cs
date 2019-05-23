@@ -21,11 +21,11 @@ namespace EntityFrameworkCore.Tests
         public virtual Int32 LastModifiedBy { get; set; }
         public virtual StatusType StatusType { get; set; }
 
-		private String _Title;
+		private String _internalTitle;
 		public virtual String Title 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_Title); }
-			set { _Title = value;}
+			get { return _internalTitle; }
+			set { _internalTitle = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
 		/// <summary>
 		/// 

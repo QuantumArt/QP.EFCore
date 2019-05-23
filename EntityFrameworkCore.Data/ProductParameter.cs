@@ -21,11 +21,11 @@ namespace EntityFrameworkCore.Data
         public virtual Int32 LastModifiedBy { get; set; }
         public virtual StatusType StatusType { get; set; }
 
-		private String _Title;
+		private String _internalTitle;
 		public virtual String Title 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_Title); }
-			set { _Title = value;}
+			get { return _internalTitle; }
+			set { _internalTitle = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
         public virtual Int32? Group_ID { get; set; }
         public virtual Int32? BaseParameter_ID { get; set; }
@@ -33,30 +33,30 @@ namespace EntityFrameworkCore.Data
         public virtual Int32? Direction_ID { get; set; }
         public virtual Int32? SortOrder { get; set; }
         public virtual Double? NumValue { get; set; }
-		private String _Value;
+		private String _internalValue;
 		public virtual String Value 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_Value); }
-			set { _Value = value;}
+			get { return _internalValue; }
+			set { _internalValue = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
         public virtual Int32? Unit_ID { get; set; }
-		private String _Legal;
+		private String _internalLegal;
 		public virtual String Legal 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_Legal); }
-			set { _Legal = value;}
+			get { return _internalLegal; }
+			set { _internalLegal = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
-		private String _ShortTitle;
+		private String _internalShortTitle;
 		public virtual String ShortTitle 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_ShortTitle); }
-			set { _ShortTitle = value;}
+			get { return _internalShortTitle; }
+			set { _internalShortTitle = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
-		private String _ShortValue;
+		private String _internalShortValue;
 		public virtual String ShortValue 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_ShortValue); }
-			set { _ShortValue = value;}
+			get { return _internalShortValue; }
+			set { _internalShortValue = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
         public virtual Int32? MatrixParameter_ID { get; set; }
         public virtual Int32? OldSiteId { get; set; }

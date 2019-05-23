@@ -22,67 +22,67 @@ namespace EntityFrameworkCore.Templates
         public virtual Int32 LastModifiedBy { get; set; }
         public virtual StatusType StatusType { get; set; }
 
-		private String _Title;
+		private String _internalTitle;
 		public virtual String Title 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_Title); }
-			set { _Title = value;}
+			get { return _internalTitle; }
+			set { _internalTitle = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
-		private String _Alias;
+		private String _internalAlias;
 		public virtual String Alias 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_Alias); }
-			set { _Alias = value;}
+			get { return _internalAlias; }
+			set { _internalAlias = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
         public virtual Int32? ProductType { get; set; }
-		private String _Benefit;
+		private String _internalBenefit;
 		public virtual String Benefit 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_Benefit); }
-			set { _Benefit = value;}
+			get { return _internalBenefit; }
+			set { _internalBenefit = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
-		private String _ShortBenefit;
+		private String _internalShortBenefit;
 		public virtual String ShortBenefit 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_ShortBenefit); }
-			set { _ShortBenefit = value;}
+			get { return _internalShortBenefit; }
+			set { _internalShortBenefit = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
-		private String _Legal;
+		private String _internalLegal;
 		public virtual String Legal 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_Legal); }
-			set { _Legal = value;}
+			get { return _internalLegal; }
+			set { _internalLegal = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
-		private String _Description;
+		private String _internalDescription;
 		public virtual String Description 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_Description); }
-			set { _Description = value;}
+			get { return _internalDescription; }
+			set { _internalDescription = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
-		private String _ShortDescription;
+		private String _internalShortDescription;
 		public virtual String ShortDescription 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_ShortDescription); }
-			set { _ShortDescription = value;}
+			get { return _internalShortDescription; }
+			set { _internalShortDescription = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
-		private String _Purpose;
+		private String _internalPurpose;
 		public virtual String Purpose 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_Purpose); }
-			set { _Purpose = value;}
+			get { return _internalPurpose; }
+			set { _internalPurpose = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
         public virtual Int32? Family_ID { get; set; }
-		private String _TitleForFamily;
+		private String _internalTitleForFamily;
 		public virtual String TitleForFamily 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_TitleForFamily); }
-			set { _TitleForFamily = value;}
+			get { return _internalTitleForFamily; }
+			set { _internalTitleForFamily = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
-		private String _CommentForFamily;
+		private String _internalCommentForFamily;
 		public virtual String CommentForFamily 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_CommentForFamily); }
-			set { _CommentForFamily = value;}
+			get { return _internalCommentForFamily; }
+			set { _internalCommentForFamily = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
         public virtual Int32? MarketingSign_ID { get; set; }
         public virtual Int32? OldSiteId { get; set; }

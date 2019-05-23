@@ -26,33 +26,33 @@ namespace EntityFrameworkCore.Data
 
         public virtual Int32? Type { get; set; }
         public virtual String PDF { get; set; }
-		private String _Legal;
+		private String _internalLegal;
 		public virtual String Legal 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_Legal); }
-			set { _Legal = value;}
+			get { return _internalLegal; }
+			set { _internalLegal = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
-		private String _Benefit;
+		private String _internalBenefit;
 		public virtual String Benefit 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_Benefit); }
-			set { _Benefit = value;}
+			get { return _internalBenefit; }
+			set { _internalBenefit = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
         public virtual Int32? SortOrder { get; set; }
         public virtual Int32? MarketingSign_ID { get; set; }
         public virtual DateTime? StartDate { get; set; }
         public virtual DateTime? EndDate { get; set; }
-		private String _ArchiveTitle;
+		private String _internalArchiveTitle;
 		public virtual String ArchiveTitle 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_ArchiveTitle); }
-			set { _ArchiveTitle = value;}
+			get { return _internalArchiveTitle; }
+			set { _internalArchiveTitle = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
-		private String _ArchiveNotes;
+		private String _internalArchiveNotes;
 		public virtual String ArchiveNotes 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_ArchiveNotes); }
-			set { _ArchiveNotes = value;}
+			get { return _internalArchiveNotes; }
+			set { _internalArchiveNotes = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
         public virtual Int32? OldSiteId { get; set; }
 		/// <summary>

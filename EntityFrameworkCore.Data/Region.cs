@@ -27,17 +27,17 @@ namespace EntityFrameworkCore.Data
         public virtual Int32 LastModifiedBy { get; set; }
         public virtual StatusType StatusType { get; set; }
 
-		private String _Title;
+		private String _internalTitle;
 		public virtual String Title 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_Title); }
-			set { _Title = value;}
+			get { return _internalTitle; }
+			set { _internalTitle = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
-		private String _Alias;
+		private String _internalAlias;
 		public virtual String Alias 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_Alias); }
-			set { _Alias = value;}
+			get { return _internalAlias; }
+			set { _internalAlias = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
         public virtual Int32? OldSiteId { get; set; }
 		/// <summary>

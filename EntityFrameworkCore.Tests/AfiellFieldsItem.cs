@@ -21,11 +21,11 @@ namespace EntityFrameworkCore.Tests
         public virtual Int32 LastModifiedBy { get; set; }
         public virtual StatusType StatusType { get; set; }
 
-		private String _String;
+		private String _internalString;
 		public virtual String String 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_String); }
-			set { _String = value;}
+			get { return _internalString; }
+			set { _internalString = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
         public virtual Int32? Integer { get; set; }
         public virtual Decimal? Decimal { get; set; }
@@ -35,24 +35,24 @@ namespace EntityFrameworkCore.Tests
         public virtual DateTime? DateTime { get; set; }
         public virtual String File { get; set; }
         public virtual String Image { get; set; }
-		private String _TextBox;
+		private String _internalTextBox;
 		public virtual String TextBox 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_TextBox); }
-			set { _TextBox = value;}
+			get { return _internalTextBox; }
+			set { _internalTextBox = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
-		private String _VisualEdit;
+		private String _internalVisualEdit;
 		public virtual String VisualEdit 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_VisualEdit); }
-			set { _VisualEdit = value;}
+			get { return _internalVisualEdit; }
+			set { _internalVisualEdit = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
         public virtual String DynamicImage { get; set; }
-		private String _Enum;
+		private String _internalEnum;
 		public virtual String Enum 
 		{ 
-			get { return EFCoreModel.Current.ReplacePlaceholders(_Enum); }
-			set { _Enum = value;}
+			get { return _internalEnum; }
+			set { _internalEnum = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
 	}
 }
