@@ -6,9 +6,11 @@
 <#@ assembly name="System.Data.Linq"#>
 <#@ assembly name="System.Collections"#>
 <#@ assembly name="EnvDTE"#>
+<#@ assembly name="NetStandard" #>
 <#@ assembly name="System.Xml"#>
 <#@ assembly name="System.Xml.Linq"#>
 <#@ assembly name="$(SolutionDir)\CodeGeneration\bin\Debug\netcoreapp2.1\Quantumart.QP8.CoreCodeGeneration.dll"#>
+<#@ assembly name="$(NuGetPackageRoot)qp.configurationservice.client\0.2.0\lib\netstandard2.0\QP.ConfigurationService.Client.dll"#>
 
 <#@ import namespace="System"#>
 <#@ import namespace="System.CodeDom"#>

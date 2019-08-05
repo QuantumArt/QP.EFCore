@@ -22,3 +22,25 @@ namespace EntityFrameworkCore.Data
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

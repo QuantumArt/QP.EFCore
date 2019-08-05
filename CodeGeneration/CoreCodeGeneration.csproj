@@ -1,9 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <AssemblyName>Quantumart.QP8.CoreCodeGeneration</AssemblyName>
     <RootNamespace>Quantumart.QP8.CoreCodeGeneration</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Quantumart.AspNetCore" Version="4.0.0-beta70" />
+  </ItemGroup>
 
 </Project>

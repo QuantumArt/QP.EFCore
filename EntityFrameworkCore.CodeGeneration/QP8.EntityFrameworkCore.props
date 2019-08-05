@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Project>
   <PropertyGroup>
-    <NugetPackageFolder>$(NuGetPackageRoot)QP8.EntityFrameworkCore\1.1.3</NugetPackageFolder>
+    <NugetPackageFolder>$(NuGetPackageRoot)QP8.EntityFrameworkCore\1.1.4-beta22</NugetPackageFolder>
   </PropertyGroup>
 </Project>

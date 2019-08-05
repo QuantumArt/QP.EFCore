@@ -25,18 +25,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<AfiellFieldsItem>()
                 .ToTable(GetTableName("AfiellFieldsItem"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<AfiellFieldsItem>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<AfiellFieldsItem>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<AfiellFieldsItem>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<AfiellFieldsItem>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<AfiellFieldsItem>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<AfiellFieldsItem>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<AfiellFieldsItem>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<AfiellFieldsItem>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -95,18 +111,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<Schema>()
                 .ToTable(GetTableName("Schema"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<Schema>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<Schema>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<Schema>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<Schema>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<Schema>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<Schema>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<Schema>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<Schema>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -124,18 +156,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<StringItem>()
                 .ToTable(GetTableName("StringItem"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<StringItem>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<StringItem>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<StringItem>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<StringItem>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<StringItem>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<StringItem>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<StringItem>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<StringItem>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -153,18 +201,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<StringItemForUpdate>()
                 .ToTable(GetTableName("StringItemForUpdate"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<StringItemForUpdate>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<StringItemForUpdate>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<StringItemForUpdate>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<StringItemForUpdate>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<StringItemForUpdate>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<StringItemForUpdate>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<StringItemForUpdate>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<StringItemForUpdate>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -182,18 +246,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<StringItemForUnsert>()
                 .ToTable(GetTableName("StringItemForUnsert"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<StringItemForUnsert>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<StringItemForUnsert>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<StringItemForUnsert>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<StringItemForUnsert>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<StringItemForUnsert>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<StringItemForUnsert>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<StringItemForUnsert>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<StringItemForUnsert>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -211,18 +291,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<ItemForUpdate>()
                 .ToTable(GetTableName("ItemForUpdate"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<ItemForUpdate>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<ItemForUpdate>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<ItemForUpdate>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<ItemForUpdate>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<ItemForUpdate>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<ItemForUpdate>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<ItemForUpdate>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<ItemForUpdate>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -240,18 +336,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<ItemForInsert>()
                 .ToTable(GetTableName("ItemForInsert"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<ItemForInsert>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<ItemForInsert>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<ItemForInsert>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<ItemForInsert>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<ItemForInsert>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<ItemForInsert>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<ItemForInsert>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<ItemForInsert>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -269,18 +381,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<PublishedNotPublishedItem>()
                 .ToTable(GetTableName("PublishedNotPublishedItem"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<PublishedNotPublishedItem>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<PublishedNotPublishedItem>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<PublishedNotPublishedItem>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<PublishedNotPublishedItem>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<PublishedNotPublishedItem>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<PublishedNotPublishedItem>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<PublishedNotPublishedItem>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<PublishedNotPublishedItem>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -301,18 +429,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<ReplacingPlaceholdersItem>()
                 .ToTable(GetTableName("ReplacingPlaceholdersItem"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<ReplacingPlaceholdersItem>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<ReplacingPlaceholdersItem>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<ReplacingPlaceholdersItem>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<ReplacingPlaceholdersItem>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<ReplacingPlaceholdersItem>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<ReplacingPlaceholdersItem>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<ReplacingPlaceholdersItem>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<ReplacingPlaceholdersItem>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -330,18 +474,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<FileFieldsItem>()
                 .ToTable(GetTableName("FileFieldsItem"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<FileFieldsItem>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<FileFieldsItem>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<FileFieldsItem>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<FileFieldsItem>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<FileFieldsItem>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<FileFieldsItem>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<FileFieldsItem>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<FileFieldsItem>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -349,6 +509,9 @@ namespace EntityFrameworkCore.Tests
 				.IsRequired()
                 .HasForeignKey(x => x.StatusTypeId); 
 
+            modelBuilder.Entity<FileFieldsItem>()
+                .Property(x => x.FileItem)
+                .HasColumnName(GetFieldName("FileFieldsItem", "FileItem"));
             modelBuilder.Entity<FileFieldsItem>().Ignore(p => p.FileItemUrl);
             modelBuilder.Entity<FileFieldsItem>().Ignore(p => p.FileItemUploadPath);
  
@@ -358,18 +521,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<SymmetricRelationArticle>()
                 .ToTable(GetTableName("SymmetricRelationArticle"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<SymmetricRelationArticle>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<SymmetricRelationArticle>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<SymmetricRelationArticle>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<SymmetricRelationArticle>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<SymmetricRelationArticle>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<SymmetricRelationArticle>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<SymmetricRelationArticle>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<SymmetricRelationArticle>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -384,18 +563,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<ToSymmetricRelationAtricle>()
                 .ToTable(GetTableName("ToSymmetricRelationAtricle"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<ToSymmetricRelationAtricle>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<ToSymmetricRelationAtricle>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<ToSymmetricRelationAtricle>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<ToSymmetricRelationAtricle>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<ToSymmetricRelationAtricle>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<ToSymmetricRelationAtricle>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<ToSymmetricRelationAtricle>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<ToSymmetricRelationAtricle>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -454,18 +649,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<MtMItemForUpdate>()
                 .ToTable(GetTableName("MtMItemForUpdate"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<MtMItemForUpdate>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<MtMItemForUpdate>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<MtMItemForUpdate>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<MtMItemForUpdate>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<MtMItemForUpdate>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<MtMItemForUpdate>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<MtMItemForUpdate>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<MtMItemForUpdate>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -527,18 +738,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<MtMDictionaryForUpdate>()
                 .ToTable(GetTableName("MtMDictionaryForUpdate"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<MtMDictionaryForUpdate>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<MtMDictionaryForUpdate>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<MtMDictionaryForUpdate>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<MtMDictionaryForUpdate>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<MtMDictionaryForUpdate>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<MtMDictionaryForUpdate>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<MtMDictionaryForUpdate>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<MtMDictionaryForUpdate>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -556,18 +783,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<OtMItemForUpdate>()
                 .ToTable(GetTableName("OtMItemForUpdate"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<OtMItemForUpdate>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<OtMItemForUpdate>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<OtMItemForUpdate>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<OtMItemForUpdate>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<OtMItemForUpdate>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<OtMItemForUpdate>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<OtMItemForUpdate>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<OtMItemForUpdate>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -585,7 +828,7 @@ namespace EntityFrameworkCore.Tests
 
             modelBuilder.Entity<OtMItemForUpdate>()
                 .Property(x => x.Reference_ID)
-                .HasColumnName(GetFieldName("OtMItemForUpdate", "Reference"));
+                .HasColumnName(GetFieldName("OtMItemForUpdate", "Reference").ToLowerInvariant());
  
             #endregion
 
@@ -593,18 +836,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<OtMDictionaryForUpdate>()
                 .ToTable(GetTableName("OtMDictionaryForUpdate"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<OtMDictionaryForUpdate>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<OtMDictionaryForUpdate>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<OtMDictionaryForUpdate>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<OtMDictionaryForUpdate>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<OtMDictionaryForUpdate>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<OtMDictionaryForUpdate>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<OtMDictionaryForUpdate>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<OtMDictionaryForUpdate>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -622,18 +881,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<DateItemForUpdate>()
                 .ToTable(GetTableName("DateItemForUpdate"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<DateItemForUpdate>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<DateItemForUpdate>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<DateItemForUpdate>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<DateItemForUpdate>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<DateItemForUpdate>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<DateItemForUpdate>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<DateItemForUpdate>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<DateItemForUpdate>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -641,6 +916,9 @@ namespace EntityFrameworkCore.Tests
 				.IsRequired()
                 .HasForeignKey(x => x.StatusTypeId); 
 
+            modelBuilder.Entity<DateItemForUpdate>()
+                .Property(x => x.DateValueField)
+                .HasColumnName(GetFieldName("DateItemForUpdate", "DateValueField"));
  
             #endregion
 
@@ -648,18 +926,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<TimeItemForUpdate>()
                 .ToTable(GetTableName("TimeItemForUpdate"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<TimeItemForUpdate>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<TimeItemForUpdate>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<TimeItemForUpdate>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<TimeItemForUpdate>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<TimeItemForUpdate>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<TimeItemForUpdate>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<TimeItemForUpdate>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<TimeItemForUpdate>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -667,6 +961,9 @@ namespace EntityFrameworkCore.Tests
 				.IsRequired()
                 .HasForeignKey(x => x.StatusTypeId); 
 
+            modelBuilder.Entity<TimeItemForUpdate>()
+                .Property(x => x.TimeValueField)
+                .HasColumnName(GetFieldName("TimeItemForUpdate", "TimeValueField"));
  
             #endregion
 
@@ -674,18 +971,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<DateTimeItemForUpdate>()
                 .ToTable(GetTableName("DateTimeItemForUpdate"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<DateTimeItemForUpdate>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<DateTimeItemForUpdate>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<DateTimeItemForUpdate>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<DateTimeItemForUpdate>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<DateTimeItemForUpdate>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<DateTimeItemForUpdate>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<DateTimeItemForUpdate>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<DateTimeItemForUpdate>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -693,6 +1006,9 @@ namespace EntityFrameworkCore.Tests
 				.IsRequired()
                 .HasForeignKey(x => x.StatusTypeId); 
 
+            modelBuilder.Entity<DateTimeItemForUpdate>()
+                .Property(x => x.DateTimeValueField)
+                .HasColumnName(GetFieldName("DateTimeItemForUpdate", "DateTimeValueField"));
  
             #endregion
 
@@ -700,18 +1016,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<FileItemForUpdate>()
                 .ToTable(GetTableName("FileItemForUpdate"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<FileItemForUpdate>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<FileItemForUpdate>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<FileItemForUpdate>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<FileItemForUpdate>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<FileItemForUpdate>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<FileItemForUpdate>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<FileItemForUpdate>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<FileItemForUpdate>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -719,6 +1051,9 @@ namespace EntityFrameworkCore.Tests
 				.IsRequired()
                 .HasForeignKey(x => x.StatusTypeId); 
 
+            modelBuilder.Entity<FileItemForUpdate>()
+                .Property(x => x.FileValueField)
+                .HasColumnName(GetFieldName("FileItemForUpdate", "FileValueField"));
             modelBuilder.Entity<FileItemForUpdate>().Ignore(p => p.FileValueFieldUrl);
             modelBuilder.Entity<FileItemForUpdate>().Ignore(p => p.FileValueFieldUploadPath);
  
@@ -728,18 +1063,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<ImageItemForUpdate>()
                 .ToTable(GetTableName("ImageItemForUpdate"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<ImageItemForUpdate>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<ImageItemForUpdate>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<ImageItemForUpdate>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<ImageItemForUpdate>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<ImageItemForUpdate>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<ImageItemForUpdate>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<ImageItemForUpdate>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<ImageItemForUpdate>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -747,6 +1098,9 @@ namespace EntityFrameworkCore.Tests
 				.IsRequired()
                 .HasForeignKey(x => x.StatusTypeId); 
 
+            modelBuilder.Entity<ImageItemForUpdate>()
+                .Property(x => x.ImageValueField)
+                .HasColumnName(GetFieldName("ImageItemForUpdate", "ImageValueField"));
             modelBuilder.Entity<ImageItemForUpdate>().Ignore(p => p.ImageValueFieldUrl);
             modelBuilder.Entity<ImageItemForUpdate>().Ignore(p => p.ImageValueFieldUploadPath);
  
@@ -756,18 +1110,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<OtMItemForMapping>()
                 .ToTable(GetTableName("OtMItemForMapping"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<OtMItemForMapping>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<OtMItemForMapping>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<OtMItemForMapping>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<OtMItemForMapping>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<OtMItemForMapping>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<OtMItemForMapping>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<OtMItemForMapping>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<OtMItemForMapping>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -782,7 +1152,7 @@ namespace EntityFrameworkCore.Tests
 
             modelBuilder.Entity<OtMItemForMapping>()
                 .Property(x => x.OtMReferenceMapping_ID)
-                .HasColumnName(GetFieldName("OtMItemForMapping", "OtMReferenceMapping"));
+                .HasColumnName(GetFieldName("OtMItemForMapping", "OtMReferenceMapping").ToLowerInvariant());
  
             #endregion
 
@@ -790,18 +1160,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<OtMRelatedItemWithMapping>()
                 .ToTable(GetTableName("OtMRelatedItemWithMapping"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<OtMRelatedItemWithMapping>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<OtMRelatedItemWithMapping>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<OtMRelatedItemWithMapping>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<OtMRelatedItemWithMapping>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<OtMRelatedItemWithMapping>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<OtMRelatedItemWithMapping>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<OtMRelatedItemWithMapping>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<OtMRelatedItemWithMapping>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -816,18 +1202,34 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<OtMItemToContentWithoutMapping>()
                 .ToTable(GetTableName("OtMItemToContentWithoutMapping"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<OtMItemToContentWithoutMapping>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<OtMItemToContentWithoutMapping>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<OtMItemToContentWithoutMapping>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<OtMItemToContentWithoutMapping>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<OtMItemToContentWithoutMapping>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<OtMItemToContentWithoutMapping>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<OtMItemToContentWithoutMapping>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<OtMItemToContentWithoutMapping>()
                 .HasOne<StatusType>(x => x.StatusType)

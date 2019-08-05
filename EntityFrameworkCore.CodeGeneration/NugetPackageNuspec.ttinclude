@@ -19,7 +19,9 @@
       <dependency id="Microsoft.EntityFrameworkCore.Relational" version="2.2.2" />
       <dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="2.2.2" />
       <dependency id="Microsoft.Extensions.Configuration.Json" version="2.2.0" />
+      <dependency id="Npgsql.EntityFrameworkCore.PostgreSQL" version="2.2.0" />
       <dependency id="System.Data.DataSetExtensions" version="4.5.0" />
+      <dependency id="QP.ConfigurationService.Client" version="0.2.0"/>
       <dependency id="<#=context.QaName#>" version="<#=context.QaVersion#>" />     
     </dependencies>
     <frameworkAssemblies>

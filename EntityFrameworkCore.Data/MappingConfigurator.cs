@@ -25,18 +25,34 @@ namespace EntityFrameworkCore.Data
             modelBuilder.Entity<MarketingProduct>()
                 .ToTable(GetTableName("MarketingProduct"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<MarketingProduct>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<MarketingProduct>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<MarketingProduct>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<MarketingProduct>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<MarketingProduct>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<MarketingProduct>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<MarketingProduct>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<MarketingProduct>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -50,6 +66,9 @@ namespace EntityFrameworkCore.Data
             modelBuilder.Entity<MarketingProduct>()
                 .Property(x => x.Alias)
                 .HasColumnName(GetFieldName("MarketingProduct", "Alias"));
+            modelBuilder.Entity<MarketingProduct>()
+                .Property(x => x.ProductType)
+                .HasColumnName(GetFieldName("MarketingProduct", "ProductType"));
             modelBuilder.Entity<MarketingProduct>()
                 .Property(x => x.Benefit)
                 .HasColumnName(GetFieldName("MarketingProduct", "Benefit"));
@@ -80,6 +99,9 @@ namespace EntityFrameworkCore.Data
             modelBuilder.Entity<MarketingProduct>()
                 .Property(x => x.MarketingSign_ID)
                 .HasColumnName(GetFieldName("MarketingProduct", "MarketingSign_ID"));
+            modelBuilder.Entity<MarketingProduct>()
+                .Property(x => x.OldSiteId)
+                .HasColumnName(GetFieldName("MarketingProduct", "OldSiteId"));
  
             #endregion
 
@@ -87,18 +109,34 @@ namespace EntityFrameworkCore.Data
             modelBuilder.Entity<Product>()
                 .ToTable(GetTableName("Product"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<Product>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<Product>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<Product>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<Product>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<Product>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<Product>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<Product>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<Product>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -107,14 +145,29 @@ namespace EntityFrameworkCore.Data
                 .HasForeignKey(x => x.StatusTypeId); 
 
             modelBuilder.Entity<Product>()
+                .Property(x => x.Type)
+                .HasColumnName(GetFieldName("Product", "Type"));
+            modelBuilder.Entity<Product>()
+                .Property(x => x.PDF)
+                .HasColumnName(GetFieldName("Product", "PDF"));
+            modelBuilder.Entity<Product>()
                 .Property(x => x.Legal)
                 .HasColumnName(GetFieldName("Product", "Legal"));
             modelBuilder.Entity<Product>()
                 .Property(x => x.Benefit)
                 .HasColumnName(GetFieldName("Product", "Benefit"));
             modelBuilder.Entity<Product>()
+                .Property(x => x.SortOrder)
+                .HasColumnName(GetFieldName("Product", "SortOrder"));
+            modelBuilder.Entity<Product>()
                 .Property(x => x.MarketingSign_ID)
                 .HasColumnName(GetFieldName("Product", "MarketingSign_ID"));
+            modelBuilder.Entity<Product>()
+                .Property(x => x.StartDate)
+                .HasColumnName(GetFieldName("Product", "StartDate"));
+            modelBuilder.Entity<Product>()
+                .Property(x => x.EndDate)
+                .HasColumnName(GetFieldName("Product", "EndDate"));
             modelBuilder.Entity<Product>()
                 .Property(x => x.ArchiveTitle)
                 .HasColumnName(GetFieldName("Product", "ArchiveTitle"));
@@ -122,13 +175,16 @@ namespace EntityFrameworkCore.Data
                 .Property(x => x.ArchiveNotes)
                 .HasColumnName(GetFieldName("Product", "ArchiveNotes"));
             modelBuilder.Entity<Product>()
+                .Property(x => x.OldSiteId)
+                .HasColumnName(GetFieldName("Product", "OldSiteId"));
+            modelBuilder.Entity<Product>()
                 .HasOne<MarketingProduct>(mp => mp.MarketingProduct)
                 .WithMany(mp => mp.Products)
                 .HasForeignKey(fp => fp.MarketingProduct_ID);
 
             modelBuilder.Entity<Product>()
                 .Property(x => x.MarketingProduct_ID)
-                .HasColumnName(GetFieldName("Product", "MarketingProduct"));
+                .HasColumnName(GetFieldName("Product", "MarketingProduct").ToLowerInvariant());
 
              modelBuilder.Entity<Product2RegionForRegions>()
                 .ToTable(GetLinkTableName("Product", "Regions"));
@@ -182,18 +238,34 @@ namespace EntityFrameworkCore.Data
             modelBuilder.Entity<ProductParameter>()
                 .ToTable(GetTableName("ProductParameter"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<ProductParameter>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<ProductParameter>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<ProductParameter>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<ProductParameter>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<ProductParameter>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<ProductParameter>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<ProductParameter>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<ProductParameter>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -217,6 +289,12 @@ namespace EntityFrameworkCore.Data
                 .Property(x => x.Direction_ID)
                 .HasColumnName(GetFieldName("ProductParameter", "Direction_ID"));
             modelBuilder.Entity<ProductParameter>()
+                .Property(x => x.SortOrder)
+                .HasColumnName(GetFieldName("ProductParameter", "SortOrder"));
+            modelBuilder.Entity<ProductParameter>()
+                .Property(x => x.NumValue)
+                .HasColumnName(GetFieldName("ProductParameter", "NumValue"));
+            modelBuilder.Entity<ProductParameter>()
                 .Property(x => x.Value)
                 .HasColumnName(GetFieldName("ProductParameter", "Value"));
             modelBuilder.Entity<ProductParameter>()
@@ -235,13 +313,16 @@ namespace EntityFrameworkCore.Data
                 .Property(x => x.MatrixParameter_ID)
                 .HasColumnName(GetFieldName("ProductParameter", "MatrixParameter_ID"));
             modelBuilder.Entity<ProductParameter>()
+                .Property(x => x.OldSiteId)
+                .HasColumnName(GetFieldName("ProductParameter", "OldSiteId"));
+            modelBuilder.Entity<ProductParameter>()
                 .HasOne<Product>(mp => mp.Product)
                 .WithMany(mp => mp.Parameters)
                 .HasForeignKey(fp => fp.Product_ID);
 
             modelBuilder.Entity<ProductParameter>()
                 .Property(x => x.Product_ID)
-                .HasColumnName(GetFieldName("ProductParameter", "Product"));
+                .HasColumnName(GetFieldName("ProductParameter", "Product").ToLowerInvariant());
  
             #endregion
 
@@ -249,18 +330,34 @@ namespace EntityFrameworkCore.Data
             modelBuilder.Entity<Region>()
                 .ToTable(GetTableName("Region"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<Region>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<Region>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<Region>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<Region>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<Region>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<Region>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<Region>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<Region>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -275,13 +372,16 @@ namespace EntityFrameworkCore.Data
                 .Property(x => x.Alias)
                 .HasColumnName(GetFieldName("Region", "Alias"));
             modelBuilder.Entity<Region>()
+                .Property(x => x.OldSiteId)
+                .HasColumnName(GetFieldName("Region", "OldSiteId"));
+            modelBuilder.Entity<Region>()
                 .HasOne<Region>(mp => mp.Parent)
                 .WithMany(mp => mp.Children)
                 .HasForeignKey(fp => fp.Parent_ID);
 
             modelBuilder.Entity<Region>()
                 .Property(x => x.Parent_ID)
-                .HasColumnName(GetFieldName("Region", "Parent"));
+                .HasColumnName(GetFieldName("Region", "Parent").ToLowerInvariant());
 
              modelBuilder.Entity<Region2RegionForAllowedRegions>()
                 .ToTable(GetLinkTableName("Region", "AllowedRegions"));
@@ -379,18 +479,34 @@ namespace EntityFrameworkCore.Data
             modelBuilder.Entity<MobileTariff>()
                 .ToTable(GetTableName("MobileTariff"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<MobileTariff>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<MobileTariff>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<MobileTariff>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<MobileTariff>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<MobileTariff>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<MobileTariff>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<MobileTariff>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<MobileTariff>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -399,13 +515,16 @@ namespace EntityFrameworkCore.Data
                 .HasForeignKey(x => x.StatusTypeId); 
 
             modelBuilder.Entity<MobileTariff>()
+                .Property(x => x.SplitInternetDeviceCount)
+                .HasColumnName(GetFieldName("MobileTariff", "SplitInternetDeviceCount"));
+            modelBuilder.Entity<MobileTariff>()
                 .HasOne<Product>(mp => mp.Product)
                 .WithMany(mp => mp.MobileTariffs)
                 .HasForeignKey(fp => fp.Product_ID);
 
             modelBuilder.Entity<MobileTariff>()
                 .Property(x => x.Product_ID)
-                .HasColumnName(GetFieldName("MobileTariff", "Product"));
+                .HasColumnName(GetFieldName("MobileTariff", "Product").ToLowerInvariant());
  
             #endregion
 
@@ -413,18 +532,34 @@ namespace EntityFrameworkCore.Data
             modelBuilder.Entity<Setting>()
                 .ToTable(GetTableName("Setting"))
                 .Property(x => x.Id)
-                .HasColumnName("CONTENT_ITEM_ID");
+                .HasColumnName("content_item_id");
 
 			 modelBuilder.Entity<Setting>()
                 .HasKey(x=>x.Id);
            
 		    modelBuilder.Entity<Setting>()
                 .Property(x => x.LastModifiedBy)
-                .HasColumnName("LAST_MODIFIED_BY");
+                .HasColumnName("last_modified_by");
             
             modelBuilder.Entity<Setting>()
                 .Property(x => x.StatusTypeId)
-                .HasColumnName("STATUS_TYPE_ID");
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<Setting>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<Setting>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<Setting>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<Setting>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
 
 			modelBuilder.Entity<Setting>()
                 .HasOne<StatusType>(x => x.StatusType)
@@ -438,6 +573,9 @@ namespace EntityFrameworkCore.Data
             modelBuilder.Entity<Setting>()
                 .Property(x => x.ValueMapped)
                 .HasColumnName(GetFieldName("Setting", "ValueMapped"));
+            modelBuilder.Entity<Setting>()
+                .Property(x => x.DecimalValue)
+                .HasColumnName(GetFieldName("Setting", "DecimalValue"));
 
              modelBuilder.Entity<Setting2SettingForRelatedSettings>()
                 .ToTable(GetLinkTableName("Setting", "RelatedSettings"));
