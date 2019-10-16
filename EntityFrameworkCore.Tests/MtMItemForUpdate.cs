@@ -33,5 +33,4 @@ namespace EntityFrameworkCore.Tests
 		/// </summary>
 		public  ICollection<MtMItemForUpdate2MtMDictionaryForUpdateForReference> Reference { get; set; }
 	}
-}
-	
+} 	

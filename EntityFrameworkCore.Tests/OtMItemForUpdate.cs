@@ -36,5 +36,4 @@ namespace EntityFrameworkCore.Tests
 		/// </summary>
 		public virtual Int32? Reference_ID { get; set; }
 	}
-}
-	
+} 	

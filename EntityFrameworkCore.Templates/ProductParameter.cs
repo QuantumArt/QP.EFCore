@@ -69,5 +69,4 @@ namespace EntityFrameworkCore.Templates
 		/// </summary>
 		public virtual Int32? Product_ID { get; set; }
 	}
-}
-	
+} 	

@@ -45,4 +45,4 @@ namespace EntityFrameworkCore.Templates
 		/// </summary>
 		public  ICollection<Setting2SettingForBackwardForRelatedSettings> BackwardForRelatedSettings { get; set; }
 	}
-}
+} 

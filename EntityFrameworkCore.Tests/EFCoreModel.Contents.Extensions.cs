@@ -61,7 +61,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("AfiellFieldsItem", x.Key), y => y.Value(this, context)));
             }
             else
@@ -95,7 +94,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("Schema", x.Key), y => y.Value(this, context)));
             }
             else
@@ -129,7 +127,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("StringItem", x.Key), y => y.Value(this, context)));
             }
             else
@@ -163,7 +160,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("StringItemForUpdate", x.Key), y => y.Value(this, context)));
             }
             else
@@ -197,7 +193,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("StringItemForUnsert", x.Key), y => y.Value(this, context)));
             }
             else
@@ -231,7 +226,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("ItemForUpdate", x.Key), y => y.Value(this, context)));
             }
             else
@@ -265,7 +259,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("ItemForInsert", x.Key), y => y.Value(this, context)));
             }
             else
@@ -300,7 +293,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("PublishedNotPublishedItem", x.Key), y => y.Value(this, context)));
             }
             else
@@ -334,7 +326,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("ReplacingPlaceholdersItem", x.Key), y => y.Value(this, context)));
             }
             else
@@ -378,7 +369,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("FileFieldsItem", x.Key), y => y.Value(this, context)));
             }
             else
@@ -411,7 +401,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("SymmetricRelationArticle", x.Key), y => y.Value(this, context)));
             }
             else
@@ -444,7 +433,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("ToSymmetricRelationAtricle", x.Key), y => y.Value(this, context)));
             }
             else
@@ -478,7 +466,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("MtMItemForUpdate", x.Key), y => y.Value(this, context)));
             }
             else
@@ -512,7 +499,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("MtMDictionaryForUpdate", x.Key), y => y.Value(this, context)));
             }
             else
@@ -547,7 +533,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("OtMItemForUpdate", x.Key), y => y.Value(this, context)));
             }
             else
@@ -581,7 +566,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("OtMDictionaryForUpdate", x.Key), y => y.Value(this, context)));
             }
             else
@@ -615,7 +599,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("DateItemForUpdate", x.Key), y => y.Value(this, context)));
             }
             else
@@ -649,7 +632,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("TimeItemForUpdate", x.Key), y => y.Value(this, context)));
             }
             else
@@ -683,7 +665,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("DateTimeItemForUpdate", x.Key), y => y.Value(this, context)));
             }
             else
@@ -727,7 +708,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("FileItemForUpdate", x.Key), y => y.Value(this, context)));
             }
             else
@@ -771,7 +751,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("ImageItemForUpdate", x.Key), y => y.Value(this, context)));
             }
             else
@@ -805,7 +784,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("OtMItemForMapping", x.Key), y => y.Value(this, context)));
             }
             else
@@ -838,7 +816,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("OtMRelatedItemWithMapping", x.Key), y => y.Value(this, context)));
             }
             else
@@ -875,7 +852,6 @@ namespace EntityFrameworkCore.Tests
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("OtMItemToContentWithoutMapping", x.Key), y => y.Value(this, context)));
             }
             else

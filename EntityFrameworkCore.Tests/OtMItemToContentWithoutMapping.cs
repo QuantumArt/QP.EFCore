@@ -23,4 +23,4 @@ namespace EntityFrameworkCore.Tests
 
         public virtual Int32? OtMReferenceMapping_ID { get; set; }
 	}
-}
+} 

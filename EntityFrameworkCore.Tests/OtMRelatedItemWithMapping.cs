@@ -27,5 +27,4 @@ namespace EntityFrameworkCore.Tests
 		/// </summary>
 		public  ICollection<OtMItemForMapping> BackOtMReferenceMapping { get; set; }
 	}
-}
-	
+} 	

@@ -76,5 +76,4 @@ namespace EntityFrameworkCore.Templates
 		/// </summary>
 		public  ICollection<Product2RegionForRegions> Regions { get; set; }
 	}
-}
-	
+} 	

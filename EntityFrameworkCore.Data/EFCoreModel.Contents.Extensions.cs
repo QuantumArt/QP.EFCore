@@ -43,7 +43,6 @@ namespace EntityFrameworkCore.Data
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("MarketingProduct", x.Key), y => y.Value(this, context)));
             }
             else
@@ -102,7 +101,6 @@ namespace EntityFrameworkCore.Data
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("Product", x.Key), y => y.Value(this, context)));
             }
             else
@@ -161,7 +159,6 @@ namespace EntityFrameworkCore.Data
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("ProductParameter", x.Key), y => y.Value(this, context)));
             }
             else
@@ -201,7 +198,6 @@ namespace EntityFrameworkCore.Data
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("Region", x.Key), y => y.Value(this, context)));
             }
             else
@@ -239,7 +235,6 @@ namespace EntityFrameworkCore.Data
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("MobileTariff", x.Key), y => y.Value(this, context)));
             }
             else
@@ -278,7 +273,6 @@ namespace EntityFrameworkCore.Data
 
             if (propertyNames == null || propertyNames.Length == 0)
             {
-                // todo: filter null values
                 table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("Setting", x.Key), y => y.Value(this, context)));
             }
             else

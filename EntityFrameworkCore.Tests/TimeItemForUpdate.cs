@@ -23,5 +23,4 @@ namespace EntityFrameworkCore.Tests
 
         public virtual TimeSpan? TimeValueField { get; set; }
 	}
-}
-	
+} 	

@@ -23,5 +23,4 @@ namespace EntityFrameworkCore.Tests
 
         public virtual String FileValueField { get; set; }
 	}
-}
-	
+} 	
