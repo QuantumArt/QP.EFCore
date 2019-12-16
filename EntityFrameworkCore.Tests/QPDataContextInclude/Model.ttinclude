@@ -10,6 +10,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;	
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using System.Threading;
 
 <#= settings.Usings#>
 
@@ -33,15 +34,14 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
             _accessor = accessor;
         }
 
-        [ThreadStatic]
-        private static <#=model.Schema.ClassName#> _context;
+        private static AsyncLocal<<#=model.Schema.ClassName#>> _context = new AsyncLocal<<#=model.Schema.ClassName#>>();
 
         public static <#=model.Schema.ClassName#> Current
         {
             get
             {
                 if (_accessor?.HttpContext == null)
-                    return _context;
+                    return _context.Value;
                 else
                     return (<#=model.Schema.ClassName#>)_accessor.HttpContext.Items[Key];
             }
@@ -49,7 +49,7 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
             private set
             {
                  if (_accessor?.HttpContext == null)
-                    _context = value;
+                    _context.Value = value;
                 else
                     _accessor.HttpContext.Items[Key] = value;
             }

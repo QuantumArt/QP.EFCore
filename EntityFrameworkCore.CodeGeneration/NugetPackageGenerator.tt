@@ -36,7 +36,7 @@
 <#
 	using (var context = new NugetContext(Host, GenerationEnvironment))
     {
-		context.Version = "1.1.4";
+		context.Version = "1.1.5";
 		context.PackageName = "QP8.EntityFrameworkCore";
 		context.PackageSource = "file://mscdev02.artq.com/Packages/";
 		context.QaName = "Quantumart.AspNetCore";

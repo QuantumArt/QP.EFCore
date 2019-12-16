@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;	
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using System.Threading;
 
 
 
@@ -27,15 +28,14 @@ namespace EntityFrameworkCore.Tests
             _accessor = accessor;
         }
 
-        [ThreadStatic]
-        private static EFCoreModel _context;
+        private static AsyncLocal<EFCoreModel> _context = new AsyncLocal<EFCoreModel>();
 
         public static EFCoreModel Current
         {
             get
             {
                 if (_accessor?.HttpContext == null)
-                    return _context;
+                    return _context.Value;
                 else
                     return (EFCoreModel)_accessor.HttpContext.Items[Key];
             }
@@ -43,7 +43,7 @@ namespace EntityFrameworkCore.Tests
             private set
             {
                  if (_accessor?.HttpContext == null)
-                    _context = value;
+                    _context.Value = value;
                 else
                     _accessor.HttpContext.Items[Key] = value;
             }

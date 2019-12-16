@@ -47,7 +47,7 @@
     <EmbeddedResource Include="QPDataContextInclude\StaticSchemaProvider.ttinclude" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="QP8.EntityFrameworkCore" Version="1.1.4" />
+    <PackageReference Include="QP8.EntityFrameworkCore" Version="1.1.5" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="*.cs">

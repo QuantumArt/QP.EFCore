@@ -22,3 +22,4 @@
 /EntityFrameworkCore.CodeGeneration/bin/Release/netcoreapp2.1/EntityFrameworkCore.PackageBuilder.deps.json
 /EntityFrameworkCore.Data/bin/Release/netstandard2.0
 /EntityFrameworkCore.Templates/bin/Release/netcoreapp2.1
+/EntityFrameworkCore.Tests/bin/Release/netcoreapp2.1
