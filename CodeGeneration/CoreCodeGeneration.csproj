@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Quantumart.AspNetCore" Version="4.0.0-beta70" />
+    <PackageReference Include="Quantumart.AspNetCore" Version="4.0.1" />
   </ItemGroup>
 
 </Project>
