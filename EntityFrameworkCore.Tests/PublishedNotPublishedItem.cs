@@ -34,5 +34,4 @@ namespace EntityFrameworkCore.Tests
 			set { _internalAlias = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
 	}
-}
-	
+} 	

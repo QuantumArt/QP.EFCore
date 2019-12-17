@@ -24,23 +24,3 @@ namespace EntityFrameworkCore.Data
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	

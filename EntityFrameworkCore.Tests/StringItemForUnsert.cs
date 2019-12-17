@@ -28,5 +28,4 @@ namespace EntityFrameworkCore.Tests
 			set { _internalStringValue = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
 	}
-}
-	
+} 	

@@ -91,5 +91,4 @@ namespace EntityFrameworkCore.Data
 		/// </summary>
 		public  ICollection<Product> Products { get; set; }
 	}
-}
-	
+} 	

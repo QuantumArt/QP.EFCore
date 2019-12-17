@@ -27,5 +27,4 @@ namespace EntityFrameworkCore.Tests
 		/// </summary>
 		public  ICollection<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation> SymmetricRelation { get; set; }
 	}
-}
-	
+} 	

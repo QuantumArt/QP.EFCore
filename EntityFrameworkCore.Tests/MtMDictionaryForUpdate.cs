@@ -33,5 +33,4 @@ namespace EntityFrameworkCore.Tests
 		/// </summary>
 		public  ICollection<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference> BackwardForReference { get; set; }
 	}
-}
-	
+} 	

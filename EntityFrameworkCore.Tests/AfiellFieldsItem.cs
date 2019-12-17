@@ -55,5 +55,4 @@ namespace EntityFrameworkCore.Tests
 			set { _internalEnum = EFCoreModel.Current.ReplacePlaceholders(value);}
 		}
 	}
-}
-	
+} 	

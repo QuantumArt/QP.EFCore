@@ -18,3 +18,8 @@
 /EntityFrameworkCore.Tests/obj
 /EntityFrameworkCore.Data/bin/Debug/netstandard2.0
 /EntityFrameworkCore.Tests/bin/Debug/netstandard2.0
+/CodeGeneration/bin/Release/netcoreapp2.1/Quantumart.QP8.CoreCodeGeneration.deps.json
+/EntityFrameworkCore.CodeGeneration/bin/Release/netcoreapp2.1/EntityFrameworkCore.PackageBuilder.deps.json
+/EntityFrameworkCore.Data/bin/Release/netstandard2.0
+/EntityFrameworkCore.Templates/bin/Release/netcoreapp2.1
+/EntityFrameworkCore.Tests/bin/Release/netcoreapp2.1

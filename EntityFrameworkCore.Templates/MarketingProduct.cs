@@ -91,5 +91,4 @@ namespace EntityFrameworkCore.Templates
 		/// </summary>
 		public  ICollection<Product> Products { get; set; }
 	}
-}
-	
+} 	

@@ -73,5 +73,4 @@ namespace EntityFrameworkCore.Templates
 		/// </summary>
 		public  ICollection<Region2RegionForBackwardForDeniedRegions> BackwardForDeniedRegions { get; set; }
 	}
-}
-	
+} 	
