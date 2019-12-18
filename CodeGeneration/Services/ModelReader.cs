@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QP.ConfigurationService.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -18,6 +19,7 @@ namespace Quantumart.QP8.CoreCodeGeneration.Services
 
         public ModelReader(XDocument doc, Action<string> write, bool isStage = true)
         {
+            DatabaseType dbType;
             Schema = doc.Descendants("schema").Select(x => new SchemaInfo
             {
                 ConnectionStringName = RootUtil.GetAttribute<string>(x, "connectionStringName", true),
@@ -27,6 +29,7 @@ namespace Quantumart.QP8.CoreCodeGeneration.Services
                 UseLongUrls = RootUtil.GetAttribute<bool>(x, "useLongUrls"),
                 ReplaceUrls = RootUtil.GetAttribute<bool>(x, "replaceUrls"),
                 IsStageMode = isStage,
+                DBType = Enum.TryParse(RootUtil.GetAttribute<string>(x, "dbType"), true, out dbType) ? dbType : DatabaseType.SqlServer
             }).First();
 
             Contents = doc.Descendants("schema").First().Descendants("content").Select(x => new ContentInfo

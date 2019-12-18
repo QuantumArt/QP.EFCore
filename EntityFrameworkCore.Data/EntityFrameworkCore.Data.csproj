@@ -47,7 +47,8 @@
     <EmbeddedResource Include="QPDataContextInclude\StaticSchemaProvider.ttinclude" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="QP8.EntityFrameworkCore" Version="1.1.5" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
+    <PackageReference Include="QP8.EntityFrameworkCore" Version="1.1.6-beta22" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="*.cs">

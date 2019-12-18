@@ -1,4 +1,6 @@
-﻿namespace Quantumart.QP8.CoreCodeGeneration.Services
+﻿using QP.ConfigurationService.Models;
+
+namespace Quantumart.QP8.CoreCodeGeneration.Services
 {
     public class SchemaInfo
     {
@@ -15,5 +17,6 @@
         public string SchemaContainer { get; set; }
         public bool IsStageMode { get; set; }
         public bool LazyLoadingEnabled { get; set; }
+        public  DatabaseType DBType { get; set; }
     }
 }

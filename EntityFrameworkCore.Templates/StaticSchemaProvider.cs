@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Quantumart.QP8.CoreCodeGeneration.Services;
+using QP.ConfigurationService.Models;
 
 /* place your custom usings here */
 
@@ -19,6 +20,7 @@ namespace EntityFrameworkCore.Templates
 
             schema.Schema.SiteName = "Product Catalog";
             schema.Schema.ReplaceUrls = true;
+            schema.Schema.DBType = DatabaseType.Postgres;
 
             schema.Attributes = new List<AttributeInfo>
             {

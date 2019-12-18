@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Data.Common;
-using System.Data.SqlClient;
+using Npgsql;
 using Quantumart.QPublishing.Database;
 using Quantumart.QP8.CoreCodeGeneration.Services;
 using System.Linq.Expressions;
@@ -127,21 +127,21 @@ namespace EntityFrameworkCore.Templates
 		#endregion
 
 		#region Factory methods
-		public static EFCoreModel Create(SqlConnection connection)
+		public static EFCoreModel Create(DbConnection connection)
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<EFCoreModel>();
-            optionsBuilder.UseSqlServer<EFCoreModel>(connection);
+			optionsBuilder.UseNpgsql<EFCoreModel>(connection);
             var ctx = new EFCoreModel(optionsBuilder.Options);
 			ctx.SiteName = DefaultSiteName;
 		    ctx.ConnectionString = connection.ConnectionString;
 			return ctx;
 		}
 
-		public static EFCoreModel Create(IMappingConfigurator configurator, SqlConnection connection)
+		public static EFCoreModel Create(IMappingConfigurator configurator, DbConnection connection)
         {
 		    var mapping = configurator.GetMappingInfo();
             var optionsBuilder = new DbContextOptionsBuilder<EFCoreModel>();
-            optionsBuilder.UseSqlServer<EFCoreModel>(connection);
+            optionsBuilder.UseNpgsql<EFCoreModel>(connection);
 			optionsBuilder.UseModel(mapping.DbCompiledModel);
             EFCoreModel ctx = new EFCoreModel(optionsBuilder.Options, mapping.Schema);
             ctx.SiteName = mapping.Schema.Schema.SiteName;
@@ -152,7 +152,9 @@ namespace EntityFrameworkCore.Templates
 
         public static EFCoreModel Create(IMappingConfigurator configurator)
         {
-            return Create(configurator, new SqlConnection(DefaultConnectionString));
+			DbConnection connection;
+			connection = new NpgsqlConnection(DefaultConnectionString);
+            return Create(configurator, connection);
         }
 
 		public static EFCoreModel Create(string connection, string siteName) 
@@ -161,7 +163,7 @@ namespace EntityFrameworkCore.Templates
 			if(connection.IndexOf("metadata", StringComparison.InvariantCultureIgnoreCase) == -1)
 			{
 				var optionsBuilder = new DbContextOptionsBuilder<EFCoreModel>();
-                optionsBuilder.UseSqlServer<EFCoreModel>(new SqlConnection(connection));
+				optionsBuilder.UseNpgsql<EFCoreModel>(connection);
                 ctx = new EFCoreModel(optionsBuilder.Options);
 				ctx.SiteName = siteName;
 				ctx.ConnectionString = connection;
@@ -170,7 +172,7 @@ namespace EntityFrameworkCore.Templates
 			else
 			{
 				var optionsBuilder = new DbContextOptionsBuilder<EFCoreModel>();
-                optionsBuilder.UseSqlServer<EFCoreModel>(connection);
+				optionsBuilder.UseNpgsql<EFCoreModel>(connection);
                 ctx = new EFCoreModel(optionsBuilder.Options);
 				ctx.SiteName = siteName;
 				ctx.ConnectionString = connection;
@@ -191,10 +193,12 @@ namespace EntityFrameworkCore.Templates
 
 		public static EFCoreModel CreateWithStaticMapping(ContentAccess contentAccess)
         {
-            return CreateWithStaticMapping(contentAccess, new SqlConnection(DefaultConnectionString));
+			DbConnection connection;
+			connection = new NpgsqlConnection(DefaultConnectionString);
+            return CreateWithStaticMapping(contentAccess, connection);
         }
 
-        public static EFCoreModel CreateWithStaticMapping(ContentAccess contentAccess, SqlConnection connection)
+        public static EFCoreModel CreateWithStaticMapping(ContentAccess contentAccess, DbConnection connection)
         {
 			var schemaProvider = new StaticSchemaProvider();
             var configurator = new MappingConfigurator(contentAccess, schemaProvider);
@@ -208,10 +212,12 @@ namespace EntityFrameworkCore.Templates
 
         public static EFCoreModel CreateWithDatabaseMapping(ContentAccess contentAccess, string siteName)
         {
-            return CreateWithDatabaseMapping(contentAccess, siteName, new SqlConnection(DefaultConnectionString));
+			DbConnection connection;
+			connection = new NpgsqlConnection(DefaultConnectionString);
+            return CreateWithDatabaseMapping(contentAccess, siteName, connection);
         }
 
-        public static EFCoreModel CreateWithDatabaseMapping(ContentAccess contentAccess, string siteName, SqlConnection connection)
+        public static EFCoreModel CreateWithDatabaseMapping(ContentAccess contentAccess, string siteName, DbConnection connection)
         {
             var schemaProvider = new DatabaseSchemaProvider(siteName, connection);
             var configurator = new MappingConfigurator(contentAccess, schemaProvider);         
@@ -222,10 +228,12 @@ namespace EntityFrameworkCore.Templates
 
         public static EFCoreModel CreateWithFileMapping(ContentAccess contentAccess, string path)
         {
-            return CreateWithFileMapping(contentAccess, path, new SqlConnection(DefaultConnectionString));
+			DbConnection connection;
+			connection = new NpgsqlConnection(DefaultConnectionString);
+            return CreateWithFileMapping(contentAccess, path, connection);
         }
 
-        public static EFCoreModel CreateWithFileMapping(ContentAccess contentAccess, string path, SqlConnection connection)
+        public static EFCoreModel CreateWithFileMapping(ContentAccess contentAccess, string path, DbConnection connection)
         {
             var schemaProvider = new FileSchemaProvider(path);
             var configurator = new MappingConfigurator(contentAccess, schemaProvider);

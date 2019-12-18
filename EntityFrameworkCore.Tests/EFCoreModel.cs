@@ -126,7 +126,7 @@ namespace EntityFrameworkCore.Tests
 						.Build();
 			var connectionString = configuration.GetConnectionString("EFCoreModel");
             var optionsBuilder = new DbContextOptionsBuilder<EFCoreModel>();
-            optionsBuilder.UseSqlServer<EFCoreModel>(connectionString);
+            optionsBuilder.UseNpgsql<EFCoreModel>(connectionString);
             return optionsBuilder.Options;
         }
 		
@@ -134,7 +134,7 @@ namespace EntityFrameworkCore.Tests
         {
 		    var connectionString = configuration.GetConnectionString("EFCoreModel");
             var optionsBuilder = new DbContextOptionsBuilder<EFCoreModel>();
-            optionsBuilder.UseSqlServer<EFCoreModel>(connectionString);
+            optionsBuilder.UseNpgsql<EFCoreModel>(connectionString);
             return optionsBuilder.Options;
         }
 		

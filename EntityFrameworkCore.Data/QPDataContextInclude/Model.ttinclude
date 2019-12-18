@@ -3,6 +3,7 @@
 <#+ void AddModel(GenerationContext context){
 var model = context.Model;
 var settings = context.Settings;
+var isPostgres = context.IsPostgres;
 #>
 using System;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;	
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using System.Threading;
 
 <#= settings.Usings#>
 
@@ -34,14 +34,15 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
             _accessor = accessor;
         }
 
-        private static AsyncLocal<<#=model.Schema.ClassName#>> _context = new AsyncLocal<<#=model.Schema.ClassName#>>();
+        [ThreadStatic]
+        private static <#=model.Schema.ClassName#> _context;
 
         public static <#=model.Schema.ClassName#> Current
         {
             get
             {
                 if (_accessor?.HttpContext == null)
-                    return _context.Value;
+                    return _context;
                 else
                     return (<#=model.Schema.ClassName#>)_accessor.HttpContext.Items[Key];
             }
@@ -49,7 +50,7 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
             private set
             {
                  if (_accessor?.HttpContext == null)
-                    _context.Value = value;
+                    _context = value;
                 else
                     _accessor.HttpContext.Items[Key] = value;
             }
@@ -128,7 +129,11 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
 						.Build();
 			var connectionString = configuration.GetConnectionString("<#=model.Schema.ConnectionStringName#>");
             var optionsBuilder = new DbContextOptionsBuilder<<#=model.Schema.ClassName#>>();
+<#+ if (isPostgres) {#>
+            optionsBuilder.UseNpgsql<<#=model.Schema.ClassName#>>(connectionString);
+<#+ } else { #>
             optionsBuilder.UseSqlServer<<#=model.Schema.ClassName#>>(connectionString);
+<#+ } #>
             return optionsBuilder.Options;
         }
 		
@@ -136,7 +141,11 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
         {
 		    var connectionString = configuration.GetConnectionString("<#=model.Schema.ConnectionStringName#>");
             var optionsBuilder = new DbContextOptionsBuilder<<#=model.Schema.ClassName#>>();
+<#+ if (isPostgres) {#>
+            optionsBuilder.UseNpgsql<<#=model.Schema.ClassName#>>(connectionString);
+<#+ } else { #>
             optionsBuilder.UseSqlServer<<#=model.Schema.ClassName#>>(connectionString);
+<#+ } #>
             return optionsBuilder.Options;
         }
 		

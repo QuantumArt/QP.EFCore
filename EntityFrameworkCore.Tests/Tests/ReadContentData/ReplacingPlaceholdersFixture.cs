@@ -7,6 +7,8 @@ using System.Data.SqlClient;
 using Quantumart.QP8.CoreCodeGeneration.Services;
 using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using Quantumart.QPublishing.Database;
 
 namespace EntityFrameworkCore.Tests.ReadContentData
 {
@@ -57,8 +59,17 @@ namespace EntityFrameworkCore.Tests.ReadContentData
             else
             {
                 DbCommand cmd = context.Database.GetDbConnection().CreateCommand();
-                cmd.CommandText = "SELECT TOP 1 REPLACE_URLS FROM SITE WHERE SITE_ID = @SiteId";
-                cmd.Parameters.Add(new SqlParameter("SiteId", context.SiteId));
+                cmd.CommandText = $"SELECT {SqlQuerySyntaxHelper.Top(context.Cnn.DatabaseType, "1")} REPLACE_URLS FROM SITE WHERE SITE_ID = @SiteId";
+                DbParameter parameter;
+                if (context.Cnn.DatabaseType == QP.ConfigurationService.Models.DatabaseType.SqlServer)
+                {
+                    parameter = new SqlParameter("SiteId", context.SiteId);
+                }
+                else
+                {
+                    parameter = new NpgsqlParameter("SiteId", context.SiteId);
+                }
+                cmd.Parameters.Add(parameter);
                 return (bool)cmd.ExecuteScalar();
 
             }

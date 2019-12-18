@@ -5,9 +5,11 @@
 <#@ assembly name="System.Data" #>
 <#@ assembly name="System.Data.Linq"#>
 <#@ assembly name="EnvDTE"#>
+<#@ assembly name="NetStandard" #>
 <#@ assembly name="System.Xml"#>
 <#@ assembly name="System.Xml.Linq"#>
 <#@ assembly name="$(SolutionDir)\CodeGeneration\bin\Debug\netcoreapp2.1\Quantumart.QP8.CoreCodeGeneration.dll"#>
+<#@ assembly name="$(NuGetPackageRoot)qp.configurationservice.client\0.2.0\lib\netstandard2.0\QP.ConfigurationService.Client.dll"#>
 
 <#@ import namespace="System"#>
 <#@ import namespace="System.CodeDom"#>
@@ -36,11 +38,11 @@
 <#
 	using (var context = new NugetContext(Host, GenerationEnvironment))
     {
-		context.Version = "1.1.5";
+		context.Version = "1.1.6";
 		context.PackageName = "QP8.EntityFrameworkCore";
 		context.PackageSource = "file://mscdev02.artq.com/Packages/";
 		context.QaName = "Quantumart.AspNetCore";
-		context.QaVersion = "3.3.3";
+		context.QaVersion = "4.0.1";
 		context.GeneratorName = "QPDataContextGenerator";
 
 		context.FlatternTemplate(@"..\EntityFrameworkCore.Templates\QPDataContextGenerator.tt");
