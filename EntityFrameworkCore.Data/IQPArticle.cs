@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-namespace EntityFrameworkCore.Data
+namespace EntityFrameworkCore.Templates
 {
     public interface IQPArticle
     {

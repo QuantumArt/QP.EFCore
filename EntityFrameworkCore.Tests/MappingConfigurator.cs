@@ -1242,6 +1242,96 @@ namespace EntityFrameworkCore.Tests
                 .HasColumnName(GetFieldName("OtMItemToContentWithoutMapping", "OtMReferenceMapping_ID"));
  
             #endregion
+
+            #region BooleanItemForUpdate mappings
+            modelBuilder.Entity<BooleanItemForUpdate>()
+                .ToTable(GetTableName("BooleanItemForUpdate"))
+                .Property(x => x.Id)
+                .HasColumnName("content_item_id");
+
+			 modelBuilder.Entity<BooleanItemForUpdate>()
+                .HasKey(x=>x.Id);
+           
+		    modelBuilder.Entity<BooleanItemForUpdate>()
+                .Property(x => x.LastModifiedBy)
+                .HasColumnName("last_modified_by");
+            
+            modelBuilder.Entity<BooleanItemForUpdate>()
+                .Property(x => x.StatusTypeId)
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<BooleanItemForUpdate>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<BooleanItemForUpdate>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<BooleanItemForUpdate>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<BooleanItemForUpdate>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
+
+			modelBuilder.Entity<BooleanItemForUpdate>()
+                .HasOne<StatusType>(x => x.StatusType)
+                .WithMany()
+				.IsRequired()
+                .HasForeignKey(x => x.StatusTypeId); 
+
+ 
+            #endregion
+
+            #region OtMItemForUpdateVirtual mappings
+            modelBuilder.Entity<OtMItemForUpdateVirtual>()
+                .ToTable(GetTableName("OtMItemForUpdateVirtual"))
+                .Property(x => x.Id)
+                .HasColumnName("content_item_id");
+
+			 modelBuilder.Entity<OtMItemForUpdateVirtual>()
+                .HasKey(x=>x.Id);
+           
+		    modelBuilder.Entity<OtMItemForUpdateVirtual>()
+                .Property(x => x.LastModifiedBy)
+                .HasColumnName("last_modified_by");
+            
+            modelBuilder.Entity<OtMItemForUpdateVirtual>()
+                .Property(x => x.StatusTypeId)
+                .HasColumnName("status_type_id");
+
+			modelBuilder.Entity<OtMItemForUpdateVirtual>()
+                .Property(x => x.Archive)
+                .HasColumnName("archive");
+
+			modelBuilder.Entity<OtMItemForUpdateVirtual>()
+                .Property(x => x.Created)
+                .HasColumnName("created");
+
+			modelBuilder.Entity<OtMItemForUpdateVirtual>()
+                .Property(x => x.Modified)
+                .HasColumnName("modified");
+
+			modelBuilder.Entity<OtMItemForUpdateVirtual>()
+                .Property(x => x.Visible)
+                .HasColumnName("visible");
+
+			modelBuilder.Entity<OtMItemForUpdateVirtual>()
+                .HasOne<StatusType>(x => x.StatusType)
+                .WithMany()
+				.IsRequired()
+                .HasForeignKey(x => x.StatusTypeId); 
+
+            modelBuilder.Entity<OtMItemForUpdateVirtual>()
+                .Property(x => x.Title)
+                .HasColumnName(GetFieldName("OtMItemForUpdateVirtual", "Title"));
+            modelBuilder.Entity<OtMItemForUpdateVirtual>()
+                .Property(x => x.Reference_ID)
+                .HasColumnName(GetFieldName("OtMItemForUpdateVirtual", "Reference_ID"));
+ 
+            #endregion
 			AddMappingInfo(modelBuilder.Model);
         }
     }

@@ -20,7 +20,7 @@ namespace EntityFrameworkCore.Tests
 
             schema.Schema.SiteName = "original_site";
             schema.Schema.ReplaceUrls = true;
-            schema.Schema.DBType = DatabaseType.Postgres;
+            schema.Schema.DBType = DatabaseType.SqlServer;
 
             schema.Attributes = new List<AttributeInfo>
             {
@@ -368,7 +368,25 @@ namespace EntityFrameworkCore.Tests
                 },
                 new AttributeInfo
                 {
-                    Id = 41539,
+                    Id = 41547,
+                    ContentId = 1827,
+                    Name = "Title",
+                    MappedName = "Title",
+                    LinkId = 0,
+                    Type = "String"
+                },
+                new AttributeInfo
+                {
+                    Id = 41548,
+                    ContentId = 1827,
+                    Name = "Reference",
+                    MappedName = "Reference_ID",
+                    LinkId = 0,
+                    Type = "Numeric"
+                },
+                new AttributeInfo
+                {
+                    Id = 41549,
                     ContentId = 999,
                     Name = "BackReference",
                     MappedName = "BackReference",
@@ -377,7 +395,7 @@ namespace EntityFrameworkCore.Tests
                 },
                 new AttributeInfo
                 {
-                    Id = 41540,
+                    Id = 41550,
                     ContentId = 1300,
                     Name = "BackOtMReferenceMapping",
                     MappedName = "BackOtMReferenceMapping",
@@ -386,7 +404,7 @@ namespace EntityFrameworkCore.Tests
                 },
                 new AttributeInfo
                 {
-                    Id = 41541,
+                    Id = 41551,
                     ContentId = 994,
                     Name = "BackwardForReference",
                     MappedName = "BackwardForReference",
@@ -589,6 +607,22 @@ namespace EntityFrameworkCore.Tests
                    MappedName = "OtMItemToContentWithoutMapping",
                    UseDefaultFiltration = true,
                    Attributes = new List<AttributeInfo>(attributesLookup[1301]),
+                   IsVirtual = false
+                },
+                new ContentInfo
+                {
+                   Id = 1307,
+                   MappedName = "BooleanItemForUpdate",
+                   UseDefaultFiltration = true,
+                   Attributes = new List<AttributeInfo>(attributesLookup[1307]),
+                   IsVirtual = false
+                },
+                new ContentInfo
+                {
+                   Id = 1827,
+                   MappedName = "OtMItemForUpdateVirtual",
+                   UseDefaultFiltration = true,
+                   Attributes = new List<AttributeInfo>(attributesLookup[1827]),
                    IsVirtual = false
                 },
             };

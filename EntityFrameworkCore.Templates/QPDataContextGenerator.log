@@ -1,0 +1,58 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+added realted attribute  Children/Children (1669) (relative to 1138) to content 294
+added realted attribute  MobileTariffs/MobileTariffs (1670) (relative to 1192) to content 288
+process 1291 Tabs
+process 1450 Images
+process 1593 ProductUsages
+process 1604 Products
+process 1193 Parameters
+process 1313 ArchiveTabs
+process 1138 Parent
+process 1602 ExternalRegionMappings
+process 1192 Product
+removed link 13 with name ParametryproduktaModifikatoryparametrovproduktaArticle
+removed link 19 with name MarketingovyeproduktyKategoriiproduktovArticle
+removed link 31 with name MarketingovyeproduktyGruppyparametrovproduktovArticle
+removed link 32 with name MarketingovyeproduktyModifikatoryproduktaArticle
+removed link 33 with name ProduktyModifikatoryproduktaArticle
+removed link 45 with name ParametryproduktaModifikatorybazovykhparametrovproduktaArticle
+removed link 55 with name MobilnyetarifyTipyuchetnykhzapiseyArticle
+removed link 63 with name MobilnyetarifyFiltrypoproduktamArticle
+removed link 66 with name ProduktyDopolnitelnyeservisyArticle
+removed link 67 with name MarketingovyeproduktyDopolnitelnyeservisyArticle
+removed attribute 1202/Categories from content Маркетинговые продукты of type M2M
+removed attribute 1289/PreOpenParamGroups from content Маркетинговые продукты of type M2M
+removed attribute 1291/Tabs from content Маркетинговые продукты of type M2O
+removed attribute 1293/Modifiers from content Маркетинговые продукты of type M2M
+removed attribute 1450/Images from content Маркетинговые продукты of type M2O
+removed attribute 1593/ProductUsages from content Маркетинговые продукты of type M2O
+removed attribute 1620/ExtServices from content Маркетинговые продукты of type M2M
+removed attribute 1295/Modifiers from content Продукты of type M2M
+removed attribute 1313/ArchiveTabs from content Продукты of type M2O
+removed attribute 1619/ExtServices from content Продукты of type M2M
+removed attribute 1413/BaseParameterModifiers from content Параметры продукта of type M2M
+removed attribute 1179/Modifiers from content Параметры продукта of type M2M
+removed attribute 1602/ExternalRegionMappings from content Регионы of type M2O
+removed attribute 1365/ProductFilters from content Мобильные тарифы of type M2M
+removed attribute 1453/AccountTypes from content Мобильные тарифы of type M2M
+ClassName:  EFCoreModel
+ConnectionStringName:  qp_database

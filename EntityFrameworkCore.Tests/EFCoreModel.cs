@@ -106,6 +106,8 @@ namespace EntityFrameworkCore.Tests
         public virtual DbSet<OtMItemForMapping> OtMItemsForMapping { get; set; }
         public virtual DbSet<OtMRelatedItemWithMapping> OtMRelatedItemsWithMapping { get; set; }
         public virtual DbSet<OtMItemToContentWithoutMapping> OtMItemsToContentWithoutMapping { get; set; }
+        public virtual DbSet<BooleanItemForUpdate> BooleanItemsForUpdate { get; set; }
+        public virtual DbSet<OtMItemForUpdateVirtual> OtMItemForUpdateVirtuals { get; set; }
 		public virtual DbSet<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation> ToSymmetricRelationAtricle2SymmetricRelationArticlesForToSymmetricRelation { get; set; }
 
 		public virtual DbSet<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation> SymmetricRelationArticle2ToSymmetricRelationAtriclesForSymmetricRelation { get; set; }
@@ -126,7 +128,7 @@ namespace EntityFrameworkCore.Tests
 						.Build();
 			var connectionString = configuration.GetConnectionString("EFCoreModel");
             var optionsBuilder = new DbContextOptionsBuilder<EFCoreModel>();
-            optionsBuilder.UseNpgsql<EFCoreModel>(connectionString);
+            optionsBuilder.UseSqlServer<EFCoreModel>(connectionString);
             return optionsBuilder.Options;
         }
 		
@@ -134,7 +136,7 @@ namespace EntityFrameworkCore.Tests
         {
 		    var connectionString = configuration.GetConnectionString("EFCoreModel");
             var optionsBuilder = new DbContextOptionsBuilder<EFCoreModel>();
-            optionsBuilder.UseNpgsql<EFCoreModel>(connectionString);
+            optionsBuilder.UseSqlServer<EFCoreModel>(connectionString);
             return optionsBuilder.Options;
         }
 		

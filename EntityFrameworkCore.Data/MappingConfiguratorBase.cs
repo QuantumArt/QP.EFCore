@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using QP.ConfigurationService.Models;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata.Conventions;
 
-namespace EntityFrameworkCore.Data
+namespace EntityFrameworkCore.Templates
 {
     public abstract class MappingConfiguratorBase : IMappingConfigurator
     {
@@ -35,7 +35,6 @@ namespace EntityFrameworkCore.Data
         {
             return _cache.GetOrAdd(GetCacheKey(), a =>
             {
-                var c = 0;
                 var _schema = _schemaProvider.GetSchema();
                 _mappingResolver = new MappingResolver(_schema);
                 ConventionSet conventionSet;
@@ -108,6 +107,8 @@ namespace EntityFrameworkCore.Data
                 .ToTable("user_group_new")
                 .Property(e => e.Id).ValueGeneratedOnAdd()
                 .HasColumnName("id");
+
+            modelBuilder.Entity<UserGroup>().Property(e => e.Name).HasColumnName("name");
 
             modelBuilder.Entity<UserGroupBind>()
                 .ToTable("user_group_bind_new");

@@ -38,11 +38,11 @@
 <#
 	using (var context = new NugetContext(Host, GenerationEnvironment))
     {
-		context.Version = "1.1.6";
+		context.Version = "1.1.8";
 		context.PackageName = "QP8.EntityFrameworkCore";
 		context.PackageSource = "file://mscdev02.artq.com/Packages/";
 		context.QaName = "Quantumart.AspNetCore";
-		context.QaVersion = "4.0.1";
+		context.QaVersion = "4.0.2";
 		context.GeneratorName = "QPDataContextGenerator";
 
 		context.FlatternTemplate(@"..\EntityFrameworkCore.Templates\QPDataContextGenerator.tt");

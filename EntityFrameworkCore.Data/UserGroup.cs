@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace EntityFrameworkCore.Data
+namespace EntityFrameworkCore.Templates
 {
     public partial class UserGroup
     {

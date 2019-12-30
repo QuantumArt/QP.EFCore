@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<schema connectionStringName="qp_database" class="EFCoreModel" namespace="QA.EF" useLongUrls="true" replaceUrls="true" dbIndependent="true" isPartial="false" sendNotifications="false" siteName="original_site" siteId="52" forStage="true" connectionString="Data Source=MSCSQL01;Initial Catalog=qp_ef6_test;Integrated Security=True;Connect Timeout=120;Application Name=QP8Backend;Workstation ID=MSCDEV02" connectionStringObject="System.Configuration.ConfigurationManager.ConnectionStrings" dbType="postgres">
+<schema connectionStringName="qp_database" class="EFCoreModel" namespace="QA.EF" useLongUrls="true" replaceUrls="true" dbIndependent="true" isPartial="false" sendNotifications="false" siteName="original_site" siteId="52" forStage="true" connectionString="Data Source=MSCSQL01;Initial Catalog=qp_ef6_test;Integrated Security=True;Connect Timeout=120;Application Name=QP8Backend;Workstation ID=MSCDEV02" connectionStringObject="System.Configuration.ConfigurationManager.ConnectionStrings" dbType="mssql">
   <content id="618" name="AfiellFieldsItem" mapped_name="AfiellFieldsItem" plural_mapped_name="AfiellFieldsItems" use_default_filtration="true" virtual="0" user_query="0" split_articles="true">
     <attribute name="StringField" mapped_name="String" id="38004" type="String" is_localization="false" size="255" />
     <attribute name="IntegerField" mapped_name="Integer" id="38005" type="Numeric" is_localization="false" size="0" is_long="false" />
@@ -84,6 +84,11 @@
   <content id="1300" name="OtMRelatedItemWithMapping" mapped_name="OtMRelatedItemWithMapping" plural_mapped_name="OtMRelatedItemsWithMapping" use_default_filtration="true" virtual="0" user_query="0" split_articles="false" />
   <content id="1301" name="OtMItemToContentWithoutMapping" mapped_name="OtMItemToContentWithoutMapping" plural_mapped_name="OtMItemsToContentWithoutMapping" use_default_filtration="true" virtual="0" user_query="0" split_articles="false">
     <attribute name="OtMReferenceMapping" mapped_back_name="BackOtMReferenceMapping" mapped_name="OtMReferenceMapping" id="40114" type="O2M" is_localization="false" related_content_id="1302" has_m2o="false" />
+  </content>
+  <content id="1307" name="BooleanItemForUpdate" mapped_name="BooleanItemForUpdate" plural_mapped_name="BooleanItemsForUpdate" use_default_filtration="true" virtual="0" user_query="0" split_articles="true" />
+  <content id="1827" name="OtMItemForUpdateVirtual" mapped_name="OtMItemForUpdateVirtual" plural_mapped_name="OtMItemForUpdateVirtuals" use_default_filtration="true" virtual="0" user_query="0" split_articles="true">
+    <attribute name="Title" mapped_name="Title" id="41547" type="String" is_localization="false" size="255" />
+    <attribute name="Reference" mapped_back_name="BackwardReference" mapped_name="Reference" id="41548" type="O2M" is_localization="false" related_content_id="1824" has_m2o="false" />
   </content>
   <link id="101" self="0" content_id="695" linked_content_id="694" mapped_name="ToSymmetricRelationAtriclesSymmetricRelationArticlesArticle" plural_mapped_name="ToSymmetricRelationAtriclesSymmetricRelationArticlesArticles" />
   <link id="149" self="0" content_id="993" linked_content_id="994" mapped_name="MtMItemForUpdateMtMDictionaryForUpdateArticle" plural_mapped_name="MtMItemForUpdateMtMDictionaryForUpdateArticles" />

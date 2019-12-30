@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Quantumart.QP8.CoreCodeGeneration.Services;
 
-namespace EntityFrameworkCore.Data
+namespace EntityFrameworkCore.Templates
 {
     public interface IMappingConfigurator
     {

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Data.Common;
-using Npgsql;
+using System.Data.SqlClient;
 using Quantumart.QPublishing.Database;
 using Quantumart.QP8.CoreCodeGeneration.Services;
 using System.Linq.Expressions;
@@ -130,7 +130,7 @@ namespace EntityFrameworkCore.Tests
 		public static EFCoreModel Create(DbConnection connection)
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<EFCoreModel>();
-			optionsBuilder.UseNpgsql<EFCoreModel>(connection);
+			optionsBuilder.UseSqlServer<EFCoreModel>(connection);
             var ctx = new EFCoreModel(optionsBuilder.Options);
 			ctx.SiteName = DefaultSiteName;
 		    ctx.ConnectionString = connection.ConnectionString;
@@ -141,7 +141,7 @@ namespace EntityFrameworkCore.Tests
         {
 		    var mapping = configurator.GetMappingInfo();
             var optionsBuilder = new DbContextOptionsBuilder<EFCoreModel>();
-            optionsBuilder.UseNpgsql<EFCoreModel>(connection);
+            optionsBuilder.UseSqlServer<EFCoreModel>(connection);
 			optionsBuilder.UseModel(mapping.DbCompiledModel);
             EFCoreModel ctx = new EFCoreModel(optionsBuilder.Options, mapping.Schema);
             ctx.SiteName = mapping.Schema.Schema.SiteName;
@@ -153,7 +153,7 @@ namespace EntityFrameworkCore.Tests
         public static EFCoreModel Create(IMappingConfigurator configurator)
         {
 			DbConnection connection;
-			connection = new NpgsqlConnection(DefaultConnectionString);
+			connection = new SqlConnection(DefaultConnectionString);
             return Create(configurator, connection);
         }
 
@@ -163,7 +163,7 @@ namespace EntityFrameworkCore.Tests
 			if(connection.IndexOf("metadata", StringComparison.InvariantCultureIgnoreCase) == -1)
 			{
 				var optionsBuilder = new DbContextOptionsBuilder<EFCoreModel>();
-				optionsBuilder.UseNpgsql<EFCoreModel>(connection);
+				optionsBuilder.UseSqlServer<EFCoreModel>(connection);
                 ctx = new EFCoreModel(optionsBuilder.Options);
 				ctx.SiteName = siteName;
 				ctx.ConnectionString = connection;
@@ -172,7 +172,7 @@ namespace EntityFrameworkCore.Tests
 			else
 			{
 				var optionsBuilder = new DbContextOptionsBuilder<EFCoreModel>();
-				optionsBuilder.UseNpgsql<EFCoreModel>(connection);
+				optionsBuilder.UseSqlServer<EFCoreModel>(connection);
                 ctx = new EFCoreModel(optionsBuilder.Options);
 				ctx.SiteName = siteName;
 				ctx.ConnectionString = connection;
@@ -194,7 +194,7 @@ namespace EntityFrameworkCore.Tests
 		public static EFCoreModel CreateWithStaticMapping(ContentAccess contentAccess)
         {
 			DbConnection connection;
-			connection = new NpgsqlConnection(DefaultConnectionString);
+			connection = new SqlConnection(DefaultConnectionString);
             return CreateWithStaticMapping(contentAccess, connection);
         }
 
@@ -213,7 +213,7 @@ namespace EntityFrameworkCore.Tests
         public static EFCoreModel CreateWithDatabaseMapping(ContentAccess contentAccess, string siteName)
         {
 			DbConnection connection;
-			connection = new NpgsqlConnection(DefaultConnectionString);
+			connection = new SqlConnection(DefaultConnectionString);
             return CreateWithDatabaseMapping(contentAccess, siteName, connection);
         }
 
@@ -229,7 +229,7 @@ namespace EntityFrameworkCore.Tests
         public static EFCoreModel CreateWithFileMapping(ContentAccess contentAccess, string path)
         {
 			DbConnection connection;
-			connection = new NpgsqlConnection(DefaultConnectionString);
+			connection = new SqlConnection(DefaultConnectionString);
             return CreateWithFileMapping(contentAccess, path, connection);
         }
 

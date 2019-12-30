@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>QP8.EntityFrameworkCore</id>
-    <version>1.1.6</version>
+    <version>1.1.8</version>
     <title>QP8.EntityFrameworkCore</title>
     <authors>Quantum Art</authors>
     <owners>Quantum Art</owners>
@@ -20,7 +20,7 @@
       <dependency id="Npgsql.EntityFrameworkCore.PostgreSQL" version="2.2.0" />
       <dependency id="System.Data.DataSetExtensions" version="4.5.0" />
       <dependency id="QP.ConfigurationService.Client" version="0.2.0"/>
-      <dependency id="Quantumart.AspNetCore" version="4.0.1" />     
+      <dependency id="Quantumart.AspNetCore" version="4.0.2" />     
     </dependencies>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System.Configuration" targetFramework="netstandard2.0"  />

@@ -1,6 +1,6 @@
 using System;
 
-namespace EntityFrameworkCore.Data
+namespace EntityFrameworkCore.Templates
 {
     public partial class StatusType
     {

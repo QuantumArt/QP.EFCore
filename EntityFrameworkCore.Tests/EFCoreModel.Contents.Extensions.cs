@@ -867,6 +867,75 @@ namespace EntityFrameworkCore.Tests
             return table;
         }
     }
+    public partial class BooleanItemForUpdate: IQPArticle
+    {
+        #region Static members
+        protected static readonly Dictionary<string, Func<BooleanItemForUpdate, IQPFormService, string>> _valueExtractors = new Dictionary<string, Func<BooleanItemForUpdate,  IQPFormService, string>>
+        {
+        };
+
+        #endregion
+
+		
+        // для Poco перенести из класса куда-нибудь, так как нарушается концепция доступа к БД
+        Hashtable IQPArticle.Pack(IQPFormService context, params string[] propertyNames)
+        {
+            Hashtable table;
+
+            if (propertyNames == null || propertyNames.Length == 0)
+            {
+                table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("BooleanItemForUpdate", x.Key), y => y.Value(this, context)));
+            }
+            else
+            {
+                table = new Hashtable();
+                foreach (var prop in propertyNames.Join(_valueExtractors.Keys, x => x, x => x, (x, y) => x))
+                {
+                    string value = _valueExtractors[prop](this, context);
+                    table.Add(prop, value);
+                }
+            }
+
+            return table;
+        }
+    }
+    public partial class OtMItemForUpdateVirtual: IQPArticle
+    {
+        #region Static members
+        protected static readonly Dictionary<string, Func<OtMItemForUpdateVirtual, IQPFormService, string>> _valueExtractors = new Dictionary<string, Func<OtMItemForUpdateVirtual,  IQPFormService, string>>
+        {
+			{ "Title", new Func<OtMItemForUpdateVirtual, IQPFormService, string>((self, ctx) => self.Title != null ? ctx.ReplacePlaceholders(self.Title) : null) },
+			{ "Reference_ID", new Func<OtMItemForUpdateVirtual, IQPFormService, string>((self, ctx) => self.Reference_ID != null ? self.Reference_ID.ToString() : null) },
+        };
+
+        #endregion
+        #region Genarated properties
+        public Int32 Reference_IDExact { get { return this.Reference_ID == null ? default(Int32) : this.Reference_ID.Value; } }
+        #endregion
+
+		
+        // для Poco перенести из класса куда-нибудь, так как нарушается концепция доступа к БД
+        Hashtable IQPArticle.Pack(IQPFormService context, params string[] propertyNames)
+        {
+            Hashtable table;
+
+            if (propertyNames == null || propertyNames.Length == 0)
+            {
+                table = new Hashtable(_valueExtractors.ToDictionary(x => context.GetFormNameByNetNames("OtMItemForUpdateVirtual", x.Key), y => y.Value(this, context)));
+            }
+            else
+            {
+                table = new Hashtable();
+                foreach (var prop in propertyNames.Join(_valueExtractors.Keys, x => x, x => x, (x, y) => x))
+                {
+                    string value = _valueExtractors[prop](this, context);
+                    table.Add(prop, value);
+                }
+            }
+
+            return table;
+        }
+    }
 }
 	
 	
