@@ -435,6 +435,7 @@ namespace EntityFrameworkCore.Templates
         private void SyncArticle(IQPArticle article, Dictionary<string, string> fieldValues)
         {
             article.Id = int.Parse(fieldValues[SystemColumnNames.Id], CultureInfo.InvariantCulture);
+            ChangeTracker.Context.Entry(article).CurrentValues["Id"] = article.Id;
             article.Modified = DateTime.Parse(fieldValues[SystemColumnNames.Modified], CultureInfo.InvariantCulture);
             article.Created = DateTime.Parse(fieldValues[SystemColumnNames.Created], CultureInfo.InvariantCulture);
         }

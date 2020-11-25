@@ -11,7 +11,7 @@ namespace EntityFrameworkCore.Templates
         public Setting()
         {
 		    RelatedSettings = new HashSet<Setting2SettingForRelatedSettings>();
-			BackwardForRelatedSettings = new HashSet<Setting2SettingForBackwardForRelatedSettings>();
+			BackwardForRelatedSettings_Setting = new HashSet<Setting2SettingForBackwardForRelatedSettings_Setting>();
         }
 
         public virtual Int32 Id { get; set; }
@@ -43,6 +43,6 @@ namespace EntityFrameworkCore.Templates
 		/// <summary>
 		/// Auto-generated backing property for 1657/RelatedSettings
 		/// </summary>
-		public  ICollection<Setting2SettingForBackwardForRelatedSettings> BackwardForRelatedSettings { get; set; }
+		public  ICollection<Setting2SettingForBackwardForRelatedSettings_Setting> BackwardForRelatedSettings_Setting { get; set; }
 	}
 } 
