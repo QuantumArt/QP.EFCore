@@ -113,7 +113,7 @@ namespace EntityFrameworkCore.Tests.Pg
 		public virtual DbSet<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation> SymmetricRelationArticle2ToSymmetricRelationAtriclesForSymmetricRelation { get; set; }
 		public virtual DbSet<MtMItemForUpdate2MtMDictionaryForUpdateForReference> MtMItemForUpdate2MtMDictionaryForUpdateForReference { get; set; }
 
-		public virtual DbSet<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference> MtMDictionaryForUpdate2MtMItemsForUpdateForBackwardForReference { get; set; }
+		public virtual DbSet<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate> MtMDictionaryForUpdate2MtMItemsForUpdateForBackwardForReference_MtMItemForUpdate { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 			var schemaProvider = new StaticSchemaProvider();
