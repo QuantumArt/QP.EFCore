@@ -33,7 +33,7 @@ namespace EntityFrameworkCore.Data
 		public IQPArticle LinkedItem { get { return SettingLinkedItem; } }
 	}
 
-	public partial class Setting2SettingForBackwardForRelatedSettings_Setting : IQPLink
+	public partial class Setting2SettingForBackwardForRelatedSettings_Setting: IQPLink
     {
 		public Setting SettingLinkedItem { get; set; }		
 		public Setting SettingItem { get; set; }

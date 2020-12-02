@@ -328,21 +328,21 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
         #region Save changes
         public override int SaveChanges()
         {
-            return OnSaveChanges2();
+            return OnSaveChanges();
         }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public async override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            return Task.FromResult(OnSaveChanges2());
+            return await OnSaveChangesAsync();
         }
-        
 
-        private int OnSaveChanges2()
+
+        private int OnSaveChanges()
         {
             ChangeTracker.DetectChanges();
 
             var modified = ChangeTracker.Entries()
-                .Where(x=>x.State == EntityState.Modified && x.Entity != null)
+                .Where(x => x.State == EntityState.Modified && x.Entity != null)
                 .ToList();
             var added = ChangeTracker.Entries()
                 .Where(x => x.State == EntityState.Added && x.Entity != null)
@@ -356,83 +356,137 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
             {
                 connection.Open();
             }
-			if(Cnn.ExternalTransaction != null)
-			{
-				UpdateObjectStateEntries(modified, (content, item) => item.Properties.Where(x=>x.IsModified).Select(x=>x.Metadata.Name).ToArray(), true);
-				UpdateObjectStateEntries(added, (content, item) => GetProperties(content), false);
+            if (Cnn.ExternalTransaction != null)
+            {
+                UpdateObjectStateEntries(modified, (content, item) => item.Properties.Where(x => x.IsModified).Select(x => x.Metadata.Name).ToArray(), true);
+                UpdateObjectStateEntries(added, (content, item) => GetProperties(content), false);
 
-				foreach (var deletedItem in deleted)
-				{
-					var article = (IQPArticle)deletedItem.Entity;
-					Cnn.DeleteContentItem(article.Id);
-				}
-			} else {
+                foreach (var deletedItem in deleted)
+                {
+                    var article = (IQPArticle)deletedItem.Entity;
+                    Cnn.DeleteContentItem(article.Id);
+                }
+            }
+            else
+            {
+                using (var transaction = Database.BeginTransaction())
+                {
+                    Cnn.ExternalTransaction = transaction.GetDbTransaction();
 
-				using (var transaction = Database.BeginTransaction())
-				{
-					Cnn.ExternalTransaction = transaction.GetDbTransaction();
+                    UpdateObjectStateEntries(modified, (content, item) => item.Properties.Where(x => x.IsModified).Select(x => x.Metadata.Name).ToArray(), true);
+                    UpdateObjectStateEntries(added, (content, item) => GetProperties(content), false);
 
-					UpdateObjectStateEntries(modified, (content, item) => item.Properties.Where(x=>x.IsModified).Select(x=>x.Metadata.Name).ToArray(), true);
-					UpdateObjectStateEntries(added, (content, item) => GetProperties(content), false);
+                    foreach (var deletedItem in deleted)
+                    {
+                        var article = (IQPArticle)deletedItem.Entity;
+                        Cnn.DeleteContentItem(article.Id);
+                    }
 
-					foreach (var deletedItem in deleted)
-					{
-						var article = (IQPArticle)deletedItem.Entity;
-						Cnn.DeleteContentItem(article.Id);
-					}
+                    transaction.Commit();
+                    Cnn.ExternalTransaction = null;
+                }
+            }
 
-					transaction.Commit();
-					Cnn.ExternalTransaction = null;
-				}
-			}
-
-            //connection.Close();
-			ChangeTracker.AcceptAllChanges();
+            ChangeTracker.AcceptAllChanges();
             return 0;
         }
-
-      private void UpdateObjectStateEntries(IEnumerable<EntityEntry> entries, Func<ContentInfo, EntityEntry, string[]> getProperties, bool passNullValues)
+        private async Task<int> OnSaveChangesAsync()
         {
-		    var links = entries.Where(x=>typeof(IQPLink).IsAssignableFrom(x.Entity.GetType())).ToList();
+            ChangeTracker.DetectChanges();
+
+            var modified = ChangeTracker.Entries()
+                .Where(x => x.State == EntityState.Modified && x.Entity != null)
+                .ToList();
+            var added = ChangeTracker.Entries()
+                .Where(x => x.State == EntityState.Added && x.Entity != null)
+                .ToList();
+            var deleted = ChangeTracker.Entries()
+                .Where(x => x.State == EntityState.Deleted && x.Entity != null)
+                .ToList();
+
+            var connection = Database.GetDbConnection();
+            if (connection.State == System.Data.ConnectionState.Closed)
+            {
+                await connection.OpenAsync();
+            }
+            if (Cnn.ExternalTransaction != null)
+            {
+                await UpdateObjectStateEntriesAsync(modified, (content, item) => item.Properties.Where(x => x.IsModified).Select(x => x.Metadata.Name).ToArray(), true);
+                await UpdateObjectStateEntriesAsync(added, (content, item) => GetProperties(content), false);
+
+                foreach (var deletedItem in deleted)
+                {
+                    var article = (IQPArticle)deletedItem.Entity;
+                    Cnn.DeleteContentItem(article.Id);
+                }
+            }
+            else
+            {
+
+                using (var transaction = await Database.BeginTransactionAsync())
+                {
+                    Cnn.ExternalTransaction = transaction.GetDbTransaction();
+
+                    await UpdateObjectStateEntriesAsync(modified, (content, item) => item.Properties.Where(x => x.IsModified).Select(x => x.Metadata.Name).ToArray(), true);
+                    await UpdateObjectStateEntriesAsync(added, (content, item) => GetProperties(content), false);
+
+                    foreach (var deletedItem in deleted)
+                    {
+                        var article = (IQPArticle)deletedItem.Entity;
+                        Cnn.DeleteContentItem(article.Id);
+                    }
+
+                    await transaction.CommitAsync();
+                    Cnn.ExternalTransaction = null;
+                }
+            }
+
+            ChangeTracker.AcceptAllChanges();
+            return 0;
+        }
+        private void UpdateObjectStateEntries(IEnumerable<EntityEntry> entries, Func<ContentInfo, EntityEntry, string[]> getProperties, bool passNullValues)
+        {
+            var links = entries.Where(x => typeof(IQPLink).IsAssignableFrom(x.Entity.GetType())).ToList();
             foreach (var group in entries.Where(e => !typeof(IQPLink).IsAssignableFrom(e.Entity.GetType())).GroupBy(m => m.Entity.GetType().Name))
             {
                 var contentName = group.Key;
                 var content = MappingResolver.GetContent(contentName);
                 if (!content.IsVirtual)
                 {
-                  var items = group
-                      .Where(item => item.Entity is IQPArticle)
-                      .Select(item => {
+                    var items = group
+                        .Where(item => item.Entity is IQPArticle)
+                        .Select(item =>
+                        {
 
-                          var article = (IQPArticle)item.Entity;
-                          var properties = getProperties(content, item);
-                          var fieldValues = GetFieldValues(contentName, article, properties, passNullValues);
-						  if(fieldValues.ContainsKey("CONTENT_ITEM_ID") && Int32.Parse(fieldValues["CONTENT_ITEM_ID"]) < 0)
-                          {
-                              fieldValues["CONTENT_ITEM_ID"] = "0";
-							  item.Property("Id").IsTemporary = false;
-                          }
-						  AddLinksToUpdate(article, fieldValues, links);
-                          return new
-                          {
-                              article,
-                              fieldValues
-                          };
-                      })
-                      .ToArray();
+                            var article = (IQPArticle)item.Entity;
+                            var properties = getProperties(content, item);
+                            var fieldValues = GetFieldValues(contentName, article, properties, passNullValues);
+                            if (fieldValues.ContainsKey("CONTENT_ITEM_ID") && Int32.Parse(fieldValues["CONTENT_ITEM_ID"]) < 0)
+                            {
+                                fieldValues["CONTENT_ITEM_ID"] = "0";
+                                item.Property("Id").IsTemporary = false;
+                            }
+                            AddLinksToUpdate(article, fieldValues, links);
+                            return new
+                            {
+                                article,
+                                fieldValues
+                            };
+                        })
+                        .ToArray();
 
-                  Cnn.MassUpdate(content.Id, items.Select(item => item.fieldValues), 1);
+                    Cnn.MassUpdate(content.Id, items.Select(item => item.fieldValues), 1);
 
-                  foreach (var item in items)
-                  {
-                      SyncArticle(item.article, item.fieldValues);
-                  }
+                    foreach (var item in items)
+                    {
+                        SyncArticle(item.article, item.fieldValues);
+                    }
                 }
             }
 
-           foreach(var e in entries.Where(x=>typeof(IQPLink).IsAssignableFrom(x.Entity.GetType())))
+            foreach (var e in entries.Where(x => typeof(IQPLink).IsAssignableFrom(x.Entity.GetType())))
             {
-               if(((IQPLink)e.Entity).Id <= 0)
+                if (((IQPLink)e.Entity).Id <= 0)
                 {
                     ((IQPLink)e.Entity).Id = ((IQPLink)e.Entity).Item.Id;
                     var p = e.Properties.Where(n => n.Metadata.Name != "ItemId" && !n.Metadata.Name.EndsWith("LinkedItemId") &&
@@ -449,19 +503,19 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
             }
 
             var relations = (from e in links
-                    where typeof(IQPLink).IsAssignableFrom(e.Entity.GetType())
-                    let Id = ((IQPLink)e.Entity).Id 
-                    let relatedId = ((IQPLink)e.Entity).LinkedItemId 
-                    let attribute = MappingResolver.GetAttribute(e.Metadata.Name.Substring(e.Metadata.Name.LastIndexOf(".") + 1))
-                    let item = new
-                    {
-                        Id = Id,
-                        RelatedId = relatedId,
-                        ContentId = attribute.ContentId,
-                        Field = attribute.MappedName
-                    }
-                    group item by item.ContentId into g
-                    select new { ContentId = g.Key, Items = g.ToArray() }
+                             where typeof(IQPLink).IsAssignableFrom(e.Entity.GetType())
+                             let Id = ((IQPLink)e.Entity).Id
+                             let relatedId = ((IQPLink)e.Entity).LinkedItemId
+                             let attribute = MappingResolver.GetAttribute(e.Metadata.Name.Substring(e.Metadata.Name.LastIndexOf(".") + 1))
+                             let item = new
+                             {
+                                 Id = Id,
+                                 RelatedId = relatedId,
+                                 ContentId = attribute.ContentId,
+                                 Field = attribute.MappedName
+                             }
+                             group item by item.ContentId into g
+                             select new { ContentId = g.Key, Items = g.ToArray() }
                     )
                     .ToArray();
 
@@ -476,8 +530,99 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
                         return d;
                     })
                     .ToArray();
-                
+
                 Cnn.MassUpdate(relation.ContentId, values, 1);
+            }
+        }
+
+        private async Task UpdateObjectStateEntriesAsync(IEnumerable<EntityEntry> entries, Func<ContentInfo, EntityEntry, string[]> getProperties, bool passNullValues)
+        {
+            var links = entries.Where(x => typeof(IQPLink).IsAssignableFrom(x.Entity.GetType())).ToList();
+            foreach (var group in entries.Where(e => !typeof(IQPLink).IsAssignableFrom(e.Entity.GetType())).GroupBy(m => m.Entity.GetType().Name))
+            {
+                var contentName = group.Key;
+                var content = MappingResolver.GetContent(contentName);
+                if (!content.IsVirtual)
+                {
+                    var items = group
+                        .Where(item => item.Entity is IQPArticle)
+                        .Select(item =>
+                        {
+
+                            var article = (IQPArticle)item.Entity;
+                            var properties = getProperties(content, item);
+                            var fieldValues = GetFieldValues(contentName, article, properties, passNullValues);
+                            if (fieldValues.ContainsKey("CONTENT_ITEM_ID") && Int32.Parse(fieldValues["CONTENT_ITEM_ID"]) < 0)
+                            {
+                                fieldValues["CONTENT_ITEM_ID"] = "0";
+                                item.Property("Id").IsTemporary = false;
+                            }
+                            AddLinksToUpdate(article, fieldValues, links);
+                            return new
+                            {
+                                article,
+                                fieldValues
+                            };
+                        })
+                        .ToArray();
+
+                    await Cnn.MassUpdateAsync(content.Id, items.Select(item => item.fieldValues), 1);
+
+                    foreach (var item in items)
+                    {
+                        SyncArticle(item.article, item.fieldValues);
+                    }
+                }
+            }
+
+            foreach (var e in entries.Where(x => typeof(IQPLink).IsAssignableFrom(x.Entity.GetType())))
+            {
+                if (((IQPLink)e.Entity).Id <= 0)
+                {
+                    ((IQPLink)e.Entity).Id = ((IQPLink)e.Entity).Item.Id;
+                    var p = e.Properties.Where(n => n.Metadata.Name != "ItemId" && !n.Metadata.Name.EndsWith("LinkedItemId") &&
+                                            n.Metadata.Name.EndsWith("ItemId")).FirstOrDefault();
+                    e.Property(p.Metadata.Name).IsTemporary = false;
+
+                }
+                if (((IQPLink)e.Entity).LinkedItemId <= 0)
+                {
+                    ((IQPLink)e.Entity).LinkedItemId = ((IQPLink)e.Entity).LinkedItem.Id;
+                    var p = e.Properties.Where(n => n.Metadata.Name != "LinkedItemId" && n.Metadata.Name.EndsWith("LinkedItemId")).FirstOrDefault();
+                    e.Property(p.Metadata.Name).IsTemporary = false;
+                }
+            }
+
+            var relations = (from e in links
+                             where typeof(IQPLink).IsAssignableFrom(e.Entity.GetType())
+                             let Id = ((IQPLink)e.Entity).Id
+                             let relatedId = ((IQPLink)e.Entity).LinkedItemId
+                             let attribute = MappingResolver.GetAttribute(e.Metadata.Name.Substring(e.Metadata.Name.LastIndexOf(".") + 1))
+                             let item = new
+                             {
+                                 Id = Id,
+                                 RelatedId = relatedId,
+                                 ContentId = attribute.ContentId,
+                                 Field = attribute.MappedName
+                             }
+                             group item by item.ContentId into g
+                             select new { ContentId = g.Key, Items = g.ToArray() }
+                    )
+                    .ToArray();
+
+            foreach (var relation in relations)
+            {
+                var values = relation.Items
+                    .GroupBy(r => r.Id)
+                    .Select(g =>
+                    {
+                        var d = g.GroupBy(x => x.Field).ToDictionary(x => x.Key, x => string.Join(",", x.Select(y => y.RelatedId)));
+                        d[SystemColumnNames.Id] = g.Key.ToString();
+                        return d;
+                    })
+                    .ToArray();
+
+                await Cnn.MassUpdateAsync(relation.ContentId, values, 1);
             }
         }
 
@@ -489,53 +634,55 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
             article.Created = DateTime.Parse(fieldValues[SystemColumnNames.Created], CultureInfo.InvariantCulture);
         }
 
-		private void AddLinksToUpdate(IQPArticle article, Dictionary<string, string> fieldValues, List<EntityEntry> links)
+        private void AddLinksToUpdate(IQPArticle article, Dictionary<string, string> fieldValues, List<EntityEntry> links)
         {
-			var forwardLinks = links.Where(e=>((IQPLink)e.Entity).Id == article.Id && ((IQPLink)e.Entity).LinkedItemId > 0).ToList();
-			if (forwardLinks.Count > 0)
-			{
-				var relations = (from e in forwardLinks
-					let relatedId = ((IQPLink)e.Entity).LinkedItemId 
-                    let attribute = MappingResolver.GetAttribute(e.Metadata.Name.Substring(e.Metadata.Name.LastIndexOf(".") + 1))
-                   select new
-                    {
-                        RelatedId = relatedId,
-                        Field = attribute.MappedName
-                    })
+            var forwardLinks = links.Where(e => ((IQPLink)e.Entity).Id == article.Id && ((IQPLink)e.Entity).LinkedItemId > 0).ToList();
+            if (forwardLinks.Count > 0)
+            {
+                var relations = (from e in forwardLinks
+                                 let relatedId = ((IQPLink)e.Entity).LinkedItemId
+                                 let attribute = MappingResolver.GetAttribute(e.Metadata.Name.Substring(e.Metadata.Name.LastIndexOf(".") + 1))
+                                 select new
+                                 {
+                                     RelatedId = relatedId,
+                                     Field = attribute.MappedName
+                                 })
                     .ToArray();
-				var values = relations
+                var values = relations
                     .GroupBy(r => r.Field).ToDictionary(x => x.Key, x => string.Join(",", x.Select(y => y.RelatedId)));
                 MergeValues(fieldValues, values);
-                links.RemoveAll(x=>forwardLinks.Contains(x));
-			}
-			var backwardLinks = links.Where(e=>((IQPLink)e.Entity).LinkedItemId == article.Id && ((IQPLink)e.Entity).Id > 0).ToList();
-			if (backwardLinks.Count > 0)
-			{
-				var relations = (from e in forwardLinks
-					let relatedId = ((IQPLink)e.Entity).Id 
-                    let attribute = MappingResolver.GetAttribute(e.Metadata.Name.Substring(e.Metadata.Name.LastIndexOf(".") + 1))
-                   select new
-                    {
-                        RelatedId = relatedId,
-                        Field = attribute.RelatedAttribute.MappedName
-                    })
+                links.RemoveAll(x => forwardLinks.Contains(x));
+            }
+            var backwardLinks = links.Where(e => ((IQPLink)e.Entity).LinkedItemId == article.Id && ((IQPLink)e.Entity).Id > 0).ToList();
+            if (backwardLinks.Count > 0)
+            {
+                var relations = (from e in forwardLinks
+                                 let relatedId = ((IQPLink)e.Entity).Id
+                                 let attribute = MappingResolver.GetAttribute(e.Metadata.Name.Substring(e.Metadata.Name.LastIndexOf(".") + 1))
+                                 select new
+                                 {
+                                     RelatedId = relatedId,
+                                     Field = attribute.RelatedAttribute.MappedName
+                                 })
                     .ToArray();
-				var values = relations
+                var values = relations
                     .GroupBy(r => r.Field).ToDictionary(x => x.Key, x => string.Join(",", x.Select(y => y.RelatedId)));
                 MergeValues(fieldValues, values);
                 links.RemoveAll(x => backwardLinks.Contains(x));
             }
-		}
+        }
         private void MergeValues(Dictionary<string, string> fieldValues, Dictionary<string, string> linkValues)
         {
             foreach (var key in linkValues.Keys)
             {
                 if (fieldValues.ContainsKey(key))
                 {
-                    if(string.IsNullOrWhiteSpace(fieldValues[key]))
+                    if (string.IsNullOrWhiteSpace(fieldValues[key]))
                     {
                         fieldValues[key] = linkValues[key];
-                    } else {
+                    }
+                    else
+                    {
                         fieldValues[key] = fieldValues[key] + "," + linkValues[key];
                     }
                 }
@@ -556,20 +703,21 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
 
         private Dictionary<string, string> GetFieldValues(string contentName, IQPArticle article, string[] fields, bool passNullValues)
         {
-             var fieldValues = article.GetType()
-                .GetProperties()
-                .Where(f => fields.Contains(f.Name))
-                .Select(f => new {
-                    field = MappingResolver.GetAttribute(contentName, f.Name.Replace("_ID", "")).Name,
-                    value = GetValue(f.GetValue(article))
-                })
-                .Where(f => passNullValues || f.value != null)
-                .Distinct()
-                .ToDictionary(
-                    f => f.field,
-                    f => f.value
-                );
-           
+            var fieldValues = article.GetType()
+               .GetProperties()
+               .Where(f => fields.Contains(f.Name))
+               .Select(f => new
+               {
+                   field = MappingResolver.GetAttribute(contentName, f.Name.Replace("_ID", "")).Name,
+                   value = GetValue(f.GetValue(article))
+               })
+               .Where(f => passNullValues || f.value != null)
+               .Distinct()
+               .ToDictionary(
+                   f => f.field,
+                   f => f.value
+               );
+
             fieldValues[SystemColumnNames.Id] = article.Id.ToString(CultureInfo.InvariantCulture);
             fieldValues[SystemColumnNames.Created] = article.Created.ToString(CultureInfo.InvariantCulture);
             fieldValues[SystemColumnNames.Modified] = article.Modified.ToString(CultureInfo.InvariantCulture);
@@ -588,7 +736,7 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
             {
                 return null;
             }
-			else if (o is bool b)
+            else if (o is bool b)
             {
                 return b ? "1" : "0";
             }
@@ -611,93 +759,6 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
             }
         }
 
-
-        int OnSaveChanges()
-        {
-            base.ChangeTracker.DetectChanges();
-
-            var objectCount = 0;
-            
-
-            var modified = ChangeTracker.Entries()
-                .Where(x=>x.State == EntityState.Modified && x.Entity != null)
-                .ToList();
-            var added = ChangeTracker.Entries()
-                .Where(x => x.State == EntityState.Added && x.Entity != null)
-                .ToList();
-            var deleted = ChangeTracker.Entries()
-                .Where(x => x.State == EntityState.Deleted && x.Entity != null)
-                .ToList();
-
-            foreach (var addedItem in added)
-            {
-                objectCount++;
-                if (!addedItem.Entity.GetType().IsAssignableFrom(typeof(IQPLink)))
-                {
-                    var entity = addedItem.Entity as IQPArticle;
-                    if(entity != null)
-                    {
-                        ProcessCreating(addedItem.Metadata.Name, entity, addedItem);
-                    }
-                }
-                else
-                {
-                }
-            }
-
-            foreach (var modifiedItem in modified)
-            {
-                if (!modifiedItem.Entity.GetType().IsAssignableFrom(typeof(IQPLink)))
-                {
-                    objectCount++;
-                    var entity = modifiedItem.Entity as IQPArticle;
-                    if (entity != null)
-                    {
-                        ProcessUpdating(modifiedItem.Metadata.Name, entity, modifiedItem);
-                    }
-                }
-                else
-                {
-                }
-            }
-
-            return 0;
-        }
-
-
-        private void ProcessCreating(string contentName, IQPArticle instance, EntityEntry entry)
-        {
-            throw new NotImplementedException();
-            var properties = entry.Properties.Where(x=>x.IsModified).Select(x=>x.Metadata.Name).ToArray();
-            var values = instance.Pack(this);
-            DateTime created = DateTime.Now;
-            // instance.LoadStatusType();
-            // todo: load first status
-            const string lowestStatus = "None";
-            if (!properties.Contains("Visible"))
-                instance.Visible = true;
-            if (!properties.Contains("Archive"))
-                instance.Archive = false;
-
-            // instance.Id = Cnn.AddFormToContent(SiteId, Cnn.GetContentIdByNetName(SiteId, contentName), lowestStatus, ref values, 0, true, 0, instance.Visible, instance.Archive, true, ref created);
-            instance.Created = created;
-            instance.Modified = created;
-        }
-
-        private void ProcessUpdating(string contentName, IQPArticle instance, EntityEntry entry)
-        {
-		    throw new NotImplementedException();
-		    var properties = entry.Properties.Where(x=>x.IsModified).Select(x=>x.Metadata.Name).ToArray();
-<#+		if(usePartialUpdate) { #>
-			var values = instance.Pack(this, properties);
-<#+		} else { #>
-			var values = instance.Pack(this);
-<#+		} #>
-			DateTime modified = DateTime.Now;
-			throw new NotImplementedException("CUD operations are not implemented yet.");
-			// Cnn.AddFormToContent(SiteId, Cnn.GetContentIdByNetName(SiteId, contentName), instance.StatusType.StatusTypeName, ref values, (int)instance.Id, true, 0, instance.Visible, instance.Archive, true, ref modified);
-			// instance.Modified = modified;
-        }
         #endregion
         string IQPFormService.GetFormNameByNetNames(string netContentName, string netFieldName)
         {

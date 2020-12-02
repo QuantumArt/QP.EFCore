@@ -33,7 +33,7 @@ namespace EntityFrameworkCore.Data
 		public IQPArticle LinkedItem { get { return RegionLinkedItem; } }
 	}
 
-	public partial class Region2RegionForBackwardForDeniedRegions_Region : IQPLink
+	public partial class Region2RegionForBackwardForDeniedRegions_Region: IQPLink
     {
 		public Region RegionLinkedItem { get; set; }		
 		public Region RegionItem { get; set; }

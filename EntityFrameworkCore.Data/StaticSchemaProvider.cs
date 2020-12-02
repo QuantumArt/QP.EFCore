@@ -550,8 +550,8 @@ namespace EntityFrameworkCore.Data
                 {
                     Id = 1671,
                     ContentId = 294,
-                    Name = "BackwardForRegions_Product ",
-                    MappedName = "BackwardForRegions_Product ",
+                    Name = "BackwardForRegions_Product",
+                    MappedName = "BackwardForRegions_Product",
                     LinkId = 21,
                     Type = "M2M"
                 },
@@ -559,8 +559,8 @@ namespace EntityFrameworkCore.Data
                 {
                     Id = 1672,
                     ContentId = 349,
-                    Name = "BackwardForRelatedSettings_Setting ",
-                    MappedName = "BackwardForRelatedSettings_Setting ",
+                    Name = "BackwardForRelatedSettings_Setting",
+                    MappedName = "BackwardForRelatedSettings_Setting",
                     LinkId = 69,
                     Type = "M2M"
                 },
@@ -568,8 +568,8 @@ namespace EntityFrameworkCore.Data
                 {
                     Id = 1673,
                     ContentId = 294,
-                    Name = "BackwardForAllowedRegions_Region ",
-                    MappedName = "BackwardForAllowedRegions_Region ",
+                    Name = "BackwardForAllowedRegions_Region",
+                    MappedName = "BackwardForAllowedRegions_Region",
                     LinkId = 71,
                     Type = "M2M"
                 },
@@ -577,8 +577,8 @@ namespace EntityFrameworkCore.Data
                 {
                     Id = 1674,
                     ContentId = 294,
-                    Name = "BackwardForDeniedRegions_Region ",
-                    MappedName = "BackwardForDeniedRegions_Region ",
+                    Name = "BackwardForDeniedRegions_Region",
+                    MappedName = "BackwardForDeniedRegions_Region",
                     LinkId = 72,
                     Type = "M2M"
                 },
