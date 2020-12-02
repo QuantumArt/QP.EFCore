@@ -33,7 +33,7 @@ namespace EntityFrameworkCore.Tests
 		public IQPArticle LinkedItem { get { return MtMDictionaryForUpdateLinkedItem; } }
 	}
 
-	public partial class MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate: IQPLink
+	public partial class MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate : IQPLink
     {
 		public MtMItemForUpdate MtMItemForUpdateLinkedItem { get; set; }		
 		public MtMDictionaryForUpdate MtMDictionaryForUpdateItem { get; set; }

@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-namespace EntityFrameworkCore.Templates
+namespace EntityFrameworkCore.Data
 {
     public interface IQPLink
     {

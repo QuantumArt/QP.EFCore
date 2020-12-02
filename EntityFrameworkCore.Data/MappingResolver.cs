@@ -1,7 +1,7 @@
 using Quantumart.QP8.CoreCodeGeneration.Services;
 using System.Linq;
 
-namespace EntityFrameworkCore.Templates
+namespace EntityFrameworkCore.Data
 {
     public interface IMappingResolver
     {

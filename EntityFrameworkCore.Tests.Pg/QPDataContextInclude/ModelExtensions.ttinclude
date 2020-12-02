@@ -27,6 +27,8 @@ using System.Collections;
 using System.Globalization;
 using Microsoft.Extensions.Configuration;
 using System.Transactions;
+using System.Threading.Tasks;
+using System.Threading;
 <#= settings.Usings#>
 
 namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("NamespaceHint")#>
@@ -328,6 +330,12 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
         {
             return OnSaveChanges2();
         }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            return Task.FromResult(OnSaveChanges2());
+        }
+        
 
         private int OnSaveChanges2()
         {

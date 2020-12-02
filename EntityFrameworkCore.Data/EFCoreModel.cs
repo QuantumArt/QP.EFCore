@@ -8,7 +8,7 @@ using System.Threading;
 
 
 
-namespace EntityFrameworkCore.Tests
+namespace EntityFrameworkCore.Data
 {
     public partial class EFCoreModel : DbContext
     {
@@ -82,38 +82,24 @@ namespace EntityFrameworkCore.Tests
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserGroup> UserGroups { get; set; }
 
-        public virtual DbSet<AfiellFieldsItem> AfiellFieldsItems { get; set; }
-        public virtual DbSet<Schema> Schemas { get; set; }
-        public virtual DbSet<StringItem> StringItems { get; set; }
-        public virtual DbSet<StringItemForUpdate> StringItemsForUpdate { get; set; }
-        public virtual DbSet<StringItemForUnsert> StringItemsForInsert { get; set; }
-        public virtual DbSet<ItemForUpdate> ItemsForUpdate { get; set; }
-        public virtual DbSet<ItemForInsert> ItemsForInsert { get; set; }
-        public virtual DbSet<PublishedNotPublishedItem> PublishedNotPublishedItems { get; set; }
-        public virtual DbSet<ReplacingPlaceholdersItem> ReplacingPlaceholdersItems { get; set; }
-        public virtual DbSet<FileFieldsItem> FileFieldsItems { get; set; }
-        public virtual DbSet<SymmetricRelationArticle> SymmetricRelationArticles { get; set; }
-        public virtual DbSet<ToSymmetricRelationAtricle> ToSymmetricRelationAtricles { get; set; }
-        public virtual DbSet<MtMItemForUpdate> MtMItemsForUpdate { get; set; }
-        public virtual DbSet<MtMDictionaryForUpdate> MtMDictionaryForUpdate { get; set; }
-        public virtual DbSet<OtMItemForUpdate> OtMItemsForUpdate { get; set; }
-        public virtual DbSet<OtMDictionaryForUpdate> OtMDictionaryForUpdate { get; set; }
-        public virtual DbSet<DateItemForUpdate> DateItemsForUpdate { get; set; }
-        public virtual DbSet<TimeItemForUpdate> TimeItemsForUpdate { get; set; }
-        public virtual DbSet<DateTimeItemForUpdate> DateTimeItemsForUpdate { get; set; }
-        public virtual DbSet<FileItemForUpdate> FileItemsForUpdate { get; set; }
-        public virtual DbSet<ImageItemForUpdate> ImageItemsForUpdate { get; set; }
-        public virtual DbSet<OtMItemForMapping> OtMItemsForMapping { get; set; }
-        public virtual DbSet<OtMRelatedItemWithMapping> OtMRelatedItemsWithMapping { get; set; }
-        public virtual DbSet<OtMItemToContentWithoutMapping> OtMItemsToContentWithoutMapping { get; set; }
-        public virtual DbSet<BooleanItemForUpdate> BooleanItemsForUpdate { get; set; }
-        public virtual DbSet<OtMItemForUpdateVirtual> OtMItemForUpdateVirtuals { get; set; }
-		public virtual DbSet<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation> ToSymmetricRelationAtricle2SymmetricRelationArticlesForToSymmetricRelation { get; set; }
+        public virtual DbSet<MarketingProduct> MarketingProducts { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductParameter> ProductParameters { get; set; }
+        public virtual DbSet<Region> Regions { get; set; }
+        public virtual DbSet<MobileTariff> MobileTariffs { get; set; }
+        public virtual DbSet<Setting> Settings { get; set; }
+		public virtual DbSet<Product2RegionForRegions> Product2RegionsForRegions { get; set; }
 
-		public virtual DbSet<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation> SymmetricRelationArticle2ToSymmetricRelationAtriclesForSymmetricRelation { get; set; }
-		public virtual DbSet<MtMItemForUpdate2MtMDictionaryForUpdateForReference> MtMItemForUpdate2MtMDictionaryForUpdateForReference { get; set; }
+		public virtual DbSet<Region2ProductForBackwardForRegions_Product > Region2ProductsForBackwardForRegions_Product  { get; set; }
+		public virtual DbSet<Region2RegionForAllowedRegions> Region2RegionsForAllowedRegions { get; set; }
 
-		public virtual DbSet<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate > MtMDictionaryForUpdate2MtMItemsForUpdateForBackwardForReference_MtMItemForUpdate  { get; set; }
+		public virtual DbSet<Region2RegionForBackwardForAllowedRegions_Region > Region2RegionsForBackwardForAllowedRegions_Region  { get; set; }
+		public virtual DbSet<Region2RegionForDeniedRegions> Region2RegionsForDeniedRegions { get; set; }
+
+		public virtual DbSet<Region2RegionForBackwardForDeniedRegions_Region > Region2RegionsForBackwardForDeniedRegions_Region  { get; set; }
+		public virtual DbSet<Setting2SettingForRelatedSettings> Setting2SettingsForRelatedSettings { get; set; }
+
+		public virtual DbSet<Setting2SettingForBackwardForRelatedSettings_Setting > Setting2SettingsForBackwardForRelatedSettings_Setting  { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 			var schemaProvider = new StaticSchemaProvider();
@@ -128,7 +114,7 @@ namespace EntityFrameworkCore.Tests
 						.Build();
 			var connectionString = configuration.GetConnectionString("EFCoreModel");
             var optionsBuilder = new DbContextOptionsBuilder<EFCoreModel>();
-            optionsBuilder.UseSqlServer<EFCoreModel>(connectionString);
+            optionsBuilder.UseNpgsql<EFCoreModel>(connectionString);
             return optionsBuilder.Options;
         }
 		
@@ -136,7 +122,7 @@ namespace EntityFrameworkCore.Tests
         {
 		    var connectionString = configuration.GetConnectionString("EFCoreModel");
             var optionsBuilder = new DbContextOptionsBuilder<EFCoreModel>();
-            optionsBuilder.UseSqlServer<EFCoreModel>(connectionString);
+            optionsBuilder.UseNpgsql<EFCoreModel>(connectionString);
             return optionsBuilder.Options;
         }
 		
