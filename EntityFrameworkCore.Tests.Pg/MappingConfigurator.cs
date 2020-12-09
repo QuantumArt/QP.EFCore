@@ -709,28 +709,28 @@ namespace EntityFrameworkCore.Tests.Pg
 			modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>().Ignore(x=>x.Item);
 			modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>().Ignore(x=>x.LinkedItem);
 
-			 modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>()
+			 modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >()
                 .ToTable(GetReversedLinkTableName("MtMItemForUpdate", "Reference"));
       
 
-			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>().Property(e => e.MtMItemForUpdateLinkedItemId).HasColumnName("linked_id");
-			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>().Property(e => e.MtMDictionaryForUpdateItemId).HasColumnName("id");
-			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>().HasKey(ug => new { ug.MtMItemForUpdateLinkedItemId, ug.MtMDictionaryForUpdateItemId });
+			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >().Property(e => e.MtMItemForUpdateLinkedItemId).HasColumnName("linked_id");
+			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >().Property(e => e.MtMDictionaryForUpdateItemId).HasColumnName("id");
+			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >().HasKey(ug => new { ug.MtMItemForUpdateLinkedItemId, ug.MtMDictionaryForUpdateItemId });
             
-			 modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>()
+			 modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >()
                 .HasOne(bc => bc.MtMDictionaryForUpdateItem)
-                .WithMany(b => b.BackwardForReference)
+                .WithMany(b => b.BackwardForReference_MtMItemForUpdate )
                 .HasForeignKey(bc => bc.MtMDictionaryForUpdateItemId);
 
-            modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>()
+            modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >()
                 .HasOne(bc => bc.MtMItemForUpdateLinkedItem)
                 .WithMany();
 
-			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>().Ignore(x=>x.Id);
-			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>().Ignore(x=>x.LinkId);
-			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>().Ignore(x=>x.LinkedItemId);
-			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>().Ignore(x=>x.Item);
-			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference>().Ignore(x=>x.LinkedItem);
+			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >().Ignore(x=>x.Id);
+			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >().Ignore(x=>x.LinkId);
+			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >().Ignore(x=>x.LinkedItemId);
+			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >().Ignore(x=>x.Item);
+			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >().Ignore(x=>x.LinkedItem);
  
             #endregion
 

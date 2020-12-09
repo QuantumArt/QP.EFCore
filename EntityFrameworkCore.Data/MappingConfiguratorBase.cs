@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using QP.ConfigurationService.Models;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata.Conventions;
 
-namespace EntityFrameworkCore.Templates
+namespace EntityFrameworkCore.Data
 {
     public abstract class MappingConfiguratorBase : IMappingConfigurator
     {

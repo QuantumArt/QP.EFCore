@@ -1,4 +1,4 @@
-namespace EntityFrameworkCore.Templates
+namespace EntityFrameworkCore.Data
 {
     public interface IQPFormService
     {

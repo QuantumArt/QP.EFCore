@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Update="QPDataContextGenerator.log">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>QPDataContextGenerator.tt</DependentUpon>
+    </None>
     <None Update="QPDataContextGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>QPDataContextGenerator.log</LastGenOutput>
@@ -42,8 +47,8 @@
     <EmbeddedResource Include="QPDataContextInclude\StaticSchemaProvider.ttinclude" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
-    <PackageReference Include="QP8.EntityFrameworkCore" Version="1.1.8" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.3" />
+    <PackageReference Include="QP8.EntityFrameworkCore" Version="1.2.7" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="*.cs">

@@ -13,9 +13,9 @@ namespace EntityFrameworkCore.Templates
 		    Children = new HashSet<Region>();
 		    AllowedRegions = new HashSet<Region2RegionForAllowedRegions>();
 		    DeniedRegions = new HashSet<Region2RegionForDeniedRegions>();
-			BackwardForRegions = new HashSet<Region2ProductForBackwardForRegions>();
-			BackwardForAllowedRegions = new HashSet<Region2RegionForBackwardForAllowedRegions>();
-			BackwardForDeniedRegions = new HashSet<Region2RegionForBackwardForDeniedRegions>();
+			BackwardForRegions_Product = new HashSet<Region2ProductForBackwardForRegions_Product>();
+			BackwardForAllowedRegions_Region = new HashSet<Region2RegionForBackwardForAllowedRegions_Region>();
+			BackwardForDeniedRegions_Region = new HashSet<Region2RegionForBackwardForDeniedRegions_Region>();
         }
 
         public virtual Int32 Id { get; set; }
@@ -63,14 +63,14 @@ namespace EntityFrameworkCore.Templates
 		/// <summary>
 		/// Auto-generated backing property for 1228/Regions
 		/// </summary>
-		public  ICollection<Region2ProductForBackwardForRegions> BackwardForRegions { get; set; }
+		public  ICollection<Region2ProductForBackwardForRegions_Product> BackwardForRegions_Product { get; set; }
 		/// <summary>
 		/// Auto-generated backing property for 1659/AllowedRegions
 		/// </summary>
-		public  ICollection<Region2RegionForBackwardForAllowedRegions> BackwardForAllowedRegions { get; set; }
+		public  ICollection<Region2RegionForBackwardForAllowedRegions_Region> BackwardForAllowedRegions_Region { get; set; }
 		/// <summary>
 		/// Auto-generated backing property for 1660/DeniedRegions
 		/// </summary>
-		public  ICollection<Region2RegionForBackwardForDeniedRegions> BackwardForDeniedRegions { get; set; }
+		public  ICollection<Region2RegionForBackwardForDeniedRegions_Region> BackwardForDeniedRegions_Region { get; set; }
 	}
 } 	

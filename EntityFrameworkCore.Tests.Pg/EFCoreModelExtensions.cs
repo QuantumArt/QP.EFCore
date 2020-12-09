@@ -16,6 +16,8 @@ using System.Collections;
 using System.Globalization;
 using Microsoft.Extensions.Configuration;
 using System.Transactions;
+using System.Threading.Tasks;
+using System.Threading;
 
 
 namespace EntityFrameworkCore.Tests.Pg
@@ -288,6 +290,12 @@ namespace EntityFrameworkCore.Tests.Pg
             return OnSaveChanges2();
         }
 
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            return Task.FromResult(OnSaveChanges2());
+        }
+        
+
         private int OnSaveChanges2()
         {
             ChangeTracker.DetectChanges();
@@ -435,6 +443,7 @@ namespace EntityFrameworkCore.Tests.Pg
         private void SyncArticle(IQPArticle article, Dictionary<string, string> fieldValues)
         {
             article.Id = int.Parse(fieldValues[SystemColumnNames.Id], CultureInfo.InvariantCulture);
+            ChangeTracker.Context.Entry(article).CurrentValues["Id"] = article.Id;
             article.Modified = DateTime.Parse(fieldValues[SystemColumnNames.Modified], CultureInfo.InvariantCulture);
             article.Created = DateTime.Parse(fieldValues[SystemColumnNames.Created], CultureInfo.InvariantCulture);
         }

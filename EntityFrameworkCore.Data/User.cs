@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace EntityFrameworkCore.Templates
+namespace EntityFrameworkCore.Data
 {
     public partial class User
     {

@@ -250,11 +250,9 @@ namespace Quantumart.QP8.CoreCodeGeneration.Services
 
         private AttributeInfo GenM2M(ContentInfo contentFrom, ContentInfo contentTo, LinkInfo link, AttributeInfo attr)
         {
-            var candidate = string.IsNullOrEmpty(attr.MappedBackName) ? ("BackwardFor" + attr.MappedName) : attr.MappedBackName;
-            var count = contentTo.Attributes.Count(x => x.MappedName.StartsWith(candidate));
-            var name = candidate + (count > 0 ? count.ToString() : "");/* contentTo.Attributes.Any(x => x.MappedName == contentFrom.PluralMappedName) ?
-                (candidate + (count == 0 ? "" : count.ToString()))
-                : (attr.MappedBackName ?? contentFrom.PluralMappedName);*/
+            var name = string.IsNullOrEmpty(attr.MappedBackName) ? 
+                string.Format("BackwardFor{0}_{1} ", attr.MappedName, contentFrom.MappedName) 
+                : attr.MappedBackName;
 
             var mappedName = name;
 

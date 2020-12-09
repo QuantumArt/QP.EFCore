@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace EntityFrameworkCore.Templates
+namespace EntityFrameworkCore.Data
 {
     public partial class UserGroupBind
     {
@@ -16,6 +16,11 @@ namespace EntityFrameworkCore.Templates
         public virtual UserGroup UserGroup { get; set; }
     }
 }
+	
+	
+	
+	
+	
 	
 	
 	
