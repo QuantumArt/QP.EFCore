@@ -50,3 +50,10 @@ namespace EntityFrameworkCore.Templates
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	

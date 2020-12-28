@@ -107,6 +107,7 @@ namespace EntityFrameworkCore.Tests.Pg
                 .ToTable("user_group_new")
                 .Property(e => e.Id).ValueGeneratedOnAdd()
                 .HasColumnName("id");
+
             modelBuilder.Entity<UserGroup>().Property(e => e.Name).HasColumnName("name");
 
             modelBuilder.Entity<UserGroupBind>()

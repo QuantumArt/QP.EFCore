@@ -88,18 +88,6 @@ namespace EntityFrameworkCore.Data
         public virtual DbSet<Region> Regions { get; set; }
         public virtual DbSet<MobileTariff> MobileTariffs { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
-		public virtual DbSet<Product2RegionForRegions> Product2RegionsForRegions { get; set; }
-
-		public virtual DbSet<Region2ProductForBackwardForRegions_Product> Region2ProductsForBackwardForRegions_Product { get; set; }
-		public virtual DbSet<Region2RegionForAllowedRegions> Region2RegionsForAllowedRegions { get; set; }
-
-		public virtual DbSet<Region2RegionForBackwardForAllowedRegions_Region> Region2RegionsForBackwardForAllowedRegions_Region { get; set; }
-		public virtual DbSet<Region2RegionForDeniedRegions> Region2RegionsForDeniedRegions { get; set; }
-
-		public virtual DbSet<Region2RegionForBackwardForDeniedRegions_Region> Region2RegionsForBackwardForDeniedRegions_Region { get; set; }
-		public virtual DbSet<Setting2SettingForRelatedSettings> Setting2SettingsForRelatedSettings { get; set; }
-
-		public virtual DbSet<Setting2SettingForBackwardForRelatedSettings_Setting> Setting2SettingsForBackwardForRelatedSettings_Setting { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 			var schemaProvider = new StaticSchemaProvider();

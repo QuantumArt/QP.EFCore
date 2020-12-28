@@ -41,13 +41,9 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
 <#+	   	foreach(var attribute in content.Attributes.Where(x => x.IsM2O)) { #>
 		    <#=attribute.MappedName#> = new HashSet<<#=attribute.RelatedContent.MappedName#>>();
 <#+		} #>
-<#+	   	foreach(var attribute in content.Attributes.Where(x => x.IsM2M)) { 
-			if((attribute.IsSource == true) ||  (!settings.UseReversedAssociations || !attribute.Content.SplitArticles)) {
+<#+	   	foreach(var attribute in content.Attributes.Where(x => x.IsM2M)) {
 #>
-		    <#=attribute.MappedName#> = new HashSet<<#=attribute.M2MClassName#>>();
-<#+			} else {  #>
-			<#=attribute.MappedName#> = new HashSet<<#=attribute.M2MReverseClassName#>>();
-<#+			} #>
+		    <#=attribute.MappedName#> = new HashSet<<#=attribute.RelatedContent.MappedName#>>();
 <#+		} #>
         }
 
@@ -96,9 +92,9 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
 		/// <#=attribute.Description??""#>
 		/// </summary>
 <#+		if(attribute.IsSource == true || (!settings.UseReversedAssociations || !attribute.Content.SplitArticles)) { #>
-		public <#+ if( settings.ProxyCreationEnabled ) { #> virtual <#+}#> ICollection<<#=attribute.M2MClassName#>> <#=attribute.MappedName#> { get; set; }
+		public <#+ if( settings.ProxyCreationEnabled ) { #> virtual <#+}#> ICollection<<#=attribute.RelatedContent.MappedName#>> <#=attribute.MappedName#> { get; set; }
 <#+		} else { #>
-		public <#+ if( settings.ProxyCreationEnabled ) { #> virtual <#+}#> ICollection<<#=attribute.M2MReverseClassName#>> <#=attribute.MappedName#> { get; set; }
+		public <#+ if( settings.ProxyCreationEnabled ) { #> virtual <#+}#> ICollection<<#=attribute.RelatedContent.MappedName#>> <#=attribute.MappedName#> { get; set; }
 <#+		} #>
 <#+		} #>
 	}

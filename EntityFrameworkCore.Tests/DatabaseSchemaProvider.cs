@@ -32,11 +32,13 @@ namespace EntityFrameworkCore.Tests
                 a.ATTRIBUTE_NAME,
 	            a.NET_ATTRIBUTE_NAME,
 	            a.link_id,
-                t.TYPE_NAME
+                t.TYPE_NAME,
+				mtm.r_content_id
             from
 	            CONTENT_ATTRIBUTE a
 	            join CONTENT c on a.CONTENT_ID = c.CONTENT_ID
                 join ATTRIBUTE_TYPE t on a.ATTRIBUTE_TYPE_ID = t.ATTRIBUTE_TYPE_ID
+				LEFT JOIN CONTENT_TO_CONTENT mtm ON a.LINK_ID = mtm.LINK_ID AND a.CONTENT_ID = mtm.l_content_id
             where
 	            c.SITE_ID = @siteId";
         #endregion
@@ -65,6 +67,7 @@ namespace EntityFrameworkCore.Tests
 
             var attributes = GetAttributes(connector, siteId);
             var contents = GetContents(connector, siteId, attributes);
+            attributes = AddM2MMappings(attributes, contents);
 
             var model = new ModelReader();
 
@@ -143,7 +146,8 @@ namespace EntityFrameworkCore.Tests
                     Name = row.Field<string>("ATTRIBUTE_NAME"),
                     MappedName = row.Field<string>("NET_ATTRIBUTE_NAME"),
                     LinkId = (int)(row.Field<decimal?>("LINK_ID") ?? 0),
-                    Type = row.Field<string>("TYPE_NAME")
+                    Type = row.Field<string>("TYPE_NAME"),
+                    RelatedContentId = (int)(row.Field<decimal?>("r_content_id") ?? 0)
                 })
                 .ToArray();
 
@@ -173,6 +177,70 @@ namespace EntityFrameworkCore.Tests
                     });
             }
             return attributesList.ToArray();
+        }
+
+        private AttributeInfo[] AddM2MMappings(AttributeInfo[] attributes, ContentInfo[] contents)
+        {
+            var attributesList = new List<AttributeInfo>(attributes);
+          
+            foreach (var item in attributes.Where(w => w.IsM2M))
+            {
+                var contentFrom = contents.FirstOrDefault(x => x.Id == item.ContentId);
+
+                if (contentFrom == null)
+                {                   
+                    continue;
+                }
+                var contentTo = contents.FirstOrDefault(x => x.Id == item.RelatedContentId);
+
+                if (contentTo == null)
+                {
+                    continue;
+                }
+                var attributeFrom = attributes.FirstOrDefault(x => x.LinkId == item.LinkId && item.ContentId == x.ContentId);
+                var attributeTo = attributes.FirstOrDefault(x => x.LinkId == item.LinkId && item.RelatedContentId == x.ContentId && (attributeFrom == null || attributeFrom.Id != x.Id));
+
+
+                if (attributeFrom == null)
+                {
+                    attributeFrom = GenM2M(contentTo, contentFrom, attributeTo, attributes.Max(x=>x.Id) + 1);
+                    attributesList.Add(attributeFrom);
+                    contentFrom.Attributes.Add(attributeFrom);
+                }
+
+                if (attributeTo == null)
+                {
+                    attributeTo = GenM2M(contentFrom, contentTo, attributeFrom, attributes.Max(x => x.Id) + 1);
+                    attributesList.Add(attributeTo);
+                    contentTo.Attributes.Add(attributeTo);
+                }
+
+            }
+            return attributesList.ToArray();
+        }
+        private AttributeInfo GenM2M(ContentInfo contentFrom, ContentInfo contentTo, AttributeInfo attr, int id)
+        {
+            var name = string.IsNullOrEmpty(attr.MappedBackName) ?
+                string.Format("BackwardFor{0}_{1}", attr.MappedName, contentFrom.MappedName)
+                : attr.MappedBackName;
+
+            var mappedName = name;
+
+            return new AttributeInfo
+            {
+                Id = id,
+                Name = name,
+                Type = "M2M",
+                MappedName = mappedName,
+                Link = attr.Link,
+                LinkId = attr.LinkId,
+                ContentId = contentTo.Id,
+                Description = string.Format("Auto-generated backing property for {0}/{1}", attr.Id, attr.Name, attr.MappedBackName),
+                Content = contentTo,
+                RelatedContent = contentFrom,
+                RelatedContentId = contentFrom.Id
+            };
+
         }
 
         private string GetType(AttributeInfo attribute)

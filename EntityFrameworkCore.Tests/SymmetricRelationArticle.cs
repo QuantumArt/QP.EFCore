@@ -10,7 +10,7 @@ namespace EntityFrameworkCore.Tests
     {
         public SymmetricRelationArticle()
         {
-			SymmetricRelation = new HashSet<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>();
+		    SymmetricRelation = new HashSet<ToSymmetricRelationAtricle>();
         }
 
         public virtual Int32 Id { get; set; }
@@ -25,6 +25,6 @@ namespace EntityFrameworkCore.Tests
 		/// <summary>
 		/// 
 		/// </summary>
-		public  ICollection<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation> SymmetricRelation { get; set; }
+		public  ICollection<ToSymmetricRelationAtricle> SymmetricRelation { get; set; }
 	}
 } 	

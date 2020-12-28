@@ -25,8 +25,7 @@ namespace EntityFrameworkCore.Tests.Pg.UpdateContentData
 
                     foreach (var d in dict)
                     {
-                        item.Reference.Add(
-                            new MtMItemForUpdate2MtMDictionaryForUpdateForReference() { MtMItemForUpdateItem = item, MtMDictionaryForUpdateLinkedItem = d  });
+                        item.Reference.Add(d);
                     }
                 }
 
@@ -47,8 +46,7 @@ namespace EntityFrameworkCore.Tests.Pg.UpdateContentData
 
                 foreach (var d in dict)
                 {
-                    item.Reference.Add(
-                        new MtMItemForUpdate2MtMDictionaryForUpdateForReference() { MtMItemForUpdateItem = item, MtMDictionaryForUpdateLinkedItem = d });
+                    item.Reference.Add(d);
                 }
 
                 context.MtMItemsForUpdate.Add(item);

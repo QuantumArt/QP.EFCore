@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>Quantumart.QP8.CoreCodeGeneration</AssemblyName>
     <RootNamespace>Quantumart.QP8.CoreCodeGeneration</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Quantumart.AspNetCore" Version="4.0.5" />
+    <PackageReference Include="Quantumart.AspNetCore" Version="5.0.0-beta" />
   </ItemGroup>
 
 </Project>

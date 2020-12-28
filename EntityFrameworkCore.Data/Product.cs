@@ -12,7 +12,7 @@ namespace EntityFrameworkCore.Data
         {
 		    Parameters = new HashSet<ProductParameter>();
 		    MobileTariffs = new HashSet<MobileTariff>();
-		    Regions = new HashSet<Product2RegionForRegions>();
+		    Regions = new HashSet<Region>();
         }
 
         public virtual Int32 Id { get; set; }
@@ -74,6 +74,6 @@ namespace EntityFrameworkCore.Data
 		/// <summary>
 		/// 
 		/// </summary>
-		public  ICollection<Product2RegionForRegions> Regions { get; set; }
+		public  ICollection<Region> Regions { get; set; }
 	}
 } 	

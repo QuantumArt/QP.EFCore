@@ -103,18 +103,6 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
 <#+
         }
 #>
-
-<#+		foreach(var content in model.Contents) { 
-	   		foreach(var attribute in content.Attributes.Where(x => x.IsM2M && x.IsSource == true)) { 
-#>
-		public virtual DbSet<<#=attribute.M2MClassName#>> <#=attribute.M2MPluralClassName#> { get; set; }
-
-<#+		if(settings.UseReversedAssociations && attribute.RelatedContent.SplitArticles) {
-#>
-		public virtual DbSet<<#=attribute.M2MReverseClassName#>> <#=attribute.M2MPluralReverseClassName#> { get; set; }
-<#+}#>
-<#+}#>
-<#+}#>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 			var schemaProvider = new StaticSchemaProvider();

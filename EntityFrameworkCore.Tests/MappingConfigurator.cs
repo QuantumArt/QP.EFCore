@@ -598,50 +598,54 @@ namespace EntityFrameworkCore.Tests
 				.IsRequired()
                 .HasForeignKey(x => x.StatusTypeId); 
 
-
-             modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>()
-                .ToTable(GetLinkTableName("ToSymmetricRelationAtricle", "ToSymmetricRelation"));
-
-            modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>().Property(e => e.ToSymmetricRelationAtricleItemId).HasColumnName("id");
-            modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>().Property(e => e.SymmetricRelationArticleLinkedItemId).HasColumnName("linked_id");
-            modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>().HasKey(ug => new { ug.ToSymmetricRelationAtricleItemId, ug.SymmetricRelationArticleLinkedItemId });
-
-            modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>()
-                .HasOne(bc => bc.ToSymmetricRelationAtricleItem)
-                .WithMany(b => b.ToSymmetricRelation)
-                .HasForeignKey(bc => bc.ToSymmetricRelationAtricleItemId);
-
-            modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>()
-                .HasOne(bc => bc.SymmetricRelationArticleLinkedItem)
-                .WithMany();
-			modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>().Ignore(x=>x.Id);
-			modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>().Ignore(x=>x.LinkId);
-			modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>().Ignore(x=>x.LinkedItemId);
-			modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>().Ignore(x=>x.Item);
-			modelBuilder.Entity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>().Ignore(x=>x.LinkedItem);
-
-			 modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>()
-                .ToTable(GetReversedLinkTableName("ToSymmetricRelationAtricle", "ToSymmetricRelation"));
-      
-
-			modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>().Property(e => e.ToSymmetricRelationAtricleLinkedItemId).HasColumnName("linked_id");
-			modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>().Property(e => e.SymmetricRelationArticleItemId).HasColumnName("id");
-			modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>().HasKey(ug => new { ug.ToSymmetricRelationAtricleLinkedItemId, ug.SymmetricRelationArticleItemId });
+            modelBuilder.Entity<ToSymmetricRelationAtricle>()
+                .HasMany(e => e.ToSymmetricRelation)
+                .WithMany(e => e.SymmetricRelation)
+                .UsingEntity<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation>(
+                bc => bc
+                    .HasOne(c => c.SymmetricRelationArticleLinkedItem)
+                    .WithMany()
+                    .HasForeignKey(c => c.SymmetricRelationArticleLinkedItemId),
+                bc => bc
+                    .HasOne(c => c.ToSymmetricRelationAtricleItem)
+                    .WithMany(),
+                bc => 
+                { 
+                    bc.Property(e => e.ToSymmetricRelationAtricleItemId).HasColumnName("id");
+                    bc.Property(e => e.SymmetricRelationArticleLinkedItemId).HasColumnName("linked_id");
+                    bc.HasKey(ug => new { ug.ToSymmetricRelationAtricleItemId, ug.SymmetricRelationArticleLinkedItemId });
+                    bc.Ignore(x=>x.Id);
+                    bc.Ignore(x=>x.LinkId);
+                    bc.Ignore(x=>x.LinkedItemId);
+                    bc.Ignore(x=>x.Item);
+                    bc.Ignore(x=>x.LinkedItem);
+                    bc.ToTable(GetLinkTableName("ToSymmetricRelationAtricle", "ToSymmetricRelation"));
+                });
             
-			 modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>()
-                .HasOne(bc => bc.SymmetricRelationArticleItem)
-                .WithMany(b => b.SymmetricRelation)
-                .HasForeignKey(bc => bc.SymmetricRelationArticleItemId);
+            modelBuilder.Entity<ToSymmetricRelationAtricle>()
+                .HasMany(e => e.ToSymmetricRelation)
+                .WithMany(e => e.SymmetricRelation)
+                .UsingEntity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>(
+                bc => bc
+                    .HasOne(c => c.SymmetricRelationArticleItem)
+                    .WithMany()
+                    .HasForeignKey(c => c.SymmetricRelationArticleItemId),
+                bc => bc
+                    .HasOne(c => c.ToSymmetricRelationAtricleLinkedItem)
+                    .WithMany(),
+                bc => 
+                { 
+                    bc.Property(e => e.ToSymmetricRelationAtricleLinkedItemId).HasColumnName("linked_id");
+                    bc.Property(e => e.SymmetricRelationArticleItemId).HasColumnName("id");
+                    bc.HasKey(ug => new { ug.ToSymmetricRelationAtricleLinkedItemId, ug.SymmetricRelationArticleItemId });
+                    bc.Ignore(x=>x.Id);
+                    bc.Ignore(x=>x.LinkId);
+                    bc.Ignore(x=>x.LinkedItemId);
+                    bc.Ignore(x=>x.Item);
+                    bc.Ignore(x=>x.LinkedItem);
+                    bc.ToTable(GetReversedLinkTableName("ToSymmetricRelationAtricle", "ToSymmetricRelation"));
+                });
 
-            modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>()
-                .HasOne(bc => bc.ToSymmetricRelationAtricleLinkedItem)
-                .WithMany();
-
-			modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>().Ignore(x=>x.Id);
-			modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>().Ignore(x=>x.LinkId);
-			modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>().Ignore(x=>x.LinkedItemId);
-			modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>().Ignore(x=>x.Item);
-			modelBuilder.Entity<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation>().Ignore(x=>x.LinkedItem);
  
             #endregion
 
@@ -687,50 +691,54 @@ namespace EntityFrameworkCore.Tests
             modelBuilder.Entity<MtMItemForUpdate>()
                 .Property(x => x.Title)
                 .HasColumnName(GetFieldName("MtMItemForUpdate", "Title"));
-
-             modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>()
-                .ToTable(GetLinkTableName("MtMItemForUpdate", "Reference"));
-
-            modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>().Property(e => e.MtMItemForUpdateItemId).HasColumnName("id");
-            modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>().Property(e => e.MtMDictionaryForUpdateLinkedItemId).HasColumnName("linked_id");
-            modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>().HasKey(ug => new { ug.MtMItemForUpdateItemId, ug.MtMDictionaryForUpdateLinkedItemId });
-
-            modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>()
-                .HasOne(bc => bc.MtMItemForUpdateItem)
-                .WithMany(b => b.Reference)
-                .HasForeignKey(bc => bc.MtMItemForUpdateItemId);
-
-            modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>()
-                .HasOne(bc => bc.MtMDictionaryForUpdateLinkedItem)
-                .WithMany();
-			modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>().Ignore(x=>x.Id);
-			modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>().Ignore(x=>x.LinkId);
-			modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>().Ignore(x=>x.LinkedItemId);
-			modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>().Ignore(x=>x.Item);
-			modelBuilder.Entity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>().Ignore(x=>x.LinkedItem);
-
-			 modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >()
-                .ToTable(GetReversedLinkTableName("MtMItemForUpdate", "Reference"));
-      
-
-			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >().Property(e => e.MtMItemForUpdateLinkedItemId).HasColumnName("linked_id");
-			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >().Property(e => e.MtMDictionaryForUpdateItemId).HasColumnName("id");
-			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >().HasKey(ug => new { ug.MtMItemForUpdateLinkedItemId, ug.MtMDictionaryForUpdateItemId });
+            modelBuilder.Entity<MtMItemForUpdate>()
+                .HasMany(e => e.Reference)
+                .WithMany(e => e.BackwardForReference_MtMItemForUpdate)
+                .UsingEntity<MtMItemForUpdate2MtMDictionaryForUpdateForReference>(
+                bc => bc
+                    .HasOne(c => c.MtMDictionaryForUpdateLinkedItem)
+                    .WithMany()
+                    .HasForeignKey(c => c.MtMDictionaryForUpdateLinkedItemId),
+                bc => bc
+                    .HasOne(c => c.MtMItemForUpdateItem)
+                    .WithMany(),
+                bc => 
+                { 
+                    bc.Property(e => e.MtMItemForUpdateItemId).HasColumnName("id");
+                    bc.Property(e => e.MtMDictionaryForUpdateLinkedItemId).HasColumnName("linked_id");
+                    bc.HasKey(ug => new { ug.MtMItemForUpdateItemId, ug.MtMDictionaryForUpdateLinkedItemId });
+                    bc.Ignore(x=>x.Id);
+                    bc.Ignore(x=>x.LinkId);
+                    bc.Ignore(x=>x.LinkedItemId);
+                    bc.Ignore(x=>x.Item);
+                    bc.Ignore(x=>x.LinkedItem);
+                    bc.ToTable(GetLinkTableName("MtMItemForUpdate", "Reference"));
+                });
             
-			 modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >()
-                .HasOne(bc => bc.MtMDictionaryForUpdateItem)
-                .WithMany(b => b.BackwardForReference_MtMItemForUpdate )
-                .HasForeignKey(bc => bc.MtMDictionaryForUpdateItemId);
+            modelBuilder.Entity<MtMItemForUpdate>()
+                .HasMany(e => e.Reference)
+                .WithMany(e => e.BackwardForReference_MtMItemForUpdate)
+                .UsingEntity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate>(
+                bc => bc
+                    .HasOne(c => c.MtMDictionaryForUpdateItem)
+                    .WithMany()
+                    .HasForeignKey(c => c.MtMDictionaryForUpdateItemId),
+                bc => bc
+                    .HasOne(c => c.MtMItemForUpdateLinkedItem)
+                    .WithMany(),
+                bc => 
+                { 
+                    bc.Property(e => e.MtMItemForUpdateLinkedItemId).HasColumnName("linked_id");
+                    bc.Property(e => e.MtMDictionaryForUpdateItemId).HasColumnName("id");
+                    bc.HasKey(ug => new { ug.MtMItemForUpdateLinkedItemId, ug.MtMDictionaryForUpdateItemId });
+                    bc.Ignore(x=>x.Id);
+                    bc.Ignore(x=>x.LinkId);
+                    bc.Ignore(x=>x.LinkedItemId);
+                    bc.Ignore(x=>x.Item);
+                    bc.Ignore(x=>x.LinkedItem);
+                    bc.ToTable(GetReversedLinkTableName("MtMItemForUpdate", "Reference"));
+                });
 
-            modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >()
-                .HasOne(bc => bc.MtMItemForUpdateLinkedItem)
-                .WithMany();
-
-			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >().Ignore(x=>x.Id);
-			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >().Ignore(x=>x.LinkId);
-			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >().Ignore(x=>x.LinkedItemId);
-			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >().Ignore(x=>x.Item);
-			modelBuilder.Entity<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate >().Ignore(x=>x.LinkedItem);
  
             #endregion
 

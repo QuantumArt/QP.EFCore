@@ -406,8 +406,8 @@ namespace EntityFrameworkCore.Tests.Pg
                 {
                     Id = 41551,
                     ContentId = 994,
-                    Name = "BackwardForReference_MtMItemForUpdate ",
-                    MappedName = "BackwardForReference_MtMItemForUpdate ",
+                    Name = "BackwardForReference_MtMItemForUpdate",
+                    MappedName = "BackwardForReference_MtMItemForUpdate",
                     LinkId = 149,
                     Type = "M2M"
                 },

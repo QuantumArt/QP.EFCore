@@ -108,12 +108,6 @@ namespace EntityFrameworkCore.Tests
         public virtual DbSet<OtMItemToContentWithoutMapping> OtMItemsToContentWithoutMapping { get; set; }
         public virtual DbSet<BooleanItemForUpdate> BooleanItemsForUpdate { get; set; }
         public virtual DbSet<OtMItemForUpdateVirtual> OtMItemForUpdateVirtuals { get; set; }
-		public virtual DbSet<ToSymmetricRelationAtricle2SymmetricRelationArticleForToSymmetricRelation> ToSymmetricRelationAtricle2SymmetricRelationArticlesForToSymmetricRelation { get; set; }
-
-		public virtual DbSet<SymmetricRelationArticle2ToSymmetricRelationAtricleForSymmetricRelation> SymmetricRelationArticle2ToSymmetricRelationAtriclesForSymmetricRelation { get; set; }
-		public virtual DbSet<MtMItemForUpdate2MtMDictionaryForUpdateForReference> MtMItemForUpdate2MtMDictionaryForUpdateForReference { get; set; }
-
-		public virtual DbSet<MtMDictionaryForUpdate2MtMItemForUpdateForBackwardForReference_MtMItemForUpdate > MtMDictionaryForUpdate2MtMItemsForUpdateForBackwardForReference_MtMItemForUpdate  { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 			var schemaProvider = new StaticSchemaProvider();

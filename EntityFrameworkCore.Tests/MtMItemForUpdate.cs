@@ -10,7 +10,7 @@ namespace EntityFrameworkCore.Tests
     {
         public MtMItemForUpdate()
         {
-		    Reference = new HashSet<MtMItemForUpdate2MtMDictionaryForUpdateForReference>();
+		    Reference = new HashSet<MtMDictionaryForUpdate>();
         }
 
         public virtual Int32 Id { get; set; }
@@ -31,6 +31,6 @@ namespace EntityFrameworkCore.Tests
 		/// <summary>
 		/// 
 		/// </summary>
-		public  ICollection<MtMItemForUpdate2MtMDictionaryForUpdateForReference> Reference { get; set; }
+		public  ICollection<MtMDictionaryForUpdate> Reference { get; set; }
 	}
 } 	

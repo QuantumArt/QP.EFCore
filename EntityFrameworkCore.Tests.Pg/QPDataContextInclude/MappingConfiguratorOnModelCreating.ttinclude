@@ -84,90 +84,98 @@ base.OnModelCreating(modelBuilder);
                 if(!settings.UseReversedAssociations || !attribute.RelatedContent.SplitArticles)
                 {
 #>
-			 modelBuilder.Entity<<#=attribute.M2MClassName#>>()
-                .ToTable(<#=getLinkTableMapping(content, attribute)#>);
-
-            modelBuilder.Entity<<#=attribute.M2MClassName#>>().Property(e => e.<#=attribute.M2MPropertyName#>Id).HasColumnName("id");
-            modelBuilder.Entity<<#=attribute.M2MClassName#>>().Property(e => e.<#=attribute.M2MRelatedPropertyName#>Id).HasColumnName("linked_id");
-            modelBuilder.Entity<<#=attribute.M2MClassName#>>().HasKey(ug => new { ug.<#=attribute.M2MPropertyName#>Id, ug.<#=attribute.M2MRelatedPropertyName#>Id });
-			modelBuilder.Entity<<#=attribute.M2MClassName#>>().Ignore(x=>x.Id);
-			modelBuilder.Entity<<#=attribute.M2MClassName#>>().Ignore(x=>x.LinkId);
-			modelBuilder.Entity<<#=attribute.M2MClassName#>>().Ignore(x=>x.LinkedItemId);
-			modelBuilder.Entity<<#=attribute.M2MClassName#>>().Ignore(x=>x.Item);
-			modelBuilder.Entity<<#=attribute.M2MClassName#>>().Ignore(x=>x.LinkedItem);
-            modelBuilder.Entity<<#=attribute.M2MClassName#>>()
-                .HasOne(bc => bc.<#=attribute.M2MPropertyName#>)
-                .WithMany(b => b.<#=attribute.MappedName#>)
-                .HasForeignKey(bc => bc.<#=attribute.M2MPropertyName#>Id);
-
-            modelBuilder.Entity<<#=attribute.M2MClassName#>>()
-                .HasOne(bc => bc.<#=attribute.M2MRelatedPropertyName#>)
-                .WithMany(c => c.<#=attribute.RelatedAttribute.MappedName#>)
-                .HasForeignKey(bc => bc.<#=attribute.M2MRelatedPropertyName#>Id);
+			modelBuilder.Entity<<#=attribute.Content.MappedName#>>()
+                .HasMany(e => e.<#=attribute.MappedName#>)
+                .WithMany(e => e.<#=attribute.RelatedAttribute.MappedName#>)
+                .UsingEntity<<#=attribute.M2MClassName#>>(
+                bc => bc
+                    .HasOne(c => c.<#=attribute.M2MPropertyName#>)
+                    .WithMany()
+                    .HasForeignKey(c => c.<#=attribute.M2MPropertyName#>Id),
+                bc => bc
+                    .HasOne(c => c.<#=attribute.M2MRelatedPropertyName#>)
+                    .WithMany()
+                    .HasForeignKey(c => c.<#=attribute.M2MRelatedPropertyName#>Id),
+                bc => 
+                { 
+                    bc.Property(e => e.<#=attribute.M2MPropertyName#>Id).HasColumnName("id");
+                    bc.Property(e => e.<#=attribute.M2MRelatedPropertyName#>Id).HasColumnName("linked_id");
+                    bc.HasKey(ug => new { ug.<#=attribute.M2MPropertyName#>Id, ug.<#=attribute.M2MRelatedPropertyName#>Id });
+                    bc.Ignore(x=>x.Id);
+                    bc.Ignore(x=>x.LinkId);
+                    bc.Ignore(x=>x.LinkedItemId);
+                    bc.Ignore(x=>x.Item);
+                    bc.Ignore(x=>x.LinkedItem);
+                    bc.ToTable(<#=getLinkTableMapping(content, attribute)#>);
+                });
 <#+
                 }
                 else
                 {
 #>
-
-             modelBuilder.Entity<<#=attribute.M2MClassName#>>()
-                .ToTable(<#=getLinkTableMapping(content, attribute)#>);
-
-            modelBuilder.Entity<<#=attribute.M2MClassName#>>().Property(e => e.<#=attribute.M2MPropertyName#>Id).HasColumnName("id");
-            modelBuilder.Entity<<#=attribute.M2MClassName#>>().Property(e => e.<#=attribute.M2MRelatedPropertyName#>Id).HasColumnName("linked_id");
-            modelBuilder.Entity<<#=attribute.M2MClassName#>>().HasKey(ug => new { ug.<#=attribute.M2MPropertyName#>Id, ug.<#=attribute.M2MRelatedPropertyName#>Id });
-
-            modelBuilder.Entity<<#=attribute.M2MClassName#>>()
-                .HasOne(bc => bc.<#=attribute.M2MPropertyName#>)
-                .WithMany(b => b.<#=attribute.MappedName#>)
-                .HasForeignKey(bc => bc.<#=attribute.M2MPropertyName#>Id);
-
-            modelBuilder.Entity<<#=attribute.M2MClassName#>>()
-                .HasOne(bc => bc.<#=attribute.M2MRelatedPropertyName#>)
-                .WithMany();
-			modelBuilder.Entity<<#=attribute.M2MClassName#>>().Ignore(x=>x.Id);
-			modelBuilder.Entity<<#=attribute.M2MClassName#>>().Ignore(x=>x.LinkId);
-			modelBuilder.Entity<<#=attribute.M2MClassName#>>().Ignore(x=>x.LinkedItemId);
-			modelBuilder.Entity<<#=attribute.M2MClassName#>>().Ignore(x=>x.Item);
-			modelBuilder.Entity<<#=attribute.M2MClassName#>>().Ignore(x=>x.LinkedItem);
-
-			 modelBuilder.Entity<<#=attribute.M2MReverseClassName#>>()
-                .ToTable(<#=getReversedLinkTableMapping(content, attribute)#>);
-      
-
+            modelBuilder.Entity<<#=attribute.Content.MappedName#>>()
+                .HasMany(e => e.<#=attribute.MappedName#>)
+                .WithMany(e => e.<#=attribute.RelatedAttribute.MappedName#>)
+                .UsingEntity<<#=attribute.M2MClassName#>>(
+                bc => bc
+                    .HasOne(c => c.<#=attribute.M2MRelatedPropertyName#>)
+                    .WithMany()
+                    .HasForeignKey(c => c.<#=attribute.M2MRelatedPropertyName#>Id),
+                bc => bc
+                    .HasOne(c => c.<#=attribute.M2MPropertyName#>)
+                    .WithMany(),
+                bc => 
+                { 
+                    bc.Property(e => e.<#=attribute.M2MPropertyName#>Id).HasColumnName("id");
+                    bc.Property(e => e.<#=attribute.M2MRelatedPropertyName#>Id).HasColumnName("linked_id");
+                    bc.HasKey(ug => new { ug.<#=attribute.M2MPropertyName#>Id, ug.<#=attribute.M2MRelatedPropertyName#>Id });
+                    bc.Ignore(x=>x.Id);
+                    bc.Ignore(x=>x.LinkId);
+                    bc.Ignore(x=>x.LinkedItemId);
+                    bc.Ignore(x=>x.Item);
+                    bc.Ignore(x=>x.LinkedItem);
+                    bc.ToTable(<#=getLinkTableMapping(content, attribute)#>);
+                });
+            
+            modelBuilder.Entity<<#=attribute.Content.MappedName#>>()
+                .HasMany(e => e.<#=attribute.MappedName#>)
+                .WithMany(e => e.<#=attribute.RelatedAttribute.MappedName#>)
+                .UsingEntity<<#=attribute.M2MReverseClassName#>>(
+                bc => bc
+                    .HasOne(c => c.<#=attribute.M2MReverseRelatedPropertyName#>)
+                    .WithMany()
+                    .HasForeignKey(c => c.<#=attribute.M2MReverseRelatedPropertyName#>Id),
+                bc => bc
+                    .HasOne(c => c.<#=attribute.M2MReversePropertyName#>)
+                    .WithMany(),
+                bc => 
+                { 
 <#+
                     if(attribute.ContentId != attribute.RelatedContentId)
                     {
 #>
-			modelBuilder.Entity<<#=attribute.M2MReverseClassName#>>().Property(e => e.<#=attribute.M2MReversePropertyName#>Id).HasColumnName("linked_id");
-			modelBuilder.Entity<<#=attribute.M2MReverseClassName#>>().Property(e => e.<#=attribute.M2MReverseRelatedPropertyName#>Id).HasColumnName("id");
+                    bc.Property(e => e.<#=attribute.M2MReversePropertyName#>Id).HasColumnName("linked_id");
+                    bc.Property(e => e.<#=attribute.M2MReverseRelatedPropertyName#>Id).HasColumnName("id");
 <#+
                     }
                     else
                     {
 #>
-			modelBuilder.Entity<<#=attribute.M2MReverseClassName#>>().Property(e => e.<#=attribute.M2MReversePropertyName#>Id).HasColumnName("id");
-			modelBuilder.Entity<<#=attribute.M2MReverseClassName#>>().Property(e => e.<#=attribute.M2MReverseRelatedPropertyName#>Id).HasColumnName("linked_id");
+			        bc.Property(e => e.<#=attribute.M2MReversePropertyName#>Id).HasColumnName("id");
+			        bc.Property(e => e.<#=attribute.M2MReverseRelatedPropertyName#>Id).HasColumnName("linked_id");
            
 <#+
                     }
 #>
-			modelBuilder.Entity<<#=attribute.M2MReverseClassName#>>().HasKey(ug => new { ug.<#=attribute.M2MReversePropertyName#>Id, ug.<#=attribute.M2MReverseRelatedPropertyName#>Id });
-            
-			 modelBuilder.Entity<<#=attribute.M2MReverseClassName#>>()
-                .HasOne(bc => bc.<#=attribute.M2MReverseRelatedPropertyName#>)
-                .WithMany(b => b.<#=attribute.RelatedAttribute.MappedName#>)
-                .HasForeignKey(bc => bc.<#=attribute.M2MReverseRelatedPropertyName#>Id);
+                    bc.HasKey(ug => new { ug.<#=attribute.M2MReversePropertyName#>Id, ug.<#=attribute.M2MReverseRelatedPropertyName#>Id });
+                    bc.Ignore(x=>x.Id);
+                    bc.Ignore(x=>x.LinkId);
+                    bc.Ignore(x=>x.LinkedItemId);
+                    bc.Ignore(x=>x.Item);
+                    bc.Ignore(x=>x.LinkedItem);
+                    bc.ToTable(<#=getReversedLinkTableMapping(content, attribute)#>);
+                });
 
-            modelBuilder.Entity<<#=attribute.M2MReverseClassName#>>()
-                .HasOne(bc => bc.<#=attribute.M2MReversePropertyName#>)
-                .WithMany();
-
-			modelBuilder.Entity<<#=attribute.M2MReverseClassName#>>().Ignore(x=>x.Id);
-			modelBuilder.Entity<<#=attribute.M2MReverseClassName#>>().Ignore(x=>x.LinkId);
-			modelBuilder.Entity<<#=attribute.M2MReverseClassName#>>().Ignore(x=>x.LinkedItemId);
-			modelBuilder.Entity<<#=attribute.M2MReverseClassName#>>().Ignore(x=>x.Item);
-			modelBuilder.Entity<<#=attribute.M2MReverseClassName#>>().Ignore(x=>x.LinkedItem);
 <#+
                 }
             }

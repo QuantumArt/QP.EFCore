@@ -11,11 +11,11 @@ namespace EntityFrameworkCore.Data
         public Region()
         {
 		    Children = new HashSet<Region>();
-		    AllowedRegions = new HashSet<Region2RegionForAllowedRegions>();
-		    DeniedRegions = new HashSet<Region2RegionForDeniedRegions>();
-			BackwardForRegions_Product = new HashSet<Region2ProductForBackwardForRegions_Product>();
-			BackwardForAllowedRegions_Region = new HashSet<Region2RegionForBackwardForAllowedRegions_Region>();
-			BackwardForDeniedRegions_Region = new HashSet<Region2RegionForBackwardForDeniedRegions_Region>();
+		    AllowedRegions = new HashSet<Region>();
+		    DeniedRegions = new HashSet<Region>();
+		    BackwardForRegions_Product = new HashSet<Product>();
+		    BackwardForAllowedRegions_Region = new HashSet<Region>();
+		    BackwardForDeniedRegions_Region = new HashSet<Region>();
         }
 
         public virtual Int32 Id { get; set; }
@@ -55,22 +55,22 @@ namespace EntityFrameworkCore.Data
 		/// <summary>
 		/// 
 		/// </summary>
-		public  ICollection<Region2RegionForAllowedRegions> AllowedRegions { get; set; }
+		public  ICollection<Region> AllowedRegions { get; set; }
 		/// <summary>
 		/// 
 		/// </summary>
-		public  ICollection<Region2RegionForDeniedRegions> DeniedRegions { get; set; }
+		public  ICollection<Region> DeniedRegions { get; set; }
 		/// <summary>
 		/// Auto-generated backing property for 1228/Regions
 		/// </summary>
-		public  ICollection<Region2ProductForBackwardForRegions_Product> BackwardForRegions_Product { get; set; }
+		public  ICollection<Product> BackwardForRegions_Product { get; set; }
 		/// <summary>
 		/// Auto-generated backing property for 1659/AllowedRegions
 		/// </summary>
-		public  ICollection<Region2RegionForBackwardForAllowedRegions_Region> BackwardForAllowedRegions_Region { get; set; }
+		public  ICollection<Region> BackwardForAllowedRegions_Region { get; set; }
 		/// <summary>
 		/// Auto-generated backing property for 1660/DeniedRegions
 		/// </summary>
-		public  ICollection<Region2RegionForBackwardForDeniedRegions_Region> BackwardForDeniedRegions_Region { get; set; }
+		public  ICollection<Region> BackwardForDeniedRegions_Region { get; set; }
 	}
 } 	
