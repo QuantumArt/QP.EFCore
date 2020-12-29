@@ -62,7 +62,7 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
 		public IQPArticle LinkedItem { get { return <#=attribute.M2MRelatedPropertyName#>; } }
 	}
 
-<#+	 if(settings.UseReversedAssociations && attribute.RelatedContent.SplitArticles)
+<#+	 if(attribute.RelatedContent.SplitArticles)
 		{
 #>
 	public partial class <#=attribute.M2MReverseClassName#>: IQPLink

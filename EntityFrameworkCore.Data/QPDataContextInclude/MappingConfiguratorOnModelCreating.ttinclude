@@ -81,7 +81,7 @@ base.OnModelCreating(modelBuilder);
 
             foreach (var attribute in content.Attributes.Where(x => x.IsM2M && x.IsSource == true))
             {
-                if(!settings.UseReversedAssociations || !attribute.RelatedContent.SplitArticles)
+                if(!attribute.RelatedContent.SplitArticles)
                 {
 #>
 			modelBuilder.Entity<<#=attribute.Content.MappedName#>>()

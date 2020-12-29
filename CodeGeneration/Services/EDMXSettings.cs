@@ -18,7 +18,6 @@ namespace Quantumart.QP8.CoreCodeGeneration.Services
         public bool GenerateInterface { get; set; }
         public bool GenerateMappingInterface { get; set; }
         public bool UseContextNameAsConnectionString { get; set; }
-        public bool UseReversedAssociations { get; set; }
         public bool PlaceContentsInSeparateFiles { get; set; }
         public string Usings { get; set; }
         public Localization Localization { get; set; }
@@ -45,7 +44,6 @@ namespace Quantumart.QP8.CoreCodeGeneration.Services
                 GenerateExtensions = RootUtil.GetElementValue<bool>(x, "GenerateExtensions"),
                 GenerateInterface = RootUtil.GetElementValue<bool>(x, "GenerateInterface"),
                 PlaceContentsInSeparateFiles = RootUtil.GetElementValue<bool>(x, "PlaceContentsInSeparateFiles"),
-                UseReversedAssociations = RootUtil.GetElementValue<bool>(x, "UseReversedAssociations"),
                 Localization = x.Descendants("Localization").Select(
                     l => new Localization
                     {

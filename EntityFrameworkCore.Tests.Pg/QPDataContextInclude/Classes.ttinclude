@@ -91,7 +91,7 @@ namespace <#=System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("Names
 		/// <summary>
 		/// <#=attribute.Description??""#>
 		/// </summary>
-<#+		if(attribute.IsSource == true || (!settings.UseReversedAssociations || !attribute.Content.SplitArticles)) { #>
+<#+		if(attribute.IsSource == true || !attribute.Content.SplitArticles) { #>
 		public <#+ if( settings.ProxyCreationEnabled ) { #> virtual <#+}#> ICollection<<#=attribute.RelatedContent.MappedName#>> <#=attribute.MappedName#> { get; set; }
 <#+		} else { #>
 		public <#+ if( settings.ProxyCreationEnabled ) { #> virtual <#+}#> ICollection<<#=attribute.RelatedContent.MappedName#>> <#=attribute.MappedName#> { get; set; }

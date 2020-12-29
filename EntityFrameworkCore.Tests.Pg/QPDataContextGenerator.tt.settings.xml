@@ -11,10 +11,7 @@
   
   <!--использовать имя класса модели в качестве имени строки подключения-->
   <UseContextNameAsConnectionString>true</UseContextNameAsConnectionString>
-  
-  <!--генерировать маппиинг с использованием обратных таблиц для связей М2М-->
-  <UseReversedAssociations>true</UseReversedAssociations>
-  
+
   <!--Использовать прокси-->
   <ProxyCreationEnabled>false</ProxyCreationEnabled>
   <LazyLoadingEnabled>true</LazyLoadingEnabled>
