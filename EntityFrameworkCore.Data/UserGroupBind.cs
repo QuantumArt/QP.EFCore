@@ -16,3 +16,4 @@ namespace EntityFrameworkCore.Data
         public virtual UserGroup UserGroup { get; set; }
     }
 }
+	

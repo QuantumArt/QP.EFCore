@@ -15,4 +15,6 @@ namespace EntityFrameworkCore.Templates
         public virtual User User { get; set; }
         public virtual UserGroup UserGroup { get; set; }
     }
-}
+}	
+	
+	

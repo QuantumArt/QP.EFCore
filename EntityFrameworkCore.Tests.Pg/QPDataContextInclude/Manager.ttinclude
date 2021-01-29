@@ -236,8 +236,8 @@ class FlatternTemplateProcessor : IContentProcessor
 {
 	private static Regex IncludeRegex = new Regex(@"(#@\s*include\s+file="")(.*)(\\[^\\]*)(""\s*#)", RegexOptions.Compiled);
 	private static Regex CodeFileRegex = new Regex(@"(AddCodeFile\(@?"")(.*)(\\[^\\""]*)("")", RegexOptions.Compiled);
-	private const string ReplacePath = @"$(SolutionDir)\CodeGeneration\bin\Debug\netcoreapp2.1\Quantumart.QP8.CoreCodeGeneration.dll";
-	private const string NewPath = @"$(NuGetPackageRoot){0}\{1}\lib\net5.0\Quantumart.QP8.CoreCodeGeneration.dll";
+	private const string ReplacePath = @"$(SolutionDir)\CodeGeneration\bin\Debug\net5.0\Quantumart.QP8.CoreCodeGeneration.dll";
+	private const string NewPath = @"$(NuGetPackageRoot){0}\{1}\lib\netstandard2.0\Quantumart.QP8.CoreCodeGeneration.dll";
 
 	private readonly string _newPath;
 

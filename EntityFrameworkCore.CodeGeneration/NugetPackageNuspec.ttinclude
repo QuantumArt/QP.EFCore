@@ -36,6 +36,7 @@
       <file src="QPDataContextGenerator.tt.settings.xml" target="content" />
     <file src="ModelMappingResult.xml" target="content" />
     <file src="bin\release\net5.0\Quantumart.QP8.CoreCodeGeneration.dll" target="lib\net5.0"/>
+    <file src="Quantumart.QP8.CoreCodeGeneration.dll" target="lib\netstandard2.0"/>
     <file src="QP8.EntityFrameworkCore.props" target="build\QP8.EntityFrameworkCore.props" />
     <file src="QP8.EntityFrameworkCore.targets" target="build\QP8.EntityFrameworkCore.targets" />
   </files>
