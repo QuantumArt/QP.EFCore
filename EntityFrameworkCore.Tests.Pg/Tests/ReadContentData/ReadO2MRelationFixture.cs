@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using Quantumart.QP8.EntityFrameworkCore.Generator.EmbeddedModels;
 
 namespace EntityFrameworkCore.Tests.Pg.ReadContentData
 {

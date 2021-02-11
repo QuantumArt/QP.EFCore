@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System;
 using EntityFrameworkCore.Tests.Infrastructure;
+using Quantumart.QP8.EntityFrameworkCore.Generator.EmbeddedModels;
 
 namespace EntityFrameworkCore.Tests.ReadContentData
 {

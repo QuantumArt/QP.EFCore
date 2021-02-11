@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 using Npgsql;
+using Quantumart.QP8.EntityFrameworkCore.Generator.EmbeddedModels;
 
 namespace EntityFrameworkCore.Tests.Pg.ReadSystemData
 {

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<package >
+	<metadata>
+		<id>QP8.EntityFrameworkCore</id>
+		<version>3.0.0</version>
+		<title>QP8.EntityFrameworkCore</title>
+		<authors>Quantum Art</authors>
+		<owners>Quantum Art</owners>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Entity Framework Core 3 class generator via c#9 source generators</description>
+		<releaseNotes>Add creation data context for EntityFrameworkCore</releaseNotes>
+		<copyright>Copyright © 2007-2021 Quantum Art</copyright>
+		<tags>QP8 EntityFrameworkCore</tags>
+		<dependencies>
+			<group targetFramework="net5.0">
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="3.8.0" exclude="Build,Analyzers" />
+				<dependency id="Microsoft.EntityFrameworkCore" version="5.0.1" />
+				<dependency id="Microsoft.EntityFrameworkCore.Relational" version="5.0.1" />
+				<dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="5.0.1" />
+				<dependency id="Microsoft.Extensions.Configuration.Json" version="5.0.0" />
+				<dependency id="Npgsql.EntityFrameworkCore.PostgreSQL" version="5.0.1" />
+				<dependency id="System.Data.DataSetExtensions" version="4.5.0" />
+				<dependency id="QP.ConfigurationService.Client" version="0.2.0"/>
+				<dependency id="Quantumart.AspNetCore" version="5.0.0-beta" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="bin\Release\netstandard2.0\Quantumart.QP8.EntityFrameworkCore.Generator.dll" target="lib\net5.0\Quantumart.QP8.EntityFrameworkCore.Generator.dll" />
+		<file src="bin\Release\netstandard2.0\Quantumart.QP8.EntityFrameworkCore.Generator.dll" target="analyzers\dotnet\cs\Quantumart.QP8.EntityFrameworkCore.Generator.dll" />
+
+		<file src="Resources\QP8.EntityFrameworkCore.props" target="build\QP8.EntityFrameworkCore.props" />
+		<file src="Resources\QP8.EntityFrameworkCore.targets" target="build\QP8.EntityFrameworkCore.targets" />
+
+		<file src="Resources\Readme.txt" target="Content" />
+		<file src="Resources\QPDataContextGenerator.tt.settings.xml" target="Content" />
+		<file src="Resources\ModelMappingResult.xml" target="Content" />
+
+
+	</files>
+</package>

@@ -1,6 +1,7 @@
 ﻿using EntityFrameworkCore.Tests.Pg.Infrastructure;
 using NUnit.Framework;
 using System;
+using Quantumart.QP8.EntityFrameworkCore.Generator.EmbeddedModels;
 
 namespace EntityFrameworkCore.Tests.Pg.UpdateContentData
 {

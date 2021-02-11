@@ -2,6 +2,7 @@
 using Npgsql;
 using NUnit.Framework;
 using System.Linq;
+using Quantumart.QP8.EntityFrameworkCore.Generator.EmbeddedModels;
 
 namespace EntityFrameworkCore.Tests.Pg.Shema
 {

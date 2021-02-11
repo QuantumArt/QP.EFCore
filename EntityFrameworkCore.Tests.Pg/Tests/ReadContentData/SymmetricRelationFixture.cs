@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using EntityFrameworkCore.Tests.Pg.Infrastructure;
 using Npgsql;
 using NUnit.Framework;
+using Quantumart.QP8.EntityFrameworkCore.Generator.EmbeddedModels;
 
 namespace EntityFrameworkCore.Tests.Pg.ReadContentData
 {

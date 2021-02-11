@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using NUnit.Framework;
+using Quantumart.QP8.EntityFrameworkCore.Generator.EmbeddedModels;
 
 namespace EntityFrameworkCore.Tests.Infrastructure
 {
