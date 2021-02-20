@@ -1,6 +1,7 @@
 ﻿* Dont forget to increase package version in .nuspec
+
 To generate version of .nupkg just run command
-> dotnet pack EntityFrameworkCore.Generator.csproj -p:NuspecFile=NugetPackage.nuspec
+> dotnet pack EntityFrameworkCore.Generator.csproj -p:NuspecFile=NugetPackage.nuspec -c Release
 
 To push to nuget repository
 > dotnet nuget push QP8.EntityFrameworkCore.3.0.0-beta1.nupkg -k QA_TFS_Build -s http://spbdev01.artq.com:7777

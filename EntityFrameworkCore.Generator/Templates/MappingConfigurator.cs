@@ -141,13 +141,13 @@ namespace {ns}
                 .WithMany(e => e.{attribute.RelatedAttribute.MappedName})
                 .UsingEntity<{attribute.M2MClassName}>(
                 bc => bc
-                    .HasOne(c => c.{attribute.M2MPropertyName})
-                    .WithMany()
-                    .HasForeignKey(c => c.{attribute.M2MPropertyName}Id),
-                bc => bc
                     .HasOne(c => c.{attribute.M2MRelatedPropertyName})
                     .WithMany()
                     .HasForeignKey(c => c.{attribute.M2MRelatedPropertyName}Id),
+                bc => bc
+                    .HasOne(c => c.{attribute.M2MPropertyName})
+                    .WithMany()
+                    .HasForeignKey(c => c.{attribute.M2MPropertyName}Id),
                 bc => 
                 {{ 
                         bc.Property(e => e.{attribute.M2MPropertyName}Id).HasColumnName(""id"");
