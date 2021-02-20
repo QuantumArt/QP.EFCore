@@ -1,9 +1,0 @@
-<#@ template debug="false" hostspecific="true" language="C#" #>
-<#+ void AddProps(NugetContext context){#>
-<#= "<?xml version=\"1.0\"?>" #>
-<Project>
-  <PropertyGroup>
-    <NugetPackageFolder>$(NuGetPackageRoot)<#=context.PackageName + "\\" + context.Version#></NugetPackageFolder>
-  </PropertyGroup>
-</Project>
-<#+}#>
