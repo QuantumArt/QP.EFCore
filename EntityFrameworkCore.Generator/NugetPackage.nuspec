@@ -33,7 +33,7 @@
 		<file src="Resources\QP8.EntityFrameworkCore.targets" target="build\QP8.EntityFrameworkCore.targets" />
 
 		<file src="Resources\Readme.txt" target="Content" />
-		<file src="Resources\QPDataContextGenerator.tt.settings.xml" target="Content" />
+		<file src="Resources\QPDataContextGenerator.settings.xml" target="Content" />
 		<file src="Resources\ModelMappingResult.xml" target="Content" />
 
 

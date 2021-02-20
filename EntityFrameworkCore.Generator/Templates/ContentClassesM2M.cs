@@ -15,7 +15,6 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using Quantumart.QP8.EntityFrameworkCore.Generator.EmbeddedModels;
 
 namespace {ns}");
 

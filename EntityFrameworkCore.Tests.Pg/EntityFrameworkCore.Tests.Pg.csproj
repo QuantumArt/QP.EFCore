@@ -11,7 +11,7 @@
     <PackageReference Include="nunit" Version="3.10.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
-    <PackageReference Include="QP8.EntityFrameworkCore" Version="3.0.0-beta5" />
+    <PackageReference Include="QP8.EntityFrameworkCore" Version="3.0.0-beta1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +22,7 @@
     <None Remove="appSettings.json" />
     <None Remove="DynamicMappingResult.xml" />
     <None Remove="ModelMappingResult.xml" />
+    <None Remove="QPDataContextGenerator.settings.xml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,7 +45,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Remove="QPDataContextGenerator.tt.settings.xml" />
-    <AdditionalFiles Include="QPDataContextGenerator.tt.settings.xml" />
+    <AdditionalFiles Include="QPDataContextGenerator.settings.xml" />
   </ItemGroup>
 </Project>

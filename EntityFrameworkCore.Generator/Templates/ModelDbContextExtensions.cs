@@ -27,7 +27,6 @@ using System.Transactions;
 using System.Threading.Tasks;
 using System.Threading;
 using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
-using Quantumart.QP8.EntityFrameworkCore.Generator.EmbeddedModels;
 {context.Settings.Usings}
 
 namespace {ns}

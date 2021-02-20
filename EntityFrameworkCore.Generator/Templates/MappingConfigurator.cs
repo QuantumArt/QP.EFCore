@@ -18,7 +18,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
-using Quantumart.QP8.EntityFrameworkCore.Generator.EmbeddedModels;
+using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
 {context.Settings.Usings}
 

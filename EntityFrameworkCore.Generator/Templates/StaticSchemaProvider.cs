@@ -14,7 +14,6 @@ namespace Quantumart.QP8.EntityFrameworkCore.Generator.Templates
 using System.Collections.Generic;
 using System.Linq;
 using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
-using Quantumart.QP8.EntityFrameworkCore.Generator.EmbeddedModels;
 using QP.ConfigurationService.Models;
 {context.Settings.Usings}
 

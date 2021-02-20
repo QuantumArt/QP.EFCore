@@ -3,7 +3,7 @@ using NUnit.Framework;
 using System;
 using System.Linq;
 using Npgsql;
-using Quantumart.QP8.EntityFrameworkCore.Generator.EmbeddedModels;
+using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
 namespace EntityFrameworkCore.Tests.Pg.UpdateContentData
 {

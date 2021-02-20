@@ -18,7 +18,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System.Threading;
-using Quantumart.QP8.EntityFrameworkCore.Generator.EmbeddedModels;
+using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 {context.Settings.Usings}
 
 namespace {ns}

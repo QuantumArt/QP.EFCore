@@ -7,9 +7,8 @@ using System.Data.SqlClient;
 using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
-using Quantumart.QP8.EntityFrameworkCore.Generator.EmbeddedModels;
-using Quantumart.QPublishing.Database;
 using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
+using Quantumart.QPublishing.Database;
 
 namespace EntityFrameworkCore.Tests.Pg.ReadContentData
 {

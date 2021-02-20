@@ -12,12 +12,12 @@
 
 	<ItemGroup>
 	  <None Remove="ModelMappingResult.xml" />
-	  <None Remove="QPDataContextGenerator.tt.settings.xml" />
+	  <None Remove="QPDataContextGenerator.settings.xml" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <AdditionalFiles Include="ModelMappingResult.xml" />
-	  <AdditionalFiles Include="QPDataContextGenerator.tt.settings.xml" />
+	  <AdditionalFiles Include="QPDataContextGenerator.settings.xml" />
 	</ItemGroup>
 
 	<ItemGroup>

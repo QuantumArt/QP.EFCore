@@ -7,9 +7,9 @@ To push to nuget repository
 > dotnet nuget push QP8.EntityFrameworkCore.3.0.0-beta1.nupkg -k QA_TFS_Build -s http://spbdev01.artq.com:7777
 
 * В папке Resources расположены служебные ресурсы:
-- QPDataContextGenerator.tt.settings.xml - настройки генерации
+- QPDataContextGenerator.settings.xml - настройки генерации
 - ModelMappingResult.xml - данные маппинга, полученные из QP
-- QP8.EntityFrameworkCore.props, QP8.EntityFrameworkCore.targets - необходим для копирования QPDataContextGenerator.tt.settings.xml и ModelMappingResult.xml в корень целевого проекта
+- QP8.EntityFrameworkCore.props, QP8.EntityFrameworkCore.targets - необходим для копирования QPDataContextGenerator.settings.xml и ModelMappingResult.xml в корень целевого проекта
 - NugetPackage.nuspec - настройки нагет пакета
 
 *ВАЖНО! При изменении версии нагет пакета НЕОБХОДИМО изменить путь в Resources/QP8.EntityFrameworkCore.props

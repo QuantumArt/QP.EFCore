@@ -9,10 +9,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -21,49 +17,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Remove="EmbeddedModels\DatabaseSchemaProvider.cs" />
-		<Compile Remove="EmbeddedModels\FileSchemaProvider.cs" />
-		<Compile Remove="EmbeddedModels\IMappingConfigurator.cs" />
-		<Compile Remove="EmbeddedModels\IQPArticle.cs" />
-		<Compile Remove="EmbeddedModels\IQPFormService.cs" />
-		<Compile Remove="EmbeddedModels\IQPLibraryService.cs" />
-		<Compile Remove="EmbeddedModels\IQPLink.cs" />
-		<Compile Remove="EmbeddedModels\IQPSchema.cs" />
-		<Compile Remove="EmbeddedModels\ISchemaProvider.cs" />
-		<Compile Remove="EmbeddedModels\MappingConfiguratorBase.cs" />
-		<Compile Remove="EmbeddedModels\MappingResolver.cs" />
-		<Compile Remove="EmbeddedModels\StatusType.cs" />
-		<Compile Remove="EmbeddedModels\User.cs" />
-		<Compile Remove="EmbeddedModels\UserGroup.cs" />
-		<Compile Remove="EmbeddedModels\UserGroupBind.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<EmbeddedResource Include="EmbeddedModels\DatabaseSchemaProvider.cs" />
-		<EmbeddedResource Include="EmbeddedModels\FileSchemaProvider.cs" />
-		<EmbeddedResource Include="EmbeddedModels\IMappingConfigurator.cs" />
-		<EmbeddedResource Include="EmbeddedModels\IQPArticle.cs" />
-		<EmbeddedResource Include="EmbeddedModels\IQPFormService.cs" />
-		<EmbeddedResource Include="EmbeddedModels\IQPLibraryService.cs" />
-		<EmbeddedResource Include="EmbeddedModels\IQPLink.cs" />
-		<EmbeddedResource Include="EmbeddedModels\IQPSchema.cs" />
-		<EmbeddedResource Include="EmbeddedModels\ISchemaProvider.cs" />
-		<EmbeddedResource Include="EmbeddedModels\MappingConfiguratorBase.cs" />
-		<EmbeddedResource Include="EmbeddedModels\MappingResolver.cs" />
-		<EmbeddedResource Include="EmbeddedModels\StatusType.cs" />
-		<EmbeddedResource Include="EmbeddedModels\User.cs" />
-		<EmbeddedResource Include="EmbeddedModels\UserGroup.cs" />
-		<EmbeddedResource Include="EmbeddedModels\UserGroupBind.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<None Remove="ModelMappingResult.xml" />
-		<None Remove="QPDataContextGenerator.tt.settings.xml" />
+		<None Remove="QPDataContextGenerator.settings.xml" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<AdditionalFiles Include="Resources\ModelMappingResult.xml" />
-		<AdditionalFiles Include="Resources\QPDataContextGenerator.tt.settings.xml" />
+		<AdditionalFiles Include="Resources\QPDataContextGenerator.settings.xml" />
 	</ItemGroup>
 
 </Project>

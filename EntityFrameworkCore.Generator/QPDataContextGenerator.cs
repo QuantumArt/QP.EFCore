@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
@@ -10,7 +9,7 @@ namespace Quantumart.QP8.EntityFrameworkCore.Generator
 	[Generator]
 	public class QPDataContextGenerator : ISourceGenerator
 	{
-		private const string QPDataContextGeneratorSettingsFilePath = "\\QPDataContextGenerator.tt.settings.xml";
+		private const string QPDataContextGeneratorSettingsFilePath = "\\QPDataContextGenerator.settings.xml";
 
 
 		public void Initialize(GeneratorInitializationContext context)
@@ -55,32 +54,65 @@ namespace Quantumart.QP8.EntityFrameworkCore.Generator
 			var generationSettings =
 				executionContext.AdditionalFiles.FirstOrDefault(x =>
 					x.Path.EndsWith(QPDataContextGeneratorSettingsFilePath));
-			if (generationSettings == null)
-				throw new FileNotFoundException($"Could not find settings file \"{QPDataContextGeneratorSettingsFilePath}\" in {nameof(executionContext.AdditionalFiles)}");
 
-			// Копируем типы как ресурсы, что не было ошибок компиляции этого проекта из-за отсутствующих зависимостей
-			executionContext.AddEmbeddedResource("EmbeddedModels.MappingResolver.cs", "MappingResolver");
-			executionContext.AddEmbeddedResource("EmbeddedModels.FileSchemaProvider.cs", "FileSchemaProvider");
-			executionContext.AddEmbeddedResource("EmbeddedModels.DatabaseSchemaProvider.cs", "DatabaseSchemaProvider");
-			executionContext.AddEmbeddedResource("EmbeddedModels.IQPArticle.cs", "IQPArticle");
-			executionContext.AddEmbeddedResource("EmbeddedModels.IQPLink.cs", "IQPLink");
-			executionContext.AddEmbeddedResource("EmbeddedModels.IQPLibraryService.cs", "IQPLibraryService");
-			executionContext.AddEmbeddedResource("EmbeddedModels.IQPFormService.cs", "IQPFormService");
-			executionContext.AddEmbeddedResource("EmbeddedModels.IQPSchema.cs", "IQPSchema");
-			executionContext.AddEmbeddedResource("EmbeddedModels.IMappingConfigurator.cs", "IMappingConfigurator");
-			executionContext.AddEmbeddedResource("EmbeddedModels.ISchemaProvider.cs", "ISchemaProvider");
-			executionContext.AddEmbeddedResource("EmbeddedModels.MappingConfiguratorBase.cs", "MappingConfiguratorBase");
-			executionContext.AddEmbeddedResource("EmbeddedModels.StatusType.cs", "StatusType");
-			executionContext.AddEmbeddedResource("EmbeddedModels.User.cs", "User");
-			executionContext.AddEmbeddedResource("EmbeddedModels.UserGroup.cs", "UserGroup");
-			executionContext.AddEmbeddedResource("EmbeddedModels.UserGroupBind.cs", "UserGroupBind");
+			// Сюда попадают "не прямо связанные" проекты
+			if (generationSettings == null)
+				return;
 
 			var context = new GenerationContext(generationSettings.Path);
 
 			var className = context.Model.Schema.ClassName;
 			var ns = executionContext.Compilation.AssemblyName;
 
+			#region SimpleTemplates
+			executionContext.AddSource(nameof(SimpleTemplates.DatabaseSchemaProvider),
+				SourceText.From(SimpleTemplates.DatabaseSchemaProvider.GetTemplate(ns), Encoding.UTF8));
 
+			executionContext.AddSource(nameof(SimpleTemplates.MappingResolver),
+				SourceText.From(SimpleTemplates.MappingResolver.GetTemplate(ns), Encoding.UTF8));
+
+			executionContext.AddSource(nameof(SimpleTemplates.FileSchemaProvider),
+				SourceText.From(SimpleTemplates.FileSchemaProvider.GetTemplate(ns), Encoding.UTF8));
+
+			executionContext.AddSource(nameof(SimpleTemplates.IQPArticle),
+				SourceText.From(SimpleTemplates.IQPArticle.GetTemplate(ns), Encoding.UTF8));
+
+			executionContext.AddSource(nameof(SimpleTemplates.IQPLink),
+				SourceText.From(SimpleTemplates.IQPLink.GetTemplate(ns), Encoding.UTF8));
+
+			executionContext.AddSource(nameof(SimpleTemplates.IQPLibraryService),
+				SourceText.From(SimpleTemplates.IQPLibraryService.GetTemplate(ns), Encoding.UTF8));
+
+			executionContext.AddSource(nameof(SimpleTemplates.IQPFormService),
+				SourceText.From(SimpleTemplates.IQPFormService.GetTemplate(ns), Encoding.UTF8));
+
+			executionContext.AddSource(nameof(SimpleTemplates.IQPSchema),
+				SourceText.From(SimpleTemplates.IQPSchema.GetTemplate(ns), Encoding.UTF8));
+
+			executionContext.AddSource(nameof(SimpleTemplates.IMappingConfigurator),
+				SourceText.From(SimpleTemplates.IMappingConfigurator.GetTemplate(ns), Encoding.UTF8));
+
+			executionContext.AddSource(nameof(SimpleTemplates.ISchemaProvider),
+				SourceText.From(SimpleTemplates.ISchemaProvider.GetTemplate(ns), Encoding.UTF8));
+
+			executionContext.AddSource(nameof(SimpleTemplates.MappingConfiguratorBase),
+				SourceText.From(SimpleTemplates.MappingConfiguratorBase.GetTemplate(ns), Encoding.UTF8));
+
+			executionContext.AddSource(nameof(SimpleTemplates.StatusType),
+				SourceText.From(SimpleTemplates.StatusType.GetTemplate(ns), Encoding.UTF8));
+
+			executionContext.AddSource(nameof(SimpleTemplates.User),
+				SourceText.From(SimpleTemplates.User.GetTemplate(ns), Encoding.UTF8));
+
+			executionContext.AddSource(nameof(SimpleTemplates.UserGroup),
+				SourceText.From(SimpleTemplates.UserGroup.GetTemplate(ns), Encoding.UTF8));
+
+			executionContext.AddSource(nameof(SimpleTemplates.UserGroupBind),
+				SourceText.From(SimpleTemplates.UserGroupBind.GetTemplate(ns), Encoding.UTF8));
+
+			#endregion
+
+			#region Templates
 			executionContext.AddSource(className,
 				SourceText.From(
 					Templates.ModelDbContext.GetTemplate(ns, context),
@@ -132,6 +164,7 @@ namespace Quantumart.QP8.EntityFrameworkCore.Generator
 							Templates.ContentClassesM2M.GetTemplate(ns, context, content, attribute),
 							Encoding.UTF8));
 				}
+			#endregion
 		}
 	}
 }
