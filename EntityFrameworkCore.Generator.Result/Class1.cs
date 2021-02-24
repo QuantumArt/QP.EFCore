@@ -8,7 +8,7 @@ namespace EntityFrameworkCore.Generator.Result
 		// You can access Generated classes here
 		public static void Main()
 		{
-            using var ctx = new EFCoreModel();
+            using var ctx = new QA.EFCore.EFCoreModel();
             var mProducts = ctx.MarketingProducts.Select(x => x.Title).ToList();
         }
 	}
