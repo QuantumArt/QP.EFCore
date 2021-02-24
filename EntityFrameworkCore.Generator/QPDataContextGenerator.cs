@@ -62,7 +62,7 @@ namespace Quantumart.QP8.EntityFrameworkCore.Generator
 			var context = new GenerationContext(generationSettings.Path);
 
 			var className = context.Model.Schema.ClassName;
-			var ns = executionContext.Compilation.AssemblyName;
+			var ns = context.Model.Schema.NamespaceName;
 
 			#region SimpleTemplates
 			executionContext.AddSource(nameof(SimpleTemplates.DatabaseSchemaProvider),
