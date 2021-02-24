@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
 namespace EntityFrameworkCore.Tests.ReadContentData
 {

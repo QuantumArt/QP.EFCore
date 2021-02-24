@@ -1,7 +1,7 @@
 ﻿using System.Data.Common;
 using System.IO;
-using EntityFrameworkCore.Tests.Pg;
 using NUnit.Framework;
+using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
 namespace EntityFrameworkCore.Tests.Pg.Infrastructure
 {

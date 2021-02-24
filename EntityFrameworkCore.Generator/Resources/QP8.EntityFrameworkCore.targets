@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<Project>
+	<ItemGroup>
+		<ReadmeFile Include="$(NugetPackageFolder)\content\Readme.txt"/>
+	</ItemGroup>
+	<ItemGroup>
+		<DataFile Include="$(NugetPackageFolder)\content\ModelMappingResult.xml"/>
+	</ItemGroup>
+	<ItemGroup>
+		<SettingsFile Include="$(NugetPackageFolder)\content\QPDataContextGenerator.settings.xml"/>
+	</ItemGroup>
+
+	<Target Name="CopyReadmeTarget" BeforeTargets="BeforeBuild">
+		<Copy DestinationFolder="$(MSBuildProjectDirectory)\" SourceFiles="@(ReadmeFile)"></Copy>
+	</Target>
+	<Target Name="CopyDataTarget" BeforeTargets="BeforeBuild">
+		<Copy DestinationFolder="$(MSBuildProjectDirectory)\" SourceFiles="@(DataFile)"
+			  Condition="!Exists('$(MSBuildProjectDirectory)\ModelMappingResult.xml')"></Copy>
+	</Target>
+	<Target Name="CopySettingsTarget" BeforeTargets="BeforeBuild">
+		<Copy DestinationFolder="$(MSBuildProjectDirectory)\" SourceFiles="@(SettingsFile)"
+			  Condition="!Exists('$(MSBuildProjectDirectory)\QPDataContextGenerator.settings.xml')"></Copy>
+	</Target>
+	
+	<ItemGroup>
+		<None Remove="ModelMappingResult.xml" />
+		<None Remove="QPDataContextGenerator.settings.xml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<AdditionalFiles Include="ModelMappingResult.xml" />
+		<AdditionalFiles Include="QPDataContextGenerator.settings.xml" />
+	</ItemGroup>
+
+</Project>

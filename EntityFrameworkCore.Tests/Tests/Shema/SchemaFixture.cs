@@ -1,6 +1,7 @@
 ﻿using EntityFrameworkCore.Tests.Infrastructure;
 using NUnit.Framework;
 using System.Linq;
+using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
 namespace EntityFrameworkCore.Tests.Shema
 {

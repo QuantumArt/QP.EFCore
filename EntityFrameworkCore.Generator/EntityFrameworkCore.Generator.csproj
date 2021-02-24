@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyName>Quantumart.QP8.EntityFrameworkCore.Generator</AssemblyName>
+		<RootNamespace>Quantumart.QP8.EntityFrameworkCore.Generator</RootNamespace>
+		<LangVersion>preview</LangVersion>
+		<IncludeBuildOutput>true</IncludeBuildOutput>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.8.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="ModelMappingResult.xml" />
+		<None Remove="QPDataContextGenerator.settings.xml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<AdditionalFiles Include="Resources\ModelMappingResult.xml" />
+		<AdditionalFiles Include="Resources\QPDataContextGenerator.settings.xml" />
+	</ItemGroup>
+
+</Project>
