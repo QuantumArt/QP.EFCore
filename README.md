@@ -1,39 +1,20 @@
-# QP.EntityFramework
-T4 Templates that generates EF Core classes to implement Data Access Layer in custom applications working with QP
+# QP.EntityFramework via C#9 Source generation
+## Base project: EntityFrameworkCore.Generator
 
-To make it working it is required to fix VS config file:
+Dont forget to increase package version in .nuspec
 
-with 
+To generate version of .nupkg just run command
+> dotnet pack EntityFrameworkCore.Generator.csproj -p:NuspecFile=NugetPackage.nuspec -c Release
 
-			<dependentAssembly>
-				<assemblyIdentity name="System.Runtime" publicKeyToken="b03f5f7f11d50a3a" culture="neutral"/>
-				<bindingRedirect oldVersion="0.0.0.0-5.0.0.0" newVersion="4.0.0.0"/>
-			</dependentAssembly>
-			<dependentAssembly>
-				<assemblyIdentity name="System.Xml.XDocument" publicKeyToken="b03f5f7f11d50a3a" culture="neutral"/>
-				<bindingRedirect oldVersion="0.0.0.0-5.0.0.0" newVersion="4.0.0.0"/>
-			</dependentAssembly>
-			<dependentAssembly>
-				<assemblyIdentity name="System.Linq" publicKeyToken="b03f5f7f11d50a3a" culture="neutral"/>
-				<bindingRedirect oldVersion="0.0.0.0-5.0.0.0" newVersion="4.0.0.0"/>
-			</dependentAssembly>
-			<dependentAssembly>
-				<assemblyIdentity name="System.ComponentModel.TypeConverter" publicKeyToken="b03f5f7f11d50a3a" culture="neutral"/>
-				<bindingRedirect oldVersion="0.0.0.0-5.0.0.0" newVersion="4.0.0.0"/>
-			</dependentAssembly>
-			<dependentAssembly>
-				<assemblyIdentity name="System.Runtime.Extensions" publicKeyToken="b03f5f7f11d50a3a" culture="neutral"/>
-				<bindingRedirect oldVersion="0.0.0.0-5.0.0.0" newVersion="4.0.0.0"/>
-			</dependentAssembly>
-			<dependentAssembly>
-				<assemblyIdentity name="System.Collections" publicKeyToken="b03f5f7f11d50a3a" culture="neutral"/>
-				<bindingRedirect oldVersion="0.0.0.0-5.0.0.0" newVersion="4.0.0.0"/>
-			</dependentAssembly>
+To push to nuget repository
+> dotnet nuget push bin\Release\QP8.EntityFrameworkCore.3.0.0.nupkg -s file://mscdev02.artq.com/Packages/
 
+В папке Resources расположены служебные ресурсы:
+- QPDataContextGenerator.settings.xml - настройки генерации
+- ModelMappingResult.xml - данные маппинга, полученные из QP
+- QP8.EntityFrameworkCore.props, QP8.EntityFrameworkCore.targets - необходим для копирования QPDataContextGenerator.settings.xml и ModelMappingResult.xml в корень целевого проекта
+- NugetPackage.nuspec - настройки нагет пакета
 
-according VS bug:
+#ВАЖНО! При изменении версии нагет пакета НЕОБХОДИМО изменить путь в Resources/QP8.EntityFrameworkCore.props
 
-https://stackoverflow.com/questions/51550265/t4-template-could-not-load-file-or-assembly-system-runtime-version-4-2-0-0
-
-
-
+Проект собран с TargetFramework=netstandard2.0, но в .Nuspec трубуется net5.0, т.к. нагенеренные файлы завясимы от компонентов .net5.0, а Visual Studio отказывается запускать Source Generators при указании другого значения.
