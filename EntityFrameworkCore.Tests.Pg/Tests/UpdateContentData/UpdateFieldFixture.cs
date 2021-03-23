@@ -3,6 +3,8 @@ using System.Linq;
 using EntityFrameworkCore.Tests.Pg.Infrastructure;
 using Npgsql;
 using NUnit.Framework;
+using QA.EF;
+using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
 namespace EntityFrameworkCore.Tests.Pg.UpdateContentData
 {

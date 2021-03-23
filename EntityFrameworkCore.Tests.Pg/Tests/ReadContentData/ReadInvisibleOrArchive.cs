@@ -2,6 +2,8 @@
 using NUnit.Framework;
 using EntityFrameworkCore.Tests.Pg.Infrastructure;
 using Npgsql;
+using QA.EF;
+using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
 namespace EntityFrameworkCore.Tests.Pg.ReadContentData
 {

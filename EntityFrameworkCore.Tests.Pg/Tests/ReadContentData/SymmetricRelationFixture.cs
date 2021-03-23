@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using EntityFrameworkCore.Tests.Pg.Infrastructure;
 using Npgsql;
 using NUnit.Framework;
+using QA.EF;
+using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
 namespace EntityFrameworkCore.Tests.Pg.ReadContentData
 {
@@ -17,9 +19,9 @@ namespace EntityFrameworkCore.Tests.Pg.ReadContentData
             using (var context = GetDataContext(access, mapping, connection))
             {
                 var items = context.SymmetricRelationArticles
-                    .Include(x => x.SymmetricRelation)
-                    .ThenInclude(y=> y.ToSymmetricRelationAtricleLinkedItem)
-                    .FirstOrDefault();
+                     .Include(x => x.SymmetricRelation)
+                     .ThenInclude(y => y.ToSymmetricRelation)
+                     .FirstOrDefault();
                 Assert.That(items.SymmetricRelation.Count, Is.Not.EqualTo(0));
             }
         }
@@ -33,9 +35,8 @@ namespace EntityFrameworkCore.Tests.Pg.ReadContentData
             {
                 var firstItem = context.SymmetricRelationArticles
                     .Include(x => x.SymmetricRelation)
-                    .ThenInclude(y => y.ToSymmetricRelationAtricleLinkedItem)
                     .ThenInclude(y => y.ToSymmetricRelation)
-                    .ThenInclude(z=>z.SymmetricRelationArticleLinkedItem)
+                    .ThenInclude(z => z.SymmetricRelation)
                     .FirstOrDefault();
                 if (firstItem.SymmetricRelation.Count == 0)
                 {
@@ -43,17 +44,15 @@ namespace EntityFrameworkCore.Tests.Pg.ReadContentData
                 }
                 else
                 {
-                    foreach (var item in firstItem.SymmetricRelation.Select(x=>x.ToSymmetricRelationAtricleLinkedItem))
+                    foreach (var item in firstItem.SymmetricRelation)
                     {
-                        if (item.ToSymmetricRelation.Count > 0)
+
+                        var ids = item.ToSymmetricRelation.Select(x => x.Id);
+                        if (!ids.Contains(firstItem.Id))
                         {
-                            var ids = item.ToSymmetricRelation.Select(s => s.SymmetricRelationArticleLinkedItemId).ToList();
-                            if (!ids.Contains(firstItem.Id))
-                            {
-                                Assert.Fail("SymmerticRelation field not filled");
-                            }
+                            Assert.Fail("SymmerticRelation field not filled");
                         }
-                        else Assert.Fail("SymmerticRelation field not filled");
+
                     }
                 }
             }

@@ -2,6 +2,8 @@
 using NUnit.Framework;
 using System;
 using System.Linq;
+using QA.EF;
+using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
 namespace EntityFrameworkCore.Tests.UpdateContentData
 {
@@ -23,8 +25,7 @@ namespace EntityFrameworkCore.Tests.UpdateContentData
 
                     foreach (var d in dict)
                     {
-                        item.Reference.Add(
-                            new MtMItemForUpdate2MtMDictionaryForUpdateForReference() { MtMItemForUpdateItem = item, MtMDictionaryForUpdateLinkedItem = d  });
+                        item.Reference.Add(d);
                     }
                 }
 
@@ -44,8 +45,7 @@ namespace EntityFrameworkCore.Tests.UpdateContentData
 
                 foreach (var d in dict)
                 {
-                    item.Reference.Add(
-                        new MtMItemForUpdate2MtMDictionaryForUpdateForReference() { MtMItemForUpdateItem = item, MtMDictionaryForUpdateLinkedItem = d });
+                    item.Reference.Add(d);
                 }
 
                 context.MtMItemsForUpdate.Add(item);

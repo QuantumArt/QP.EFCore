@@ -7,6 +7,8 @@ using System.Transactions;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Data.SqlClient;
 using Npgsql;
+using QA.EF;
+using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
 namespace EntityFrameworkCore.Tests.Pg.UpdateContentData
 {

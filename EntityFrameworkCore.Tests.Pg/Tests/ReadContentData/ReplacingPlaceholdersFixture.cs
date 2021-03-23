@@ -4,10 +4,11 @@ using EntityFrameworkCore.Tests.Pg.Infrastructure;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Data.SqlClient;
-using Quantumart.QP8.CoreCodeGeneration.Services;
 using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using QA.EF;
+using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 using Quantumart.QPublishing.Database;
 
 namespace EntityFrameworkCore.Tests.Pg.ReadContentData

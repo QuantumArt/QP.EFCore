@@ -1,11 +1,10 @@
 using EntityFrameworkCore.Tests.Infrastructure;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Transactions;
 using Microsoft.EntityFrameworkCore.Storage;
-using System.Data.SqlClient;
+using QA.EF;
+using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
 namespace EntityFrameworkCore.Tests.UpdateContentData
 {
