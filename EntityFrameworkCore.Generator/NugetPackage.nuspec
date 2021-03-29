@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>QP8.EntityFrameworkCore</id>
-		<version>3.0.0</version>
+		<version>3.0.1</version>
 		<title>QP8.EntityFrameworkCore</title>
 		<authors>Quantum Art</authors>
 		<owners>Quantum Art</owners>
@@ -32,9 +32,9 @@
 		<file src="Resources\QP8.EntityFrameworkCore.props" target="build\QP8.EntityFrameworkCore.props" />
 		<file src="Resources\QP8.EntityFrameworkCore.targets" target="build\QP8.EntityFrameworkCore.targets" />
 
-		<file src="Resources\Readme.txt" target="Content" />
-		<file src="Resources\QPDataContextGenerator.settings.xml" target="Content" />
-		<file src="Resources\ModelMappingResult.xml" target="Content" />
+		<file src="Resources\Readme.txt" target="content" />
+		<file src="Resources\QPDataContextGenerator.settings.xml" target="content" />
+		<file src="Resources\ModelMappingResult.xml" target="content" />
 
 
 	</files>
