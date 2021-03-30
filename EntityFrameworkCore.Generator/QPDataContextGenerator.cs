@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.IO;
 using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
@@ -9,7 +10,7 @@ namespace Quantumart.QP8.EntityFrameworkCore.Generator
 	[Generator]
 	public class QPDataContextGenerator : ISourceGenerator
 	{
-		private const string QPDataContextGeneratorSettingsFilePath = "\\QPDataContextGenerator.settings.xml";
+		private static readonly string QPDataContextGeneratorSettingsFilePath = Path.DirectorySeparatorChar + "QPDataContextGenerator.settings.xml";
 
 
 		public void Initialize(GeneratorInitializationContext context)
