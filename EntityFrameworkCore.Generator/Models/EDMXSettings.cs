@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 
 namespace Quantumart.QP8.EntityFrameworkCore.Generator.Models
 {
@@ -28,7 +29,8 @@ namespace Quantumart.QP8.EntityFrameworkCore.Generator.Models
 
             var result = doc.Descendants("settings").Select(x => new EDMXSettings
             {
-                QPContextMappingResultPath = RootUtil.GetElementValue<string>(x, "QPContextMappingResultPath"),
+                QPContextMappingResultPath = RootUtil.GetElementValue<string>(x, "QPContextMappingResultPath")
+                    .Replace('\\', Path.DirectorySeparatorChar),
                 GenerateModel = RootUtil.GetElementValue<bool>(x, "GenerateModel"),
                 GenerateMappings = RootUtil.GetElementValue<bool>(x, "GenerateMappings"),
                 GenerateMappingInterface = RootUtil.GetElementValue<bool>(x, "GenerateMappingInterface"),
