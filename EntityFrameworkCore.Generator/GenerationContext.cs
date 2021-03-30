@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.IO;
+using System.Text;
 using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
 
@@ -40,7 +41,7 @@ namespace Quantumart.QP8.EntityFrameworkCore.Generator
 
 		private static string GeFileDirectory(string filePath)
 		{
-			var lastSlashIndex = filePath.LastIndexOf("\\");
+			var lastSlashIndex = filePath.LastIndexOf(Path.DirectorySeparatorChar);
 			return lastSlashIndex == -1
 				? string.Empty
 				: filePath.Substring(0, lastSlashIndex);
