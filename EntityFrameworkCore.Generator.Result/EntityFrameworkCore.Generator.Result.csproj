@@ -32,7 +32,7 @@
 		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.1" />
 		<PackageReference Include="QP.ConfigurationService.Client" Version="0.2.0" />
 		<PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-		<PackageReference Include="Quantumart.AspNetCore" Version="5.0.0-beta" />
+		<PackageReference Include="Quantumart.AspNetCore" Version="5.0.1" />
 	</ItemGroup>
 
 </Project>
