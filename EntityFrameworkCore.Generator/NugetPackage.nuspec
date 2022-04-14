@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>QP8.EntityFrameworkCore</id>
-		<version>3.0.4/version>
+		<version>3.0.4-beta1</version>
 		<title>QP8.EntityFrameworkCore</title>
 		<authors>Quantum Art</authors>
 		<owners>Quantum Art</owners>
@@ -13,7 +13,7 @@
 		<tags>QP8 EntityFrameworkCore</tags>
 		<dependencies>
 			<group targetFramework="net5.0">
-				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="3.8.0" exclude="Build,Analyzers" />
+				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="4.1.0" exclude="Build,Analyzers" />
 				<dependency id="Microsoft.EntityFrameworkCore" version="5.0.1" />
 				<dependency id="Microsoft.EntityFrameworkCore.Relational" version="5.0.1" />
 				<dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="5.0.1" />

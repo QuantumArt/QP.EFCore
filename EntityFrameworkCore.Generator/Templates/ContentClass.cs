@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
 namespace Quantumart.QP8.EntityFrameworkCore.Generator.Templates
 {
 	internal static class ContentClass
 	{
-		public static string GetTemplate(string ns, GenerationContext context, ContentInfo content)
+		public static string GetTemplate(string ns, GenerationContext context, ContentInfo content, CancellationToken cancellationToken)
 		{
+			cancellationToken.ThrowIfCancellationRequested();
 			var sb = new StringBuilder();
 
 			sb.AppendLine(@$"
