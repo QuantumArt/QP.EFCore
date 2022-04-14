@@ -1,10 +1,7 @@
 ﻿* Dont forget to increase package version in "NugetPackage.nuspec" and "QP8.EntityFrameworkCore.props"
 
-To generate version of .nupkg just run command
-> dotnet pack EntityFrameworkCore.Generator.csproj -p:NuspecFile=NugetPackage.nuspec -c Release
-
-To push to nuget repository
-> dotnet nuget push bin\Release\QP8.EntityFrameworkCore.3.0.0.nupkg -s file://mscdev02.artq.com/Packages/
+To generate version of .nupkg and push to nuget server just run tfs pipeline
+> Nuget.EFCore.Net5
 
 * В папке Resources расположены служебные ресурсы:
 - QPDataContextGenerator.settings.xml - настройки генерации
