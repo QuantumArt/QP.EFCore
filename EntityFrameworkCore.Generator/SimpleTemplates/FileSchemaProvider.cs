@@ -1,9 +1,12 @@
-﻿namespace Quantumart.QP8.EntityFrameworkCore.Generator.SimpleTemplates
+﻿using System.Threading;
+
+namespace Quantumart.QP8.EntityFrameworkCore.Generator.SimpleTemplates
 {
     internal static class FileSchemaProvider
     {
-        public static string GetTemplate(string ns)
+        public static string GetTemplate(string ns, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
             return @$"
 using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
