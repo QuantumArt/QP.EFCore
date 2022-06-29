@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
 namespace EntityFrameworkCore.Generator.Result
 {
@@ -10,6 +9,9 @@ namespace EntityFrameworkCore.Generator.Result
 		{
             using var ctx = new QA.EFCore.EFCoreModel();
             var mProducts = ctx.MarketingProducts.Select(x => x.Title).ToList();
-        }
+
+            QA.EFCore.CacheTagUtilities utils = null;
+            var action = () => utils.Merge(QA.EFCore.CacheTags.MarketingProduct, QA.EFCore.CacheTags.Product);
+		}
 	}
 }
