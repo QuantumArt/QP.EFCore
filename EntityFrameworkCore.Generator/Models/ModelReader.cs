@@ -20,6 +20,7 @@ namespace Quantumart.QP8.EntityFrameworkCore.Generator.Models
                 ClassName = RootUtil.GetAttribute<string>(x, "class", true),
                 NamespaceName = RootUtil.GetAttribute<string>(x, "namespace", true),
                 SiteName = RootUtil.GetAttribute<string>(x, "siteName", true),
+                SiteId = RootUtil.GetAttribute<string>(x, "siteId"),
                 UseLongUrls = RootUtil.GetAttribute<bool>(x, "useLongUrls"),
                 ReplaceUrls = RootUtil.GetAttribute<bool>(x, "replaceUrls"),
                 IsStageMode = isStage,

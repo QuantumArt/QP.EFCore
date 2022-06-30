@@ -10,6 +10,7 @@
         public bool SendNotifications { get; set; }
         public bool DbIndependent { get; set; }
         public string SiteName { get; set; }
+        public string SiteId { get; set; }
         public bool IsPartial { get; set; }
         public string SchemaNamespace { get; set; }
         public string SchemaContainer { get; set; }

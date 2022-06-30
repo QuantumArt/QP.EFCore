@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>QP8.EntityFrameworkCore</id>
-		<version>3.0.4</version>
+		<version>3.0.5</version>
 		<title>QP8.EntityFrameworkCore</title>
 		<authors>Quantum Art</authors>
 		<owners>Quantum Art</owners>
@@ -22,6 +22,7 @@
 				<dependency id="System.Data.DataSetExtensions" version="4.5.0" />
 				<dependency id="QP.ConfigurationService.Client" version="0.2.0"/>
 				<dependency id="Quantumart.AspNetCore" version="5.0.0-beta" />
+				<dependency id="QA.DotNetCore.Engine.CacheTags" version="2.0.0-beta" />
 			</group>
 		</dependencies>
 	</metadata>
