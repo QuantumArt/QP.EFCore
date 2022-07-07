@@ -28,27 +28,6 @@ builder.ConfigureServices((context, services) =>
 			: ContentAccess.Live,
 		sp.GetService<NpgsqlConnection>()));
 
-	
-	// services.AddScoped<CacheTagUtilities>();
-	// services.AddCacheTagServices(options =>
-	// {
-	// 	options.InvalidateByTimer(TimeSpan.FromSeconds(30));
-	// });
-	// // Сервисы, необходимые для работы с кеш-тэгами
-	// services.AddScoped<IMetaInfoRepository, MetaInfoRepository>();
-	//
-	// // IMemoryCache требуется в VersionedCacheCoreProvider.
-	// // IMemoryCache не явно регистрируется в методе AddControllersWithViews,
-	// // поэтому падает в runtime только в консольных проектах
-	// services.TryAddSingleton<IMemoryCache, MemoryCache>();
-	// services.AddSingleton<ICacheProvider, VersionedCacheCoreProvider>();
-	// services.AddScoped<IQpContentCacheTagNamingProvider, DefaultQpContentCacheTagNamingProvider>();
-	//
-	// services.AddScoped<IUnitOfWork, UnitOfWork>(sp =>
-	// {
-	// 	return new UnitOfWork(qpSettings.ConnectionString, qpSettings.DatabaseType);
-	// });
-
 	services.AddScoped<Test>();
 });
 
