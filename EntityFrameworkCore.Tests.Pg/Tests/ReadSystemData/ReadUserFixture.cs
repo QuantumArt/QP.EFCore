@@ -37,7 +37,7 @@ namespace EntityFrameworkCore.Tests.Pg.ReadSystemData
             using (var context = GetDataContext(access, mapping, connection))
             {
                 var us = context.Users.Include(u => u.UserGroupBinds)
-                        .ThenInclude(ug => ug.User).FirstOrDefault(f => f.Id == 0);
+                    .FirstOrDefault(f => f.Id == 0);
 
                 var groups = context.UserGroups
                     .Include(u => u.UserGroupBinds)

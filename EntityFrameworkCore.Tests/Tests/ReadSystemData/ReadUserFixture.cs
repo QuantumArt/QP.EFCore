@@ -32,8 +32,7 @@ namespace EntityFrameworkCore.Tests.ReadSystemData
         {
             using (var context = GetDataContext(access, mapping))
             {
-                var us = context.Users.Include(u => u.UserGroupBinds)
-                        .ThenInclude(ug => ug.User).FirstOrDefault(f => f.Id == 0);
+                var us = context.Users.Include(u => u.UserGroupBinds).FirstOrDefault(f => f.Id == 0);
 
                 var groups = context.UserGroups
                     .Include(u => u.UserGroupBinds)

@@ -2,32 +2,32 @@
 <package >
 	<metadata>
 		<id>QP8.EntityFrameworkCore</id>
-		<version>3.0.5</version>
+		<version>6.0.0-beta3</version>
 		<title>QP8.EntityFrameworkCore</title>
 		<authors>Quantum Art</authors>
 		<owners>Quantum Art</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>Entity Framework Core 3 class generator via c#9 source generators</description>
+		<description>Entity Framework Core class generator via c#9 source generators</description>
 		<releaseNotes>Add creation data context for EntityFrameworkCore</releaseNotes>
 		<copyright>Copyright © 2007-2021 Quantum Art</copyright>
 		<tags>QP8 EntityFrameworkCore</tags>
 		<dependencies>
-			<group targetFramework="net5.0">
+			<group targetFramework="net6.0">
 				<dependency id="Microsoft.CodeAnalysis.CSharp.Workspaces" version="4.1.0" exclude="Build,Analyzers" />
-				<dependency id="Microsoft.EntityFrameworkCore" version="5.0.1" />
-				<dependency id="Microsoft.EntityFrameworkCore.Relational" version="5.0.1" />
-				<dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="5.0.1" />
-				<dependency id="Microsoft.Extensions.Configuration.Json" version="5.0.0" />
-				<dependency id="Npgsql.EntityFrameworkCore.PostgreSQL" version="5.0.1" />
+				<dependency id="Microsoft.EntityFrameworkCore" version="6.0.6" />
+				<dependency id="Microsoft.EntityFrameworkCore.Relational" version="6.0.6" />
+				<dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="6.0.6" />
+				<dependency id="Microsoft.Extensions.Configuration.Json" version="6.0.0" />
+				<dependency id="Npgsql.EntityFrameworkCore.PostgreSQL" version="6.0.5" />
 				<dependency id="System.Data.DataSetExtensions" version="4.5.0" />
 				<dependency id="QP.ConfigurationService.Client" version="0.2.0"/>
-				<dependency id="Quantumart.AspNetCore" version="5.0.0-beta" />
+				<dependency id="Quantumart.AspNetCore" version="5.0.1" />
 				<dependency id="QA.DotNetCore.Engine.CacheTags" version="2.0.0-beta" />
 			</group>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="bin\Release\netstandard2.0\Quantumart.QP8.EntityFrameworkCore.Generator.dll" target="lib\net5.0\Quantumart.QP8.EntityFrameworkCore.Generator.dll" />
+		<file src="bin\Release\netstandard2.0\Quantumart.QP8.EntityFrameworkCore.Generator.dll" target="lib\net6.0\Quantumart.QP8.EntityFrameworkCore.Generator.dll" />
 		<file src="bin\Release\netstandard2.0\Quantumart.QP8.EntityFrameworkCore.Generator.dll" target="analyzers\dotnet\cs\Quantumart.QP8.EntityFrameworkCore.Generator.dll" />
 
 		<file src="Resources\QP8.EntityFrameworkCore.props" target="build\QP8.EntityFrameworkCore.props" />
