@@ -20,6 +20,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
 {context.Settings.Usings}
@@ -38,7 +39,11 @@ namespace {ns}
             base.OnModelCreating(modelBuilder);");
             IncludeMappingConfigurators(sb, context.Model.Contents);
             sb.AppendLine(@"
-            AddMappingInfo(modelBuilder.Model);
+        }
+        
+        public override void OnModelFinalized(IModel model)
+        {
+            AddMappingInfo(model);
         }
     }
 }");

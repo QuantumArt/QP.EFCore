@@ -58,10 +58,11 @@ namespace {ns}
                 }}
                 var builder = new ModelBuilder(conventionSet);
                 OnModelCreating(builder);
-                builder.FinalizeModel();
+                var iModel = builder.FinalizeModel();
+                OnModelFinalized(iModel);
 
                 return new Lazy<MappingInfo>(
-                    () => new MappingInfo(builder.Model, _schema),
+                    () => new MappingInfo(iModel, _schema),
                     LazyThreadSafetyMode.ExecutionAndPublication);
             }}).Value;
         }}
@@ -77,6 +78,10 @@ namespace {ns}
             _cache.TryAdd(GetCacheKey(), new Lazy<MappingInfo>(
                     () => new MappingInfo(model, _schema),
                     LazyThreadSafetyMode.ExecutionAndPublication));
+        }}
+
+        public virtual void OnModelFinalized(IModel model)
+        {{
         }}
 
         public virtual void OnModelCreating(ModelBuilder modelBuilder)

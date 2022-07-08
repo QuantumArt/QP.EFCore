@@ -1,0 +1,11 @@
+﻿{
+  "profiles": {
+    "EntityFrameworkCore.Generator.ReferenceResult": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

@@ -115,6 +115,7 @@ namespace {ns}
 			var schemaProvider = new StaticSchemaProvider();
 			var mapping = new MappingConfigurator(DefaultContentAccess, schemaProvider);
 			mapping.OnModelCreating(modelBuilder);
+            mapping.OnModelFinalized(modelBuilder.FinalizeModel());
         }}
 
 		private static DbContextOptions<{context.Model.Schema.ClassName}> DefaultConnectionOptions()

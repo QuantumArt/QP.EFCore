@@ -11,4 +11,4 @@ To generate version of .nupkg and push to nuget server just run tfs pipeline
 
 *ВАЖНО! При изменении версии нагет пакета НЕОБХОДИМО изменить путь в Resources/QP8.EntityFrameworkCore.props
 
-* Проект собран с TargetFramework=netstandard2.0, но в .Nuspec требуется net5.0, т.к. нагенеренные файлы зависимы от компонентов .net5.0, а Visual Studio отказывается запускать Source Generators при указании другого значения.
+* Проект собран с TargetFramework=netstandard2.0, но в .Nuspec требуется другая версия, т.к. нагенеренные файлы зависимы от компонентов отличного от .netstandard, а Visual Studio отказывается запускать Source Generators при указании другого значения.
