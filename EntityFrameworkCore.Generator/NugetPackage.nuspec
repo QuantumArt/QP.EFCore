@@ -1,5 +1,5 @@
-<?xml version="1.0"?>
-<package >
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
 	<metadata>
 		<id>QP8.EntityFrameworkCore</id>
 		<version>6.0.0</version>
@@ -9,7 +9,7 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Entity Framework Core class generator via c#9 source generators</description>
 		<releaseNotes>Add creation data context for EntityFrameworkCore</releaseNotes>
-		<copyright>Copyright © 2007-2021 Quantum Art</copyright>
+		<copyright>Copyright © 2007-2022 Quantum Art</copyright>
 		<tags>QP8 EntityFrameworkCore</tags>
 		<dependencies>
 			<group targetFramework="net6.0">
@@ -20,7 +20,7 @@
 				<dependency id="Microsoft.Extensions.Configuration.Json" version="6.0.0" />
 				<dependency id="Npgsql.EntityFrameworkCore.PostgreSQL" version="6.0.5" />
 				<dependency id="System.Data.DataSetExtensions" version="4.5.0" />
-				<dependency id="QP.ConfigurationService.Client" version="0.2.0"/>
+				<dependency id="QP.ConfigurationService.Client" version="0.2.0" />
 				<dependency id="Quantumart.AspNetCore" version="5.0.1" />
 				<dependency id="QA.DotNetCore.Engine.CacheTags" version="2.0.0-beta" />
 			</group>
@@ -29,6 +29,8 @@
 	<files>
 		<file src="bin\Release\netstandard2.0\Quantumart.QP8.EntityFrameworkCore.Generator.dll" target="lib\net6.0\Quantumart.QP8.EntityFrameworkCore.Generator.dll" />
 		<file src="bin\Release\netstandard2.0\Quantumart.QP8.EntityFrameworkCore.Generator.dll" target="analyzers\dotnet\cs\Quantumart.QP8.EntityFrameworkCore.Generator.dll" />
+		<file src="bin\Release\netstandard2.0\Quantumart.QP8.EntityFrameworkCore.Generator.pdb" target="lib\net6.0\Quantumart.QP8.EntityFrameworkCore.Generator.pdb" />
+		<file src="bin\Release\netstandard2.0\Quantumart.QP8.EntityFrameworkCore.Generator.pdb" target="analyzers\dotnet\cs\Quantumart.QP8.EntityFrameworkCore.Generator.pdb" />
 
 		<file src="Resources\QP8.EntityFrameworkCore.props" target="build\QP8.EntityFrameworkCore.props" />
 		<file src="Resources\QP8.EntityFrameworkCore.targets" target="build\QP8.EntityFrameworkCore.targets" />
@@ -36,7 +38,5 @@
 		<file src="Resources\Readme.txt" target="content" />
 		<file src="Resources\QPDataContextGenerator.settings.xml" target="content" />
 		<file src="Resources\ModelMappingResult.xml" target="content" />
-
-
 	</files>
 </package>
