@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Worker">
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
@@ -19,7 +19,7 @@
             <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
             <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
             <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.5" />
-            <PackageReference Include="QA.DotNetCore.Engine.CacheTags" Version="2.0.0-beta" />
+            <PackageReference Include="QA.DotNetCore.Engine.CacheTags" Version="2.1.5" />
             <PackageReference Include="QP.ConfigurationService.Client" Version="0.2.0" />
             <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
             <PackageReference Include="Quantumart.AspNetCore" Version="5.0.1" />
