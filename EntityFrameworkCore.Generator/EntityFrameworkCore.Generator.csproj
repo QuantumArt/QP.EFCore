@@ -4,7 +4,7 @@
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<AssemblyName>Quantumart.QP8.EntityFrameworkCore.Generator</AssemblyName>
 		<RootNamespace>Quantumart.QP8.EntityFrameworkCore.Generator</RootNamespace>
-		<LangVersion>preview</LangVersion>
+		<LangVersion>10.0</LangVersion>
 		<IncludeBuildOutput>true</IncludeBuildOutput>
 	</PropertyGroup>
 

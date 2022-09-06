@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
 	<metadata>
 		<id>QP8.EntityFrameworkCore</id>
-		<version>6.0.1</version>
+		<version>6.0.2-beta1</version>
 		<title>QP8.EntityFrameworkCore</title>
 		<authors>Quantum Art</authors>
 		<owners>Quantum Art</owners>
@@ -35,7 +35,7 @@
 		<file src="Resources\QP8.EntityFrameworkCore.props" target="build\QP8.EntityFrameworkCore.props" />
 		<file src="Resources\QP8.EntityFrameworkCore.targets" target="build\QP8.EntityFrameworkCore.targets" />
 
-		<file src="Resources\Readme.txt" target="content" />
+		<file src="Resources\ReadMe.txt" target="content" />
 		<file src="Resources\QPDataContextGenerator.settings.xml" target="content" />
 		<file src="Resources\ModelMappingResult.xml" target="content" />
 	</files>
