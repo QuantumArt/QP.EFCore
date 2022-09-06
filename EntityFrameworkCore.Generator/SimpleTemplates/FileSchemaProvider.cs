@@ -4,10 +4,10 @@ namespace Quantumart.QP8.EntityFrameworkCore.Generator.SimpleTemplates
 {
     internal static class FileSchemaProvider
     {
-        public static string GetTemplate(string ns, CancellationToken cancellationToken)
+        public static string GetTemplate(string ns, GenerationContext context, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            return @$"
+            return @$"{context.Settings.GeneratedCodePrefix}
 using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
 namespace {ns}
