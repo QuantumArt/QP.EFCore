@@ -692,7 +692,7 @@ namespace {ns}
             if (article.StatusTypeId != 0)
             {{
                 fieldValues[SystemColumnNames.StatusTypeId] = article.StatusTypeId.ToString();
-            }}            
+            }}
             return fieldValues;
         }}
 
