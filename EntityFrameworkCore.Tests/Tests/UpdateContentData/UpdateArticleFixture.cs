@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore.Storage;
 using QA.EF;
 using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace EntityFrameworkCore.Tests.UpdateContentData
 {
@@ -59,16 +60,13 @@ namespace EntityFrameworkCore.Tests.UpdateContentData
 
                 var item = context.ItemsForUpdate.FirstOrDefault();
                 Assert.That(item, Is.Not.Null);
+                var status = item.StatusTypeId == published.Id ? none : published; 
+                item.StatusType = status;
+                context.SaveChanges();
 
-                foreach (var status in new[] { none, published })
-                {
-                    item.StatusType = published;
-                    context.SaveChanges();
-
-                    var updatedItem = context.ItemsForUpdate.Where(itm => itm.Id == item.Id).FirstOrDefault();
-                    Assert.That(updatedItem, Is.Not.Null);
-                    Assert.That(updatedItem.StatusTypeId, Is.EqualTo(published.Id));
-                }
+                var updatedItem = context.ItemsForUpdate.Where(itm => itm.Id == item.Id).FirstOrDefault();
+                Assert.That(updatedItem, Is.Not.Null);
+                Assert.That(updatedItem.StatusTypeId, Is.EqualTo(status.Id));                
             }
         }
 
