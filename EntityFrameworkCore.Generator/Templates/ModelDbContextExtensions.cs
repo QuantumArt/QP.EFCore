@@ -669,9 +669,11 @@ namespace {ns}
 
         private Dictionary<string, string> GetFieldValues(string contentName, IQPArticle article, string[] fields, bool passNullValues)
         {{
+            bool hasStatus = fields.Contains(SystemColumnNames.StatusTypeId);
+            var filteredFields = fields.Where(x => x != SystemColumnNames.StatusTypeId).ToArray();
             var fieldValues = article.GetType()
                .GetProperties()
-               .Where(f => fields.Contains(f.Name))
+               .Where(f => filteredFields.Contains(f.Name))
                .Select(f => new
                {{
                    field = MappingResolver.GetAttribute(contentName, f.Name.Replace(""_ID"", """")).Name,
@@ -688,11 +690,10 @@ namespace {ns}
             fieldValues[SystemColumnNames.Created] = article.Created.ToString(CultureInfo.InvariantCulture);
             fieldValues[SystemColumnNames.Modified] = article.Modified.ToString(CultureInfo.InvariantCulture);
 
-            if (article.StatusTypeId != 0)
+            if (hasStatus)
             {{
                 fieldValues[SystemColumnNames.StatusTypeId] = article.StatusTypeId.ToString();
-            }}
-
+            }}            
             return fieldValues;
         }}
 
