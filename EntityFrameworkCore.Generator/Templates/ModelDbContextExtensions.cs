@@ -669,9 +669,7 @@ namespace {ns}
 
         private Dictionary<string, string> GetFieldValues(string contentName, IQPArticle article, string[] fields, bool passNullValues)
         {{
-            string statusPropName = ""StatusTypeId"";
-            bool hasStatus = fields.Contains(statusPropName);
-            var filteredFields = fields.Where(x => x != statusPropName).ToArray();           
+            var filteredFields = fields.Where(x => x != ""StatusTypeId"").ToArray();           
             var fieldValues = article.GetType()
                .GetProperties()
                .Where(f => filteredFields.Contains(f.Name))
@@ -691,7 +689,7 @@ namespace {ns}
             fieldValues[SystemColumnNames.Created] = article.Created.ToString(CultureInfo.InvariantCulture);
             fieldValues[SystemColumnNames.Modified] = article.Modified.ToString(CultureInfo.InvariantCulture);
 
-            if (article.StatusTypeId != 0 || hasStatus)
+            if (article.StatusTypeId != 0)
             {{
                 fieldValues[SystemColumnNames.StatusTypeId] = article.StatusTypeId.ToString();
             }}            
