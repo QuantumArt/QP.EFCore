@@ -669,9 +669,9 @@ namespace {ns}
 
         private Dictionary<string, string> GetFieldValues(string contentName, IQPArticle article, string[] fields, bool passNullValues)
         {{
-            string const statusPropName = ""StatusTypeId"";
+            string statusPropName = ""StatusTypeId"";
             bool hasStatus = fields.Contains(statusPropName);
-            var filteredFields = fields.Where(x => x != statusPropName).ToArray();
+            var filteredFields = fields.Where(x => x != statusPropName).ToArray();           
             var fieldValues = article.GetType()
                .GetProperties()
                .Where(f => filteredFields.Contains(f.Name))
