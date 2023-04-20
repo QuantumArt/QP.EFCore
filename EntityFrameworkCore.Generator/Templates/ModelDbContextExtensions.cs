@@ -691,7 +691,7 @@ namespace {ns}
             fieldValues[SystemColumnNames.Created] = article.Created.ToString(CultureInfo.InvariantCulture);
             fieldValues[SystemColumnNames.Modified] = article.Modified.ToString(CultureInfo.InvariantCulture);
 
-            if (hasStatus)
+            if (article.StatusTypeId != 0 || hasStatus)
             {{
                 fieldValues[SystemColumnNames.StatusTypeId] = article.StatusTypeId.ToString();
             }}            

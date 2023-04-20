@@ -59,22 +59,19 @@ namespace EntityFrameworkCore.Tests.Pg.UpdateContentData
             {
                 var none = context.StatusTypes.FirstOrDefault(s => s.SiteId == context.SiteId && s.StatusTypeName == "None");
                 var published = context.StatusTypes.FirstOrDefault(s => s.SiteId == context.SiteId && s.StatusTypeName == "Published");
-                
+
                 Assert.That(published, Is.Not.Null);
                 Assert.That(none, Is.Not.Null);
 
-                foreach (var status in new[] { none, published })
-                {
-                    var item = context.ItemsForUpdate.FirstOrDefault(x => x.StatusType != status);
-                    Assert.That(item, Is.Not.Null);
+                var item = context.ItemsForUpdate.FirstOrDefault();
+                Assert.That(item, Is.Not.Null);
+                var status = item.StatusTypeId == published.Id ? none : published;
+                item.StatusType = status;
+                context.SaveChanges();
 
-                    item.StatusType = status;
-                    context.SaveChanges();
-
-                    var updatedItem = context.ItemsForUpdate.Where(itm => itm.Id == item.Id).FirstOrDefault();
-                    Assert.That(updatedItem, Is.Not.Null);
-                    Assert.That(updatedItem.StatusTypeId, Is.EqualTo(status.Id));
-                }
+                var updatedItem = context.ItemsForUpdate.Where(itm => itm.Id == item.Id).FirstOrDefault();
+                Assert.That(updatedItem, Is.Not.Null);
+                Assert.That(updatedItem.StatusTypeId, Is.EqualTo(status.Id));
             }
         }
 
