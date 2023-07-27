@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
 	<metadata>
 		<id>QP8.EntityFrameworkCore</id>
-		<version>6.0.5</version>
+		<version>6.0.6</version>
 		<title>QP8.EntityFrameworkCore</title>
 		<authors>Quantum Art</authors>
 		<owners>Quantum Art</owners>
@@ -22,7 +22,7 @@
 				<dependency id="System.Data.DataSetExtensions" version="4.5.0" />
 				<dependency id="QP.ConfigurationService.Client" version="0.2.0" />
 				<dependency id="Quantumart.AspNetCore" version="6.0.6" />
-				<dependency id="QA.DotNetCore.Engine.CacheTags" version="3.2.0" />
+				<dependency id="QA.DotNetCore.Engine.CacheTags" version="3.2.4" />
 			</group>
 		</dependencies>
 	</metadata>
