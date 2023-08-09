@@ -195,16 +195,16 @@ namespace {ns}
                     bc.ToTable(GetLinkTableName(""{mappedName}"", ""{attribute.MappedName}""));
                 }});
             
-            modelBuilder.Entity<{attribute.Content.MappedName}>()
-                .HasMany(e => e.{attribute.MappedName})
-                .WithMany(e => e.{attribute.RelatedAttribute.MappedName})
+            modelBuilder.Entity<{attribute.RelatedContent.MappedName}>()
+                .HasMany(e => e.{attribute.RelatedAttribute.MappedName})
+                .WithMany(e => e.{attribute.MappedName})
                 .UsingEntity<{attribute.M2MReverseClassName}>(
                 bc => bc
-                    .HasOne(c => c.{attribute.M2MReverseRelatedPropertyName})
-                    .WithMany()
-                    .HasForeignKey(c => c.{attribute.M2MReverseRelatedPropertyName}Id),
-                bc => bc
                     .HasOne(c => c.{attribute.M2MReversePropertyName})
+                    .WithMany()
+                    .HasForeignKey(c => c.{attribute.M2MReversePropertyName}Id),
+                bc => bc
+                    .HasOne(c => c.{attribute.M2MReverseRelatedPropertyName})
                     .WithMany(),
                 bc => 
                 {{");

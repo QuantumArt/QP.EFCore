@@ -59,6 +59,11 @@ namespace EntityFrameworkCore.Tests.ReadContentData
             }
             else
             {
+                if (context.Database.GetDbConnection().State != System.Data.ConnectionState.Open)
+                {
+                    context.Database.GetDbConnection().Open();
+                }
+
                 DbCommand cmd = context.Database.GetDbConnection().CreateCommand();
                 cmd.CommandText = $"SELECT {SqlQuerySyntaxHelper.Top(context.Cnn.DatabaseType, "1")} REPLACE_URLS FROM SITE WHERE SITE_ID = @SiteId";
                 DbParameter parameter;

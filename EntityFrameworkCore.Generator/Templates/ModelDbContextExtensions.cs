@@ -315,6 +315,7 @@ namespace {ns}
                 .ToList();
             var deleted = ChangeTracker.Entries()
                 .Where(x => x.State == EntityState.Deleted && x.Entity != null)
+                .Where(x => x.Entity is IQPArticle)
                 .ToList();
 
             var connection = Database.GetDbConnection();
@@ -368,6 +369,7 @@ namespace {ns}
                 .ToList();
             var deleted = ChangeTracker.Entries()
                 .Where(x => x.State == EntityState.Deleted && x.Entity != null)
+                .Where(x => x.Entity is IQPArticle)
                 .ToList();
 
             var connection = Database.GetDbConnection();
