@@ -53,7 +53,7 @@ namespace {ns}
 
 			IncludeAttibutesIsM2M(
 				sb, content.Attributes.Where(x => x.IsM2M),
-				context.Settings.ProxyCreationEnabled);
+				context.Settings.ProxyCreationEnabled, content.SplitArticles);
 			
 			sb.AppendLine(@"}
 }");
@@ -143,7 +143,8 @@ namespace {ns}
 			}
 		}
 
-		private static void IncludeAttibutesIsM2M(StringBuilder sb, IEnumerable<AttributeInfo> attributes, bool useVirtualModifier)
+		private static void IncludeAttibutesIsM2M(StringBuilder sb, IEnumerable<AttributeInfo> attributes, bool useVirtualModifier, 
+			bool splitArticles)
 		{
 			foreach (var attribute in attributes)
 			{
@@ -158,7 +159,21 @@ namespace {ns}
 				}
 
 				sb.AppendLine(@$"ICollection<{attribute.RelatedContent.MappedName}> {attribute.MappedName} {{ get; set; }}");
-			}
+				if (splitArticles)
+				{
+					sb.AppendLine($@"
+		/// <summary>
+		/// Only for internal usage !!! (do not use directly) {attribute.Description ?? string.Empty}
+		/// </summary>");
+					sb.Append("		internal ");
+					if (useVirtualModifier)
+					{
+						sb.Append("virtual ");
+					}
+
+					sb.AppendLine(@$"ICollection<{attribute.RelatedContent.MappedName}> {attribute.MappedName}Reverse {{ get; set; }}");
+				}
+            }
 		}
 
 	}

@@ -22,10 +22,10 @@ namespace {ns}");
 
 			sb.AppendLine("{");
 
-			IncludeM2MClass(sb, content, attribute);
-			if (attribute.RelatedContent.SplitArticles)
+            IncludeM2MClass(sb, content, attribute);
+            if (attribute.RelatedContent.SplitArticles)
 			{
-				IncludeM2MReverseClass(sb, content, attribute);
+                IncludeM2MReverseClass(sb, content, attribute);
 			}
 
 			sb.AppendLine("}");
@@ -68,34 +68,34 @@ namespace {ns}");
 		private static void IncludeM2MReverseClass(StringBuilder sb, ContentInfo content, AttributeInfo attribute)
 		{
 			sb.AppendLine($@"
-		public partial class {attribute.M2MReverseClassName}: IQPLink
+	public partial class {attribute.M2MReverseClassName}: IQPLink
+	{{
+		public {content.MappedName} {attribute.M2MReversePropertyName} {{ get; set; }}		
+		public {attribute.RelatedContent.MappedName} {attribute.M2MReverseRelatedPropertyName} {{ get; set; }}
+
+		public int {attribute.M2MReversePropertyName}Id {{ get; set; }}	
+		public int {attribute.M2MReverseRelatedPropertyName}Id {{ get; set; }}
+
+		public int LinkId
 		{{
-			public {content.MappedName} {attribute.M2MReversePropertyName} {{ get; set; }}		
-			public {attribute.RelatedContent.MappedName} {attribute.M2MReverseRelatedPropertyName} {{ get; set; }}
+			get {{ return {attribute.LinkId}; }}
+		}}");
 
-			public int {attribute.M2MReversePropertyName}Id {{ get; set; }}	
-			public int {attribute.M2MReverseRelatedPropertyName}Id {{ get; set; }}
-
-			public int LinkId
-			{{
-				get {{ return {attribute.LinkId}; }}
-			}}");
-
-			if (attribute.ContentId != attribute.RelatedContentId)
-			{
-				sb.AppendLine($@"
+		if (attribute.ContentId != attribute.RelatedContentId)
+		{
+			sb.AppendLine($@"
 		public int Id 
 		{{
-			get {{ return {attribute.M2MReversePropertyName}Id; }}
-			set {{ {attribute.M2MReversePropertyName}Id = value; }}
-		}}
-        public int LinkedItemId 
-		{{ 
 			get {{ return {attribute.M2MReverseRelatedPropertyName}Id; }}
 			set {{ {attribute.M2MReverseRelatedPropertyName}Id = value; }}
 		}}
-		public IQPArticle Item {{  get {{ return {attribute.M2MReversePropertyName}; }} }}		
-		public IQPArticle LinkedItem {{  get {{ return {attribute.M2MReverseRelatedPropertyName}; }} }}");
+        public int LinkedItemId 
+		{{ 
+			get {{ return {attribute.M2MReversePropertyName}Id; }}
+			set {{ {attribute.M2MReversePropertyName}Id = value; }}
+		}}
+		public IQPArticle Item {{  get {{ return {attribute.M2MReverseRelatedPropertyName}; }} }}		
+		public IQPArticle LinkedItem {{  get {{ return {attribute.M2MReversePropertyName}; }} }}");
 			}
 			else
 			{

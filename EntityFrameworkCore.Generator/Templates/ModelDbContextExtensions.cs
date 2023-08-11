@@ -651,7 +651,8 @@ namespace {ns}
                     }}
                     else
                     {{
-                        fieldValues[key] = fieldValues[key] + "","" + linkValues[key];
+                        fieldValues[key] = string.Join(',', 
+                            fieldValues[key].Split(',').Concat(linkValues[key].Split(',')).Distinct());
                     }}
                 }}
                 else

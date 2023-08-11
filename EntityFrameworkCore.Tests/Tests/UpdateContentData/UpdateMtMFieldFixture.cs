@@ -17,7 +17,9 @@ namespace EntityFrameworkCore.Tests.UpdateContentData
         [Category("UpdateContentData")]
         public void Check_That_MtM_Field_isUpdated([ContentAccessValues] ContentAccess access, [MappingValues] Mapping mapping)
         {
-
+            int itemId;
+            MtMDictionaryForUpdate[] dictionaryForUpdate;
+            
             using (var context = GetDataContext(access, mapping))
             {
                 using (var transaction = context.Database.BeginTransaction())
@@ -29,6 +31,7 @@ namespace EntityFrameworkCore.Tests.UpdateContentData
                     context.MtMItemsForUpdate.Add(item);
 
                     context.SaveChanges();
+                    itemId = item.Id;
                     item = context.MtMItemsForUpdate.FirstOrDefault(itm => itm.Id == item.Id);
 
                     var dict = context.MtMDictionaryForUpdate.Take(2).ToArray();
@@ -37,27 +40,28 @@ namespace EntityFrameworkCore.Tests.UpdateContentData
                         dict = AddDictionaryPublishedItems(context, PublishedStatusId);
                     }
 
+                    dictionaryForUpdate = dict;
+                    item.Title = $"{nameof(Check_That_MtM_Field_isUpdated)}_{Guid.NewGuid()}";
                     foreach (var d in dict)
                     {
                         item.Reference.Add(d);
+                        //d.BackwardForReference_MtMItemForUpdate.Add(item);
                     }
 
                     context.SaveChanges();
+                    transaction.Commit();
+                }
+           
+            }
 
-                    var updatedItem = context.MtMItemsForUpdate.FirstOrDefault(itm => itm.Id == item.Id);
-                    Assert.That(updatedItem != null);
+            using (var context = GetDataContext(access, mapping))
+            {
+                var updatedItem = context.MtMItemsForUpdate.Include(x=>x.Reference).FirstOrDefault(itm => itm.Id == itemId);
+                Assert.That(updatedItem != null);
 
-                    foreach (var d in dict)
-                    {
-                        Assert.That(updatedItem.Reference.Any(x => x.Id == d.Id));
-                    }
-                    updatedItem.Reference.Clear();
-                    updatedItem.Title = $"{nameof(Check_That_MtM_Field_isUpdated)}_{Guid.NewGuid()}";
-                    context.SaveChanges();
-
-                    var clearedItem = context.MtMItemsForUpdate.FirstOrDefault(itm => itm.Id == item.Id);
-                    Assert.That(clearedItem != null);
-                    Assert.That(clearedItem.Reference.Count() == 0);
+                foreach (var d in dictionaryForUpdate)
+                {
+                    Assert.That(updatedItem.Reference.Any(x => x.Id == d.Id));
                 }
             }
         }

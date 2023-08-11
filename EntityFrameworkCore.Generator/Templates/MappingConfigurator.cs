@@ -156,7 +156,7 @@ namespace {ns}
                     .HasForeignKey(c => c.{attribute.M2MPropertyName}Id),
                 bc => 
                 {{ 
-                        bc.Property(e => e.{attribute.M2MPropertyName}Id).HasColumnName(""id"");
+                    bc.Property(e => e.{attribute.M2MPropertyName}Id).HasColumnName(""id"");
                     bc.Property(e => e.{attribute.M2MRelatedPropertyName}Id).HasColumnName(""linked_id"");
                     bc.HasKey(ug => new {{ ug.{attribute.M2MPropertyName}Id, ug.{attribute.M2MRelatedPropertyName}Id }});
                     bc.Ignore(x=>x.Id);
@@ -173,15 +173,15 @@ namespace {ns}
                     sb.AppendLine($@"
                 modelBuilder.Entity<{attribute.Content.MappedName}>()
                 .HasMany(e => e.{attribute.MappedName})
-                .WithMany(e => e.{attribute.RelatedAttribute.MappedName})
+                .WithMany(e => e.{attribute.RelatedAttribute.MappedName}Reverse)
                 .UsingEntity<{attribute.M2MClassName}>(
                 bc => bc
                     .HasOne(c => c.{attribute.M2MRelatedPropertyName})
-                    .WithMany()
-                    .HasForeignKey(c => c.{attribute.M2MRelatedPropertyName}Id),
+                    .WithMany(),
                 bc => bc
                     .HasOne(c => c.{attribute.M2MPropertyName})
-                    .WithMany(),
+                    .WithMany()
+                    .HasForeignKey(c => c.{attribute.M2MPropertyName}Id),
                 bc => 
                 {{
                     bc.Property(e => e.{attribute.M2MPropertyName}Id).HasColumnName(""id"");
@@ -197,15 +197,15 @@ namespace {ns}
             
             modelBuilder.Entity<{attribute.RelatedContent.MappedName}>()
                 .HasMany(e => e.{attribute.RelatedAttribute.MappedName})
-                .WithMany(e => e.{attribute.MappedName})
+                .WithMany(e => e.{attribute.MappedName}Reverse)
                 .UsingEntity<{attribute.M2MReverseClassName}>(
                 bc => bc
                     .HasOne(c => c.{attribute.M2MReversePropertyName})
-                    .WithMany()
-                    .HasForeignKey(c => c.{attribute.M2MReversePropertyName}Id),
+                    .WithMany(),
                 bc => bc
                     .HasOne(c => c.{attribute.M2MReverseRelatedPropertyName})
-                    .WithMany(),
+                    .WithMany()
+                    .HasForeignKey(c => c.{attribute.M2MReverseRelatedPropertyName}Id),
                 bc => 
                 {{");
 
@@ -232,8 +232,8 @@ namespace {ns}
                     bc.ToTable(GetReversedLinkTableName(""{mappedName}"", ""{attribute.MappedName}""));
                 }});
 
-");
-                }
+"); 
+                } 
             }
         }
 
