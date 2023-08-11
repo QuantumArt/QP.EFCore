@@ -99,6 +99,34 @@ namespace EntityFrameworkCore.Tests.UpdateContentData
                 }
             }
         }
+
+        [Test, Combinatorial]
+        [Category("UpdateContentData")]
+        public void Check_That_MtM_Field_isCleared([ContentAccessValues] ContentAccess access,
+            [MappingValues] Mapping mapping)
+        {
+            using (var context = GetDataContext(access, mapping))
+            {
+                var item = context.MtMItemsForUpdate.Include(i => i.Reference).OrderByDescending(o => o.Id)
+                    .FirstOrDefault();
+                Assert.IsNotNull(item);
+                
+                item.Title = $"{nameof(Check_That_MtM_Field_isUpdated)}_{Guid.NewGuid()}";
+                item.Reference.Clear();
+
+                context.SaveChanges();
+            }
+
+            using (var context = GetDataContext(access, mapping))
+            {
+                var item = context.MtMItemsForUpdate.Include(i => i.Reference).OrderByDescending(o => o.Id)
+                    .FirstOrDefault();
+
+                Assert.IsNotNull(item);
+                Assert.IsEmpty(item.Reference);
+            }
+        }
+        
         private static MtMDictionaryForUpdate[] AddDictionaryPublishedItems(EFCoreModel context, int PublishedStatusId)
         {
             MtMDictionaryForUpdate[] dict;
