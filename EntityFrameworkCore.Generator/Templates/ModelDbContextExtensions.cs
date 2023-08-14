@@ -478,7 +478,7 @@ namespace {ns}
                                  Id = Id,
                                  RelatedId = relatedId,
                                  ContentId = attribute.ContentId,
-                                 Field = attribute.MappedName
+                                 Field = attribute.Name
                              }}
                              group item by item.ContentId into g
                              select new {{ ContentId = g.Key, Items = g.ToArray() }}
@@ -569,7 +569,7 @@ namespace {ns}
                                  Id = Id,
                                  RelatedId = relatedId,
                                  ContentId = attribute.ContentId,
-                                 Field = attribute.MappedName
+                                 Field = attribute.Name
                              }}
                              group item by item.ContentId into g
                              select new {{ ContentId = g.Key, Items = g.ToArray() }}
@@ -611,7 +611,7 @@ namespace {ns}
                                  select new
                                  {{
                                      RelatedId = e.State == EntityState.Deleted ? 0 : relatedId,
-                                     Field = attribute.MappedName
+                                     Field = attribute.Name
                                  }})
                     .ToArray();
                 var values = relations
@@ -629,7 +629,7 @@ namespace {ns}
                                  select new
                                  {{
                                      RelatedId =e.State == EntityState.Deleted ? 0 : relatedId,
-                                     Field = attribute.RelatedAttribute.MappedName
+                                     Field = attribute.RelatedAttribute.Name
                                  }})
                     .ToArray();
                 var values = relations
