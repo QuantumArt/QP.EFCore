@@ -610,7 +610,7 @@ namespace {ns}
                                  let attribute = MappingResolver.GetAttribute(e.Metadata.Name.Substring(e.Metadata.Name.LastIndexOf(""."") + 1))
                                  select new
                                  {{
-                                     RelatedId = e.State == EntityState.Deleted ? "" : relatedId,
+                                     RelatedId = e.State == EntityState.Deleted ? """" : relatedId,
                                      Field = attribute.MappedName
                                  }})
                     .ToArray();
@@ -628,7 +628,7 @@ namespace {ns}
                                  let attribute = MappingResolver.GetAttribute(e.Metadata.Name.Substring(e.Metadata.Name.LastIndexOf(""."") + 1))
                                  select new
                                  {{
-                                     RelatedId =e.State == EntityState.Deleted ? "" : relatedId,
+                                     RelatedId =e.State == EntityState.Deleted ? """" : relatedId,
                                      Field = attribute.RelatedAttribute.MappedName
                                  }})
                     .ToArray();
