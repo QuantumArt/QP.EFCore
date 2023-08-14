@@ -177,7 +177,7 @@ namespace {ns}
                 .UsingEntity<{attribute.M2MClassName}>(
                 bc => bc
                     .HasOne(c => c.{attribute.M2MRelatedPropertyName})
-                    .WithMany(),
+                    .WithMany()
                     .HasForeignKey(c => c.{attribute.M2MRelatedPropertyName}Id),
                 bc => bc
                     .HasOne(c => c.{attribute.M2MPropertyName})
@@ -202,7 +202,7 @@ namespace {ns}
                 .UsingEntity<{attribute.M2MReverseClassName}>(
                 bc => bc
                     .HasOne(c => c.{attribute.M2MReversePropertyName})
-                    .WithMany(),
+                    .WithMany()
                     .HasForeignKey(c => c.{attribute.M2MReversePropertyName}Id),
                 bc => bc
                     .HasOne(c => c.{attribute.M2MReverseRelatedPropertyName})
