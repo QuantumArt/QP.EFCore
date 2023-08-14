@@ -51,7 +51,7 @@
   </content>
   <content id="995" name="MtMItemForUpdate" mapped_name="MtMItemForUpdate" plural_mapped_name="MtMItemsForUpdate" use_default_filtration="true" virtual="0" user_query="0" split_articles="true">
     <attribute name="Title" mapped_name="Title" id="39285" type="String" is_localization="false" size="255" />
-    <attribute name="Reference" mapped_name="Reference" id="39288" type="M2M" is_localization="false" related_content_id="996" link_id="151" use_separate_reverse_views="false" />
+    <attribute name="Reference1" mapped_name="Reference" id="39288" type="M2M" is_localization="false" related_content_id="996" link_id="151" use_separate_reverse_views="false" />
   </content>
   <content id="996" name="MtMDictionaryForUpdate" mapped_name="MtMDictionaryForUpdate" plural_mapped_name="MtMDictionaryForUpdate" use_default_filtration="true" virtual="0" user_query="0" split_articles="true">
     <attribute name="Title" mapped_name="Title" id="39286" type="String" is_localization="false" size="255" />

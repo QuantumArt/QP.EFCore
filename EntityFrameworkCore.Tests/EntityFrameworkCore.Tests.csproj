@@ -11,7 +11,7 @@
     <PackageReference Include="nunit" Version="3.13.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
-    <PackageReference Include="QP8.EntityFrameworkCore" Version="6.0.11-beta10" />
+    <PackageReference Include="QP8.EntityFrameworkCore" Version="6.0.11-beta11" />
   </ItemGroup>
 
   <ItemGroup>
