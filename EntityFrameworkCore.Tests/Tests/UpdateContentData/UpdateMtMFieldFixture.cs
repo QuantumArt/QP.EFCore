@@ -70,6 +70,7 @@ namespace EntityFrameworkCore.Tests.UpdateContentData
         [Category("UpdateContentData")]
         public void Check_That_MtM_Field_isCreated([ContentAccessValues] ContentAccess access, [MappingValues] Mapping mapping)
         {
+            int itemId = 0;
             using (var context = GetDataContext(access, mapping))
             {
                 int PublishedStatusId = context.StatusTypes.OrderByDescending(x => x.Weight).FirstOrDefault().Id;
@@ -89,7 +90,7 @@ namespace EntityFrameworkCore.Tests.UpdateContentData
                 context.MtMItemsForUpdate.Add(item);
 
                 context.SaveChanges();
-
+                itemId = item.Id;
                 var updatedItem = context.MtMItemsForUpdate.FirstOrDefault(itm => itm.Id == item.Id);
                 Assert.That(updatedItem != null);
 
@@ -98,7 +99,28 @@ namespace EntityFrameworkCore.Tests.UpdateContentData
                     Assert.That(updatedItem.Reference.Any(x => x.Id == d.Id));
                 }
             }
+            using (var context = GetDataContext(access, mapping))
+            {
+                var item = context.MtMItemsForUpdate.Include(i => i.Reference).Where(x => x.Id == itemId)
+                    .FirstOrDefault();
+
+                Assert.IsNotNull(item);
+                item.Title = $"{nameof(Check_That_MtM_Field_isCreated)}_{Guid.NewGuid()}";
+                item.Reference.Clear();
+                context.SaveChanges();
+            }
+
+            using (var context = GetDataContext(access, mapping))
+            {
+                var item = context.MtMItemsForUpdate.Include(i => i.Reference).Where(x=>x.Id == itemId)
+                    .FirstOrDefault();
+
+                Assert.IsNotNull(item);
+                Assert.IsEmpty(item.Reference);
+            }
         }
+
+        
         private static MtMDictionaryForUpdate[] AddDictionaryPublishedItems(EFCoreModel context, int PublishedStatusId)
         {
             MtMDictionaryForUpdate[] dict;

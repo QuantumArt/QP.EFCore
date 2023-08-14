@@ -308,14 +308,13 @@ namespace {ns}
             ChangeTracker.DetectChanges();
 
             var modified = ChangeTracker.Entries()
-                .Where(x => x.State == EntityState.Modified && x.Entity != null)
+                .Where(x => (x.State == EntityState.Modified || (x.State == EntityState.Deleted && x.Entity is IQPLink)) && x.Entity != null)
                 .ToList();
             var added = ChangeTracker.Entries()
                 .Where(x => x.State == EntityState.Added && x.Entity != null)
                 .ToList();
             var deleted = ChangeTracker.Entries()
-                .Where(x => x.State == EntityState.Deleted && x.Entity != null)
-                .Where(x => x.Entity is IQPArticle)
+                .Where(x => x.State == EntityState.Deleted && x.Entity != null && x.Entity is IQPArticle)
                 .ToList();
 
             var connection = Database.GetDbConnection();
@@ -361,15 +360,14 @@ namespace {ns}
         {{
             ChangeTracker.DetectChanges();
 
-            var modified = ChangeTracker.Entries()
-                .Where(x => x.State == EntityState.Modified && x.Entity != null)
+             var modified = ChangeTracker.Entries()
+                .Where(x => (x.State == EntityState.Modified || (x.State == EntityState.Deleted && x.Entity is IQPLink)) && x.Entity != null)
                 .ToList();
             var added = ChangeTracker.Entries()
                 .Where(x => x.State == EntityState.Added && x.Entity != null)
                 .ToList();
             var deleted = ChangeTracker.Entries()
-                .Where(x => x.State == EntityState.Deleted && x.Entity != null)
-                .Where(x => x.Entity is IQPArticle)
+                .Where(x => x.State == EntityState.Deleted && x.Entity != null && x.Entity is IQPArticle)
                 .ToList();
 
             var connection = Database.GetDbConnection();
@@ -471,7 +469,7 @@ namespace {ns}
             }}
 
             var relations = (from e in links
-                             where typeof(IQPLink).IsAssignableFrom(e.Entity.GetType())
+                             where typeof(IQPLink).IsAssignableFrom(e.Entity.GetType()) &&  e.State != EntityState.Deleted
                              let Id = ((IQPLink)e.Entity).Id
                              let relatedId = ((IQPLink)e.Entity).LinkedItemId
                              let attribute = MappingResolver.GetAttribute(e.Metadata.Name.Substring(e.Metadata.Name.LastIndexOf(""."") + 1))
@@ -480,7 +478,7 @@ namespace {ns}
                                  Id = Id,
                                  RelatedId = relatedId,
                                  ContentId = attribute.ContentId,
-                                 Field = attribute.MappedName
+                                 Field = attribute.Name
                              }}
                              group item by item.ContentId into g
                              select new {{ ContentId = g.Key, Items = g.ToArray() }}
@@ -562,7 +560,7 @@ namespace {ns}
             }}
 
             var relations = (from e in links
-                             where typeof(IQPLink).IsAssignableFrom(e.Entity.GetType())
+                             where typeof(IQPLink).IsAssignableFrom(e.Entity.GetType()) &&  e.State != EntityState.Deleted
                              let Id = ((IQPLink)e.Entity).Id
                              let relatedId = ((IQPLink)e.Entity).LinkedItemId
                              let attribute = MappingResolver.GetAttribute(e.Metadata.Name.Substring(e.Metadata.Name.LastIndexOf(""."") + 1))
@@ -571,7 +569,7 @@ namespace {ns}
                                  Id = Id,
                                  RelatedId = relatedId,
                                  ContentId = attribute.ContentId,
-                                 Field = attribute.MappedName
+                                 Field = attribute.Name
                              }}
                              group item by item.ContentId into g
                              select new {{ ContentId = g.Key, Items = g.ToArray() }}
@@ -612,12 +610,13 @@ namespace {ns}
                                  let attribute = MappingResolver.GetAttribute(e.Metadata.Name.Substring(e.Metadata.Name.LastIndexOf(""."") + 1))
                                  select new
                                  {{
-                                     RelatedId = relatedId,
-                                     Field = attribute.MappedName
+                                     RelatedId = e.State == EntityState.Deleted ? 0 : relatedId,
+                                     Field = attribute.Name
                                  }})
                     .ToArray();
                 var values = relations
-                    .GroupBy(r => r.Field).ToDictionary(x => x.Key, x => string.Join("","", x.Select(y => y.RelatedId)));
+                    .GroupBy(r => r.Field).ToDictionary(x => x.Key, x => string.Join("","", 
+                        x.Where(y=> y.RelatedId != 0).Select(y => y.RelatedId)));
                 MergeValues(fieldValues, values);
                 links.RemoveAll(x => forwardLinks.Contains(x));
             }}
@@ -629,12 +628,13 @@ namespace {ns}
                                  let attribute = MappingResolver.GetAttribute(e.Metadata.Name.Substring(e.Metadata.Name.LastIndexOf(""."") + 1))
                                  select new
                                  {{
-                                     RelatedId = relatedId,
-                                     Field = attribute.RelatedAttribute.MappedName
+                                     RelatedId =e.State == EntityState.Deleted ? 0 : relatedId,
+                                     Field = attribute.RelatedAttribute.Name
                                  }})
                     .ToArray();
                 var values = relations
-                    .GroupBy(r => r.Field).ToDictionary(x => x.Key, x => string.Join("","", x.Select(y => y.RelatedId)));
+                    .GroupBy(r => r.Field).ToDictionary(x => x.Key, x => string.Join("","", 
+                         x.Where(y=> y.RelatedId != 0).Select(y => y.RelatedId)));
                 MergeValues(fieldValues, values);
                 links.RemoveAll(x => backwardLinks.Contains(x));
             }}
