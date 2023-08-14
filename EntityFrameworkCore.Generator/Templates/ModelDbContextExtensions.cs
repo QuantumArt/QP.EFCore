@@ -616,7 +616,7 @@ namespace {ns}
                     .ToArray();
                 var values = relations
                     .GroupBy(r => r.Field).ToDictionary(x => x.Key, x => string.Join("","", 
-                        x.Where(y=> y.RelatedId != 0)).Select(y => y.RelatedId)));
+                        x.Where(y=> y.RelatedId != 0).Select(y => y.RelatedId)));
                 MergeValues(fieldValues, values);
                 links.RemoveAll(x => forwardLinks.Contains(x));
             }}
