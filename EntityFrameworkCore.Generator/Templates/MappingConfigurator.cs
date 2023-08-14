@@ -178,6 +178,7 @@ namespace {ns}
                 bc => bc
                     .HasOne(c => c.{attribute.M2MRelatedPropertyName})
                     .WithMany(),
+                    .HasForeignKey(c => c.{attribute.M2MRelatedPropertyName}Id),
                 bc => bc
                     .HasOne(c => c.{attribute.M2MPropertyName})
                     .WithMany()
@@ -202,6 +203,7 @@ namespace {ns}
                 bc => bc
                     .HasOne(c => c.{attribute.M2MReversePropertyName})
                     .WithMany(),
+                    .HasForeignKey(c => c.{attribute.M2MReversePropertyName}Id),
                 bc => bc
                     .HasOne(c => c.{attribute.M2MReverseRelatedPropertyName})
                     .WithMany()

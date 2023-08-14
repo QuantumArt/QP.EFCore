@@ -107,11 +107,12 @@ namespace EntityFrameworkCore.Tests.UpdateContentData
         {
             using (var context = GetDataContext(access, mapping))
             {
-                var item = context.MtMItemsForUpdate.Include(i => i.Reference).OrderByDescending(o => o.Id)
+                var item = context.MtMItemsForUpdate.Include(i => i.Reference).Where(x=>x.Reference.Count() > 0).OrderByDescending(o => o.Id)
                     .FirstOrDefault();
                 Assert.IsNotNull(item);
                 
                 item.Title = $"{nameof(Check_That_MtM_Field_isUpdated)}_{Guid.NewGuid()}";
+                
                 item.Reference.Clear();
 
                 context.SaveChanges();
