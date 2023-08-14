@@ -610,13 +610,13 @@ namespace {ns}
                                  let attribute = MappingResolver.GetAttribute(e.Metadata.Name.Substring(e.Metadata.Name.LastIndexOf(""."") + 1))
                                  select new
                                  {{
-                                     RelatedId = e.State == EntityState.Deleted ? """" : relatedId,
+                                     RelatedId = e.State == EntityState.Deleted ? 0 : relatedId,
                                      Field = attribute.MappedName
                                  }})
                     .ToArray();
                 var values = relations
                     .GroupBy(r => r.Field).ToDictionary(x => x.Key, x => string.Join("","", 
-                        x.Where(y=>!string.IsNullOrEmpty(y)).Select(y => y.RelatedId)));
+                        x.Where(y=> y.RelatedId != 0)).Select(y => y.RelatedId)));
                 MergeValues(fieldValues, values);
                 links.RemoveAll(x => forwardLinks.Contains(x));
             }}
@@ -628,13 +628,13 @@ namespace {ns}
                                  let attribute = MappingResolver.GetAttribute(e.Metadata.Name.Substring(e.Metadata.Name.LastIndexOf(""."") + 1))
                                  select new
                                  {{
-                                     RelatedId =e.State == EntityState.Deleted ? """" : relatedId,
+                                     RelatedId =e.State == EntityState.Deleted ? 0 : relatedId,
                                      Field = attribute.RelatedAttribute.MappedName
                                  }})
                     .ToArray();
                 var values = relations
                     .GroupBy(r => r.Field).ToDictionary(x => x.Key, x => string.Join("","", 
-                         x.Where(y=>!string.IsNullOrEmpty(y)).Select(y => y.RelatedId)));
+                         x.Where(y=> y.RelatedId != 0).Select(y => y.RelatedId)));
                 MergeValues(fieldValues, values);
                 links.RemoveAll(x => backwardLinks.Contains(x));
             }}
