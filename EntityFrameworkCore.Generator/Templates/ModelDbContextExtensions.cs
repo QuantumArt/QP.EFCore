@@ -308,7 +308,7 @@ namespace {ns}
             ChangeTracker.DetectChanges();
 
             var modified = ChangeTracker.Entries()
-                .Where(x => (x.State == EntityState.Modified || (x.State == EntityState && x.Entity is IQPLink)) && x.Entity != null)
+                .Where(x => (x.State == EntityState.Modified || (x.State == EntityState.Deleted && x.Entity is IQPLink)) && x.Entity != null)
                 .ToList();
             var added = ChangeTracker.Entries()
                 .Where(x => x.State == EntityState.Added && x.Entity != null)
@@ -361,7 +361,7 @@ namespace {ns}
             ChangeTracker.DetectChanges();
 
              var modified = ChangeTracker.Entries()
-                .Where(x => (x.State == EntityState.Modified || (x.State == EntityState && x.Entity is IQPLink)) && x.Entity != null)
+                .Where(x => (x.State == EntityState.Modified || (x.State == EntityState.Deleted && x.Entity is IQPLink)) && x.Entity != null)
                 .ToList();
             var added = ChangeTracker.Entries()
                 .Where(x => x.State == EntityState.Added && x.Entity != null)
