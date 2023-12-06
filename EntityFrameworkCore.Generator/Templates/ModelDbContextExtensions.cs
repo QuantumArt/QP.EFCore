@@ -352,7 +352,7 @@ namespace {ns}
                     Cnn.ExternalTransaction = null;
                 }}
             }}
-            SendNotifications(modified, added, deleted);
+            SendNotifications(added, modified, deleted);
             ChangeTracker.AcceptAllChanges();
             return 0;
         }}
@@ -406,7 +406,7 @@ namespace {ns}
                     Cnn.ExternalTransaction = null;
                 }}
             }}
-            SendNotifications(modified, added, deleted);
+            SendNotifications(added, modified, deleted);
             ChangeTracker.AcceptAllChanges();
             return 0;
         }}
