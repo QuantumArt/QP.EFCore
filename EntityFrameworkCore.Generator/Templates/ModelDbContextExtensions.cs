@@ -352,7 +352,7 @@ namespace {ns}
                     Cnn.ExternalTransaction = null;
                 }}
             }}
-
+            SendNotifications(added, modified, deleted);
             ChangeTracker.AcceptAllChanges();
             return 0;
         }}
@@ -395,20 +395,45 @@ namespace {ns}
 
                     await UpdateObjectStateEntriesAsync(modified, (content, item) => item.Properties.Where(x => x.IsModified).Select(x => x.Metadata.Name).ToArray(), true);
                     await UpdateObjectStateEntriesAsync(added, (content, item) => GetProperties(content), false);
-
+                   
                     foreach (var deletedItem in deleted)
                     {{
                         var article = (IQPArticle)deletedItem.Entity;
-                        Cnn.DeleteContentItem(article.Id);
+                        Cnn.DeleteContentItem(article.Id);                       
                     }}
 
                     await transaction.CommitAsync();
                     Cnn.ExternalTransaction = null;
                 }}
             }}
-
+            SendNotifications(added, modified, deleted);
             ChangeTracker.AcceptAllChanges();
             return 0;
+        }}
+        private void SendNotifications(IEnumerable<EntityEntry> added, IEnumerable<EntityEntry> modified, IEnumerable<EntityEntry> deleted)
+        {{
+            if(GetInfo().SendNotifications)
+            {{
+                foreach (var addedItem in added)
+                {{
+                    var article = (IQPArticle)addedItem.Entity;
+                    Cnn.SendNotification(article.Id, NotificationEvent.Create);
+                }}
+                foreach (var modifiedItem in modified)
+                {{
+                    var article = (IQPArticle)modifiedItem.Entity;
+                    Cnn.SendNotification(article.Id, NotificationEvent.Modify);
+                    if (article.StatusTypeId != 0)
+                    {{
+                        Cnn.SendNotification(article.Id, NotificationEvent.StatusChanged);
+                    }}
+                }}
+                foreach (var deletedItem in deleted)
+                {{
+                    var article = (IQPArticle)deletedItem.Entity;
+                    Cnn.SendNotification(article.Id, NotificationEvent.Remove);
+                }}
+             }}
         }}
         private void UpdateObjectStateEntries(IEnumerable<EntityEntry> entries, Func<ContentInfo, EntityEntry, string[]> getProperties, bool passNullValues)
         {{
