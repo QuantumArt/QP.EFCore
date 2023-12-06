@@ -410,7 +410,7 @@ namespace {ns}
             ChangeTracker.AcceptAllChanges();
             return 0;
         }}
-        private void SendNotifications(IEnumerable<ObjectStateEntry> added, IEnumerable<ObjectStateEntry> modified, IEnumerable<ObjectStateEntry> deleted)
+        private void SendNotifications(IEnumerable<EntityEntry> added, IEnumerable<EntityEntry> modified, IEnumerable<EntityEntry> deleted)
         {{
             if(GetInfo().SendNotifications)
             {{
