@@ -53,7 +53,7 @@ namespace Quantumart.QP8.EntityFrameworkCore.Generator.Models
                     case "VisualEdit":
                     case "Dynamic Image":
                     case "File":
-                        return "String";
+                        return IsNullable ? "String?" : "String";
                     case "Boolean": return "Boolean?";
                     case "Numeric":
                         if (IsLong && Size == 0) { return "Int64?"; }
