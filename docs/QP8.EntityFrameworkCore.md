@@ -10,6 +10,15 @@
 
 ## История версий 6.x (для .NET 6.0)
 
+### QP8.EntityFrameworkCore.6.0.13
+
+* Убрана зависимость от схемы public в PostgreSQL (#173717)
+* Обновление Quantumart.AspNetCore до 6.0.13
+
+### QP8.EntityFrameworkCore.6.0.12
+
+* Добавлена отправка уведомлений
+
 ### QP8.EntityFrameworkCore.6.0.11
 
 * Исправлена ошибка с очисткой M2M-связей
