@@ -264,6 +264,7 @@ namespace {ns}
 
 		public string GetUrl(string input, string className, string propertyName)
 		{{
+            if (string.IsNullOrEmpty(input)) return string.Empty;
             return String.Format(@""{{0}}/{{1}}"", Cnn.GetUrlForFileAttribute(Cnn.GetAttributeIdByNetNames(SiteId, className, propertyName), true, ShouldRemoveSchema), input);
 		}}
 
