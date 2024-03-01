@@ -254,7 +254,7 @@ namespace {ns}
 		public string ReplacePlaceholders(string input)
 		{{
 			string result = input;
-			if (result != null && MappingResolver?.GetSchema()?.ReplaceUrls ?? false)
+			if (result != null && (MappingResolver?.GetSchema()?.ReplaceUrls ?? false))
 			{{
 				result = result.Replace(uploadPlaceholder, UploadUrl);
 				result = result.Replace(sitePlaceholder, SiteUrl);
