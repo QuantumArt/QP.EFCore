@@ -90,7 +90,7 @@ namespace {ns}
 		public virtual {attribute.NetType} {attribute.MappedName} 
 		{{ 
             get {{ return _internal{attribute.MappedName}; }}
-            set {{ _internal{attribute.MappedName} = {className}.Current.ReplacePlaceholders(value);}}
+            set {{ _internal{attribute.MappedName} = {className}.Current?.ReplacePlaceholders(value) ?? value;}}
         }}");
 				}
 				else
