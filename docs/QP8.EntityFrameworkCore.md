@@ -10,9 +10,13 @@
 
 ## История версий 6.x (для .NET 6.0)
 
-### QP8.EntityFrameworkCore.6.0.16
+### QP8.EntityFrameworkCore.6.0.17
 
 * Обновлена библиотека Quantumart.AspNetCore до 6.0.15
+
+### QP8.EntityFrameworkCore.6.0.16
+
+* Промежуточная версия
 
 ### QP8.EntityFrameworkCore.6.0.15
 
