@@ -13,10 +13,11 @@ namespace Quantumart.QP8.EntityFrameworkCore.Generator
 		public ModelReader Model { get; }
 		public bool UsePartialUpdate { get; }
 		public bool IsPostgres { get; }
+		public bool IsNullable { get; }
 
-		public GenerationContext(string settingsFile)
+		public GenerationContext(string settingsFile, bool isNullable)
 		{
-
+			IsNullable = isNullable;
 			UsePartialUpdate = false;
 			Settings = EDMXSettings.Parse(settingsFile);
 
