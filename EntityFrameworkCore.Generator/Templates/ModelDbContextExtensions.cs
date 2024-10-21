@@ -68,7 +68,7 @@ namespace {ns}
         private string _siteName;
         private DBConnector _cnn;
         private SiteSpecificInfo _info = new SiteSpecificInfo();
-        private static SiteSpecificInfo _defaultInfo = new SiteSpecificInfo();
+        private static SiteSpecificInfo _defaultInfo;
         #endregion
 
         #region Properties
