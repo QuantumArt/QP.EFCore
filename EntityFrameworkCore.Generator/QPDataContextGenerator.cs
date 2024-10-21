@@ -150,6 +150,7 @@ namespace Quantumart.QP8.EntityFrameworkCore.Generator
             AddSource(nameof(IMappingConfigurator), IMappingConfigurator.GetTemplate);
             AddSource(nameof(ISchemaProvider), ISchemaProvider.GetTemplate);
             AddSource(nameof(MappingConfiguratorBase), MappingConfiguratorBase.GetTemplate);
+            AddSource(nameof(SiteSpecificInfo), SiteSpecificInfo.GetTemplate);
             AddSource(nameof(StatusType), StatusType.GetTemplate);
             AddSource(nameof(User), User.GetTemplate);
             AddSource(nameof(UserGroup), UserGroup.GetTemplate);
