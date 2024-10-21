@@ -122,7 +122,7 @@ namespace {ns}
                     if (_defaultInfo == null) 
                     {{
                         _defaultInfo = new SiteSpecificInfo();
-                        _defaulInfo.Load(Cnn, _siteName, _shouldRemoveSchema);
+                        _defaultInfo.Load(Cnn, _siteName, _shouldRemoveSchema);
                         _defaultSiteName = _siteName;
                     }}
                     else if (_defaultSiteName != _siteName)
