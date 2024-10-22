@@ -1,15 +1,7 @@
 
 using EntityFrameworkCore.Generator.ReferenceResult;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Npgsql;
-using QA.DotNetCore.Caching;
-using QA.DotNetCore.Caching.Interfaces;
-using QA.DotNetCore.Engine.CacheTags;
-using QA.DotNetCore.Engine.CacheTags.Configuration;
-using QA.DotNetCore.Engine.Persistent.Interfaces;
 using QA.DotNetCore.Engine.Persistent.Interfaces.Settings;
-using QA.DotNetCore.Engine.QpData.Persistent.Dapper;
 using QA.EF;
 using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
