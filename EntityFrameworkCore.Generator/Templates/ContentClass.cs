@@ -40,7 +40,8 @@ namespace {ns}
 			IncludeBaseAttibutes(sb,
 				content.Attributes.Where(x => !x.IsM2M && !x.IsM2O && !x.IsO2M),
 				context.Model.Schema.ReplaceUrls,
-				context.Model.Schema.ClassName
+				context.Model.Schema.ClassName,
+				context.IsNullable
 			);
 			IncludeAttibutesIsO2MRelatedContent(sb, content.Attributes.Where(x => x.IsO2M));
 
@@ -79,15 +80,18 @@ namespace {ns}
 		}
 
 		private static void IncludeBaseAttibutes(StringBuilder sb, IEnumerable<AttributeInfo> attributes, bool useUrlsReplace,
-			string className)
+			string className, bool isNullable)
 		{
 			foreach (var attribute in attributes)
 			{
+				var netType = attribute.NetType;
+				netType = isNullable && !netType.EndsWith("?") ? netType + "?" : netType;
+
 				if (useUrlsReplace && attribute.CanContainPlaceholders)
 				{
 					sb.AppendLine($@"
-		private {attribute.NetType} _internal{attribute.MappedName};
-		public virtual {attribute.NetType} {attribute.MappedName} 
+		private {netType} _internal{attribute.MappedName};
+		public virtual {netType} {attribute.MappedName} 
 		{{ 
             get {{ return _internal{attribute.MappedName}; }}
             set {{ _internal{attribute.MappedName} = {className}.Current?.ReplacePlaceholders(value) ?? value;}}
@@ -95,7 +99,7 @@ namespace {ns}
 				}
 				else
 				{
-					sb.AppendLine(@$"		public virtual {attribute.NetType} {attribute.MappedName} {{ get; set; }}");
+					sb.AppendLine(@$"		public virtual {netType} {attribute.MappedName} {{ get; set; }}");
 				}
 			}
 		}

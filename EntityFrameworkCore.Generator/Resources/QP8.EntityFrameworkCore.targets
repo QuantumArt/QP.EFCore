@@ -10,6 +10,10 @@
 		<SettingsFile Include="$(NugetPackageFolder)\content\QPDataContextGenerator.settings.xml"/>
 	</ItemGroup>
 
+	<ItemGroup>
+		<CompilerVisibleProperty Include="Nullable" />
+	</ItemGroup>
+
 	<Target Name="CopyReadmeTarget" BeforeTargets="BeforeBuild">
 		<Copy DestinationFolder="$(MSBuildProjectDirectory)\" SourceFiles="@(ReadmeFile)"></Copy>
 	</Target>

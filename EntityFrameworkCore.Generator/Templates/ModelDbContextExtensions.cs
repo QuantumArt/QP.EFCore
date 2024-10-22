@@ -67,6 +67,8 @@ namespace {ns}
         private bool _shouldRemoveSchema = false;
         private string _siteName;
         private DBConnector _cnn;
+        private SiteSpecificInfo _info = new SiteSpecificInfo();
+        private static SiteSpecificInfo _defaultInfo;
         #endregion
 
         #region Properties
@@ -75,16 +77,16 @@ namespace {ns}
         protected IMappingResolver MappingResolver {{ get; private set; }}
 
         public bool ShouldRemoveSchema {{ get {{ return _shouldRemoveSchema; }} set {{ _shouldRemoveSchema = value; }} }}
-        public Int32 SiteId {{ get; private set; }}
-		public string SiteUrl {{ get {{ return StageSiteUrl; }} }}
+        public int SiteId => _info.SiteId;
+		public string SiteUrl => StageSiteUrl;
 		public string UploadUrl => {(context.Model.Schema.UseLongUrls ? "LongUploadUrl" : "ShortUploadUrl")};
-		public string LiveSiteUrl {{ get; private set; }}
-		public string LiveSiteUrlRel {{ get; private set; }}
-		public string StageSiteUrl {{ get; private set; }}
-		public string StageSiteUrlRel {{ get; private set; }}
-		public string LongUploadUrl {{ get; private set; }}
-		public string ShortUploadUrl {{ get; private set; }}
-		public Int32 PublishedId {{ get; private set; }}
+		public string LiveSiteUrl => _info.LiveSiteUrl;
+		public string LiveSiteUrlRel => _info.LiveSiteUrlRel;
+		public string StageSiteUrl => _info.StageSiteUrl;
+		public string StageSiteUrlRel => _info.StageSiteUrlRel;
+		public string LongUploadUrl => _info.LongUploadUrl;
+		public string ShortUploadUrl => _info.ShortUploadUrl;
+		public int PublishedId => _info.PublishedId;
 		public string ConnectionString {{ get; private set; }}
 		public static string DefaultSiteName 
 		{{ 
@@ -111,8 +113,27 @@ namespace {ns}
 				if (!String.Equals(_siteName, value, StringComparison.InvariantCultureIgnoreCase))
 				{{
 					_siteName = value;
-					SiteId = Cnn.GetSiteId(_siteName);
-					LoadSiteSpecificInfo();
+                    
+                    if (RemoveUploadUrlSchema && !_shouldRemoveSchema)
+                    {{
+                        _shouldRemoveSchema = RemoveUploadUrlSchema;
+                    }}
+                    
+                    if (_defaultInfo == null) 
+                    {{
+                        _defaultInfo = new SiteSpecificInfo();
+                        _defaultInfo.Load(Cnn, _siteName, _shouldRemoveSchema);
+                        _defaultSiteName = _siteName; 
+                        _info.CopyFrom(_defaultInfo);
+                    }}
+                    else if (_defaultSiteName != _siteName)
+                    {{
+                        _info.Load(Cnn, _siteName, _shouldRemoveSchema);
+                    }}
+                    else 
+                    {{
+                        _info.CopyFrom(_defaultInfo);
+                    }}
 				}}
 			}}
 		}}
@@ -273,22 +294,6 @@ namespace {ns}
 		{{
 			return Cnn.GetDirectoryForFileAttribute(Cnn.GetAttributeIdByNetNames(SiteId, className, propertyName));
 		}}
-		
-		public void LoadSiteSpecificInfo()
-        {{
-            if (RemoveUploadUrlSchema && !_shouldRemoveSchema)
-            {{
-                _shouldRemoveSchema = RemoveUploadUrlSchema;
-            }}
-
-            LiveSiteUrl = Cnn.GetSiteUrl(SiteId, true);
-            LiveSiteUrlRel = Cnn.GetSiteUrlRel(SiteId, true);
-            StageSiteUrl = Cnn.GetSiteUrl(SiteId, false);
-            StageSiteUrlRel = Cnn.GetSiteUrlRel(SiteId, false);
-            LongUploadUrl = Cnn.GetImagesUploadUrl(SiteId, false, _shouldRemoveSchema);
-            ShortUploadUrl = Cnn.GetImagesUploadUrl(SiteId, true, _shouldRemoveSchema);
-            PublishedId = Cnn.GetMaximumWeightStatusTypeId(SiteId);
-        }}
         #endregion
 
 

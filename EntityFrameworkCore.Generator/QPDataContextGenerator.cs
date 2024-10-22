@@ -29,14 +29,18 @@ namespace Quantumart.QP8.EntityFrameworkCore.Generator
                 .Where(x => x.Path.EndsWith(".xml"));
 
             var provider = changedFilesProvider.Combine(settingsFileProvider.Collect()).Collect();
+            var isNullable = context.AnalyzerConfigOptionsProvider.Select((p, ct) =>
+                p.GlobalOptions.TryGetValue("build_property.Nullable", out var nullableSwitch) 
+                && nullableSwitch.Equals("enable", StringComparison.InvariantCultureIgnoreCase));
 
-            context.RegisterSourceOutput(provider, TryGenerateEfContexts);
-            context.RegisterSourceOutput(provider, TryGenerateCacheTags);
+            context.RegisterSourceOutput(provider.Combine(isNullable), TryGenerateEfContexts);
+            context.RegisterSourceOutput(provider.Combine(isNullable), TryGenerateCacheTags);
         }
 
         private static void TryGenerateEfContexts(SourceProductionContext context,
-            ImmutableArray<(AdditionalText, ImmutableArray<(string, EDMXSettings)>)> data)
+            (ImmutableArray<(AdditionalText, ImmutableArray<(string, EDMXSettings)>)>, bool) args)
         {
+            var (data, isNullable) = args;
             try
             {
                 if (!TryGetSettings(data, out var settingsPath, out var settings))
@@ -45,7 +49,7 @@ namespace Quantumart.QP8.EntityFrameworkCore.Generator
                 if (!WereQpSettingsChanged(settingsPath, settings, data))
                     return;
 
-                GenerateQpDataContext(context, new GenerationContext(settingsPath));
+                GenerateQpDataContext(context, new GenerationContext(settingsPath, isNullable));
             }
             catch (Exception ex)
             {
@@ -65,8 +69,9 @@ namespace Quantumart.QP8.EntityFrameworkCore.Generator
         }
 
         private static void TryGenerateCacheTags(SourceProductionContext context,
-            ImmutableArray<(AdditionalText, ImmutableArray<(string, EDMXSettings)>)> data)
+            (ImmutableArray<(AdditionalText, ImmutableArray<(string, EDMXSettings)>)>, bool) args)
         {
+            var (data, isNullable) = args;
             try
             {
                 if (!TryGetSettings(data, out var settingsPath, out var settings))
@@ -75,7 +80,7 @@ namespace Quantumart.QP8.EntityFrameworkCore.Generator
                 if (!WereQpSettingsChanged(settingsPath, settings, data))
                     return;
 
-                GenerateCacheTags(context, new GenerationContext(settingsPath));
+                GenerateCacheTags(context, new GenerationContext(settingsPath, isNullable));
             }
             catch (Exception ex)
             {
@@ -145,6 +150,7 @@ namespace Quantumart.QP8.EntityFrameworkCore.Generator
             AddSource(nameof(IMappingConfigurator), IMappingConfigurator.GetTemplate);
             AddSource(nameof(ISchemaProvider), ISchemaProvider.GetTemplate);
             AddSource(nameof(MappingConfiguratorBase), MappingConfiguratorBase.GetTemplate);
+            AddSource(nameof(SiteSpecificInfo), SiteSpecificInfo.GetTemplate);
             AddSource(nameof(StatusType), StatusType.GetTemplate);
             AddSource(nameof(User), User.GetTemplate);
             AddSource(nameof(UserGroup), UserGroup.GetTemplate);
