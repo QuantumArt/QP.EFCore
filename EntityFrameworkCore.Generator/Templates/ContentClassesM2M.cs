@@ -2,41 +2,38 @@
 using System.Threading;
 using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
-namespace Quantumart.QP8.EntityFrameworkCore.Generator.Templates
-{
-	internal static class ContentClassesM2M
-	{
-		public static string GetTemplate(string ns, GenerationContext context, ContentInfo content,
-			AttributeInfo attribute, CancellationToken cancellationToken)
-		{
-			cancellationToken.ThrowIfCancellationRequested();
-			var sb = new StringBuilder(context.Settings.GeneratedCodePrefix);
+namespace Quantumart.QP8.EntityFrameworkCore.Generator.Templates;
 
-			sb.AppendLine($@"
+internal static class ContentClassesM2M
+{
+	public static string GetTemplate(string ns, GenerationContext context, ContentInfo content,
+		AttributeInfo attribute, CancellationToken cancellationToken)
+	{
+		cancellationToken.ThrowIfCancellationRequested();
+		var sb = new StringBuilder(context.Settings.GeneratedCodePrefix);
+
+		sb.AppendLine($@"
 using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace {ns}");
+namespace {ns};
 
-			sb.AppendLine("{");
-
-            IncludeM2MClass(sb, content, attribute);
-            if (attribute.RelatedContent.SplitArticles)
-			{
-                IncludeM2MReverseClass(sb, content, attribute);
-			}
-
-			sb.AppendLine("}");
-
-
-			return sb.ToString();
+");
+		
+		IncludeM2MClass(sb, content, attribute);
+        if (attribute.RelatedContent.SplitArticles)
+		{
+            IncludeM2MReverseClass(sb, content, attribute);
 		}
 
-		private static void IncludeM2MClass(StringBuilder sb, ContentInfo content, AttributeInfo attribute)
-		{
-			sb.AppendLine(@$"
+		return sb.ToString();
+	}
+
+	private static void IncludeM2MClass(StringBuilder sb, ContentInfo content, AttributeInfo attribute)
+	{
+		sb.AppendLine(@$"
     public partial class {attribute.M2MClassName}: IQPLink
     {{
 		public {content.MappedName} {attribute.M2MPropertyName} {{ get; set; }}		
@@ -63,11 +60,11 @@ namespace {ns}");
 		public IQPArticle Item {{ get {{ return {attribute.M2MPropertyName}; }} }}		
 		public IQPArticle LinkedItem {{ get {{ return {attribute.M2MRelatedPropertyName}; }} }}
     }}");
-		}
+	}
 
-		private static void IncludeM2MReverseClass(StringBuilder sb, ContentInfo content, AttributeInfo attribute)
-		{
-			sb.AppendLine($@"
+	private static void IncludeM2MReverseClass(StringBuilder sb, ContentInfo content, AttributeInfo attribute)
+	{
+		sb.AppendLine($@"
 	public partial class {attribute.M2MReverseClassName}: IQPLink
 	{{
 		public {content.MappedName} {attribute.M2MReversePropertyName} {{ get; set; }}		
@@ -81,9 +78,9 @@ namespace {ns}");
 			get {{ return {attribute.LinkId}; }}
 		}}");
 
-		if (attribute.ContentId != attribute.RelatedContentId)
-		{
-			sb.AppendLine($@"
+	if (attribute.ContentId != attribute.RelatedContentId)
+	{
+		sb.AppendLine($@"
 		public int Id 
 		{{
 			get {{ return {attribute.M2MReverseRelatedPropertyName}Id; }}
@@ -96,10 +93,10 @@ namespace {ns}");
 		}}
 		public IQPArticle Item {{  get {{ return {attribute.M2MReverseRelatedPropertyName}; }} }}		
 		public IQPArticle LinkedItem {{  get {{ return {attribute.M2MReversePropertyName}; }} }}");
-			}
-			else
-			{
-				sb.AppendLine($@"
+		}
+		else
+		{
+			sb.AppendLine($@"
 		public int Id 
 		{{
 			get {{ return {attribute.M2MReverseRelatedPropertyName}Id; }} 
@@ -112,9 +109,8 @@ namespace {ns}");
 		}}
 		public IQPArticle Item {{  get {{ return {attribute.M2MReverseRelatedPropertyName}; }} }}		
 		public IQPArticle LinkedItem {{  get {{ return {attribute.M2MReversePropertyName}; }} }}");
-			}
-
-			sb.AppendLine("}");
 		}
+
+		sb.AppendLine("}");
 	}
 }

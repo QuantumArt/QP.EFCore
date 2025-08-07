@@ -8,6 +8,12 @@
 
 * <https://nuget.qsupport.ru/packages/QP8.EntityFrameworkCore>
 
+## История версий 8.x (для .NET 8.0)
+
+### QP8.EntityFrameworkCore.8.0.0
+
+* Переход на .NET 8.0
+
 ## История версий 6.x (для .NET 6.0)
 
 ### QP8.EntityFrameworkCore.6.0.17

@@ -2,50 +2,48 @@
 using System.Text;
 using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
+namespace Quantumart.QP8.EntityFrameworkCore.Generator;
 
-namespace Quantumart.QP8.EntityFrameworkCore.Generator
+internal class GenerationContext
 {
-	internal class GenerationContext
+	// Black hole logger
+	public static readonly StringBuilder Logger = new();
+	public EDMXSettings Settings { get; }
+	public ModelReader Model { get; }
+	public bool UsePartialUpdate { get; }
+	public bool IsPostgres { get; }
+	public bool IsNullable { get; }
+
+	public GenerationContext(string settingsFile, bool isNullable)
 	{
-		// Black hole logger
-		public static readonly StringBuilder Logger = new();
-		public EDMXSettings Settings { get; }
-		public ModelReader Model { get; }
-		public bool UsePartialUpdate { get; }
-		public bool IsPostgres { get; }
-		public bool IsNullable { get; }
+		IsNullable = isNullable;
+		UsePartialUpdate = false;
+		Settings = EDMXSettings.Parse(settingsFile);
 
-		public GenerationContext(string settingsFile, bool isNullable)
+		var directoryPath = GeFileDirectory(settingsFile);
+		var mappingFile = System.IO.Path.Combine(directoryPath, Settings.QPContextMappingResultPath);
+
+		Model = new ModelReader(mappingFile, text => Logger.AppendLine(text), true)
 		{
-			IsNullable = isNullable;
-			UsePartialUpdate = false;
-			Settings = EDMXSettings.Parse(settingsFile);
-
-			var directoryPath = GeFileDirectory(settingsFile);
-			var mappingFile = System.IO.Path.Combine(directoryPath, Settings.QPContextMappingResultPath);
-
-			Model = new ModelReader(mappingFile, text => Logger.AppendLine(text), true)
+			Schema =
 			{
-				Schema =
-				{
-					LazyLoadingEnabled = Settings.LazyLoadingEnabled, IsStageMode = true
-				}
-			};
-			Model.Schema.ConnectionStringName = Settings.UseContextNameAsConnectionString
-				? Model.Schema.ClassName
-				: Model.Schema.ConnectionStringName;
-			IsPostgres = Model.Schema.DBType == DatabaseType.Postgres;
+				LazyLoadingEnabled = Settings.LazyLoadingEnabled, IsStageMode = true
+			}
+		};
+		Model.Schema.ConnectionStringName = Settings.UseContextNameAsConnectionString
+			? Model.Schema.ClassName
+			: Model.Schema.ConnectionStringName;
+		IsPostgres = Model.Schema.DBType == DatabaseType.Postgres;
 
-			Logger.AppendLine("ClassName:  " + Model.Schema.ClassName);
-			Logger.AppendLine("ConnectionStringName:  " + Model.Schema.ConnectionStringName);
-		}
+		Logger.AppendLine("ClassName:  " + Model.Schema.ClassName);
+		Logger.AppendLine("ConnectionStringName:  " + Model.Schema.ConnectionStringName);
+	}
 
-		private static string GeFileDirectory(string filePath)
-		{
-			var lastSlashIndex = filePath.LastIndexOf(Path.DirectorySeparatorChar);
-			return lastSlashIndex == -1
-				? string.Empty
-				: filePath.Substring(0, lastSlashIndex);
-		}
+	private static string GeFileDirectory(string filePath)
+	{
+		var lastSlashIndex = filePath.LastIndexOf(Path.DirectorySeparatorChar);
+		return lastSlashIndex == -1
+			? string.Empty
+			: filePath.Substring(0, lastSlashIndex);
 	}
 }

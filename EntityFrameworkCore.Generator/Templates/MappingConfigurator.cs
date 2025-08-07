@@ -4,15 +4,15 @@ using System.Text;
 using System.Threading;
 using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
-namespace Quantumart.QP8.EntityFrameworkCore.Generator.Templates
+namespace Quantumart.QP8.EntityFrameworkCore.Generator.Templates;
+
+internal class MappingConfigurator
 {
-    internal class MappingConfigurator
+    public static string GetTemplate(string ns, GenerationContext context, CancellationToken cancellationToken)
     {
-        public static string GetTemplate(string ns, GenerationContext context, CancellationToken cancellationToken)
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-            var sb = new StringBuilder();
-            sb.AppendLine(@$"{context.Settings.GeneratedCodePrefix}
+        cancellationToken.ThrowIfCancellationRequested();
+        var sb = new StringBuilder();
+        sb.AppendLine(@$"{context.Settings.GeneratedCodePrefix}
 using System;
 using System.Collections.Concurrent;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,50 +24,50 @@ using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
 {context.Settings.Usings}
 
-namespace {ns}
-{{
-    public class MappingConfigurator : MappingConfiguratorBase
-    {{
-        public MappingConfigurator(ContentAccess contentAccess, ISchemaProvider schemaProvider)
-            : base(contentAccess, schemaProvider)
-        {{
-        }}
+namespace {ns};
 
-        public override void OnModelCreating(ModelBuilder modelBuilder)
-        {{
-            base.OnModelCreating(modelBuilder);");
-            IncludeMappingConfigurators(sb, context.Model.Contents);
-            sb.AppendLine(@"
-        }
-        
-        public override void OnModelFinalized(IModel model)
-        {
-            AddMappingInfo(model);
-        }
+public class MappingConfigurator : MappingConfiguratorBase
+{{
+    public MappingConfigurator(ContentAccess contentAccess, ISchemaProvider schemaProvider)
+        : base(contentAccess, schemaProvider)
+    {{
+    }}
+
+    public override void OnModelCreating(ModelBuilder modelBuilder)
+    {{
+        base.OnModelCreating(modelBuilder);");
+
+        IncludeMappingConfigurators(sb, context.Model.Contents);
+        sb.AppendLine(@"
+    }
+    
+    public override void OnModelFinalized(IModel model)
+    {
+        AddMappingInfo(model);
     }
 }");
-            return sb.ToString();
-        }
+        return sb.ToString();
+    }
 
-        private static void IncludeMappingConfigurators(StringBuilder sb, IEnumerable<ContentInfo> contents)
+    private static void IncludeMappingConfigurators(StringBuilder sb, IEnumerable<ContentInfo> contents)
+    {
+        foreach (var content in contents)
         {
-            foreach (var content in contents)
-            {
-                sb.AppendLine($"#region {content.MappedName} mappings");
-                IncludeBaseMapping(sb, content.MappedName);
-                IncludeAttributesMappingIsRelation(sb, content.Attributes.Where(x => !x.IsRelation));
-                IncludeAttributesMappingIsO2M(sb, content.Attributes.Where(x => x.IsO2M));
-                IncludeAttributesMappingIsM2MIsSource(sb, content.MappedName,
-                    content.Attributes.Where(x => x.IsM2M && x.IsSource == true));
-                IncludeAttributesMappingIsGenerateLibraryUrl(sb, content.Attributes.Where(x => x.GenerateLibraryUrl));
-                IncludeAttributesMappingIsGenerateUploadPath(sb, content.Attributes.Where(x => x.GenerateUploadPath));
-                sb.AppendLine("#endregion");
-            }
+            sb.AppendLine($"#region {content.MappedName} mappings");
+            IncludeBaseMapping(sb, content.MappedName);
+            IncludeAttributesMappingIsRelation(sb, content.Attributes.Where(x => !x.IsRelation));
+            IncludeAttributesMappingIsO2M(sb, content.Attributes.Where(x => x.IsO2M));
+            IncludeAttributesMappingIsM2MIsSource(sb, content.MappedName,
+                content.Attributes.Where(x => x.IsM2M && x.IsSource == true));
+            IncludeAttributesMappingIsGenerateLibraryUrl(sb, content.Attributes.Where(x => x.GenerateLibraryUrl));
+            IncludeAttributesMappingIsGenerateUploadPath(sb, content.Attributes.Where(x => x.GenerateUploadPath));
+            sb.AppendLine("#endregion");
         }
+    }
 
-        private static void IncludeBaseMapping(StringBuilder sb, string mappedName)
-        {
-            sb.AppendLine($@"
+    private static void IncludeBaseMapping(StringBuilder sb, string mappedName)
+    {
+        sb.AppendLine($@"
             modelBuilder.Entity<{mappedName}>()
                 .ToTable(GetTableName(""{mappedName}""))
                 .Property(x => x.Id)
@@ -105,24 +105,24 @@ namespace {ns}
                     .WithMany()
                     .IsRequired()
                     .HasForeignKey(x => x.StatusTypeId);");
-        }
+    }
 
-        private static void IncludeAttributesMappingIsRelation(StringBuilder sb, IEnumerable<AttributeInfo> attributes)
+    private static void IncludeAttributesMappingIsRelation(StringBuilder sb, IEnumerable<AttributeInfo> attributes)
+    {
+        foreach (var attribute in attributes)
         {
-            foreach (var attribute in attributes)
-            {
-                sb.AppendLine($@"
+            sb.AppendLine($@"
             modelBuilder.Entity<{attribute.Content.MappedName}>()
                 .Property(x => x.{attribute.MappedName})
                 .HasColumnName(GetFieldName(""{attribute.Content.MappedName}"", ""{attribute.MappedName}""));");
-            }
         }
+    }
 
-        private static void IncludeAttributesMappingIsO2M(StringBuilder sb, IEnumerable<AttributeInfo> attributes)
+    private static void IncludeAttributesMappingIsO2M(StringBuilder sb, IEnumerable<AttributeInfo> attributes)
+    {
+        foreach (var attribute in attributes)
         {
-            foreach (var attribute in attributes)
-            {
-                sb.AppendLine(@$"
+            sb.AppendLine(@$"
             modelBuilder.Entity<{attribute.Content.MappedName}>()
                 .HasOne<{attribute.RelatedContent.MappedName}>(mp => mp.{attribute.MappedName})
                 .WithMany(mp => mp.{attribute.RelatedAttribute.MappedName})
@@ -131,17 +131,17 @@ namespace {ns}
             modelBuilder.Entity<{attribute.Content.MappedName}>()
                 .Property(x => x.{attribute.OriginalMappedName})
                 .HasColumnName(GetFieldName(""{attribute.Content.MappedName}"", ""{attribute.MappedName}"").ToLowerInvariant());");
-            }
         }
+    }
 
-        private static void IncludeAttributesMappingIsM2MIsSource(StringBuilder sb, string mappedName,
-            IEnumerable<AttributeInfo> attributes)
+    private static void IncludeAttributesMappingIsM2MIsSource(StringBuilder sb, string mappedName,
+        IEnumerable<AttributeInfo> attributes)
+    {
+        foreach (var attribute in attributes)
         {
-            foreach (var attribute in attributes)
+            if (!attribute.RelatedContent.SplitArticles)
             {
-                if (!attribute.RelatedContent.SplitArticles)
-                {
-                    sb.AppendLine($@"
+                sb.AppendLine($@"
                 modelBuilder.Entity<{attribute.Content.MappedName}>()
                 .HasMany(e => e.{attribute.MappedName})
                 .WithMany(e => e.{attribute.RelatedAttribute.MappedName})
@@ -167,10 +167,10 @@ namespace {ns}
                     bc.ToTable(GetLinkTableName(""{mappedName}"", ""{attribute.MappedName}""));
                     }});
 ");
-                }
-                else
-                {
-                    sb.AppendLine($@"
+            }
+            else
+            {
+                sb.AppendLine($@"
                 modelBuilder.Entity<{attribute.Content.MappedName}>()
                 .HasMany(e => e.{attribute.MappedName})
                 .WithMany(e => e.{attribute.RelatedAttribute.MappedName}Reverse)
@@ -209,20 +209,20 @@ namespace {ns}
                 bc => 
                 {{");
 
-                    if (attribute.ContentId != attribute.RelatedContentId)
-                    {
-                        sb.AppendLine($@"
+                if (attribute.ContentId != attribute.RelatedContentId)
+                {
+                    sb.AppendLine($@"
                     bc.Property(e => e.{attribute.M2MReversePropertyName}Id).HasColumnName(""linked_id"");
                     bc.Property(e => e.{attribute.M2MReverseRelatedPropertyName}Id).HasColumnName(""id"");");
-                    }
-                    else
-                    {
-                        sb.AppendLine($@"
+                }
+                else
+                {
+                    sb.AppendLine($@"
 			        bc.Property(e => e.{attribute.M2MReversePropertyName}Id).HasColumnName(""id"");
 			        bc.Property(e => e.{attribute.M2MReverseRelatedPropertyName}Id).HasColumnName(""linked_id"");");
-                    }
+                }
 
-                    sb.AppendLine($@"
+                sb.AppendLine($@"
                     bc.HasKey(ug => new {{ ug.{attribute.M2MReversePropertyName}Id, ug.{attribute.M2MReverseRelatedPropertyName}Id }});
                     bc.Ignore(x=>x.Id);
                     bc.Ignore(x=>x.LinkId);
@@ -233,26 +233,25 @@ namespace {ns}
                 }});
 
 "); 
-                } 
-            }
+            } 
         }
+    }
 
-        private static void IncludeAttributesMappingIsGenerateLibraryUrl(StringBuilder sb, IEnumerable<AttributeInfo> attributes)
+    private static void IncludeAttributesMappingIsGenerateLibraryUrl(StringBuilder sb, IEnumerable<AttributeInfo> attributes)
+    {
+        foreach (var attribute in attributes)
         {
-            foreach (var attribute in attributes)
-            {
-                sb.AppendLine(
-                    $"            modelBuilder.Entity<{attribute.Content.MappedName}>().Ignore(p => p.{attribute.MappedName}Url);");
-            }
+            sb.AppendLine(
+                $"            modelBuilder.Entity<{attribute.Content.MappedName}>().Ignore(p => p.{attribute.MappedName}Url);");
         }
+    }
 
-        private static void IncludeAttributesMappingIsGenerateUploadPath(StringBuilder sb, IEnumerable<AttributeInfo> attributes)
+    private static void IncludeAttributesMappingIsGenerateUploadPath(StringBuilder sb, IEnumerable<AttributeInfo> attributes)
+    {
+        foreach (var attribute in attributes)
         {
-            foreach (var attribute in attributes)
-            {
-                sb.AppendLine(
-                    $"            modelBuilder.Entity<{attribute.Content.MappedName}>().Ignore(p => p.{attribute.MappedName}UploadPath);");
-            }
+            sb.AppendLine(
+                $"            modelBuilder.Entity<{attribute.Content.MappedName}>().Ignore(p => p.{attribute.MappedName}UploadPath);");
         }
     }
 }

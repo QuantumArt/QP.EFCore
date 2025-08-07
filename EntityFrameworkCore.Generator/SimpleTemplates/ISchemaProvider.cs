@@ -1,24 +1,22 @@
 ﻿using System.Threading;
 
-namespace Quantumart.QP8.EntityFrameworkCore.Generator.SimpleTemplates
+namespace Quantumart.QP8.EntityFrameworkCore.Generator.SimpleTemplates;
+
+internal static class ISchemaProvider
 {
-    internal static class ISchemaProvider
+    public static string GetTemplate(string ns, GenerationContext context, CancellationToken cancellationToken)
     {
-        public static string GetTemplate(string ns, GenerationContext context, CancellationToken cancellationToken)
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-            return @$"{context.Settings.GeneratedCodePrefix}
+        cancellationToken.ThrowIfCancellationRequested();
+        return @$"{context.Settings.GeneratedCodePrefix}
 
 using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
-namespace {ns}
+namespace {ns};
+
+public interface ISchemaProvider
 {{
-    public interface ISchemaProvider
-    {{
-        ModelReader GetSchema();
-        object GetCacheKey();
-    }}
+    ModelReader GetSchema();
+    object GetCacheKey();
 }}";
-        }
     }
 }

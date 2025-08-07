@@ -1,4 +1,3 @@
-
 using EntityFrameworkCore.Generator.ReferenceResult;
 using Npgsql;
 using QA.DotNetCore.Engine.Persistent.Interfaces.Settings;

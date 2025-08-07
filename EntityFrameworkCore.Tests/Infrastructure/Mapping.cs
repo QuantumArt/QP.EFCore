@@ -1,11 +1,10 @@
-﻿namespace EntityFrameworkCore.Tests.Infrastructure
+﻿namespace EntityFrameworkCore.Tests.Infrastructure;
+
+public enum Mapping
 {
-    public enum Mapping
-    {
-        StaticMapping,
-        FileDefaultMapping,
-        FileDynamicMapping,
-        DatabaseDefaultMapping,
-        DatabaseDynamicMapping
-    }
+    StaticMapping,
+    FileDefaultMapping,
+    FileDynamicMapping,
+    DatabaseDefaultMapping,
+    DatabaseDynamicMapping
 }

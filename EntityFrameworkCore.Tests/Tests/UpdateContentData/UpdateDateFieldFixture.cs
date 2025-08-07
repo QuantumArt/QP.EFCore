@@ -4,30 +4,29 @@ using NUnit.Framework;
 using QA.EF;
 using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
-namespace EntityFrameworkCore.Tests.UpdateContentData
+namespace EntityFrameworkCore.Tests.UpdateContentData;
+
+[TestFixture]
+public class UpdateDateFieldFixture : DataContextUpdateFixtureBase
 {
-    [TestFixture]
-    public class UpdateDateFieldFixture : DataContextUpdateFixtureBase
+    [Test, Combinatorial]
+    [Category("UpdateContentData")]
+    public void Check_That_DateTime_Field_isUpdated([ContentAccessValues] ContentAccess access, [MappingValues] Mapping mapping)
     {
-        [Test, Combinatorial]
-        [Category("UpdateContentData")]
-        public void Check_That_DateTime_Field_isUpdated([ContentAccessValues] ContentAccess access, [MappingValues] Mapping mapping)
-        {
-            UpdateProperty<DateTimeItemForUpdate>(access, mapping, a => a.DateTimeValueField = DateTime.Now, a => a.DateTimeValueField);
-        }
+        UpdateProperty<DateTimeItemForUpdate>(access, mapping, a => a.DateTimeValueField = DateTime.Now, a => a.DateTimeValueField);
+    }
 
-        [Test, Combinatorial]
-        [Category("UpdateContentData")]
-        public void Check_That_Date_Field_isUpdated([ContentAccessValues] ContentAccess access, [MappingValues] Mapping mapping)
-        {
-            UpdateProperty<DateItemForUpdate>(access, mapping, a => a.DateValueField = DateTime.Now, a => a.DateValueField);
-        }
+    [Test, Combinatorial]
+    [Category("UpdateContentData")]
+    public void Check_That_Date_Field_isUpdated([ContentAccessValues] ContentAccess access, [MappingValues] Mapping mapping)
+    {
+        UpdateProperty<DateItemForUpdate>(access, mapping, a => a.DateValueField = DateTime.Now, a => a.DateValueField);
+    }
 
-        [Test, Combinatorial]
-        [Category("UpdateContentData")]
-        public void Check_That_Time_Field_isUpdated([ContentAccessValues] ContentAccess access, [MappingValues] Mapping mapping)
-        {
-            UpdateProperty<TimeItemForUpdate>(access, mapping, a => a.TimeValueField = DateTime.Now - DateTime.Today, a => a.TimeValueField);
-        }
+    [Test, Combinatorial]
+    [Category("UpdateContentData")]
+    public void Check_That_Time_Field_isUpdated([ContentAccessValues] ContentAccess access, [MappingValues] Mapping mapping)
+    {
+        UpdateProperty<TimeItemForUpdate>(access, mapping, a => a.TimeValueField = DateTime.Now - DateTime.Today, a => a.TimeValueField);
     }
 }

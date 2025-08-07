@@ -1,34 +1,33 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
 
-namespace Quantumart.QP8.EntityFrameworkCore.Generator.Models
+namespace Quantumart.QP8.EntityFrameworkCore.Generator.Models;
+
+public static class RootUtil
 {
-    public static class RootUtil
+    public static T GetAttribute<T>(XElement e, string name, bool required = false, T fallbackValue = default(T))
     {
-        public static T GetAttribute<T>(XElement e, string name, bool required = false, T fallbackValue = default(T))
-        {
-            return Util.GetAttribute<T>(e, name, required, fallbackValue);
+        return Util.GetAttribute<T>(e, name, required, fallbackValue);
+    }
+
+    public static T GetElementValue<T>(XElement e, string name, bool required = false)
+    {
+        return Util.GetElementValue<T>(e, name, required);
+    }
+
+    public static string ToPascal(string input)
+    {
+        if (input == null)
+        {                
+            return null;
         }
 
-        public static T GetElementValue<T>(XElement e, string name, bool required = false)
+        switch (input)
         {
-            return Util.GetElementValue<T>(e, name, required);
+            case "STUB_FIELD": return "StubField";
         }
 
-        public static string ToPascal(string input)
-        {
-            if (input == null)
-            {                
-                return null;
-            }
-
-            switch (input)
-            {
-                case "STUB_FIELD": return "StubField";
-            }
-
-            return string.Join("", input.Split('_').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x))
-                .Select(x => x.Length > 1 ? (x[0] + x.Substring(1).ToLower()) : x));
-        }
+        return string.Join("", input.Split('_').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x))
+            .Select(x => x.Length > 1 ? (x[0] + x.Substring(1).ToLower()) : x));
     }
 }

@@ -1,9 +1,8 @@
-﻿namespace Quantumart.QP8.EntityFrameworkCore.Generator.Models
+﻿namespace Quantumart.QP8.EntityFrameworkCore.Generator.Models;
+
+public enum DatabaseType
 {
-    public enum DatabaseType
-    {
-        SqlServer,
-        Postgres,
-        Unknown,
-    }
+    SqlServer,
+    Postgres,
+    Unknown,
 }

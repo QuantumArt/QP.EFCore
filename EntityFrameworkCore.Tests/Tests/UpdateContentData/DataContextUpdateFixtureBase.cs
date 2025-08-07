@@ -1,29 +1,28 @@
-﻿using EntityFrameworkCore.Tests.Infrastructure;
-using NUnit.Framework;
-using System;
+﻿using System;
 using System.Linq;
+using EntityFrameworkCore.Tests.Infrastructure;
+using NUnit.Framework;
 using Quantumart.QP8.EntityFrameworkCore.Generator.Models;
 
-namespace EntityFrameworkCore.Tests.UpdateContentData
+namespace EntityFrameworkCore.Tests.UpdateContentData;
+
+public class DataContextUpdateFixtureBase : DataContextFixtureBase
 {
-    public class DataContextUpdateFixtureBase : DataContextFixtureBase
+    protected void UpdateProperty<TArticle>(ContentAccess access, Mapping mapping, Action<TArticle> setField, Func<TArticle, object> getField)
+       where TArticle : class
     {
-        protected void UpdateProperty<TArticle>(ContentAccess access, Mapping mapping, Action<TArticle> setField, Func<TArticle, object> getField)
-           where TArticle : class
+        using (var context = GetDataContext(access, mapping))
         {
-            using (var context = GetDataContext(access, mapping))
-            {
-                var oldItem = context.Set<TArticle>().FirstOrDefault();
-                Assert.That(oldItem, Is.Not.Null);
+            var oldItem = context.Set<TArticle>().FirstOrDefault();
+            Assert.That(oldItem, Is.Not.Null);
 
-                setField(oldItem);
-                context.SaveChanges();
+            setField(oldItem);
+            context.SaveChanges();
 
-                var newItem = context.Set<TArticle>().FirstOrDefault();
-                Assert.That(newItem, Is.Not.Null);
+            var newItem = context.Set<TArticle>().FirstOrDefault();
+            Assert.That(newItem, Is.Not.Null);
 
-                Assert.That(getField(newItem), Is.EqualTo(getField(oldItem)));
-            }
+            Assert.That(getField(newItem), Is.EqualTo(getField(oldItem)));
         }
     }
 }

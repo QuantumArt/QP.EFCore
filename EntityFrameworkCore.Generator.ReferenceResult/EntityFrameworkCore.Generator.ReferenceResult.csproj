@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
@@ -13,16 +13,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
-            <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.35" />
-            <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.35" />
-            <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.35" />
-            <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
-            <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.29" />
-            <PackageReference Include="QA.DotNetCore.Engine.CacheTags" Version="3.2.25" />
-            <PackageReference Include="QP.ConfigurationService.Client" Version="0.2.0" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.7" />
+            <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.7" />
+            <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.7" />
+            <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.7" />
+            <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.7" />
+            <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+            <PackageReference Include="QA.DotNetCore.Engine.CacheTags" Version="3.4.1" />
+            <PackageReference Include="QP.ConfigurationService.Client" Version="0.3.1" />
             <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-            <PackageReference Include="Quantumart.AspNetCore" Version="6.0.15" />
+            <PackageReference Include="Quantumart.AspNetCore" Version="6.3.2" />
     </ItemGroup>
 
     <ItemGroup>
